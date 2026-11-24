@@ -67,13 +67,40 @@ console.log(`${scenes.length} scenes, ${total.toFixed(1)}s @ ${FPS}fps, voice: $
   ff.stdin.end(); await new Promise(r => ff.on('close', r)); await browser.close();
   console.log('\n  encoding audio...');
 
-  // ---------- audio mix: voice placed at scene starts + optional music ducked ----------
-  const inputs = ['-i', silent], filters = []; let k = 1, t0 = 0; const labels = [];
-  scenes.forEach(sc => { if (sc.audio) { inputs.push('-i', sc.audio); filters.push(`[${k}:a]adelay=${Math.round(t0 * 1000 + 150)}|${Math.round(t0 * 1000 + 150)}[a${k}]`); labels.push(`[a${k}]`); k++; } t0 += sc.dur; });
-  const music = opt('--music', meta.music);
-  if (music && fs.existsSync(music)) { inputs.push('-stream_loop', '-1', '-i', music); filters.push(`[${k}:a]volume=0.12,atrim=0:${total}[m]`); labels.push('[m]'); k++; }
-  if (!labels.length) { fs.copyFileSync(silent, out); console.log('done ->', out); return; }
-  filters.push(`${labels.join('')}amix=inputs=${labels.length}:normalize=0,afade=t=out:st=${Math.max(0, total - .8).toFixed(2)}:d=0.8[aout]`);
-  spawnSync('ffmpeg', ['-y', '-loglevel', 'error', ...inputs, '-filter_complex', filters.join(';'), '-map', '0:v', '-map', '[aout]', '-c:v', 'copy', '-c:a', 'aac', '-b:a', '192k', '-t', String(total), out], { stdio: 'inherit' });
+  // ---------- score + sfx (synthesized by audio.py), voice ducks the music ----------
+  const genAudio = meta.music !== 'off' || meta.sfx !== 'off';
+  if (genAudio && !opt('--music')) {
+    const cues = [], levels = []; let t1 = 0;
+    scenes.forEach((sc, i) => {
+      const fx = String(sc.fx || ''), fight = fx.includes('shake') && sc.cast;
+      levels.push([t1, t1 + sc.dur, sc.level ?? (sc.type === 'impact' || fight ? 2 : sc.tone === 'whisper' || sc.tone === 'dramatic' ? 0 : 1)]);
+      if (i > 0) cues.push({ t: t1, type: 'whoosh', off: -.3, g: .5 });
+      if (sc.type === 'impact') { const n = String(sc.word || '').split('|').filter(s => s.trim()).length || 1, gap = Math.min(.55, sc.dur * .7 / n); for (let k = 0; k < n; k++) cues.push({ t: t1 + k * gap, type: k ? 'thud' : 'boom', g: k ? .8 : 1 }); }
+      if (sc.pop) String(sc.pop).split('|').forEach((p, k) => cues.push({ t: t1 + (sc.popAt ?? .25) + k * .35, type: 'thud', g: .7 }));
+      if (sc.type === 'meteor') { const hit = sc.hit ?? Math.min(1.6, sc.dur * .35); cues.push({ t: t1, type: 'rumble', d: hit, g: .8 }, { t: t1 + hit, type: 'explosion' }); }
+      if (sc.type === 'jungle') cues.push({ t: t1, type: sc.time === 'day' ? 'birds' : 'crickets', d: sc.dur });
+      if (sc.type === 'wakanda' && !fight) cues.push({ t: t1, type: 'water', d: sc.dur, g: .4 });
+      if (fight) { const n = Math.max(1, Math.round(sc.dur / (sc.cut || meta.cut || 1.8))); for (let k = 0; k < n; k++) cues.push({ t: t1 + k * sc.dur / n + .1, type: 'clash', g: .6 }); }
+      if (String(sc.sfx || '').includes('riser')) cues.push({ t: t1 + sc.dur - 1.2, type: 'riser' });
+      t1 += sc.dur;
+    });
+    fs.writeFileSync(`${tmp}/cues.json`, JSON.stringify({ total, bpm: meta.bpm || 96, levels, cues: meta.sfx === 'off' ? [] : cues }));
+    const r = spawnSync('python3', [path.join(__dirname, 'audio.py'), `${tmp}/cues.json`, tmp], { stdio: 'inherit' });
+    if (r.status !== 0) console.log('  (score/sfx unavailable — needs python3 + numpy)');
+  }
+  const inputs = ['-i', silent], filters = []; let k = 1, t0 = 0; const vo = [];
+  scenes.forEach(sc => { if (sc.audio) { inputs.push('-i', sc.audio); filters.push(`[${k}:a]adelay=${Math.round(t0 * 1000 + 150)}|${Math.round(t0 * 1000 + 150)}[a${k}]`); vo.push(`[a${k}]`); k++; } t0 += sc.dur; });
+  const music = opt('--music') || (meta.music && meta.music !== 'off' && meta.music !== 'auto' && fs.existsSync(meta.music) ? meta.music : fs.existsSync(`${tmp}/music.wav`) && meta.music !== 'off' ? `${tmp}/music.wav` : null);
+  const sfxF = fs.existsSync(`${tmp}/sfx.wav`) && meta.sfx !== 'off' ? `${tmp}/sfx.wav` : null;
+  const mixIn = [];
+  if (vo.length) { filters.push(`${vo.join('')}amix=inputs=${vo.length}:normalize=0,volume=1.5,asplit=2[vo][vok]`); mixIn.push('[vo]'); }
+  if (music) { inputs.push(...(opt('--music') ? ['-stream_loop', '-1'] : []), '-i', music); filters.push(`[${k}:a]volume=${opt('--music') ? .18 : .55},atrim=0:${total.toFixed(2)}[m0]`); k++;
+    if (vo.length) { filters.push(`[m0][vok]sidechaincompress=threshold=0.02:ratio=5:attack=30:release=400[m]`); } else filters.push('[m0]anull[m]'); mixIn.push('[m]'); }
+  else if (vo.length) filters.push('[vok]anullsink');
+  if (sfxF) { inputs.push('-i', sfxF); filters.push(`[${k}:a]volume=0.8[s]`); mixIn.push('[s]'); k++; }
+  if (!mixIn.length) { fs.copyFileSync(silent, out); console.log('done ->', out); return; }
+  filters.push(`${mixIn.join('')}amix=inputs=${mixIn.length}:normalize=0,alimiter=limit=0.95,afade=t=out:st=${Math.max(0, total - .8).toFixed(2)}:d=0.8[aout]`);
+  const mx = spawnSync('ffmpeg', ['-y', '-loglevel', 'error', ...inputs, '-filter_complex', filters.join(';'), '-map', '0:v', '-map', '[aout]', '-c:v', 'copy', '-c:a', 'aac', '-b:a', '192k', '-t', String(total), out], { stdio: 'inherit' });
+  if (mx.status !== 0) { fs.copyFileSync(silent, out); console.log('  (audio mix failed — wrote silent video)'); }
   console.log('done ->', out);
 })();

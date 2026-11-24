@@ -2,19 +2,20 @@ video: yes
 title: The King of Wakanda
 voice: en-US-AndrewNeural
 rate: +28%
+bpm: 96
 cut: 1.1
 ---
 tone: whisper
 scene: jungle
 fx: purple
 push: 0.12
-Deep in the jungle... something is watching you.
+Deep in the jungles of Africa... something is watching you.
 ---
 tone: dramatic
 scene: impact
 word: HE IS|A KING
 color: #b48cff
-He's not just a hero. He's a king.
+He is not just a warrior. He is a king.
 ---
 tone: excited
 scene: wakanda
@@ -22,19 +23,19 @@ cast: hero(x=0.5, skin=dark, hair=#111, outfit=armor, shirt=#17151f, pants=#1715
 speaker: hero
 shots: wide, close, medium
 pop: WAKANDA
-Behind the trees hides Wakanda. The most advanced nation on Earth. And nobody knows it exists.
+His name is T'Challa. And behind these trees hides his home. Wakanda. The most advanced nation on Earth.
 ---
 tone: dramatic
 scene: meteor
 dur: 4.6
-Why? Because long ago, a meteor crashed right here.
+Thousands of years ago, a meteor fell from the sky... right here.
 ---
 tone: hype
 scene: impact
 word: VIBRANIUM
 sub: absorbs any hit
 color: #9b7cff
-Inside it was vibranium. A metal that can absorb almost any hit.
+Inside it was vibranium. The strongest metal on the planet.
 ---
 tone: excited
 scene: wakanda
@@ -42,13 +43,13 @@ time: night
 fx: shake
 pop: NEVER CONQUERED
 popColor: #ff5a5a
-Wakanda used it to build a nation that has never been conquered.
+With it, Wakanda grew powerful. Hidden. And never conquered.
 ---
 scene: throne
 cast: father(x=0.42, hat=crown, skin=dark, hair=#555, beard=#666, outfit=robe, color2=#6a3a1a, cape=#4a2a7a, necklace, tag=T'Chaka), son(x=0.6, kid, skin=dark, hair=#111, shirt=#efe6d2, pants=#3a2a20, mood=happy, tag=young T'Challa)
 speaker: father
 shots: wide, close, react
-Young T'Challa was raised to be king by his father, King T'Chaka.
+T'Challa was born a prince. His father, King T'Chaka, taught him everything.
 ---
 tone: serious
 scene: throne
@@ -57,7 +58,7 @@ cast: father(x=0.42, hat=crown, skin=dark, hair=#555, beard=#666, outfit=robe, c
 speaker: thief
 shots: close, react, close, react
 cut: 0.8
-Then a thief named Klaw invaded, hunting the vibranium... and killed the king. Right in front of his son.
+Until the night a man named Klaw broke into the palace... and killed the king. Right in front of his son.
 ---
 tone: whisper
 scene: impact
@@ -73,32 +74,32 @@ cast: hero(x=0.36, skin=dark, hair=#111, outfit=armor, shirt=#17151f, pants=#171
 speaker: hero
 fx: lines
 cut: 0.8
-To become the Black Panther, he had to beat every challenger in ritual combat.
+Years later, every warrior who wanted the throne came for him. One by one, he beat them all.
 ---
 tone: dramatic
 scene: impact
-word: HEART|SHAPED|HERB
+word: THE SACRED|HERB
 color: #7bf0a0
 bg: #06180e
-Then he ate the heart shaped herb.
+Then he drank the sacred heart shaped herb.
 ---
 tone: hype
 scene: impact
-word: STRENGTH|SPEED|SENSES
+word: STRONGER|FASTER|SHARPER
 color: #b48cff
-It gave him superhuman strength, speed and senses.
+And he rose stronger. Faster. Sharper than any man alive.
 ---
 tone: excited
 scene: network
-pop: GENIUS
-Crazy part? He's also one of the smartest people on the planet. A scientist who builds his own tech.
+pop: MASTERMIND
+But his greatest weapon is his mind. He builds the technology that protects his people.
 ---
 scene: wakanda
 time: night
 cast: hero(x=0.5, skin=dark, hair=#111, outfit=armor, shirt=#17151f, pants=#17151f, necklace=#c9c9d6, pose=think, mood=neutral)
 speaker: hero
 shots: medium, close
-He's famous for having a plan to beat almost anyone. Even his own friends.
+He studies every enemy. He always has a plan.
 ---
 tone: serious
 scene: jungle
@@ -107,7 +108,7 @@ cast: villain(x=0.34, skin=dark, hair=#111, outfit=vest, color2=#2a5a3a, pants=#
 speaker: villain
 shots: close, react, close, react
 cut: 0.8
-But his deadliest enemy came from inside Wakanda. Erik Killmonger.
+Then came Erik Killmonger. A warrior who wanted to take everything.
 ---
 tone: hype
 scene: impact
@@ -117,13 +118,14 @@ bg: #06101e
 Killmonger beat him... and threw him off a waterfall.
 ---
 tone: excited
+sfx: riser
 scene: wakanda
 fx: purple
 cast: hero(x=0.5, skin=dark, hair=#111, outfit=armor, shirt=#17151f, pants=#17151f, necklace=#c9c9d6, mood=angry, pose=hips)
 speaker: hero
 shots: wide, close
 pop: HE CAME BACK
-He survived. He climbed back. And he took his throne back.
+Everyone thought he was dead. But T'Challa climbed back. And he took back his throne.
 ---
 tone: dramatic
 scene: throne
@@ -137,4 +139,4 @@ tone: hype
 scene: impact
 word: LONG LIVE|THE KING
 color: #e8b923
-That's T'Challa. The Black Panther. Long live the king.
+He is T'Challa. The Black Panther. Long live the king.

@@ -1,42 +1,42 @@
 BLACK PANTHER — VOICE-OVER SCRIPT (for an AI voice generator)
-Tags in [brackets] are emotion/delivery cues. ElevenLabs v3 reads them directly.
-For other tools, use the tag as the style setting for that line and delete it from the text.
-Voice: deep, cinematic male narrator. Speed: fast (about 1.15x). Gaps: short.
+Tags in [brackets] are delivery cues. ElevenLabs v3 reads them directly.
+For other tools, use the tag as that line's style setting and delete it from the text.
+Voice: deep, cinematic male storyteller. Speed: fast (about 1.15x). Short gaps.
 
-[whispers] Deep in the jungle... something is watching you.
+[whispers] Deep in the jungles of Africa... something is watching you.
 
-[dramatic] He's not just a hero. [intense] He's a KING.
+[dramatic] He is not just a warrior. [intense] He is a KING.
 
-[excited] Behind the trees hides Wakanda. The most advanced nation on Earth. [mischievously] And nobody knows it exists.
+[excited] His name is T'Challa. And behind these trees hides his home. [awe] Wakanda. The most advanced nation on Earth.
 
-[mysterious] Why? Because long ago... a meteor crashed right here.
+[mysterious] Thousands of years ago, a meteor fell from the sky... [whispers] right here.
 
-[excited] Inside it was vibranium! A metal that can absorb almost ANY hit.
+[excited] Inside it was vibranium! The strongest metal on the planet.
 
-[proud] Wakanda used it to build a nation that has NEVER been conquered.
+[proud] With it, Wakanda grew powerful. Hidden. And NEVER conquered.
 
-[warm] Young T'Challa was raised to be king by his father, King T'Chaka.
+[warm] T'Challa was born a prince. His father, King T'Chaka, taught him everything.
 
-[serious] Then a thief named Klaw invaded, hunting the vibranium... [sad] and killed the king. Right in front of his son.
+[serious] Until the night a man named Klaw broke into the palace... [sad] and killed the king. Right in front of his son.
 
 [quiet, intense] The boy never forgot.
 
-[intense] To become the Black Panther, he had to beat EVERY challenger in ritual combat.
+[intense] Years later, every warrior who wanted the throne came for him. [determined] One by one, he beat them ALL.
 
-[mysterious] Then he ate the heart-shaped herb.
+[mysterious] Then he drank the sacred heart-shaped herb.
 
-[excited] It gave him superhuman strength! Speed! And senses!
+[excited] And he rose stronger! Faster! Sharper than any man alive!
 
-[amazed] Crazy part? He's also one of the smartest people on the planet. A scientist who builds his own tech.
+[serious] But his greatest weapon is his mind. He builds the technology that protects his people.
 
-[mischievously] He's famous for having a plan to beat almost anyone. [laughs softly] Even his own friends.
+[calm, confident] He studies every enemy. He always has a plan.
 
-[serious] But his deadliest enemy came from inside Wakanda. [menacing] Erik Killmonger.
+[menacing] Then came Erik Killmonger. A warrior who wanted to take everything.
 
 [shocked] Killmonger beat him... and threw him off a WATERFALL.
 
-[building, triumphant] He survived. He climbed back. And he took his throne back.
+[building, triumphant] Everyone thought he was dead. But T'Challa climbed back. And he took back his throne.
 
 [slow, powerful] Warrior. Genius. King.
 
-[proud, epic] That's T'Challa. The Black Panther. [shouting] Long live the king!
+[proud, epic] He is T'Challa. The Black Panther. [shouting] Long live the king!
