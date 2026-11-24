@@ -1,0 +1,83 @@
+video: yes
+title: The King Who Beat The Fantastic Four
+voice: en-US-AndrewNeural
+rate: +12%
+---
+scene: throne
+cast: king(x=0.5, hat=crown, skin=dark, hair=#111, outfit=robe, color2=#1b1b24, shirt=#2a2a36, cape=#4a2a7a, necklace, mood=angry, size=1.1, tag=T'Challa)
+speaker: king
+shots: wide, close, medium, close
+July 1966. A brand new hero walks into a comic book and beats the entire Fantastic Four. By himself. His name was T'Challa. The Black Panther.
+---
+scene: castle
+label: Where it began
+To understand how a king did that, we have to go back to the people who made him.
+---
+scene: room
+palette: warm
+cast: writer(x=0.38, hair=#888, glasses, outfit=suit, color2=#2e3a5a, mood=happy, tag=Stan Lee), artist(x=0.6, hair=#3a2a20, outfit=shirt, shirt=#efe6d2, pants=#444, prop=book, tag=Jack Kirby)
+speaker: artist
+shots: wide, close, react, close
+He was created by Stan Lee and Jack Kirby. Crazy fact: Kirby's first design was called the Coal Tiger, with a yellow and black suit and his face uncovered.
+---
+scene: stat
+value: 52
+prefix: #
+label: Fantastic Four #52
+He debuted in Fantastic Four number fifty two. He became the first Black superhero in mainstream American comics.
+---
+scene: earth
+place: Wakanda
+zoom: 0.6
+He ruled Wakanda, a hidden African nation that secretly had the most advanced technology on Earth.
+---
+scene: space
+color: #7a4ad8
+The secret? A meteor of vibranium, the rarest metal in the Marvel universe, crashed there long ago. Wakanda kept it all to itself.
+---
+scene: throne
+cast: father(x=0.42, hat=crown, skin=dark, hair=#666, beard=#777, old, outfit=robe, color2=#6a3a1a, cape=#4a2a7a, tag=T'Chaka), son(x=0.6, kid, skin=dark, hair=#111, shirt=#efe6d2, pants=#3a2a20, mood=worried)
+speaker: father
+shots: wide, close, react, medium
+cut: 2.4
+His father, King T'Chaka, was killed by the villain Klaw. Young T'Challa had to grow up fast, and win the right to the throne himself.
+---
+scene: timeline
+years: 1966, 1968, 1973, 1977
+events: Debut | Joins Avengers | Panther's Rage | Own series
+active: 2
+In 1968 he joined the Avengers. Soon he had his own stories, and in 1977 Jack Kirby came back to draw his solo series.
+---
+scene: hall
+cast: king(x=0.5, hat=crown, skin=dark, hair=#111, outfit=robe, color2=#1b1b24, shirt=#2a2a36, cape=#4a2a7a, necklace, mood=worried, tag=Black Leopard?)
+speaker: king
+label: 1972
+Here is a wild one. In 1972, Marvel renamed him the Black Leopard, to avoid confusion with the political Black Panther Party. It lasted one issue.
+---
+scene: outdoor
+cast: villain(x=0.38, skin=dark, hair=#111, outfit=vest, color2=#2a5a3a, pants=#2a2a2a, necklace, mood=angry, prop=sword, tag=Killmonger), king(x=0.6, hat=crown, skin=dark, hair=#111, outfit=robe, color2=#1b1b24, shirt=#2a2a36, cape=#4a2a7a, necklace, mood=angry)
+speaker: villain
+shots: wide, close, react, medium
+cut: 1.4
+In Jungle Action, writer Don McGregor wrote Panther's Rage, thirteen issues that are called the first comic built from start to finish as a complete novel. It also introduced Erik Killmonger.
+---
+scene: network
+label: Genius king
+Another crazy fact. T'Challa is a king, a warrior, and a scientist. In the comics he is one of the smartest people on Earth.
+---
+scene: stat
+value: 1300000000
+prefix: $
+label: Box office
+Then came Hollywood. Chadwick Boseman played T'Challa, and the 2018 movie made over one point three billion dollars worldwide.
+---
+scene: sun
+label: Oscar history
+It became the first superhero film ever nominated for Best Picture, and it won three Oscars.
+---
+scene: throne
+cast: king(x=0.5, hat=crown, skin=dark, hair=#111, outfit=robe, color2=#1b1b24, shirt=#2a2a36, cape=#4a2a7a, necklace, mood=happy, size=1.1)
+speaker: king
+shots: wide, medium, close
+cut: 2.5
+Chadwick Boseman passed away in 2020. But the king he brought to life lives on. Wakanda forever.
