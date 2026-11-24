@@ -1,5 +1,3 @@
-32	[serious] His uncle ruled for a time while the prince grew up. But T'Challa never stopped thinking about that night. The sound of the blast. His father's last words. He trained harder than anyone in the kingdom. Before sunrise. After midnight. Every single day.
-34	[calm] He left Wakanda in secret and traveled the world. He studied science at the best universities on Earth. He learned how the outside world thinks. And how it fights.
 35	[calm] Nobody there knew he was a prince. To them, he was just a quiet student who always sat in the back, who finished every exam first, and who never, ever lost a fight in the gym.
 36	[determined] When he came home, he was ready.
 37	[intense] In Wakanda, the throne is not just given. On challenge day, any warrior from any tribe can fight for the crown. No weapons. No armor. Just strength, skill and courage. At the edge of the great waterfall.
