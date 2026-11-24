@@ -1,6 +1,3 @@
-26	[menacing] Klaw brought hired soldiers and a weapon unlike anything Wakanda had seen. A machine that turned sound into pure destruction. He did not want peace. He wanted the mountain of vibranium. All of it.
-29	[intense] But the boy did not run. He grabbed Klaw's own sound weapon... and turned it on him. The blast destroyed Klaw's right hand. The thief fled into the night, screaming.
-31	[sad] Wakanda had lost its king. And T'Challa was too young to take the throne. So he waited. And he trained.
 32	[serious] His uncle ruled for a time while the prince grew up. But T'Challa never stopped thinking about that night. The sound of the blast. His father's last words. He trained harder than anyone in the kingdom. Before sunrise. After midnight. Every single day.
 34	[calm] He left Wakanda in secret and traveled the world. He studied science at the best universities on Earth. He learned how the outside world thinks. And how it fights.
 35	[calm] Nobody there knew he was a prince. To them, he was just a quiet student who always sat in the back, who finished every exam first, and who never, ever lost a fight in the gym.
