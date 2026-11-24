@@ -1,0 +1,44 @@
+6	[awe] The impact shook the whole land. Trees burned for miles. And when the smoke cleared, a mountain of strange metal was glowing in the crater. Some people who touched it changed. Some became monsters. Others were never seen again.
+8	[storytelling] Five tribes lived around the crash site. They fought over the strange glowing metal for years. Then a warrior named Bashenga had a dream. The Panther Goddess, Bast, showed him the way.
+9	[awe] Bashenga united the tribes. He became the very first Black Panther. And from that day on, a Panther has always protected Wakanda.
+11	[calm] For thousands of years, the Panthers ruled from the Golden City. They built farms that never failed, medicine that healed any wound, and machines powered by the purple metal. While empires rose and fell outside, Wakanda kept growing in silence.
+12	[serious] Many tried to find it. Explorers. Armies. Treasure hunters. They walked into the jungle, and most of them never walked out. The ones who did said the same thing. Something in the trees was hunting them.
+14	[mysterious] To the outside world, Wakanda looks like a small, poor farming country. No airports. No skyscrapers. Just jungle and mountains. But that is a mask.
+15	[excited] Behind a wall of hidden technology are flying ships, magnetic trains, and cities of light. They chose to stay hidden. Because the world wants vibranium. And the world would take it.
+18	[sad] His mother died when he was born. So the queen, Ramonda, raised him like her own son. Later came a little sister. Shuri. Brilliant. Loud. And always one step ahead.
+19	[warm] Every morning, T'Chaka took his son into the jungle. He taught him to move without sound. To read the wind. To listen to the animals.
+20	[storytelling] He learned to climb the tallest trees before he could read. He raced leopards along the riverbank. He fell. He bled. And every time, his father told him to get back up.
+21	[warm] At night, the young prince sat in the palace library, reading about the outside world. Its cities. Its wars. Its endless hunger for power. And he wondered why Wakanda hid from all of it.
+22	[serious] A king does not fight for glory, his father said. A king fights so that his people never have to.
+23	[warm] Shuri followed her big brother everywhere. While he trained his body, she took apart every machine in the palace, just to see how it worked. Their father used to joke that one day she would run the whole kingdom from her lab.
+25	[serious] Then, one night, a stranger came. Ulysses Klaw. A thief who hunted rare metals across the world. And he had heard the rumors about Wakanda.
+26	[menacing] Klaw brought hired soldiers and a weapon unlike anything Wakanda had seen. A machine that turned sound into pure destruction. He did not want peace. He wanted the mountain of vibranium. All of it.
+29	[intense] But the boy did not run. He grabbed Klaw's own sound weapon... and turned it on him. The blast destroyed Klaw's right hand. The thief fled into the night, screaming.
+31	[sad] Wakanda had lost its king. And T'Challa was too young to take the throne. So he waited. And he trained.
+32	[serious] His uncle ruled for a time while the prince grew up. But T'Challa never stopped thinking about that night. The sound of the blast. His father's last words. He trained harder than anyone in the kingdom. Before sunrise. After midnight. Every single day.
+34	[calm] He left Wakanda in secret and traveled the world. He studied science at the best universities on Earth. He learned how the outside world thinks. And how it fights.
+35	[calm] Nobody there knew he was a prince. To them, he was just a quiet student who always sat in the back, who finished every exam first, and who never, ever lost a fight in the gym.
+36	[determined] When he came home, he was ready.
+37	[intense] In Wakanda, the throne is not just given. On challenge day, any warrior from any tribe can fight for the crown. No weapons. No armor. Just strength, skill and courage. At the edge of the great waterfall.
+41	[whispers] The herb sent him into a deep sleep. In his dream, he walked through a purple sky... and the Panther Goddess looked into his eyes.
+42	[whispers] She showed him the spirits of every Panther who came before him. Hundreds of kings and queens, all the way back to Bashenga. And among them, his father. Smiling.
+44	[epic] T'Challa was crowned king of Wakanda. And the new Black Panther.
+47	[excited] He designs his own jets. His own medicine. His own weapons. In his labs, scientists build things the rest of the world will not invent for another hundred years. And T'Challa understands every single one of them.
+48	[excited] His suit is woven from vibranium. Every punch that hits him, it soaks up the energy. And then he can release it all at once, in one giant blast.
+49	[confident] And he is never alone. The Dora Milaje, an army of elite women warriors, guard the king with their lives. Their leader, Okoye, has never lost a fight.
+52	[serious] He even keeps secret plans to stop his own friends, just in case they ever turn bad. People call him paranoid. He calls it being a king.
+55	[serious] Killmonger was Wakandan too. When he was a boy, his father helped Klaw attack the kingdom. The family was sent away in shame. Erik grew up far from home, full of hate.
+56	[sad] As a boy, he stared at old pictures of Wakanda and told himself a story. That the kingdom had thrown his family away. That the Panthers were liars. And that one day, he would make them pay.
+57	[menacing] He trained for years. He became a soldier, a killer, a master of war. And he had one goal. Take the throne. And take revenge on the son of T'Chaka.
+58	[menacing] He gave himself a new name. Killmonger. And for every enemy he defeated, he cut a mark into his own skin. By the time he came home, his body was covered in them.
+59	[intense] He came back to Wakanda with an army, and he challenged T'Challa at the edge of the great waterfall.
+62	[sad] Killmonger sat on the throne. Wakanda had a new king. And the people were afraid.
+63	[serious] He burned the sacred garden where the heart-shaped herb grew, so no one could ever become the Panther again. He threw anyone who disagreed with him into prison. Wakanda had never been so dark.
+65	[whispers] But deep under the water... T'Challa was still alive. Barely. Fishermen pulled him from the river, broken and bleeding.
+66	[determined] Okoye found him. The Dora Milaje hid him in the mountains and healed his wounds. And Shuri had saved one last piece of the sacred herb. Just enough for one more Panther.
+69	[intense] This time he fought with everything. His father's lessons. His years of training. His people behind him. And Killmonger fell.
+70	[serious] Even then, T'Challa did not celebrate. Killmonger was one of his own people. A son of Wakanda, lost to anger. And that hurt more than any wound.
+71	[calm] So he made a promise. No child of Wakanda would ever be left behind again. Not inside its walls. And not outside them either.
+73	[warm] Today, T'Challa rules with Shuri at his side. She builds the future. He protects it.
+74	[serious] Klaw never stopped hunting him. Killmonger's followers still wait in the shadows. And every year, a new enemy comes looking for the purple metal. But every one of them finds the same thing waiting in the trees.
+75	[proud] And he made a choice no king before him had dared to make. He opened Wakanda to the world. To share its knowledge. To help, instead of hide.
