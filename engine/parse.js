@@ -21,7 +21,7 @@ function parseScript(raw) {
       if (m && m[1] !== 'text') { const k = m[1], v = m[2].trim(); sc[k] = k === 'cast' ? parseCast(v) : isNaN(+v) || v === '' ? v : +v; }
       else sc.text += ' ' + (m ? m[2] : line).trim();
     });
-    sc.text = sc.text.trim(); sc.seed = seed += 101;
+    sc.text = sc.text.trim(); sc.say = sc.text; sc.text = sc.text.replace(/\[[^\]]*\]\s*/g, '').trim(); sc.seed = seed += 101;
     return sc;
   }).filter(sc => { if (sc.video) { Object.assign(meta, sc); return false; } return true; });
   scenes.forEach(sc => { sc.type = sc.scene || 'room'; delete sc.scene; if (!sc.speaker && sc.cast && sc.cast.length) sc.speaker = sc.cast[sc.cast.length - 1].name; });

@@ -21,12 +21,25 @@ const { meta, scenes } = parseScript(fs.readFileSync(scriptPath, 'utf8'));
 const probe = f => +spawnSync('ffprobe', ['-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', f]).stdout.toString().trim() || 0;
 const hasTTS = !flag('--novoice') && spawnSync('python3', ['-c', 'import edge_tts']).status === 0;
 // per-scene delivery: tone: excited | serious | whisper | dramatic | hype
+// ElevenLabs AI voice: set `tts: elevenlabs` + `eleven_voice: <voice id>` in the header, or pass --eleven <voice id>
+// pre-made voice lines: --vo DIR (or `vo: DIR` in the header) with vo0.mp3, vo1.mp3 … one per scene
+const VODIR = opt('--vo', meta.vo);
+const ELEVEN = !flag('--novoice') && (opt('--eleven') || (meta.tts === 'elevenlabs' && (meta.eleven_voice || 'nPczCjzI2devNBz1zQrb')));
 const TONE = { excited: ['+12%', '+6Hz', '+0%'], hype: ['+18%', '+10Hz', '+0%'], serious: ['-6%', '-6Hz', '+0%'], dramatic: ['-10%', '-8Hz', '+0%'], whisper: ['-8%', '-4Hz', '-35%'] };
 const pct = (a, b) => (parseInt(a) + parseInt(b) >= 0 ? '+' : '') + (parseInt(a) + parseInt(b)) + '%';
 scenes.forEach((sc, i) => {
   const words = sc.text ? sc.text.split(/\s+/).length : 0;
   let speech = words / 3.1;
-  if (hasTTS && sc.text) {
+  const pre = VODIR && path.join(VODIR, `vo${i}.mp3`);
+  if (pre && sc.text && fs.existsSync(pre)) { const f = `${tmp}/vo${i}.mp3`; spawnSync('ffmpeg', ['-y', '-loglevel', 'error', '-i', pre, '-af', `silenceremove=start_periods=1:start_threshold=-45dB,areverse,silenceremove=start_periods=1:start_threshold=-45dB,areverse,atempo=${meta.vspeed || 1.08}`, f]); sc.audio = f; speech = probe(f); }
+  if (!sc.audio && ELEVEN && sc.text) {
+    const f = `${tmp}/vo${i}.mp3`, raw = `${tmp}/vo${i}-raw.mp3`, vs = meta.stability ?? 0.5;
+    const body = JSON.stringify({ text: (sc.say || sc.text).replace(/\*/g, ''), model_id: meta.model || 'eleven_v3', voice_settings: { stability: vs, similarity_boost: 0.8 } });
+    const r = spawnSync('curl', ['-s', '-f', '-X', 'POST', `https://api.elevenlabs.io/v1/text-to-speech/${sc.voice || ELEVEN}?output_format=mp3_44100_128`, '-H', `xi-api-key: ${process.env.ELEVENLABS_API_KEY || 'proxy-injected'}`, '-H', 'Content-Type: application/json', '--data-binary', '@-', '-o', raw], { input: body, timeout: 120000 });
+    if (r.status === 0 && probe(raw) > 0) { spawnSync('ffmpeg', ['-y', '-loglevel', 'error', '-i', raw, '-af', `atempo=${meta.vspeed || 1.1},silenceremove=start_periods=1:start_threshold=-45dB`, f]); sc.audio = f; speech = probe(f); }
+    else console.log(`  (ElevenLabs failed on scene ${i + 1}, falling back)`);
+  }
+  if (!sc.audio && hasTTS && sc.text) {
     const f = `${tmp}/vo${i}.mp3`;
     const [tr, tp, tv] = TONE[sc.tone] || ['+0%', '+0Hz', '+0%'];
     const r = spawnSync('python3', [path.join(__dirname, 'tts.py'), sc.voice || meta.voice || VOICE, pct(meta.rate || '+15%', tr), tp, tv, f, sc.text.replace(/\*/g, '')], { timeout: 60000 });
