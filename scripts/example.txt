@@ -1,38 +1,47 @@
 video: yes
 voice: en-US-AndrewNeural
 ---
-scene: hook
-title: He could bend steel with his mind. But first, he had to survive.
-color: #c0392b
+scene: throne
+cast: ruler(x=0.45, hat=crown, hair=#e9e9ef, beard=#e9e9ef, old, outfit=robe, color2=#5b3a8a, shirt=#d9cfe8, cape=#5b3a8a, mood=angry, prop=orb, size=1.1, tag=the frost king), queen(x=0.58, hair=#e8c66a, hairstyle=long, hat=crown, outfit=dress, color2=#f2ede2, mood=worried)
+speaker: ruler
+shots: wide, close, react, close
+He rules a kingdom of ice and gold. Every mountain, every river, every star in the sky. But how did a boy from nowhere end up on this throne?
 ---
-scene: room
-palette: warm
-cast: kid(x=0.3, kid, size=0.82, hair=#1f1a18, shirt=#a8382e, vest=#2a2626, pants=#4a4a4f, eyes=#4a78b0), elder(x=0.52, hair=#a3a3a3, beard=#8e8e8e, glasses, shirt=#e4ddcf, vest=#c8682f, prop=hammer, mood=angry, skin=tan)
-speaker: elder
-Our story begins in a small workshop. His father was a *jeweler*, and the family name translates simply to *iron hard*.
+scene: castle
+Kings are usually born in castles. Our story does not begin in one.
 ---
-scene: timeline
-years: 1929, 1939, 1945, 1963
-events: Born | War | Survived | Rise
-active: 4
-He was born in 1929. Ten years later, the war came, and *everything* changed.
+scene: camp
+time: night
+cast: boy(x=0.44, kid, hair=#2a1d16, shirt=#efe6d2, vest=#a33a30, pants=#5a4a3a)
+speaker: boy
+It begins in a camp high in the mountains, on the coldest night of the year.
 ---
-scene: outdoor
-cast: villain(x=0.62, helmet=#c62828, shirt=#d32f2f, suit=#d32f2f, tie=#7b1fa2, pants=#7b1fa2, mood=angry, prop=orb)
-Years later, he was at *war* with the world. All he ever wanted was a home they could not take away.
+scene: camp
+castle: 1
+cast: mother(x=0.3, hat=scarf, scarf=#2e5a9a, outfit=dress, color2=#8a2a24, shirt=#f2ead8), girl(x=0.38, kid, hairstyle=long, hair=#5a3a24, outfit=dress, color2=#4f7a4a, mood=happy), father(x=0.46, hair=#3a2a20, beard=#3a2a20, vest=#5a3a7a, shirt=#efe6d2, tag=the father)
+speaker: father
+His people were travelers. They lived in tents and wagons, and they moved wherever the seasons took them.
 ---
-scene: network
-label: Large Language Model
-First, let us set the stage. Every idea is a node, and every node is *connected*.
+scene: earth
+place: Valdoria
+zoom: 0.6
+They lived in the mountains of a small country called Valdoria, and they were very poor.
 ---
-scene: stat
-value: 8000000000
-label: people on Earth
-And there are eight billion people who could change *everything*.
+scene: shop
+cast: healer(x=0.5, bald, hair=#9a9a9a, beard=#9a9a9a, old, outfit=apron, color2=#4f7a4a, shirt=#efe6d2, tag=werner)
+speaker: healer
+His father was a healer. He mixed herbs and medicines for anyone who needed help, rich or poor.
 ---
-scene: glitch
-title: SYSTEM BREACH
-Something was watching. And it was *learning*.
+scene: camp
+cast: boy(x=0.3, kid, hair=#2a1d16, shirt=#efe6d2, vest=#a33a30, mood=worried), mother(x=0.4, hat=scarf, scarf=#2e5a9a, outfit=dress, color2=#8a2a24, shirt=#f2ead8, mood=worried), soldier(x=0.5, hat=helmet, tabard=#7a1f2a, pants=#3a3a40, mood=angry, prop=sword, beard=#5a4030), soldier2(x=0.64, hat=helmet, tabard=#7a1f2a, pants=#3a3a40, mood=angry, prop=sword)
+speaker: soldier
+shots: wide, close, react, medium
+But the baron hated the travelers, and his soldiers chased them from place to place.
 ---
-scene: robot
-It is impossible to learn the details and not get *freaked out*, at least a bit.
+scene: portraits
+cast: farmer(x=0.3, hairstyle=bun, hair=#4a2a6a, outfit=dress, color2=#2d6a9a, skin=medium, prop=basket, mood=happy), fisher(x=0.7, hat=cap, capColor=#e0a03a, skin=brown, hair=#2a1a14, outfit=shirt, shirt=#8a3a2a, necklace, prop=fish)
+Thousands of years ago, people began cultivating the earth, built settlements and created civilization.
+---
+scene: sun
+label: A god at the center
+He made every star in the sky himself. He is quite literally a god.

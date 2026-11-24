@@ -1,40 +1,45 @@
 # 2D Video Maker
 
-Turn a text script into an animated 2D YouTube video. All art, characters, lighting and motion graphics are drawn in code. No assets needed.
+Turns a text script into an animated 2D explainer video. Every background, character and effect is drawn in code.
 
-## Usage
+**Style:** chunky big-headed characters with limited, choppy animation (12fps held poses and snapping mouth shapes), detailed paper-cut backgrounds with parallax, hard cuts between wide, medium and close-up shots, name labels with arrows, and illustrated motion-graphic scenes.
+
+## Setup and usage
 ```bash
-pip install edge-tts            # optional: free AI voice-over (needs internet)
-node engine/render.js scripts/example.txt            # -> out/example.mp4 (1080p30)
-node engine/render.js my.txt out/my.mp4 --preview    # fast 15fps draft
-node engine/render.js my.txt --still 5               # single frame at 5s
+npm install                     # fonts
+pip install edge-tts            # optional free AI voice-over (needs internet)
+node engine/render.js scripts/example.txt                 # -> out/example.mp4
+node engine/render.js my.txt --preview                    # fast 15fps draft
+node engine/render.js my.txt --still 2,8,15               # preview frames at those seconds
 node engine/render.js my.txt --music bg.mp3 --voice en-US-GuyNeural
 ```
 
 ## Script format
-Scenes are separated by `---`. Lines written as `key: value` set options. Any other line is narration. Narration becomes the captions and the voice-over.
+Scenes are separated by `---`. Lines written as `key: value` set options. Any other line is narration, which becomes the voice-over and the captions.
 
-| scene | look |
-|---|---|
-| `hook` | kinetic title slam, light rays, shake (use as scene 1) |
-| `room` | cartoon interior, window light shaft, clock, workbench (`palette: warm/cool/royal`) |
-| `outdoor` | sky, sun glow, sea, poles, drifting clouds |
-| `hall` | grand meeting hall, long table |
-| `network` | glowing neural net with traveling pulses (`label:` adds a title bar) |
-| `space` | stars, nebula, lit planet (`color:`) |
-| `robot` | neon robot, glowing eyes, glitch |
-| `stat` | big count-up number (`value:`, `label:`, `prefix:`, `suffix:`) |
-| `glitch` | glitch title card, data rain, neon grid (`title:`) |
-| `timeline` | animated timeline (`years: 1929, 1945`, `events: Born \| War`, `active: 2`) |
+### Scenes
+| scene | what it looks like | options |
+|---|---|---|
+| `camp` | mountains, forest, tents, wagon, campfire, bunting | `time: night`, `snow: 1`, `castle: 1` |
+| `castle` | castle at night, moon, lit windows, clouds | |
+| `throne` | palace throne room, columns, blue braziers | |
+| `shop` | interior with shelves, bottles, tapestry and window (close-ups) | |
+| `room` / `hall` / `outdoor` | workshop, meeting hall, industrial yard | `palette: warm/cool/night` |
+| `earth` | globe with a pin and a place label | `place: Name`, `zoom: 0.5` |
+| `sun` | star with surface cells and solar flares | |
+| `portraits` | two characters in glowing circles over moving blobs | first 2 characters in `cast` |
+| `space`, `network`, `stat`, `timeline` | motion graphics | `value:`, `years:`, `events:` |
 
-**Characters:** `cast: name(x=0.5, skin=tan, hair=#333, beard=#888, glasses, shirt=#fff, vest=#c86, suit=#223, tie=#a22, kid, helmet=#c22, mood=angry|happy|sad, prop=hammer|book|orb, bald, longhair, size=1, flip)`.
-The `speaker:` character talks and gestures. If no speaker is set, the last character in the cast talks.
+Any scene can also use `label: Text` (ribbon title), `dur:` (seconds), `push:` (camera push-in), `captions: off` (set once in the header).
 
-Other options: `title:` (kinetic text), `dur:` (seconds), `zoom:`, `pan:`, `nocap: 1`.
-
-## Style
-- **Characters use limited animation.** They move at about 8fps and hold poses: gestures snap between poses, mouths swap between shapes, and blinks last two frames.
-- **Motion graphics are smooth at 30fps.** They include keyword pop-ups, HUD rings, bar-wipe transitions, count-ups and the timeline.
-- **Glitch effects:** RGB split, slice tearing, datamosh blocks and scanlines, plus bloom and film grain on top.
-- **Keyword pop-ups:** wrap words in `*stars*` in the narration and they pop up as glitchy titles at the moment they're spoken.
-- Each scene can set `glitch: 0-1` (how often it glitches), `bloom: 0-1`, `trans: glitch|bars|flash` and `hud: 1`. Characters also take `pose: rest|hips|chest|point|open|shrug` and `hairstyle: short|swept`.
+### Characters
+```
+cast: name(x=0.4, kid, skin=light|tan|medium|brown|dark, hair=#333, hairstyle=short|swept|long|bun|curly|bald,
+           beard=#888, old, glasses, outfit=shirt|vest|apron|tunic|dress|robe|suit, shirt=#fff, color2=#a33,
+           pants=#444, hat=helmet|scarf|crown|hood|cap, cape=#523, mood=angry|happy|sad|worried,
+           prop=sword|hammer|torch|book|orb|fish|basket, size=1, tag=his name)
+speaker: name
+shots: wide, close, react, medium     # optional; default cuts automatically every ~3s
+```
+- `close` frames the speaker. `react` cuts to another character's face.
+- `tag` shows a big name label with an arrow pointing at the character during their close-ups.

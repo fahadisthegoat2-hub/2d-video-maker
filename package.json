@@ -1,0 +1,6 @@
+{
+  "name": "2d-video-maker",
+  "private": true,
+  "scripts": { "render": "node engine/render.js" },
+  "dependencies": { "@fontsource/fredoka": "^5.0.0", "@fontsource/roboto": "^5.0.0" }
+}

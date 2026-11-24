@@ -64,11 +64,16 @@ console.log(`${scenes.length} scenes, ${total.toFixed(1)}s @ ${FPS}fps, voice: $
   const browser = await chromium.launch();
   const page = await browser.newPage({ viewport: { width: 1920, height: 1080 } });
   await page.goto('file://' + path.join(__dirname, 'scene.html'));
+  page.on('pageerror', e => console.log('PAGE ERROR:', e.message));
+  await page.evaluate(() => window.fontsReady);
   await page.evaluate(([s, f, m]) => setup(s, f, m), [scenes, FPS, meta]);
 
   if (opt('--still')) { // quick single-frame check
-    const d = await page.evaluate(t => frame(t, .92), +opt('--still'));
-    const f = out.replace(/\.mp4$/, '.jpg'); fs.writeFileSync(f, Buffer.from(d.split(',')[1], 'base64')); console.log('still ->', f); await browser.close(); return;
+    for (const ts of opt('--still').split(',')) {
+      const d = await page.evaluate(t => frame(t, .92), +ts);
+      const f = out.replace(/\.mp4$/, `-${ts}.jpg`); fs.writeFileSync(f, Buffer.from(d.split(',')[1], 'base64')); console.log('still ->', f);
+    }
+    await browser.close(); return;
   }
 
   const silent = `${tmp}/video.mp4`;
