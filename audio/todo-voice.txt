@@ -1,6 +1,3 @@
-36	[determined] When he came home, he was ready.
-37	[intense] In Wakanda, the throne is not just given. On challenge day, any warrior from any tribe can fight for the crown. No weapons. No armor. Just strength, skill and courage. At the edge of the great waterfall.
-41	[whispers] The herb sent him into a deep sleep. In his dream, he walked through a purple sky... and the Panther Goddess looked into his eyes.
 42	[whispers] She showed him the spirits of every Panther who came before him. Hundreds of kings and queens, all the way back to Bashenga. And among them, his father. Smiling.
 44	[epic] T'Challa was crowned king of Wakanda. And the new Black Panther.
 47	[excited] He designs his own jets. His own medicine. His own weapons. In his labs, scientists build things the rest of the world will not invent for another hundred years. And T'Challa understands every single one of them.
