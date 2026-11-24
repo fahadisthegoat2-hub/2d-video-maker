@@ -1,0 +1,146 @@
+<title>__TITLE__</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Roboto:wght@400;500&display=swap">
+<style>
+/* Layout: cinema stage on top, transport bar under it, scene strip + script editor below. Single dark look (screening room). */
+:root {
+  --bg: #0d0f14; --panel: #161a22; --line: #262c38; --fg: #eef0f4; --dim: #9aa3b2; --accent: #ffcc33; --accent-ink: #1a1405;
+  --ui: Roboto, system-ui, sans-serif; --display: Fredoka, Roboto, system-ui, sans-serif;
+  color-scheme: dark;
+}
+html, body { height: 100%; }
+body { background: var(--bg); color: var(--fg); font-family: var(--ui); padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 16px 32px; }
+.wrap { max-width: 1180px; margin: 0 auto; display: grid; gap: 14px; }
+header { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+h1 { font-family: var(--display); font-weight: 700; font-size: clamp(22px, 3.2vw, 30px); margin: 0; text-wrap: balance; }
+.meta { color: var(--dim); font-size: 13px; font-variant-numeric: tabular-nums; }
+.stage { position: relative; width: 100%; aspect-ratio: 16 / 9; max-width: 100%; background: #000; border-radius: 10px; overflow: hidden; }
+canvas#c { width: 100%; height: 100%; display: block; }
+.big-play { position: absolute; inset: 0; margin: auto; width: 92px; height: 92px; border-radius: 50%; border: 0; background: rgba(0,0,0,.55); color: #fff; font-size: 34px; cursor: pointer; }
+.big-play:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.bar { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.bar input[type=range] { flex: 1 1 220px; min-width: 0; accent-color: var(--accent); }
+.time { font-variant-numeric: tabular-nums; color: var(--dim); font-size: 14px; min-width: 92px; }
+button { font: 500 15px var(--ui); color: var(--fg); background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 10px 14px; cursor: pointer; min-height: 44px; }
+button.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); font-weight: 600; }
+button[aria-pressed=true] { border-color: var(--accent); color: var(--accent); }
+button:disabled { opacity: .5; cursor: default; }
+.status { color: var(--dim); font-size: 14px; min-height: 20px; }
+.scenes { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px; }
+.chip { flex: 0 0 auto; font-size: 13px; padding: 8px 12px; min-height: 36px; text-transform: capitalize; }
+.chip.on { border-color: var(--accent); color: var(--accent); }
+details { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; }
+summary { cursor: pointer; font-weight: 500; }
+textarea { width: 100%; box-sizing: border-box; min-height: 260px; margin-top: 10px; background: var(--bg); color: var(--fg); border: 1px solid var(--line); border-radius: 8px; padding: 10px; font: 13px/1.5 ui-monospace, Menlo, monospace; }
+.row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px; align-items: center; }
+.hint { color: var(--dim); font-size: 13px; }
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <h1 id="title">__TITLE__</h1>
+    <span class="meta" id="meta"></span>
+  </header>
+  <div class="stage">
+    <canvas id="c" width="1920" height="1080" aria-label="Video preview"></canvas>
+    <button class="big-play" id="bigPlay" aria-label="Play">▶</button>
+  </div>
+  <div class="bar">
+    <button class="primary" id="play">Play</button>
+    <input type="range" id="seek" min="0" max="1000" value="0" step="1" aria-label="Seek">
+    <span class="time" id="time">0:00 / 0:00</span>
+    <button id="voice" aria-pressed="true">Voice on</button>
+    <button id="export">Export video</button>
+    <button id="save" class="primary" hidden>Save video</button>
+  </div>
+  <div class="status" id="status" role="status"></div>
+  <div class="scenes" id="scenes"></div>
+  <details>
+    <summary>Edit script</summary>
+    <textarea id="script" spellcheck="false" aria-label="Video script"></textarea>
+    <div class="row"><button class="primary" id="apply">Update video</button><span class="hint">Scenes are separated by <code>---</code>. Lines like <code>scene: camp</code> set options; other lines are narration.</span></div>
+  </details>
+</div>
+
+__ENGINE__
+
+<script type="application/json" id="initial-script">__SCRIPT_JSON__</script>
+<script>
+(() => {
+  const $ = id => document.getElementById(id);
+  let scenes = [], meta = {}, total = 1, playing = false, t0 = 0, offset = 0, lastScene = -1, rec = null, recBlob = null, ext = 'mp4';
+  let tts = null, downloads = null, slowFrames = 0;
+  const fmt = s => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
+  const status = m => { $('status').textContent = m; };
+  window.LITE = false;
+
+  function load(text) {
+    const parsed = parseScript(text); meta = parsed.meta; scenes = estimateTiming(parsed.scenes, meta.wps || 2.9);
+    setup(scenes, 30, meta); total = scenes.reduce((a, s) => a + s.dur, 0) || 1;
+    $('meta').textContent = `${scenes.length} scenes · ${fmt(total)}`;
+    const strip = $('scenes'); strip.textContent = ''; let acc = 0;
+    scenes.forEach((sc, i) => { const b = document.createElement('button'); b.className = 'chip'; b.textContent = `${i + 1}. ${sc.type}`; const at = acc; b.onclick = () => seekTo(at + .01); strip.appendChild(b); acc += sc.dur; });
+    seekTo(0);
+  }
+  function sceneAt(T) { let a = 0; for (let i = 0; i < scenes.length; i++) { if (T < a + scenes[i].dur) return [i, a]; a += scenes[i].dur; } return [scenes.length - 1, a]; }
+  function draw(T) {
+    const s = performance.now(); renderAt(Math.min(T, total - .001)); const ms = performance.now() - s;
+    if (playing && !window.LITE && ms > 40 && ++slowFrames > 20) { window.LITE = true; status('Switched to lite mode (no glow) so playback keeps up on this device.'); }
+    $('time').textContent = `${fmt(T)} / ${fmt(total)}`; $('seek').value = Math.round(T / total * 1000);
+    const [i] = sceneAt(T); document.querySelectorAll('.chip').forEach((c, k) => c.classList.toggle('on', k === i));
+  }
+  function speak(text) {
+    if ($('voice').getAttribute('aria-pressed') !== 'true' || !text) return;
+    const clean = text.replace(/\*/g, '');
+    if (tts) { tts.speak(clean, { rate: 1.1 }).catch(() => {}); return; }
+    if ('speechSynthesis' in window) { speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance(clean); u.rate = 1.1; speechSynthesis.speak(u); }
+  }
+  function stopVoice() { try { tts && tts.stop(); } catch (e) {} if ('speechSynthesis' in window) speechSynthesis.cancel(); }
+  function tick() {
+    if (!playing) return;
+    const T = offset + (performance.now() - t0) / 1000;
+    if (T >= total) { draw(total); pause(); offset = 0; if (rec) rec.stop(); return; }
+    const [i] = sceneAt(T); if (i !== lastScene) { lastScene = i; speak(scenes[i].text); }
+    draw(T); requestAnimationFrame(tick);
+  }
+  function play() { if (playing) return; playing = true; t0 = performance.now(); lastScene = -1; $('play').textContent = 'Pause'; $('bigPlay').hidden = true; requestAnimationFrame(tick); }
+  function pause() { if (playing) offset = Math.min(total, offset + (performance.now() - t0) / 1000); playing = false; stopVoice(); $('play').textContent = 'Play'; $('bigPlay').hidden = false; }
+  function seekTo(T) { const was = playing; if (was) pause(); offset = clamp(T, 0, total); draw(offset); if (was) play(); }
+
+  $('play').onclick = () => playing ? pause() : play();
+  $('bigPlay').onclick = play;
+  $('seek').oninput = e => seekTo(e.target.value / 1000 * total);
+  $('voice').onclick = e => { const on = e.currentTarget.getAttribute('aria-pressed') !== 'true'; e.currentTarget.setAttribute('aria-pressed', on); e.currentTarget.textContent = on ? 'Voice on' : 'Voice off'; if (!on) stopVoice(); };
+  $('apply').onclick = () => { pause(); try { load($('script').value); status('Video updated.'); try { localStorage.setItem('v2d-draft', $('script').value); } catch (e) {} } catch (err) { status('Could not read the script: ' + err.message); } };
+
+  // ---- export: record the canvas in real time on this device ----
+  $('export').onclick = () => {
+    if (!C.captureStream || !window.MediaRecorder) { status('This browser cannot record video. Try Safari 15+ or Chrome.'); return; }
+    const type = ['video/mp4;codecs=avc1', 'video/mp4', 'video/webm;codecs=vp9', 'video/webm'].find(m => MediaRecorder.isTypeSupported(m));
+    if (!type) { status('No supported video format for recording here.'); return; }
+    ext = type.startsWith('video/mp4') ? 'mp4' : 'webm';
+    const chunks = []; rec = new MediaRecorder(C.captureStream(30), { mimeType: type, videoBitsPerSecond: 8e6 });
+    rec.ondataavailable = e => e.data.size && chunks.push(e.data);
+    rec.onstop = () => { recBlob = new Blob(chunks, { type }); rec = null; $('export').disabled = false; $('save').hidden = !downloads; status(downloads ? `Recorded ${fmt(total)} (${(recBlob.size / 1048576).toFixed(1)} MB). Tap Save video.` : 'Recorded, but saving files is not available in this view.'); };
+    $('export').disabled = true; $('save').hidden = true; status('Recording… keep this tab open until the video ends. The voice is not included in the file.');
+    pause(); offset = 0; rec.start(250); play();
+  };
+  $('save').onclick = async () => {
+    if (!downloads || !recBlob) return;
+    try { await downloads.save({ filename: (meta.name || 'video') + '.' + ext, data: recBlob }); status('Saved.'); }
+    catch (e) { status(e && e.code === 'declined' ? 'Save cancelled.' : 'Could not save: ' + ((e && e.message) || 'unknown error')); }
+  };
+
+  // ---- boot ----
+  const initial = JSON.parse($('initial-script').textContent);
+  let text = initial; try { text = localStorage.getItem('v2d-draft') || initial; } catch (e) {}
+  $('script').value = text;
+  (document.fonts ? document.fonts.ready : Promise.resolve()).then(() => load(text));
+  if (window.claude && claude.use) {
+    claude.use('tts').then(t => { tts = t; });
+    claude.use('downloads').then(d => { downloads = d; });
+  }
+})();
+</script>

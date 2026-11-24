@@ -1,0 +1,10 @@
+{
+  "extraKnownMarketplaces": {
+    "2d-video-maker": {
+      "source": { "source": "github", "repo": "fahadisthegoat2-hub/2d-video-maker" }
+    }
+  },
+  "enabledPlugins": {
+    "2d-video-maker@2d-video-maker": true
+  }
+}

@@ -81,7 +81,8 @@ function captions(sc, lt) {
 
 // ---------- post ----------
 const BL = (() => { const c = document.createElement('canvas'); c.width = 480; c.height = 270; return c; })(), BX = BL.getContext('2d');
-function bloom(a) { if (a <= 0) return; BX.filter = 'blur(8px) brightness(.62) contrast(2.4)'; BX.clearRect(0, 0, 480, 270); BX.drawImage(C, 0, 0, 480, 270); X.save(); X.setTransform(1, 0, 0, 1, 0, 0); X.globalCompositeOperation = 'screen'; X.globalAlpha = a; X.drawImage(BL, 0, 0, W, H); X.restore(); }
+const FILTER_OK = (() => { try { const g = document.createElement('canvas').getContext('2d'); g.filter = 'blur(2px)'; return g.filter === 'blur(2px)'; } catch (e) { return false; } })();
+function bloom(a) { if (a <= 0 || !FILTER_OK || window.LITE) return; BX.filter = 'blur(8px) brightness(.62) contrast(2.4)'; BX.clearRect(0, 0, 480, 270); BX.drawImage(C, 0, 0, 480, 270); X.save(); X.setTransform(1, 0, 0, 1, 0, 0); X.globalCompositeOperation = 'screen'; X.globalAlpha = a; X.drawImage(BL, 0, 0, W, H); X.restore(); }
 const BLOOM = { camp: .25, castle: .35, throne: .2, shop: .15, earth: .35, sun: .4, portraits: .25, network: .45, space: .4 };
 
 // ---------- compositor ----------

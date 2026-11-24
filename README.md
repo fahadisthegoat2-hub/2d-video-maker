@@ -4,7 +4,31 @@ Turns a text script into an animated 2D explainer video. Every background, chara
 
 **Style:** chunky big-headed characters with limited, choppy animation (12fps held poses and snapping mouth shapes), detailed paper-cut backgrounds with parallax, hard cuts between wide, medium and close-up shots, name labels with arrows, and illustrated motion-graphic scenes.
 
-## Setup and usage
+## Install as a Claude Code plugin
+Any Claude Code session opened on this repo, including on iPad or phone in the Claude app, turns the plugin on automatically through `.claude/settings.json`.
+
+To use it in other projects:
+```
+/plugin install 2d-video-maker --marketplace fahadisthegoat2-hub/2d-video-maker
+```
+Then just ask: *"make a video about the history of the printing press"*.
+
+**Skills**
+| skill | what it covers |
+|---|---|
+| `make-video` | end to end: topic → script → check → player artifact and MP4 |
+| `video-script` | exact script format reference |
+| `story-and-pacing` | hooks, pacing, shot rhythm, character design |
+| `render-video` | on-device player, MP4 render, stills, troubleshooting |
+| `add-scene` | extending the engine with new places, props, outfits and poses |
+
+## Play on your device (iPad, phone, desktop)
+```bash
+node engine/build-player.js scripts/example.txt     # -> out/example-player.html
+```
+Publish that file as a claude.ai Artifact. It renders the video live on the device you open it on, lets you edit the script and update the video instantly, and its **Export video** button records a video file on the device. The voice plays live but is not included in exported files; use the MP4 render below for a file with voice.
+
+## Setup and usage (MP4 render)
 ```bash
 npm install                     # fonts
 pip install edge-tts            # optional free AI voice-over (needs internet)

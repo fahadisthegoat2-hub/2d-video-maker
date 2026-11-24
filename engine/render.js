@@ -14,33 +14,8 @@ const VOICE = opt('--voice', 'en-US-AndrewNeural');
 const tmp = fs.mkdtempSync('/tmp/v2d-');
 fs.mkdirSync(path.dirname(out), { recursive: true });
 
-// ---------- parse script ----------
-// Blocks separated by '---'. Lines "key: value". Anything without a key is narration text.
-function parseCast(s) {
-  const res = []; const re = /(\w+)\s*(?:\(([^)]*)\))?/g; let m;
-  while ((m = re.exec(s))) {
-    const c = { name: m[1] };
-    (m[2] || '').split(',').map(x => x.trim()).filter(Boolean).forEach(kv => {
-      const [k, v] = kv.split('=').map(x => x.trim());
-      c[k] = v === undefined ? true : isNaN(+v) ? v : +v;
-    });
-    res.push(c);
-  }
-  return res;
-}
-const raw = fs.readFileSync(scriptPath, 'utf8');
-const meta = {}; let seed = 7;
-const scenes = raw.split(/^---\s*$/m).map(b => b.trim()).filter(Boolean).map(b => {
-  const sc = { text: '' };
-  b.split('\n').forEach(line => {
-    const m = line.match(/^(\w+):\s*(.*)$/);
-    if (m && m[1] !== 'text') { const k = m[1], v = m[2].trim(); sc[k] = k === 'cast' ? parseCast(v) : isNaN(+v) || v === '' ? v : +v; }
-    else sc.text += ' ' + (m ? m[2] : line).trim();
-  });
-  sc.text = sc.text.trim(); sc.seed = seed += 101;
-  return sc;
-}).filter(sc => { if (sc.video) { Object.assign(meta, sc); return false; } return true; });
-scenes.forEach(sc => { sc.type = sc.scene || 'room'; delete sc.scene; if (!sc.speaker && sc.cast && sc.cast.length) sc.speaker = sc.cast[sc.cast.length - 1].name; });
+const { parseScript } = require('./parse');
+const { meta, scenes } = parseScript(fs.readFileSync(scriptPath, 'utf8'));
 
 // ---------- voice-over (edge-tts if available) ----------
 const probe = f => +spawnSync('ffprobe', ['-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', f]).stdout.toString().trim() || 0;

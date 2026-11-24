@@ -1,0 +1,16 @@
+{
+  "name": "2d-video-maker",
+  "owner": {
+    "name": "fahadisthegoat2-hub"
+  },
+  "metadata": {
+    "description": "Animated 2D explainer videos from a script, made entirely with code."
+  },
+  "plugins": [
+    {
+      "name": "2d-video-maker",
+      "source": "./",
+      "description": "Script-to-animated-video engine with skills for writing, rendering and extending videos."
+    }
+  ]
+}

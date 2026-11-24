@@ -1,0 +1,8 @@
+{
+  "name": "2d-video-maker",
+  "version": "1.0.0",
+  "description": "Turn a topic or script into an animated 2D explainer video: chunky limited-animation characters, illustrated paper-cut worlds, fast-cut shots and motion graphics. Plays on-device as an artifact or renders to MP4.",
+  "author": { "name": "fahadisthegoat2-hub" },
+  "repository": "https://github.com/fahadisthegoat2-hub/2d-video-maker",
+  "keywords": ["video", "animation", "2d", "explainer", "youtube", "motion-graphics"]
+}
