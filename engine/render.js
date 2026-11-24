@@ -47,15 +47,15 @@ const probe = f => +spawnSync('ffprobe', ['-v', 'error', '-show_entries', 'forma
 const hasTTS = !flag('--novoice') && spawnSync('which', ['edge-tts']).status === 0;
 scenes.forEach((sc, i) => {
   const words = sc.text ? sc.text.split(/\s+/).length : 0;
-  let speech = words / 2.6;
+  let speech = words / 3.1;
   if (hasTTS && sc.text) {
     const f = `${tmp}/vo${i}.mp3`;
-    const r = spawnSync('edge-tts', ['--voice', sc.voice || meta.voice || VOICE, '--rate', meta.rate || '+8%', '--text', sc.text.replace(/\*/g, ''), '--write-media', f], { timeout: 60000 });
+    const r = spawnSync('edge-tts', ['--voice', sc.voice || meta.voice || VOICE, '--rate', meta.rate || '+15%', '--text', sc.text.replace(/\*/g, ''), '--write-media', f], { timeout: 60000 });
     if (r.status === 0 && fs.existsSync(f) && probe(f) > 0) { sc.audio = f; speech = probe(f); }
     else if (i === 0) console.log('  (voice unavailable — rendering silent with captions)');
   }
   sc.speech = speech;
-  sc.dur = sc.dur || Math.max(2.5, speech + .45);
+  sc.dur = sc.dur || Math.max(1.6, speech + .15);
 });
 const total = scenes.reduce((a, s) => a + s.dur, 0);
 console.log(`${scenes.length} scenes, ${total.toFixed(1)}s @ ${FPS}fps, voice: ${scenes.some(s => s.audio) ? 'yes' : 'no'}`);

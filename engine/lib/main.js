@@ -21,8 +21,8 @@ function shotAt(sc, lt) {
   const push = 1 + (sc.push ?? .05) * ease(lt / sc.dur);
   const cast = (sc.cast || []).filter(c => !c.hidden);
   if (!cast.length || sc.type === 'portraits' || !SCENE_DEF[sc.type]) return { cx: W / 2, cy: H / 2, z: (sc.cam || 1) * (1 + (sc.push ?? .06) * ease(lt / sc.dur)), name: 'wide' };
-  const list = sc.shots ? String(sc.shots).split(',').map(s => s.trim()) : sc.shot ? [sc.shot] : (SCENE_DEF[sc.type].shots || (sc.dur > 4.5 ? ['wide', 'close', 'medium', 'close', 'react'] : ['medium']));
-  const n = Math.max(1, Math.round(sc.dur / (sc.cut || 3))), seg = sc.dur / n, k = Math.min(n - 1, Math.floor(lt / seg)), sp = (lt - k * seg) / seg;
+  const list = sc.shots ? String(sc.shots).split(',').map(s => s.trim()) : sc.shot ? [sc.shot] : (SCENE_DEF[sc.type].shots || (sc.dur > 2.8 ? ['wide', 'close', 'medium', 'close', 'react'] : ['medium']));
+  const n = Math.max(1, Math.round(sc.dur / (sc.cut || META.cut || 1.8))), seg = sc.dur / n, k = Math.min(n - 1, Math.floor(lt / seg)), sp = (lt - k * seg) / seg;
   const name = list[k % list.length], speaker = cast.find(c => c.name === sc.speaker) || cast[0];
   const others = cast.filter(c => c !== speaker), sub = 1 + .05 * ease(sp);
   if (name === 'close' || name === 'react') {
@@ -103,7 +103,7 @@ function renderAt(T) {
   X.fillStyle = rad(W / 2, H / 2, H * .5, W * .75, ['rgba(0,0,0,0)', 'rgba(0,0,0,.3)']); X.fillRect(0, 0, W, H);
   // labels
   if ((CAM.name === 'close' || CAM.name === 'react') && CAM.who && CAM.who.tag) {
-    const h = headOf(CAM.who, sc), p = toScreen(h.x, h.y); const segStart = lt - (lt % (sc.dur / Math.max(1, Math.round(sc.dur / (sc.cut || 3)))));
+    const h = headOf(CAM.who, sc), p = toScreen(h.x, h.y); const segStart = lt - (lt % (sc.dur / Math.max(1, Math.round(sc.dur / (sc.cut || META.cut || 1.8)))));
     nameTag(String(CAM.who.tag), p.x, p.y, h.r * CAM.z, lt - segStart - .2);
   }
   if (sc.type === 'stat') bigNumber(sc, lt);

@@ -39,7 +39,7 @@ cast: name(x=0.4, kid, skin=light|tan|medium|brown|dark, hair=#333, hairstyle=sh
            pants=#444, hat=helmet|scarf|crown|hood|cap, cape=#523, mood=angry|happy|sad|worried,
            prop=sword|hammer|torch|book|orb|fish|basket, size=1, tag=his name)
 speaker: name
-shots: wide, close, react, medium     # optional; default cuts automatically every ~3s
+shots: wide, close, react, medium     # optional; cuts automatically every ~1.8s (set `cut: 2.5` per scene or in the header to change)
 ```
 - `close` frames the speaker. `react` cuts to another character's face.
 - `tag` shows a big name label with an arrow pointing at the character during their close-ups.
