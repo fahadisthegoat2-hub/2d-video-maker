@@ -1,6 +1,3 @@
-22	[serious] A king does not fight for glory, his father said. A king fights so that his people never have to.
-23	[warm] Shuri followed her big brother everywhere. While he trained his body, she took apart every machine in the palace, just to see how it worked. Their father used to joke that one day she would run the whole kingdom from her lab.
-25	[serious] Then, one night, a stranger came. Ulysses Klaw. A thief who hunted rare metals across the world. And he had heard the rumors about Wakanda.
 26	[menacing] Klaw brought hired soldiers and a weapon unlike anything Wakanda had seen. A machine that turned sound into pure destruction. He did not want peace. He wanted the mountain of vibranium. All of it.
 29	[intense] But the boy did not run. He grabbed Klaw's own sound weapon... and turned it on him. The blast destroyed Klaw's right hand. The thief fled into the night, screaming.
 31	[sad] Wakanda had lost its king. And T'Challa was too young to take the throne. So he waited. And he trained.
