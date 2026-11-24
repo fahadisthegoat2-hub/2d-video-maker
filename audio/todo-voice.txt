@@ -1,9 +1,3 @@
-42	[whispers] She showed him the spirits of every Panther who came before him. Hundreds of kings and queens, all the way back to Bashenga. And among them, his father. Smiling.
-44	[epic] T'Challa was crowned king of Wakanda. And the new Black Panther.
-47	[excited] He designs his own jets. His own medicine. His own weapons. In his labs, scientists build things the rest of the world will not invent for another hundred years. And T'Challa understands every single one of them.
-48	[excited] His suit is woven from vibranium. Every punch that hits him, it soaks up the energy. And then he can release it all at once, in one giant blast.
-49	[confident] And he is never alone. The Dora Milaje, an army of elite women warriors, guard the king with their lives. Their leader, Okoye, has never lost a fight.
-52	[serious] He even keeps secret plans to stop his own friends, just in case they ever turn bad. People call him paranoid. He calls it being a king.
 55	[serious] Killmonger was Wakandan too. When he was a boy, his father helped Klaw attack the kingdom. The family was sent away in shame. Erik grew up far from home, full of hate.
 56	[sad] As a boy, he stared at old pictures of Wakanda and told himself a story. That the kingdom had thrown his family away. That the Panthers were liars. And that one day, he would make them pay.
 57	[menacing] He trained for years. He became a soldier, a killer, a master of war. And he had one goal. Take the throne. And take revenge on the son of T'Chaka.
