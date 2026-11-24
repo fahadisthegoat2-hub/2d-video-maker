@@ -1,5 +1,3 @@
-20	[storytelling] He learned to climb the tallest trees before he could read. He raced leopards along the riverbank. He fell. He bled. And every time, his father told him to get back up.
-21	[warm] At night, the young prince sat in the palace library, reading about the outside world. Its cities. Its wars. Its endless hunger for power. And he wondered why Wakanda hid from all of it.
 22	[serious] A king does not fight for glory, his father said. A king fights so that his people never have to.
 23	[warm] Shuri followed her big brother everywhere. While he trained his body, she took apart every machine in the palace, just to see how it worked. Their father used to joke that one day she would run the whole kingdom from her lab.
 25	[serious] Then, one night, a stranger came. Ulysses Klaw. A thief who hunted rare metals across the world. And he had heard the rumors about Wakanda.
