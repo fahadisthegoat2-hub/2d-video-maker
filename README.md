@@ -24,8 +24,17 @@ Scenes are separated by `---`. Lines written as `key: value` set options. Any ot
 | `space` | stars, nebula, lit planet (`color:`) |
 | `robot` | neon robot, glowing eyes, glitch |
 | `stat` | big count-up number (`value:`, `label:`, `prefix:`, `suffix:`) |
+| `glitch` | glitch title card, data rain, neon grid (`title:`) |
+| `timeline` | animated timeline (`years: 1929, 1945`, `events: Born \| War`, `active: 2`) |
 
 **Characters:** `cast: name(x=0.5, skin=tan, hair=#333, beard=#888, glasses, shirt=#fff, vest=#c86, suit=#223, tie=#a22, kid, helmet=#c22, mood=angry|happy|sad, prop=hammer|book|orb, bald, longhair, size=1, flip)`.
 The `speaker:` character talks and gestures. If no speaker is set, the last character in the cast talks.
 
 Other options: `title:` (kinetic text), `dur:` (seconds), `zoom:`, `pan:`, `nocap: 1`.
+
+## Style
+- **Characters use limited animation.** They move at about 8fps and hold poses: gestures snap between poses, mouths swap between shapes, and blinks last two frames.
+- **Motion graphics are smooth at 30fps.** They include keyword pop-ups, HUD rings, bar-wipe transitions, count-ups and the timeline.
+- **Glitch effects:** RGB split, slice tearing, datamosh blocks and scanlines, plus bloom and film grain on top.
+- **Keyword pop-ups:** wrap words in `*stars*` in the narration and they pop up as glitchy titles at the moment they're spoken.
+- Each scene can set `glitch: 0-1` (how often it glitches), `bloom: 0-1`, `trans: glitch|bars|flash` and `hud: 1`. Characters also take `pose: rest|hips|chest|point|open|shrug` and `hairstyle: short|swept`.

@@ -50,7 +50,7 @@ scenes.forEach((sc, i) => {
   let speech = words / 2.6;
   if (hasTTS && sc.text) {
     const f = `${tmp}/vo${i}.mp3`;
-    const r = spawnSync('edge-tts', ['--voice', sc.voice || meta.voice || VOICE, '--rate', meta.rate || '+8%', '--text', sc.text, '--write-media', f], { timeout: 60000 });
+    const r = spawnSync('edge-tts', ['--voice', sc.voice || meta.voice || VOICE, '--rate', meta.rate || '+8%', '--text', sc.text.replace(/\*/g, ''), '--write-media', f], { timeout: 60000 });
     if (r.status === 0 && fs.existsSync(f) && probe(f) > 0) { sc.audio = f; speech = probe(f); }
     else if (i === 0) console.log('  (voice unavailable — rendering silent with captions)');
   }
@@ -64,7 +64,7 @@ console.log(`${scenes.length} scenes, ${total.toFixed(1)}s @ ${FPS}fps, voice: $
   const browser = await chromium.launch();
   const page = await browser.newPage({ viewport: { width: 1920, height: 1080 } });
   await page.goto('file://' + path.join(__dirname, 'scene.html'));
-  await page.evaluate(([s, f]) => setup(s, f), [scenes, FPS]);
+  await page.evaluate(([s, f, m]) => setup(s, f, m), [scenes, FPS, meta]);
 
   if (opt('--still')) { // quick single-frame check
     const d = await page.evaluate(t => frame(t, .92), +opt('--still'));

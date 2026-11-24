@@ -7,26 +7,32 @@ color: #c0392b
 ---
 scene: room
 palette: warm
-cast: kid(x=0.3, kid, size=0.82, hair=#1f1a18, shirt=#a8382e, pants=#4a4a4f, eyes=#4a78b0), elder(x=0.55, hair=#9a9a9a, beard=#8a8a8a, glasses, shirt=#e4ddcf, vest=#c8682f, prop=hammer, mood=angry, skin=tan)
+cast: kid(x=0.3, kid, size=0.82, hair=#1f1a18, shirt=#a8382e, vest=#2a2626, pants=#4a4a4f, eyes=#4a78b0), elder(x=0.52, hair=#a3a3a3, beard=#8e8e8e, glasses, shirt=#e4ddcf, vest=#c8682f, prop=hammer, mood=angry, skin=tan)
 speaker: elder
-Our story begins in a small workshop. His father was a jeweler, and the family name translates simply to "iron hard".
+Our story begins in a small workshop. His father was a *jeweler*, and the family name translates simply to *iron hard*.
+---
+scene: timeline
+years: 1929, 1939, 1945, 1963
+events: Born | War | Survived | Rise
+active: 4
+He was born in 1929. Ten years later, the war came, and *everything* changed.
 ---
 scene: outdoor
-cast: villain(x=0.62, helmet=#c62828, shirt=#d32f2f, pants=#7b1fa2, mood=angry, prop=orb)
-Years later, he was at war with the world. All he ever wanted was a home they could not take away.
+cast: villain(x=0.62, helmet=#c62828, shirt=#d32f2f, suit=#d32f2f, tie=#7b1fa2, pants=#7b1fa2, mood=angry, prop=orb)
+Years later, he was at *war* with the world. All he ever wanted was a home they could not take away.
 ---
 scene: network
 label: Large Language Model
-First, let us set the stage. Every idea is a node, and every node is connected.
+First, let us set the stage. Every idea is a node, and every node is *connected*.
 ---
 scene: stat
 value: 8000000000
 label: people on Earth
-And there are eight billion people who could change everything.
+And there are eight billion people who could change *everything*.
 ---
-scene: space
-color: #2f6fd6
-Our planet is just a pale blue dot, floating in the dark.
+scene: glitch
+title: SYSTEM BREACH
+Something was watching. And it was *learning*.
 ---
 scene: robot
-It is impossible to learn the details and not get freaked out, at least a bit.
+It is impossible to learn the details and not get *freaked out*, at least a bit.
