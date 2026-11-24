@@ -1,6 +1,0 @@
-69	[intense] This time he fought with everything. His father's lessons. His years of training. His people behind him. And Killmonger fell.
-70	[serious] Even then, T'Challa did not celebrate. Killmonger was one of his own people. A son of Wakanda, lost to anger. And that hurt more than any wound.
-71	[calm] So he made a promise. No child of Wakanda would ever be left behind again. Not inside its walls. And not outside them either.
-73	[warm] Today, T'Challa rules with Shuri at his side. She builds the future. He protects it.
-74	[serious] Klaw never stopped hunting him. Killmonger's followers still wait in the shadows. And every year, a new enemy comes looking for the purple metal. But every one of them finds the same thing waiting in the trees.
-75	[proud] And he made a choice no king before him had dared to make. He opened Wakanda to the world. To share its knowledge. To help, instead of hide.
