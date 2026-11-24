@@ -4,9 +4,10 @@
 let SCENES = [], META = {}, TS = 0, LT = 0, CAM = { cx: W / 2, cy: H / 2, z: 1 };
 const SCENE_DEF = {
   camp: { y: .87, s: .6 }, castle: { y: .96, s: .45 }, throne: { y: .86, s: .5 }, shop: { y: 1.02, s: 1.25, shots: ['close', 'medium', 'close'] },
+  jungle: { y: .9, s: .72 }, wakanda: { y: .9, s: .62 },
   room: { y: .95, s: 1 }, outdoor: { y: .93, s: 1 }, hall: { y: .98, s: 1 },
 };
-const WORLD = { camp: bgCamp, castle: bgCastle, throne: bgThrone, shop: bgShop, earth: bgEarth, sun: bgSun, portraits: bgPortraits };
+const WORLD = { camp: bgCamp, castle: bgCastle, throne: bgThrone, shop: bgShop, earth: bgEarth, sun: bgSun, portraits: bgPortraits, jungle: bgJungle, wakanda: bgWakanda, meteor: bgMeteor, impact: bgImpact };
 const CLASSIC = { room: bgRoom, outdoor: bgOutdoor, hall: bgHall, network: bgNetwork, space: bgSpace, stat: bgStat, timeline: bgTimeline };
 const charScale = (c, sc) => (c.size || 1) * (sc.charScale || (SCENE_DEF[sc.type] || {}).s || 1);
 const charY = (c, sc) => (c.y || sc.ground || (SCENE_DEF[sc.type] || {}).y || .9) * H;
@@ -83,14 +84,14 @@ function captions(sc, lt) {
 const BL = (() => { const c = document.createElement('canvas'); c.width = 480; c.height = 270; return c; })(), BX = BL.getContext('2d');
 const FILTER_OK = (() => { try { const g = document.createElement('canvas').getContext('2d'); g.filter = 'blur(2px)'; return g.filter === 'blur(2px)'; } catch (e) { return false; } })();
 function bloom(a) { if (a <= 0 || !FILTER_OK || window.LITE) return; BX.filter = 'blur(8px) brightness(.62) contrast(2.4)'; BX.clearRect(0, 0, 480, 270); BX.drawImage(C, 0, 0, 480, 270); X.save(); X.setTransform(1, 0, 0, 1, 0, 0); X.globalCompositeOperation = 'screen'; X.globalAlpha = a; X.drawImage(BL, 0, 0, W, H); X.restore(); }
-const BLOOM = { camp: .25, castle: .35, throne: .2, shop: .15, earth: .35, sun: .4, portraits: .25, network: .45, space: .4 };
+const BLOOM = { camp: .25, castle: .35, throne: .2, shop: .15, earth: .35, sun: .4, portraits: .25, network: .45, space: .4, jungle: .35, wakanda: .35, meteor: .5, impact: .2 };
 
 // ---------- compositor ----------
 function renderAt(T) {
   let i = 0, start = 0; while (i < SCENES.length - 1 && T >= start + SCENES[i].dur) { start += SCENES[i].dur; i++; }
   const sc = SCENES[i], lt = T - start, prog = clamp(lt / sc.dur), toEnd = sc.dur - lt;
   TS = Math.floor(T * 12) / 12; LT = lt;                      // characters + fire etc. animate on 12fps
-  CAM = shotAt(sc, lt);
+  CAM = shotAt(sc, lt); fxBefore(sc, lt, T, i);
   X.setTransform(1, 0, 0, 1, 0, 0); X.globalAlpha = 1; X.globalCompositeOperation = 'source-over'; X.fillStyle = '#000'; X.fillRect(0, 0, W, H);
   if (WORLD[sc.type]) WORLD[sc.type](sc, T, prog); else { cam(1); (CLASSIC[sc.type] || bgCamp)(sc, T, prog); }
   if (sc.type !== 'portraits') {
@@ -110,6 +111,7 @@ function renderAt(T) {
   if (sc.type === 'stat') bigNumber(sc, lt);
   if (sc.type === 'timeline') timeline(sc, lt, T);
   ribbon(sc.label, lt - .2);
+  fxAfter(sc, lt, T, i);
   captions(sc, lt);
   if (i === 0 && lt < .4) { X.fillStyle = `rgba(0,0,0,${1 - lt / .4})`; X.fillRect(0, 0, W, H); }
   if (i === SCENES.length - 1 && toEnd < .8) { X.fillStyle = `rgba(0,0,0,${1 - toEnd / .8})`; X.fillRect(0, 0, W, H); }

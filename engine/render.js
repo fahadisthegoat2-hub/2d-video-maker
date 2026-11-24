@@ -19,13 +19,17 @@ const { meta, scenes } = parseScript(fs.readFileSync(scriptPath, 'utf8'));
 
 // ---------- voice-over (edge-tts if available) ----------
 const probe = f => +spawnSync('ffprobe', ['-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', f]).stdout.toString().trim() || 0;
-const hasTTS = !flag('--novoice') && spawnSync('which', ['edge-tts']).status === 0;
+const hasTTS = !flag('--novoice') && spawnSync('python3', ['-c', 'import edge_tts']).status === 0;
+// per-scene delivery: tone: excited | serious | whisper | dramatic | hype
+const TONE = { excited: ['+12%', '+6Hz', '+0%'], hype: ['+18%', '+10Hz', '+0%'], serious: ['-6%', '-6Hz', '+0%'], dramatic: ['-10%', '-8Hz', '+0%'], whisper: ['-8%', '-4Hz', '-35%'] };
+const pct = (a, b) => (parseInt(a) + parseInt(b) >= 0 ? '+' : '') + (parseInt(a) + parseInt(b)) + '%';
 scenes.forEach((sc, i) => {
   const words = sc.text ? sc.text.split(/\s+/).length : 0;
   let speech = words / 3.1;
   if (hasTTS && sc.text) {
     const f = `${tmp}/vo${i}.mp3`;
-    const r = spawnSync('edge-tts', ['--voice', sc.voice || meta.voice || VOICE, '--rate', meta.rate || '+15%', '--text', sc.text.replace(/\*/g, ''), '--write-media', f], { timeout: 60000 });
+    const [tr, tp, tv] = TONE[sc.tone] || ['+0%', '+0Hz', '+0%'];
+    const r = spawnSync('python3', [path.join(__dirname, 'tts.py'), sc.voice || meta.voice || VOICE, pct(meta.rate || '+15%', tr), tp, tv, f, sc.text.replace(/\*/g, '')], { timeout: 60000 });
     if (r.status === 0 && fs.existsSync(f) && probe(f) > 0) { sc.audio = f; speech = probe(f); }
     else if (i === 0) console.log('  (voice unavailable — rendering silent with captions)');
   }
@@ -69,7 +73,7 @@ console.log(`${scenes.length} scenes, ${total.toFixed(1)}s @ ${FPS}fps, voice: $
   const music = opt('--music', meta.music);
   if (music && fs.existsSync(music)) { inputs.push('-stream_loop', '-1', '-i', music); filters.push(`[${k}:a]volume=0.12,atrim=0:${total}[m]`); labels.push('[m]'); k++; }
   if (!labels.length) { fs.copyFileSync(silent, out); console.log('done ->', out); return; }
-  filters.push(`${labels.join('')}amix=inputs=${labels.length}:normalize=0,afade=t=out:st=${Math.max(0, total - .8)}:d=.8[aout]`);
+  filters.push(`${labels.join('')}amix=inputs=${labels.length}:normalize=0,afade=t=out:st=${Math.max(0, total - .8).toFixed(2)}:d=0.8[aout]`);
   spawnSync('ffmpeg', ['-y', '-loglevel', 'error', ...inputs, '-filter_complex', filters.join(';'), '-map', '0:v', '-map', '[aout]', '-c:v', 'copy', '-c:a', 'aac', '-b:a', '192k', '-t', String(total), out], { stdio: 'inherit' });
   console.log('done ->', out);
 })();

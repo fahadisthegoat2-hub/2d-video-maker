@@ -1,83 +1,140 @@
 video: yes
-title: The King Who Beat The Fantastic Four
+title: The King of Wakanda
 voice: en-US-AndrewNeural
-rate: +12%
+rate: +28%
+cut: 1.1
+---
+tone: whisper
+scene: jungle
+fx: purple
+push: 0.12
+Deep in the jungle... something is watching you.
+---
+tone: dramatic
+scene: impact
+word: HE IS|A KING
+color: #b48cff
+He's not just a hero. He's a king.
+---
+tone: excited
+scene: wakanda
+cast: hero(x=0.5, skin=dark, hair=#111, outfit=armor, shirt=#17151f, pants=#17151f, necklace=#c9c9d6, mood=angry, pose=cross, tag=T'Challa)
+speaker: hero
+shots: wide, close, medium
+pop: WAKANDA
+Behind the trees hides Wakanda. The most advanced nation on Earth. And nobody knows it exists.
+---
+tone: dramatic
+scene: meteor
+dur: 4.6
+Why? Because long ago, a meteor crashed right here.
+---
+tone: hype
+scene: impact
+word: VIBRANIUM
+sub: absorbs any hit
+color: #9b7cff
+Inside it was vibranium. A metal that can absorb almost any hit.
+---
+tone: excited
+scene: wakanda
+time: night
+fx: shake
+pop: NEVER CONQUERED
+popColor: #ff5a5a
+Wakanda used it to build a nation that has never been conquered.
 ---
 scene: throne
-cast: king(x=0.5, hat=crown, skin=dark, hair=#111, outfit=robe, color2=#1b1b24, shirt=#2a2a36, cape=#4a2a7a, necklace, mood=angry, size=1.1, tag=T'Challa)
-speaker: king
-shots: wide, close, medium, close
-July 1966. A brand new hero walks into a comic book and beats the entire Fantastic Four. By himself. His name was T'Challa. The Black Panther.
----
-scene: castle
-label: Where it began
-To understand how a king did that, we have to go back to the people who made him.
----
-scene: room
-palette: warm
-cast: writer(x=0.38, hair=#888, glasses, outfit=suit, color2=#2e3a5a, mood=happy, tag=Stan Lee), artist(x=0.6, hair=#3a2a20, outfit=shirt, shirt=#efe6d2, pants=#444, prop=book, tag=Jack Kirby)
-speaker: artist
-shots: wide, close, react, close
-He was created by Stan Lee and Jack Kirby. Crazy fact: Kirby's first design was called the Coal Tiger, with a yellow and black suit and his face uncovered.
----
-scene: stat
-value: 52
-prefix: #
-label: Fantastic Four #52
-He debuted in Fantastic Four number fifty two. He became the first Black superhero in mainstream American comics.
----
-scene: earth
-place: Wakanda
-zoom: 0.6
-He ruled Wakanda, a hidden African nation that secretly had the most advanced technology on Earth.
----
-scene: space
-color: #7a4ad8
-The secret? A meteor of vibranium, the rarest metal in the Marvel universe, crashed there long ago. Wakanda kept it all to itself.
----
-scene: throne
-cast: father(x=0.42, hat=crown, skin=dark, hair=#666, beard=#777, old, outfit=robe, color2=#6a3a1a, cape=#4a2a7a, tag=T'Chaka), son(x=0.6, kid, skin=dark, hair=#111, shirt=#efe6d2, pants=#3a2a20, mood=worried)
+cast: father(x=0.42, hat=crown, skin=dark, hair=#555, beard=#666, outfit=robe, color2=#6a3a1a, cape=#4a2a7a, necklace, tag=T'Chaka), son(x=0.6, kid, skin=dark, hair=#111, shirt=#efe6d2, pants=#3a2a20, mood=happy, tag=young T'Challa)
 speaker: father
-shots: wide, close, react, medium
-cut: 2.4
-His father, King T'Chaka, was killed by the villain Klaw. Young T'Challa had to grow up fast, and win the right to the throne himself.
+shots: wide, close, react
+Young T'Challa was raised to be king by his father, King T'Chaka.
 ---
-scene: timeline
-years: 1966, 1968, 1973, 1977
-events: Debut | Joins Avengers | Panther's Rage | Own series
-active: 2
-In 1968 he joined the Avengers. Soon he had his own stories, and in 1977 Jack Kirby came back to draw his solo series.
----
-scene: hall
-cast: king(x=0.5, hat=crown, skin=dark, hair=#111, outfit=robe, color2=#1b1b24, shirt=#2a2a36, cape=#4a2a7a, necklace, mood=worried, tag=Black Leopard?)
-speaker: king
-label: 1972
-Here is a wild one. In 1972, Marvel renamed him the Black Leopard, to avoid confusion with the political Black Panther Party. It lasted one issue.
----
-scene: outdoor
-cast: villain(x=0.38, skin=dark, hair=#111, outfit=vest, color2=#2a5a3a, pants=#2a2a2a, necklace, mood=angry, prop=sword, tag=Killmonger), king(x=0.6, hat=crown, skin=dark, hair=#111, outfit=robe, color2=#1b1b24, shirt=#2a2a36, cape=#4a2a7a, necklace, mood=angry)
-speaker: villain
-shots: wide, close, react, medium
-cut: 1.4
-In Jungle Action, writer Don McGregor wrote Panther's Rage, thirteen issues that are called the first comic built from start to finish as a complete novel. It also introduced Erik Killmonger.
----
-scene: network
-label: Genius king
-Another crazy fact. T'Challa is a king, a warrior, and a scientist. In the comics he is one of the smartest people on Earth.
----
-scene: stat
-value: 1300000000
-prefix: $
-label: Box office
-Then came Hollywood. Chadwick Boseman played T'Challa, and the 2018 movie made over one point three billion dollars worldwide.
----
-scene: sun
-label: Oscar history
-It became the first superhero film ever nominated for Best Picture, and it won three Oscars.
----
+tone: serious
 scene: throne
-cast: king(x=0.5, hat=crown, skin=dark, hair=#111, outfit=robe, color2=#1b1b24, shirt=#2a2a36, cape=#4a2a7a, necklace, mood=happy, size=1.1)
+fx: shake, lines
+cast: father(x=0.42, hat=crown, skin=dark, hair=#555, beard=#666, outfit=robe, color2=#6a3a1a, cape=#4a2a7a, necklace, mood=worried), son(x=0.6, kid, skin=dark, hair=#111, shirt=#efe6d2, pants=#3a2a20, mood=sad), thief(x=0.24, skin=pale, hair=#b33, outfit=vest, color2=#3a3a40, pants=#2a2a2a, mood=angry, prop=sword, tag=Klaw)
+speaker: thief
+shots: close, react, close, react
+cut: 0.8
+Then a thief named Klaw invaded, hunting the vibranium... and killed the king. Right in front of his son.
+---
+tone: whisper
+scene: impact
+word: HE NEVER|FORGOT
+color: #ff4d6d
+bg: #1a0610
+The boy never forgot.
+---
+tone: serious
+scene: jungle
+time: day
+cast: hero(x=0.36, skin=dark, hair=#111, outfit=armor, shirt=#17151f, pants=#17151f, necklace=#c9c9d6, mood=angry), rival(x=0.64, skin=brown, hair=#222, beard=#222, outfit=vest, color2=#7a3a1a, pants=#3a2a20, mood=angry, prop=sword, flip)
+speaker: hero
+fx: lines
+cut: 0.8
+To become the Black Panther, he had to beat every challenger in ritual combat.
+---
+tone: dramatic
+scene: impact
+word: HEART|SHAPED|HERB
+color: #7bf0a0
+bg: #06180e
+Then he ate the heart shaped herb.
+---
+tone: hype
+scene: impact
+word: STRENGTH|SPEED|SENSES
+color: #b48cff
+It gave him superhuman strength, speed and senses.
+---
+tone: excited
+scene: network
+pop: GENIUS
+Crazy part? He's also one of the smartest people on the planet. A scientist who builds his own tech.
+---
+scene: wakanda
+time: night
+cast: hero(x=0.5, skin=dark, hair=#111, outfit=armor, shirt=#17151f, pants=#17151f, necklace=#c9c9d6, pose=think, mood=neutral)
+speaker: hero
+shots: medium, close
+He's famous for having a plan to beat almost anyone. Even his own friends.
+---
+tone: serious
+scene: jungle
+fx: shake, lines
+cast: villain(x=0.34, skin=dark, hair=#111, outfit=vest, color2=#2a5a3a, pants=#2a2a2a, necklace=#ffffff, mood=angry, prop=sword, tag=Killmonger), hero(x=0.62, skin=dark, hair=#111, outfit=armor, shirt=#17151f, pants=#17151f, necklace=#c9c9d6, mood=worried)
+speaker: villain
+shots: close, react, close, react
+cut: 0.8
+But his deadliest enemy came from inside Wakanda. Erik Killmonger.
+---
+tone: hype
+scene: impact
+word: THROWN|OFF A|WATERFALL
+color: #7fd6ff
+bg: #06101e
+Killmonger beat him... and threw him off a waterfall.
+---
+tone: excited
+scene: wakanda
+fx: purple
+cast: hero(x=0.5, skin=dark, hair=#111, outfit=armor, shirt=#17151f, pants=#17151f, necklace=#c9c9d6, mood=angry, pose=hips)
+speaker: hero
+shots: wide, close
+pop: HE CAME BACK
+He survived. He climbed back. And he took his throne back.
+---
+tone: dramatic
+scene: throne
+cast: king(x=0.5, hat=crown, skin=dark, hair=#111, outfit=robe, color2=#1b1b24, shirt=#2a2a36, cape=#4a2a7a, necklace=#c9c9d6, mood=happy, size=1.15)
 speaker: king
-shots: wide, medium, close
-cut: 2.5
-Chadwick Boseman passed away in 2020. But the king he brought to life lives on. Wakanda forever.
+shots: wide, close
+fx: purple
+Warrior. Genius. King.
+---
+tone: hype
+scene: impact
+word: LONG LIVE|THE KING
+color: #e8b923
+That's T'Challa. The Black Panther. Long live the king.

@@ -34,8 +34,15 @@ captions: off                  # hide burned-in captions
 | `network` | glowing node network | none |
 | `stat` | big count-up number | `value: 8000000000`, `unit: people`, `prefix: $`, `suffix: %` |
 | `timeline` | animated year markers | `years: 1929, 1945`, `events: Born \| War`, `active: 2` |
+| `jungle` | layered jungle, moon, glowing eyes, fireflies, swaying fronds | `time: day` |
+| `wakanda` | futuristic city in the jungle: towers, waterfall, maglev, flying craft, plaza | `time: night` |
+| `meteor` | meteor streaks in, impact flash + shockwave, glowing crystal cluster | `hit: 1.6` (seconds) |
+| `impact` | comic kinetic text: words slam in one by one over a ray burst | `word: HE IS\|A KING`, `sub:`, `color:`, `bg:` |
 
 Every scene also accepts:
+- `pop: WORD` slams a big comic word over the scene (`popColor:`, `popAt:`).
+- `fx: shake, lines, purple` adds camera shake, speed lines or a purple glow.
+- `tone: excited|hype|serious|dramatic|whisper` sets the MP4 voice delivery for that scene.
 - `label: Text` for a ribbon title banner.
 - `dur: 4` to force the length in seconds.
 - `push: 0.08` to set how far the camera pushes in.
@@ -50,6 +57,7 @@ speaker: name
 - **Body:** `kid`, `skin=pale|light|tan|medium|brown|dark` (or a hex value), `old` (wrinkles).
 - **Hair:** `hair=#hex`, `hairstyle=short|swept|long|bun|curly|none`, `bald`, `beard=#hex`, `glasses`.
 - **Clothes:**
+  - `outfit=armor` is a dark bodysuit with glowing seams (`glow=#hex`).
   - `outfit=shirt|vest|apron|tunic|dress|robe|suit`
   - `shirt=#hex`, `pants=#hex`
   - `color2=#hex` colours the vest, apron, tabard, skirt, robe or jacket.

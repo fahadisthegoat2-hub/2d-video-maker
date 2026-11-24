@@ -1,0 +1,42 @@
+BLACK PANTHER — VOICE-OVER SCRIPT (for an AI voice generator)
+Tags in [brackets] are emotion/delivery cues. ElevenLabs v3 reads them directly.
+For other tools, use the tag as the style setting for that line and delete it from the text.
+Voice: deep, cinematic male narrator. Speed: fast (about 1.15x). Gaps: short.
+
+[whispers] Deep in the jungle... something is watching you.
+
+[dramatic] He's not just a hero. [intense] He's a KING.
+
+[excited] Behind the trees hides Wakanda. The most advanced nation on Earth. [mischievously] And nobody knows it exists.
+
+[mysterious] Why? Because long ago... a meteor crashed right here.
+
+[excited] Inside it was vibranium! A metal that can absorb almost ANY hit.
+
+[proud] Wakanda used it to build a nation that has NEVER been conquered.
+
+[warm] Young T'Challa was raised to be king by his father, King T'Chaka.
+
+[serious] Then a thief named Klaw invaded, hunting the vibranium... [sad] and killed the king. Right in front of his son.
+
+[quiet, intense] The boy never forgot.
+
+[intense] To become the Black Panther, he had to beat EVERY challenger in ritual combat.
+
+[mysterious] Then he ate the heart-shaped herb.
+
+[excited] It gave him superhuman strength! Speed! And senses!
+
+[amazed] Crazy part? He's also one of the smartest people on the planet. A scientist who builds his own tech.
+
+[mischievously] He's famous for having a plan to beat almost anyone. [laughs softly] Even his own friends.
+
+[serious] But his deadliest enemy came from inside Wakanda. [menacing] Erik Killmonger.
+
+[shocked] Killmonger beat him... and threw him off a WATERFALL.
+
+[building, triumphant] He survived. He climbed back. And he took his throne back.
+
+[slow, powerful] Warrior. Genius. King.
+
+[proud, epic] That's T'Challa. The Black Panther. [shouting] Long live the king!
