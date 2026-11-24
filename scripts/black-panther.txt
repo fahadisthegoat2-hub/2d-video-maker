@@ -2,7 +2,7 @@ video: yes
 title: The King of Wakanda
 vo: audio/black-panther
 eleven_voice: JJCR1UICgHnHljtvu5uF
-vspeed: 1.08
+vspeed: 1.2
 voice: en-US-AndrewNeural
 rate: +28%
 bpm: 96
@@ -30,7 +30,6 @@ pop: WAKANDA
 ---
 tone: dramatic
 scene: meteor
-dur: 4.6
 [mysterious] Thousands of years ago, a meteor fell from the sky... [whispers] right here.
 ---
 tone: hype
