@@ -7,14 +7,14 @@ cut: 1.6
 scene: space
 color: #c0283a
 label: He was built to kill a hero
-cast: metal(x=0.5, skin=#2a49a8, mask=#3a5cc8, hairstyle=swept, hair=#2a49a8, outfit=suit, color2=#1e3070, shirt=#c8cdd6, mood=angry, size=1.15, tag=metal sonic)
+cast: metal(metal, x=0.5, size=1.15, tag=metal sonic)
 speaker: metal
 shots: close, wide, close
 He was built with one job. Destroy Sonic. And one day, he actually became him.
 ---
 scene: room
 palette: night
-cast: doctor(x=0.42, bald, hair=#c8541e, beard=#c8541e, glasses, outfit=suit, color2=#c02a2a, shirt=#f2ead8, mood=happy, tag=dr eggman), metal(x=0.62, skin=#2a49a8, mask=#3a5cc8, hairstyle=swept, hair=#2a49a8, outfit=suit, color2=#1e3070, shirt=#c8cdd6)
+cast: doctor(x=0.42, bald, hair=#c8541e, beard=#c8541e, glasses, outfit=suit, color2=#c02a2a, shirt=#f2ead8, mood=happy, tag=dr eggman), metal(metal, x=0.62)
 speaker: doctor
 shots: wide, close, react, close
 It's 1993. Doctor Eggman is tired of losing. So he builds a copy of Sonic. Faster. Stronger. No feelings.
@@ -27,7 +27,7 @@ His first mission was in Sonic CD, on a world called Little Planet.
 ---
 scene: space
 color: #e0a03a
-cast: metal(x=0.4, skin=#2a49a8, mask=#3a5cc8, hairstyle=swept, hair=#2a49a8, outfit=suit, color2=#1e3070, shirt=#c8cdd6, mood=angry, pose=point), amy(x=0.62, hairstyle=short, hair=#f07aa8, outfit=dress, color2=#d02a3a, mood=worried)
+cast: metal(metal, x=0.4, pose=point), amy(x=0.62, hairstyle=short, hair=#f07aa8, outfit=dress, color2=#d02a3a, mood=worried)
 speaker: metal
 label: Stardust Speedway
 He kidnapped Amy, and raced Sonic through Stardust Speedway. One wrong move meant death.
@@ -43,7 +43,7 @@ label: He copied everyone
 Ten years later, Metal came back. He secretly scanned the data of every hero and every enemy.
 ---
 scene: throne
-cast: metal(x=0.5, skin=#3a2a8a, mask=#6a5ad0, hairstyle=swept, hair=#3a2a8a, outfit=robe, color2=#2a1a5a, shirt=#c8cdd6, cape=#7a1a2a, hat=crown, mood=angry, size=1.2, tag=neo metal sonic)
+cast: metal(metal, x=0.5, cape=#7a1a2a, size=1.2, tag=neo metal sonic, metalColor=#4a3aa8)
 speaker: metal
 shots: wide, close, close
 He even turned on Eggman, locked him up, and called himself the real Sonic. The only one.
@@ -54,13 +54,13 @@ Then he became a giant dragon monster called Metal Overlord. It took Sonic, Shad
 ---
 scene: room
 palette: cool
-cast: metal(x=0.5, skin=#2a49a8, mask=#3a5cc8, hairstyle=swept, hair=#2a49a8, outfit=suit, color2=#1e3070, shirt=#c8cdd6, mood=sad)
+cast: metal(metal, x=0.5)
 speaker: metal
 After that, he was rebuilt and went back to serving Eggman. A copy with no choice.
 ---
 scene: space
 color: #2a49a8
 label: Who is the real Sonic?
-cast: metal(x=0.5, skin=#2a49a8, mask=#3a5cc8, hairstyle=swept, hair=#2a49a8, outfit=suit, color2=#1e3070, shirt=#c8cdd6, mood=angry, size=1.15)
+cast: metal(metal, x=0.5, size=1.15)
 speaker: metal
 So is he just a robot? Or the rival who never stopped chasing? Comment which Metal Sonic fight was the hardest, and subscribe for the next villain.

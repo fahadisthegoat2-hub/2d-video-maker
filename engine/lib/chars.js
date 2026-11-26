@@ -12,12 +12,14 @@ const POSES = {
 const TALK = ['explain', 'chest', 'open', 'explain', 'point', 'shrug', 'chest', 'hold'];
 const IDLE = ['rest', 'rest', 'hips', 'rest', 'cross'];
 function charDims(c) {
+  if (c.metal) return MD;
   const kid = !!c.kid; return kid ? { kid, legH: 66, bodyH: 120, bw: 118, R: 102, arm: 54 } : { kid, legH: 92, bodyH: 168, bw: 150, R: 110, arm: 66 };
 }
 // world-space head center for camera framing
 function headOf(c, sc) { const d = charDims(c), s = charScale(c, sc); return { x: c.x * W, y: charY(c, sc) - (d.legH + d.bodyH + d.R * .8) * s, r: d.R * s }; }
 
 function drawChar(c, t, speaking, close) {
+  if (c.metal) return drawMetal(c, t, speaking, close);
   const d = charDims(c), s = c._s || (c.size || 1), x = c.x * W, y = c._y ?? (c.y || .88) * H;
   const skin = SKIN[c.skin] || c.skin || SKIN.light, shirt = c.shirt || '#efe6d2', pants = c.pants || '#4a4038';
   const col2 = c.color2 || c.vest || c.apron || c.tabard || '#7a2a2a', outfit = c.outfit || (c.vest ? 'vest' : c.apron ? 'apron' : c.tabard ? 'tunic' : 'shirt');
@@ -163,4 +165,91 @@ function drawHead(c, t, speaking, skin, R, id, close, pname) {
   if (hat === 'crown') { X.beginPath(); X.moveTo(-R * .62, -R * .78); for (let i = 0; i <= 4; i++) { X.lineTo(-R * .62 + i * R * .31, -R * (i % 2 ? 1.05 : 1.32)); } X.lineTo(R * .62, -R * .78); X.closePath(); X.fillStyle = '#e8b923'; X.fill(); box(-R * .66, -R * .86, R * 1.32, R * .14, '#c9961e', 4); ell(0, -R * .79, 7, 7, '#c0304a'); }
   if (hat === 'cap') { X.beginPath(); X.arc(0, -R * .3, R * .98, Math.PI, 0); X.closePath(); X.fillStyle = c.capColor || '#5a3a24'; X.fill(); box(-R * 1.05, -R * .36, R * 2.1, R * .14, hex(c.capColor || '#5a3a24', -.2), 6); }
   if (c.glasses) { const gc = c.glasses === true ? '#2a2a2a' : c.glasses; X.lineWidth = 6; X.strokeStyle = gc; for (const sx of [-1, 1]) { X.beginPath(); X.ellipse(sx * ex, ey, erx * 1.2, ery * 1.12, 0, 0, 7); X.stroke(); } line(-ex + erx * 1.2, ey, ex - erx * 1.2, ey, gc, 5); }
+}
+
+// ---------- METAL: custom robot rig (cast option `metal`) ----------
+const MD = { legH: 118, bodyH: 104, bw: 96, R: 120, arm: 60 };
+function fs(fill, w = 5, st = '#0d1230') { X.fillStyle = fill; X.fill(); X.lineJoin = 'round'; X.strokeStyle = st; X.lineWidth = w; X.stroke(); }
+function screw(x, y, r) { ell(x, y, r, r); fs(lin(x - r, y - r, x + r, y + r, ['#f4f6fa', '#9aa3b2']), 3); line(x - r * .6, y - r * .3, x + r * .6, y + r * .3, '#5a6272', 3); }
+function drawMetal(c, t, speaking, close) {
+  const s = c._s || (c.size || 1), x = c.x * W, y = c._y ?? (c.y || .88) * H, id = c.x * 91 + 3;
+  const B = c.metalColor || '#2b55c8', BD = hex(B, -.35), BL = hex(B, .3), SIL = '#c9d0dc', SILD = '#7d8697';
+  const { legH, bodyH, bw, R } = MD, shY = -legH - bodyH, hipY = -legH;
+  const beat = Math.floor(t / (speaking ? .7 : 2.2) + hash(id));
+  const pname = c.pose && !speaking ? c.pose : speaking ? TALK[Math.floor(hash(beat * 1.9 + id) * TALK.length)] : IDLE[Math.floor(hash(beat * 1.3 + id) * IDLE.length)];
+  const [ru, rf, lu, lf] = POSES[pname] || POSES.rest;
+  const tilt = (hash(beat * 3.7 + id) - .5) * (speaking ? .14 : .05), hover = c.fly ? Math.sin(t * 3) * 10 - 40 : 0;
+  X.save(); X.translate(x, y); X.scale(s * (c.flip ? -1 : 1), s);
+  ell(0, 0, bw * .9, 16, 'rgba(20,15,30,.3)');
+  X.translate(0, hover);
+  if (c.cape) { X.beginPath(); X.moveTo(-bw * .5, shY + 8); X.lineTo(bw * .5, shY + 8); X.lineTo(bw * .9, -10); X.lineTo(-bw * .9, -10); X.closePath(); fs(hex(c.cape, -.15)); }
+  // legs: silver thigh rods, ball knees, blue shins, big red shoes
+  for (const sx of [-1, 1]) {
+    const dk = sx < 0, kx = sx * 24, ky = hipY + legH * .45;
+    X.lineCap = 'round'; line(sx * 20, hipY, kx, ky, '#0d1230', 18); line(sx * 20, hipY, kx, ky, dk ? SILD : SIL, 11);
+    X.beginPath(); X.moveTo(kx - 17, ky); X.lineTo(kx + 17, ky); X.lineTo(kx + 13, -30); X.lineTo(kx - 13, -30); X.closePath(); fs(dk ? BD : B);
+    ell(kx, ky, 14, 14); fs(dk ? SILD : SIL, 4);
+    const fx = kx + 16; box(fx - 30, -40, 44, 14, SIL, 5); X.strokeStyle = '#0d1230'; X.lineWidth = 4; X.stroke();
+    X.beginPath(); X.moveTo(fx - 42, -4); X.quadraticCurveTo(fx - 46, -40, fx - 10, -36); X.quadraticCurveTo(fx + 44, -34, fx + 50, -8); X.quadraticCurveTo(fx + 50, 2, fx + 38, 2); X.lineTo(fx - 38, 2); X.closePath(); fs(dk ? '#a51c2a' : '#d82b3a');
+    X.save(); X.clip(); box(fx - 8, -42, 18, 46, '#f4f2ee'); box(fx - 50, -8, 110, 12, dk ? '#6a1018' : '#8c1622'); ell(fx + 18, -26, 14, 5, 'rgba(255,255,255,.35)'); X.restore();
+  }
+  X.save(); X.translate(0, hipY); X.rotate(tilt * .3); X.translate(0, -hipY);
+  // torso + pelvis
+  box(-bw * .3, hipY - 16, bw * .6, 28, SILD, 10); X.strokeStyle = '#0d1230'; X.lineWidth = 4; X.stroke();
+  X.beginPath(); X.moveTo(-bw / 2, shY + 18); X.quadraticCurveTo(-bw / 2, shY, -bw / 2 + 22, shY); X.lineTo(bw / 2 - 22, shY); X.quadraticCurveTo(bw / 2, shY, bw / 2, shY + 18); X.lineTo(bw * .34, hipY - 6); X.quadraticCurveTo(0, hipY + 10, -bw * .34, hipY - 6); X.closePath(); fs(lin(-bw / 2, 0, bw / 2, 0, [BL, B, BD]));
+  // chest jet engine
+  const ey = shY + bodyH * .42, er = 34, glow = speaking ? .7 + .3 * Math.sin(t * 20) : .55;
+  ell(0, ey, er, er); fs('#f2b928', 5); ell(0, ey, er * .72, er * .72, '#2a160e');
+  X.save(); X.translate(0, ey); X.rotate(t * 9); for (let i = 0; i < 8; i++) { X.rotate(Math.PI / 4); X.beginPath(); X.moveTo(0, 0); X.lineTo(er * .68, -6); X.lineTo(er * .68, 6); X.closePath(); X.fillStyle = '#d0601e'; X.fill(); } X.restore();
+  ell(0, ey, er * .3, er * .3, `rgba(255,${120 + glow * 100 | 0},40,${glow})`); ell(0, ey, er * .14, er * .14, '#1a0c08');
+  // arms: silver rods, ball joints, blue forearms, yellow cuff, claws
+  const L = MD.arm;
+  const arm = (sx, u, f) => {
+    X.save(); X.translate(sx * (bw / 2 - 4), shY + 16); X.rotate(sx * u); X.lineCap = 'round';
+    line(0, 0, 0, L, '#0d1230', 16); line(0, 0, 0, L, sx > 0 ? SILD : SIL, 9);
+    X.translate(0, L); X.rotate(sx * f);
+    X.beginPath(); X.moveTo(-14, 4); X.lineTo(14, 4); X.lineTo(10, L * .85); X.lineTo(-10, L * .85); X.closePath(); fs(sx > 0 ? BD : B);
+    ell(0, 0, 13, 13); fs(SIL, 4);
+    box(-15, L * .8, 30, 14, '#f2b928', 4); X.strokeStyle = '#0d1230'; X.lineWidth = 3; X.stroke();
+    const hy = L * .8 + 22; ell(0, hy, 15, 13); fs(SIL, 4);
+    for (let k = 0; k < 3; k++) { const a = -.45 + k * .45; X.save(); X.translate(Math.sin(a) * 10, hy + 6); X.rotate(-a); line(0, 0, 0, 30, '#0d1230', 9); line(0, 0, 0, 30, SIL, 5); ell(0, 15, 5, 5, SILD); X.beginPath(); X.moveTo(-4, 30); X.lineTo(4, 30); X.lineTo(0, 40); X.closePath(); fs('#e8ecf2', 2); X.restore(); }
+    X.save(); X.translate(-sx * 14, hy); X.rotate(sx * .9); line(0, 0, 0, 22, '#0d1230', 9); line(0, 0, 0, 22, SIL, 5); X.restore();
+    X.restore();
+  };
+  // shoulders behind head-neck
+  arm(-1, lu, lf);
+  // neck collar
+  box(-bw * .36, shY - 16, bw * .72, 26, SIL, 12); X.strokeStyle = '#0d1230'; X.lineWidth = 4; X.stroke(); screw(-bw * .26, shY - 3, 7); screw(bw * .26, shY - 3, 7);
+  for (const sx of [-1, 1]) { ell(sx * bw / 2, shY + 12, 20, 18); fs(sx < 0 ? B : BD); }
+  // ---- head ----
+  X.save(); X.translate(0, shY - R * .8); X.rotate(tilt); metalHead(c, t, speaking, R, B, BD, BL, SIL, SILD, id); X.restore();
+  arm(1, ru, rf);
+  X.restore(); X.restore();
+}
+function metalHead(c, t, speaking, R, B, BD, BL, SIL, SILD, id) {
+  // back quills (sweep back-left; faces right)
+  const quill = (bx, by, tx, ty, w, col) => { X.beginPath(); X.moveTo(bx, by - w); X.quadraticCurveTo((bx + tx) / 2, (by + ty) / 2 - w * .9, tx, ty); X.quadraticCurveTo((bx + tx) / 2, (by + ty) / 2 + w * .5, bx, by + w); X.closePath(); fs(col); };
+  quill(-R * .3, R * .45, -R * 1.7, R * 1.0, R * .45, BD);
+  quill(-R * .3, R * .02, -R * 2.15, R * .15, R * .55, hex(B, -.2));
+  quill(-R * .2, -R * .4, -R * 2.05, -R * .85, R * .55, B);
+  quill(R * .05, -R * .65, -R * 1.2, -R * 1.75, R * .5, BL);
+  // ears
+  const ear = (bx, tx, ty, col) => { X.beginPath(); X.moveTo(bx - R * .3, -R * .6); X.lineTo(tx, ty); X.lineTo(bx + R * .3, -R * .7); X.closePath(); fs(col); X.beginPath(); X.moveTo(bx - R * .16, -R * .68); X.lineTo(tx + R * .02, ty + R * .22); X.lineTo(bx + R * .16, -R * .74); X.closePath(); X.fillStyle = '#f2b440'; X.fill(); };
+  ear(-R * .05, -R * .05, -R * 1.5, BD); ear(R * .5, R * .62, -R * 1.42, B);
+  // dome
+  ell(0, 0, R, R * .98); fs(lin(-R, -R, R, R, [BL, B, BD]), 6);
+  ell(-R * .35, -R * .55, R * .35, R * .18, 'rgba(255,255,255,.28)', -.5);
+  // black visor: top edge slants down toward the snout (angry brow)
+  X.beginPath(); X.moveTo(-R * .22, R * .05); X.quadraticCurveTo(-R * .25, -R * .42, R * .05, -R * .44); X.lineTo(R * .97, -R * .06); X.quadraticCurveTo(R * 1.05, R * .3, R * .85, R * .42); X.lineTo(-R * .05, R * .42); X.quadraticCurveTo(-R * .26, R * .3, -R * .22, R * .05); X.closePath(); fs('#07080f', 5);
+  const on = speaking ? (hash(Math.floor(t * 10) + id) > .3 ? 1 : .7) : (Math.floor(t * 2.3 + id) % 9 === 0 ? .4 : 1);
+  X.save(); X.shadowColor = '#ff1a1a'; X.shadowBlur = 34 * on;
+  for (const [ex, ey, rx, ry] of [[R * .2, R * .06, R * .16, R * .24], [R * .7, R * .12, R * .1, R * .18]]) {
+    X.save(); X.beginPath(); X.moveTo(ex - rx * 1.6, ey - ry * .35 - (ex - rx * 1.6) * .38 + ex * .38); X.lineTo(ex + rx * 1.6, ey - ry * .35 - (ex + rx * 1.6) * .38 + ex * .38 + R * .02); X.lineTo(ex + rx * 2, ey + ry * 2); X.lineTo(ex - rx * 2, ey + ry * 2); X.closePath(); X.clip();
+    ell(ex, ey, rx, ry, `rgba(255,36,28,${on})`); ell(ex, ey, rx * .62, ry * .66, '#2a0606'); ell(ex, ey, rx * .34, ry * .4, `rgba(255,110,70,${on})`); X.restore();
+  }
+  X.restore();
+  // silver muzzle + pointed nose + cheek screw
+  X.beginPath(); X.moveTo(-R * .05, R * .38); X.quadraticCurveTo(R * .4, R * .28, R * .9, R * .36); X.quadraticCurveTo(R * 1.15, R * .38, R * 1.22, R * .5); X.quadraticCurveTo(R * 1.12, R * .7, R * .8, R * .8); X.quadraticCurveTo(R * .3, R * .98, -R * .02, R * .72); X.quadraticCurveTo(-R * .2, R * .55, -R * .05, R * .38); X.closePath(); fs(lin(0, R * .3, 0, R * .9, ['#f2f4f8', SIL, SILD]), 5);
+  line(R * .5, R * .66, R * .95, R * .6, 'rgba(13,18,48,.5)', 3);
+  screw(R * .08, R * .52, R * .1);
 }
