@@ -12,12 +12,22 @@ const { chromium } = require('playwright');
     // RIGHT: final form over the dragon
     // ---- hero render: Metal Sonic built as its own lit layer ----
     const mk = () => { const c = document.createElement('canvas'); c.width = W; c.height = H; return [c, c.getContext('2d')]; };
-    const FR = 285, fcx = W * .765, fcy = H * .4, BS = .62;
+    const FR = 225, fcx = W * .765, fcy = H * .29, BS = .6;
     const frontMetal = (R) => {
       const B = '#2b55c8', BD = '#16307a', BL = '#6a92ff', O = '#05060c', SIL = '#c9d0dc';
       const P = (pts, fill, w = 6) => { X.beginPath(); pts.forEach(([x, y], i) => i ? X.lineTo(x * R, y * R) : X.moveTo(x * R, y * R)); X.closePath(); fs(fill, w, O); };
       const metalG = () => lin(-R, 0, R, 0, [BL, B, BD]);
       X.save(); X.translate(0, R * .95); X.scale(BS, BS); X.translate(0, -R * .95);
+      // legs (front view): silver thighs, knee balls, blue shins, big red shoes
+      ell(0, 2.75 * R, R * .3, R * .16); fs('#7d8697', 5, O);
+      for (const sx of [-1, 1]) {
+        X.lineCap = 'round'; line(sx * .2 * R, 2.7 * R, sx * .32 * R, 3.45 * R, O, R * .14); line(sx * .2 * R, 2.7 * R, sx * .32 * R, 3.45 * R, sx < 0 ? SIL : '#9aa3b2', R * .08);
+        X.beginPath(); X.moveTo(sx * .16 * R, 3.45 * R); X.lineTo(sx * .5 * R, 3.45 * R); X.lineTo(sx * .46 * R, 4.25 * R); X.lineTo(sx * .22 * R, 4.25 * R); X.closePath(); fs(sx < 0 ? B : BD, 6, O);
+        ell(sx * .33 * R, 3.45 * R, R * .13, R * .13); fs(SIL, 5, O);
+        box(sx * .34 * R - R * .2, 4.12 * R, R * .4, R * .16, SIL, 8); X.strokeStyle = O; X.lineWidth = 5; X.stroke();
+        X.save(); X.translate(sx * .4 * R, 4.45 * R); ell(0, 0, R * .5, R * .3); fs(sx < 0 ? '#ff3a4a' : '#d82b3a', 6, O);
+        X.save(); ell(0, 0, R * .5, R * .3); X.clip(); box(-R * .4, -R * .05, R * .8, R * .1, '#f4f2ee'); box(-R * .4, R * .14, R * .8, R * .2, '#7a1018'); ell(-R * .12, -R * .12, R * .12, R * .05, 'rgba(255,255,255,.4)'); X.restore(); X.restore();
+      }
       // torso + engine
       X.beginPath(); X.moveTo(-.62 * R, 1.05 * R); X.lineTo(.62 * R, 1.05 * R); X.quadraticCurveTo(.6 * R, 2.0 * R, .36 * R, 2.7 * R); X.lineTo(-.36 * R, 2.7 * R); X.quadraticCurveTo(-.6 * R, 2.0 * R, -.62 * R, 1.05 * R); X.closePath(); fs(metalG(), 6, O);
       ell(0, 1.72 * R, R * .3, R * .3); fs('#f2b928', 6, O); ell(0, 1.72 * R, R * .21, R * .21, '#2a160e');
@@ -51,7 +61,7 @@ const { chromium } = require('playwright');
     const [Lc, L] = mk(); L.drawImage(C, 0, 0);
     // shading: darken lower/left, keep top-right lit
     L.globalCompositeOperation = 'source-atop';
-    let g = L.createLinearGradient(fcx, fcy - 500, fcx, H); g.addColorStop(0, 'rgba(0,0,0,0)'); g.addColorStop(.6, 'rgba(5,5,20,.2)'); g.addColorStop(1, 'rgba(0,0,10,.55)'); L.fillStyle = g; L.fillRect(0, 0, W, H);
+    let g = L.createLinearGradient(fcx, fcy - 500, fcx, H); g.addColorStop(0, 'rgba(0,0,0,0)'); g.addColorStop(.6, 'rgba(5,5,20,.2)'); g.addColorStop(1, 'rgba(0,0,10,.3)'); L.fillStyle = g; L.fillRect(0, 0, W, H);
     // metallic specular streaks
     { const R0 = FR, cx0 = fcx, cy0 = fcy; L.globalCompositeOperation = 'source-atop';
       let hg = L.createRadialGradient(cx0 - R0 * .3, cy0 - R0 * .6, 10, cx0 - R0 * .3, cy0 - R0 * .6, R0 * .7); hg.addColorStop(0, 'rgba(255,255,255,.55)'); hg.addColorStop(1, 'rgba(255,255,255,0)'); L.fillStyle = hg; L.fillRect(0, 0, W, H);
