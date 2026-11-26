@@ -10,8 +10,12 @@ const { chromium } = require('playwright');
     const clipSide = (left, fn) => { X.save(); X.setTransform(1, 0, 0, 1, 0, 0); X.beginPath(); if (left) { X.moveTo(0, 0); X.lineTo(SPL + 120, 0); X.lineTo(SPL - 120, H); X.lineTo(0, H); } else { X.moveTo(SPL + 120, 0); X.lineTo(W, 0); X.lineTo(W, H); X.lineTo(SPL - 120, H); } X.closePath(); X.clip(); fn(); X.restore(); };
     CAM = { cx: W / 2, cy: H / 2, z: 1 };
     // RIGHT: final form over the dragon
-    clipSide(false, () => { bgOverlord({ seed: 4 }, t); X.setTransform(1, 0, 0, 1, 0, 0); glowC(W * .74, H * .55, 520, '255,40,40', .35);
-      drawMetal({ metal: 1, x: .76, _y: H * .99, _s: 1.38, mood: 'angry', cape: '#7a1a2a', metalColor: '#4a3aa8', pose: 'point' }, t, false, true); });
+    clipSide(false, () => { X.setTransform(1, 0, 0, 1, 0, 0); X.fillStyle = rad(W * .76, H * .5, 50, W * .55, ['#3a0608', '#12020a', '#000000']); X.fillRect(0, 0, W, H);
+      for (let i = 0; i < 40; i++) { const R = rng(i + 9); ell(SPL + R() * W * .5, R() * H, 2 + R() * 3, 2 + R() * 3, `rgba(255,${80 + R() * 80 | 0},40,${.3 + R() * .5})`); }
+      X.translate(W * .8, H * .6); X.scale(-1, 1); X.rotate(-.06);
+      metalHead({}, 2.0, false, 470, '#2b55c8', '#13286a', '#5a86f0', '#cfd6e2', '#7d8697', 7);
+      X.setTransform(1, 0, 0, 1, 0, 0); glowC(W * .78, H * .58, 380, '255,30,30', .35);
+      X.fillStyle = lin(0, H * .75, 0, H, ['rgba(0,0,0,0)', 'rgba(0,0,0,.6)']); X.fillRect(SPL - 200, H * .75, W, H * .25); });
     // LEFT: nursery
     clipSide(true, () => { X.setTransform(1, 0, 0, 1, 0, 0); X.fillStyle = lin(0, 0, 0, H, ['#bfe6ff', '#ffe0f0']); X.fillRect(0, 0, W, H);
       for (let i = 0; i < 26; i++) { const R = rng(i + 2), x = R() * SPL, y = R() * H * .8; X.save(); X.translate(x, y); X.rotate(R()); X.fillStyle = 'rgba(255,255,255,.8)'; X.beginPath(); for (let k = 0; k < 10; k++) { const a = k * Math.PI / 5, r = k % 2 ? 9 : 22; X.lineTo(Math.cos(a) * r, Math.sin(a) * r); } X.fill(); X.restore(); }
@@ -42,8 +46,9 @@ const { chromium } = require('playwright');
     X.strokeStyle = '#fff'; X.lineWidth = 26; X.lineJoin = 'round'; X.shadowColor = '#ffd84a'; X.shadowBlur = 40; X.stroke(); X.shadowBlur = 0; X.strokeStyle = '#ffd84a'; X.lineWidth = 10; X.stroke();
     // text
     const word = (s, x, y, size, fill, rot = 0) => { X.save(); X.translate(x, y); X.rotate(rot); X.font = `700 ${size}px ${FONT}`; X.textAlign = 'center'; X.textBaseline = 'middle'; X.lineJoin = 'round'; X.strokeStyle = '#000'; X.lineWidth = size * .22; X.strokeText(s, 0, 0); X.fillStyle = fill; X.fillText(s, 0, 0); X.restore(); };
-    word('DAY 1', W * .2, H * .12, 190, '#ffffff', -.05);
-    word('FINAL FORM', W * .74, H * .12, 170, '#ff3a3a', .04);
+    const fit = (s, max, size) => { do { X.font = `700 ${size}px ${FONT}`; size -= 4; } while (X.measureText(s).width * 1.12 > max); return size + 4; };
+    word('DAY 1', W * .22, H * .13, fit('DAY 1', W * .36, 180), '#ffffff', -.05);
+    word('FINAL FORM', W * .75, H * .13, fit('FINAL FORM', W * .4, 160), '#ff3a3a', .03);
     // arrow
     X.save(); X.translate(W * .5, H * .86); X.rotate(-.08); X.beginPath(); X.moveTo(-150, -34); X.lineTo(70, -34); X.lineTo(70, -80); X.lineTo(170, 0); X.lineTo(70, 80); X.lineTo(70, 34); X.lineTo(-150, 34); X.closePath(); X.lineWidth = 22; X.lineJoin = 'round'; X.strokeStyle = '#000'; X.stroke(); X.fillStyle = '#ffd84a'; X.fill(); X.restore();
     return C.toDataURL('image/png');
