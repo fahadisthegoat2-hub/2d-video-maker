@@ -1,66 +1,83 @@
 video: yes
-title: Metal Sonic Was Built To Replace Sonic. Then He Did.
+title: The Robot Built To Replace Sonic
 voice: en-US-AndrewNeural
-rate: +18%
-cut: 1.6
----
-scene: space
-color: #c0283a
-label: He was built to kill a hero
-cast: metal(metal, x=0.5, size=1.15, tag=metal sonic)
-speaker: metal
-shots: close, wide, close
-He was built with one job. Destroy Sonic. And one day, he actually became him.
+rate: +15%
+cut: 1.7
 ---
 scene: room
 palette: night
-cast: doctor(x=0.42, bald, hair=#c8541e, beard=#c8541e, glasses, outfit=suit, color2=#c02a2a, shirt=#f2ead8, mood=happy, tag=dr eggman), metal(metal, x=0.62)
+label: Little Planet. Day one.
+cast: metal(metal, x=0.5, size=1.15, tag=metal sonic)
+speaker: metal
+shots: close, wide, close
+Deep under a frozen machine base, a robot opened its eyes for the very first time. It had one reason to exist. Destroy Sonic the Hedgehog.
+---
+scene: room
+palette: night
+cast: doctor(egg, x=0.38, tag=dr eggman), metal(metal, x=0.66)
 speaker: doctor
 shots: wide, close, react, close
-It's 1993. Doctor Eggman is tired of losing. So he builds a copy of Sonic. Faster. Stronger. No feelings.
----
-scene: timeline
-years: 1993, 2003, 2011, 2017
-events: Sonic CD | Sonic Heroes | Generations | Mania
-active: 1
-His first mission was in Sonic CD, on a world called Little Planet.
+Its creator was Doctor Eggman. He had lost to Sonic so many times that he stopped trying to beat him. Instead, he decided to build a better Sonic.
 ---
 scene: space
 color: #e0a03a
-cast: metal(metal, x=0.4, pose=point), amy(x=0.62, hairstyle=short, hair=#f07aa8, outfit=dress, color2=#d02a3a, mood=worried)
-speaker: metal
-label: Stardust Speedway
-He kidnapped Amy, and raced Sonic through Stardust Speedway. One wrong move meant death.
+label: The planet that appears once a year
+cast: sonic(toon=sonic, x=0.38, tag=sonic), amy(toon=amy, x=0.6, mood=happy, tag=amy rose)
+speaker: amy
+shots: wide, close, react
+Every year, a strange world called Little Planet appeared over a lake. Sonic went there to see it. And Amy Rose followed him.
 ---
-scene: stat
-value: 0
-suffix: %
-label: Chance Metal had of winning
-He lost. Sonic was just too fast. But Metal never forgot that race.
+scene: space
+color: #c0283a
+cast: metal(metal, x=0.42, pose=point), amy(toon=amy, x=0.62, mood=worried)
+speaker: metal
+shots: wide, close, react
+Then, without warning, a blue blur grabbed her. Amy thought it was Sonic. It wasn't.
+---
+scene: space
+color: #6a3ac0
+label: Stardust Speedway
+cast: sonic(toon=sonic, x=0.36, mood=angry), metal(metal, x=0.64, flip)
+speaker: sonic
+shots: wide, close, react, close
+Sonic chased them to a highway in the stars. Sonic against his copy. Both at full speed, with a giant laser chasing them from behind.
+---
+scene: space
+color: #2a49a8
+cast: sonic(toon=sonic, x=0.5, mood=happy, pose=wave)
+speaker: sonic
+shots: close, wide
+Sonic won by inches. Amy was saved. And Metal Sonic was left broken on the ground.
 ---
 scene: network
-label: He copied everyone
-Ten years later, Metal came back. He secretly scanned the data of every hero and every enemy.
+label: He was watching
+But he was not finished. For years, Metal secretly copied the data of every hero he fought. Their speed. Their strength. Their powers.
 ---
 scene: throne
-cast: metal(metal, x=0.5, cape=#7a1a2a, size=1.2, tag=neo metal sonic, metalColor=#4a3aa8)
+cast: metal(metal, x=0.5, cape=#7a1a2a, size=1.2, metalColor=#4a3aa8, tag=neo metal sonic)
 speaker: metal
 shots: wide, close, close
-He even turned on Eggman, locked him up, and called himself the real Sonic. The only one.
+Then he locked Eggman in a cage, took over his whole army, and called himself the one true Sonic.
 ---
-scene: sun
-label: Metal Overlord
-Then he became a giant dragon monster called Metal Overlord. It took Sonic, Shadow and their friends together to beat him.
+scene: space
+color: #c0283a
+label: Everyone, together
+cast: tails(toon=tails, x=0.3, fly, tag=tails), sonic(toon=sonic, x=0.44, mood=angry), shadow(toon=shadow, x=0.58, tag=shadow), amy(toon=amy, x=0.72, prop=hammer, mood=angry)
+speaker: shadow
+shots: wide, close, react, medium
+He turned into a giant metal dragon. It took Sonic, Tails, Amy, Shadow and every hero alive, fighting together, to bring him down.
 ---
 scene: room
 palette: cool
 cast: metal(metal, x=0.5)
 speaker: metal
-After that, he was rebuilt and went back to serving Eggman. A copy with no choice.
+shots: close, wide
+Eggman rebuilt him and wiped his pride away. Today, he serves the doctor again. But some say he still remembers.
 ---
 scene: space
 color: #2a49a8
 label: Who is the real Sonic?
-cast: metal(metal, x=0.5, size=1.15)
-speaker: metal
-So is he just a robot? Or the rival who never stopped chasing? Comment which Metal Sonic fight was the hardest, and subscribe for the next villain.
+cast: metal(metal, x=0.36), sonic(toon=sonic, x=0.64, flip, mood=smug)
+speaker: sonic
+shots: wide, close, react, wide
+Is he just a machine? Or the rival who never stops chasing? Tell us in the comments, and subscribe for the next story.

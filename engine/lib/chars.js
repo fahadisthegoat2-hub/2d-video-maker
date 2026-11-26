@@ -12,7 +12,7 @@ const POSES = {
 const TALK = ['explain', 'chest', 'open', 'explain', 'point', 'shrug', 'chest', 'hold'];
 const IDLE = ['rest', 'rest', 'hips', 'rest', 'cross'];
 function charDims(c) {
-  if (c.metal) return MD;
+  if (c.metal || c.toon || c.egg) return toonDims(c);
   const kid = !!c.kid; return kid ? { kid, legH: 66, bodyH: 120, bw: 118, R: 102, arm: 54 } : { kid, legH: 92, bodyH: 168, bw: 150, R: 110, arm: 66 };
 }
 // world-space head center for camera framing
@@ -20,6 +20,8 @@ function headOf(c, sc) { const d = charDims(c), s = charScale(c, sc); return { x
 
 function drawChar(c, t, speaking, close) {
   if (c.metal) return drawMetal(c, t, speaking, close);
+  if (c.toon) return drawToon(c, t, speaking, close);
+  if (c.egg) return drawEgg(c, t, speaking, close);
   const d = charDims(c), s = c._s || (c.size || 1), x = c.x * W, y = c._y ?? (c.y || .88) * H;
   const skin = SKIN[c.skin] || c.skin || SKIN.light, shirt = c.shirt || '#efe6d2', pants = c.pants || '#4a4038';
   const col2 = c.color2 || c.vest || c.apron || c.tabard || '#7a2a2a', outfit = c.outfit || (c.vest ? 'vest' : c.apron ? 'apron' : c.tabard ? 'tunic' : 'shirt');
