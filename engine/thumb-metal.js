@@ -10,39 +10,38 @@ const { chromium } = require('playwright');
     const clipSide = (left, fn) => { X.save(); X.setTransform(1, 0, 0, 1, 0, 0); X.beginPath(); if (left) { X.moveTo(0, 0); X.lineTo(SPL + 120, 0); X.lineTo(SPL - 120, H); X.lineTo(0, H); } else { X.moveTo(SPL + 120, 0); X.lineTo(W, 0); X.lineTo(W, H); X.lineTo(SPL - 120, H); } X.closePath(); X.clip(); fn(); X.restore(); };
     CAM = { cx: W / 2, cy: H / 2, z: 1 };
     // RIGHT: final form over the dragon
-    const frontMetal = (R) => {
-      const B = '#2b55c8', BD = '#13286a', BL = '#6a92ff', O = '#05060c', SIL = '#c9d0dc';
-      const P = (pts, fill, w = 6) => { X.beginPath(); pts.forEach(([x, y], i) => i ? X.lineTo(x * R, y * R) : X.moveTo(x * R, y * R)); X.closePath(); fs(fill, w, O); };
-      // body: torso, then arms + shoulders + chains
-      P([[-.62, 1.0], [.62, 1.0], [.42, 2.6], [-.42, 2.6]], lin(-R, 0, R, 0, [BL, B, BD]));
-      ell(0, 1.75 * R, R * .3, R * .3); fs('#f2b928', 6, O); ell(0, 1.75 * R, R * .2, R * .2, '#2a160e'); ell(0, 1.75 * R, R * .08, R * .08, '#ff7a2a'); glowC(0, 1.75 * R, R * .5, '255,120,40', .5);
-      for (const sx of [-1, 1]) {
-        X.lineCap = 'round'; line(sx * 1.0 * R, 1.25 * R, sx * 1.25 * R, 1.95 * R, O, R * .14); line(sx * 1.0 * R, 1.25 * R, sx * 1.25 * R, 1.95 * R, SIL, R * .08);
-        P([[sx * 1.12, 1.9], [sx * 1.42, 1.9], [sx * 1.5, 2.7], [sx * 1.08, 2.7]], sx < 0 ? B : BD);
-        ell(sx * 1.25 * R, 1.95 * R, R * .1, R * .1); fs(SIL, 5, O);
-        box(sx * 1.29 * R - R * .25, 2.5 * R, R * .5, R * .16, '#f2b928', 8); X.strokeStyle = O; X.lineWidth = 5; X.stroke();
-        ell(sx * .95 * R, 1.15 * R, R * .34, R * .3); fs(lin(-R, 0, R, 0, [BL, B, BD]), 6, O);
-        for (let i = 0; i < 17; i++) { const k = i / 16, x = sx * (1.3 + k * .55) * R, y = (2.55 - k * 4.6) * R; X.save(); X.translate(x, y); X.rotate(sx * -.25 + (i % 2) * 1.57); X.beginPath(); X.ellipse(0, 0, R * .16, R * .08, 0, 0, 7); X.strokeStyle = O; X.lineWidth = R * .06; X.stroke(); X.strokeStyle = SIL; X.lineWidth = R * .03; X.stroke(); X.restore(); }
-      }
-      box(-R * .45, R * .9, R * .9, R * .2, SIL, R * .1); X.strokeStyle = O; X.lineWidth = 5; X.stroke();
-      // spikes behind
-      P([[-.45, -.55], [0, -2.05], [.45, -.55]], lin(0, -2 * R, 0, 0, [BL, B]));
-      for (const sx of [-1, 1]) { P([[sx * .7, -.35], [sx * 1.75, -1.05], [sx * .95, .15]], sx < 0 ? B : BD); P([[sx * .85, .15], [sx * 1.7, .35], [sx * .8, .6]], BD); P([[sx * .3, -.85], [sx * .95, -1.35], [sx * .75, -.45]], B); }
-      // ears
-      for (const sx of [-1, 1]) { P([[sx * .35, -.8], [sx * .95, -1.45], [sx * .85, -.45]], sx < 0 ? B : BD); P([[sx * .5, -.8], [sx * .88, -1.25], [sx * .8, -.6]], '#f2b440', 0); }
-      // dome
-      ell(0, 0, R, R * .95); fs(lin(-R, -R, R, R, [BL, B, BD]), 7, O); ell(-R * .35, -R * .55, R * .4, R * .2, 'rgba(255,255,255,.3)', -.4); X.save(); ell(0, 0, R, R * .95); X.clip(); X.fillStyle = lin(0, -R, 0, R * .3, ['rgba(0,0,10,.0)', 'rgba(0,0,10,.45)']); X.fillRect(-R, -R, 2 * R, 1.3 * R); X.restore();
-      // visor with V brow
-      X.beginPath(); X.moveTo(-.9 * R, .15 * R); X.lineTo(-.6 * R, -.12 * R); X.lineTo(0, .2 * R); X.lineTo(.6 * R, -.12 * R); X.lineTo(.9 * R, .15 * R); X.quadraticCurveTo(.88 * R, .6 * R, .55 * R, .72 * R); X.lineTo(-.55 * R, .72 * R); X.quadraticCurveTo(-.88 * R, .6 * R, -.9 * R, .15 * R); X.closePath(); fs(O, 6);
-      for (const sx of [-1, 1]) { X.save(); X.beginPath(); X.moveTo(sx * .08 * R, .3 * R); X.lineTo(sx * .62 * R, .02 * R); X.lineTo(sx * .9 * R, .7 * R); X.lineTo(sx * .08 * R, .7 * R); X.closePath(); X.clip(); X.shadowColor = '#ff1a1a'; X.shadowBlur = 50; ell(sx * .4 * R, .34 * R, R * .2, R * .17, '#ff2a1a'); X.shadowBlur = 0; ell(sx * .4 * R, .34 * R, R * .11, R * .1, '#3a0404'); ell(sx * .4 * R, .34 * R, R * .05, R * .05, '#ffb08a'); X.restore(); glowC(sx * .4 * R, .34 * R, R * .55, '255,30,20', .55); }
-      // muzzle + nose pointing down at viewer
-      X.beginPath(); X.moveTo(-.5 * R, .62 * R); X.quadraticCurveTo(0, .5 * R, .5 * R, .62 * R); X.quadraticCurveTo(.55 * R, .9 * R, .12 * R, 1.0 * R); X.lineTo(0, 1.22 * R); X.lineTo(-.12 * R, 1.0 * R); X.quadraticCurveTo(-.55 * R, .9 * R, -.5 * R, .62 * R); X.closePath(); fs(lin(0, .5 * R, 0, 1.2 * R, ['#f2f4f8', SIL, '#6a7282']), 6, O);
-      for (const sx of [-1, 1]) screw(sx * .32 * R, .74 * R, R * .06);
-    };
-    clipSide(false, () => { X.setTransform(1, 0, 0, 1, 0, 0); X.fillStyle = rad(W * .76, H * .45, 50, W * .55, ['#2a0a10', '#0c0208', '#000']); X.fillRect(0, 0, W, H);
-      for (let i = 0; i < 50; i++) { const R = rng(i + 9); ell(SPL - 100 + R() * W * .6, R() * H, 2 + R() * 3, 2 + R() * 3, `rgba(255,${90 + R() * 90 | 0},40,${.3 + R() * .6})`); }
-      for (const pass of [0, 1]) { X.setTransform(1, 0, 0, 1, 0, 0); X.translate(W * .75, H * .5); X.rotate(.03); if (!pass) X.filter = 'drop-shadow(0 0 22px #ff5a1a) drop-shadow(0 0 50px #ff2a10)'; frontMetal(275); X.filter = 'none'; }
-      X.setTransform(1, 0, 0, 1, 0, 0); X.fillStyle = lin(0, 0, 0, H, ['rgba(0,0,0,.35)', 'rgba(0,0,0,0)', 'rgba(0,0,0,0)', 'rgba(0,0,0,.5)']); X.fillRect(SPL - 200, 0, W, H); });
+    // ---- hero render: Metal Sonic built as its own lit layer ----
+    const mk = () => { const c = document.createElement('canvas'); c.width = W; c.height = H; return [c, c.getContext('2d')]; };
+    const hs = 2.75, hx = W * .77, hy = H * .5 + 318 * hs;
+    const M = { metal: 1, x: hx / W, _y: hy, _s: hs, flip: true, pose: 'rest' };
+    X.setTransform(1, 0, 0, 1, 0, 0); X.clearRect(0, 0, W, H); drawMetal(M, 0, false, true);
+    const [Lc, L] = mk(); L.drawImage(C, 0, 0);
+    // shading: darken lower/left, keep top-right lit
+    L.globalCompositeOperation = 'source-atop';
+    let g = L.createLinearGradient(hx + 500, H * .05, hx - 500, H); g.addColorStop(0, 'rgba(0,0,0,0)'); g.addColorStop(.6, 'rgba(5,5,20,.2)'); g.addColorStop(1, 'rgba(0,0,10,.55)'); L.fillStyle = g; L.fillRect(0, 0, W, H);
+    // metallic specular streaks
+    { const R0 = 120 * hs, cx0 = hx, cy0 = hy - 318 * hs; L.globalCompositeOperation = 'source-atop';
+      let hg = L.createRadialGradient(cx0 + R0 * .35, cy0 - R0 * .55, 10, cx0 + R0 * .35, cy0 - R0 * .55, R0 * .7); hg.addColorStop(0, 'rgba(255,255,255,.55)'); hg.addColorStop(1, 'rgba(255,255,255,0)'); L.fillStyle = hg; L.fillRect(0, 0, W, H);
+      L.lineCap = 'round'; for (const [r, a0, a1, w, al] of [[.86, 3.9, 4.9, 16, .55], [.74, 4.0, 4.6, 7, .4]]) { L.beginPath(); L.arc(cx0, cy0, R0 * r, a0, a1); L.strokeStyle = `rgba(255,255,255,${al})`; L.lineWidth = w; L.stroke(); } }
+    // rim light (orange) on the outer edge
+    const [Rc, Rl] = mk(); Rl.drawImage(Lc, 0, 0); Rl.globalCompositeOperation = 'source-in'; Rl.fillStyle = '#ff7a2a'; Rl.fillRect(0, 0, W, H); Rl.globalCompositeOperation = 'destination-out'; Rl.drawImage(Lc, -16, 10);
+    L.globalCompositeOperation = 'lighter'; L.globalAlpha = .9; L.drawImage(Rc, 0, 0); L.globalAlpha = 1;
+    const [Bc, Bl] = mk(); Bl.drawImage(Lc, 0, 0); Bl.globalCompositeOperation = 'source-in'; Bl.fillStyle = '#ff9a6a'; Bl.fillRect(0, 0, W, H); Bl.globalCompositeOperation = 'destination-out'; Bl.drawImage(Lc, 12, 12);
+    L.globalAlpha = .55; L.drawImage(Bc, 0, 0); L.globalAlpha = 1; L.globalCompositeOperation = 'source-over';
+    const R = 120 * hs, hcx = hx, hcy = hy - 318 * hs, eyes = [[hcx - R * .2, hcy + R * .06, 1], [hcx - R * .68, hcy + R * .12, .7]];
+    const chainLink = (Z, x0, y0, x1, y1, n, sz) => { for (let i = 0; i <= n; i++) { const k = i / n, x = x0 + (x1 - x0) * k, y = y0 + (y1 - y0) * k + Math.sin(k * Math.PI) * 40; Z.save(); Z.translate(x, y); Z.rotate(Math.atan2(y1 - y0, x1 - x0) + (i % 2) * 1.57); Z.beginPath(); Z.ellipse(0, 0, sz, sz * .5, 0, 0, 7); Z.strokeStyle = '#05060c'; Z.lineWidth = sz * .42; Z.stroke(); const gg = Z.createLinearGradient(-sz, -sz, sz, sz); gg.addColorStop(0, '#f4f6fa'); gg.addColorStop(.5, '#8a93a4'); gg.addColorStop(1, '#3a404c'); Z.strokeStyle = gg; Z.lineWidth = sz * .22; Z.stroke(); Z.restore(); } };
+    X.clearRect(0, 0, W, H);
+    clipSide(false, () => { X.setTransform(1, 0, 0, 1, 0, 0);
+      X.fillStyle = rad(W * .8, H * .45, 40, W * .6, ['#4a0a0c', '#16030a', '#020104']); X.fillRect(0, 0, W, H);
+      for (let i = 0; i < 9; i++) { const R2 = rng(i + 40); X.fillStyle = `rgba(80,20,20,${.12 + R2() * .1})`; X.beginPath(); X.ellipse(SPL + R2() * W * .5, H * (.6 + R2() * .5), 300 + R2() * 300, 140 + R2() * 120, 0, 0, 7); X.fill(); }
+      chainLink(X, W * .5, -40, W * .66, H * .5, 13, 46); chainLink(X, W * 1.02, -60, W * .92, H * .55, 13, 46);
+      X.filter = 'blur(28px)'; X.globalAlpha = .9; X.drawImage(Rc, 0, 0); X.drawImage(Rc, 0, 0); X.filter = 'none'; X.globalAlpha = 1;
+      X.save(); X.filter = 'drop-shadow(0 0 40px rgba(255,60,20,.8))'; X.drawImage(Lc, 0, 0); X.restore();
+      chainLink(X, W * .54, H * 1.05, W * 1.05, H * .62, 16, 52);
+      for (const [ex, ey, k] of eyes) { glowC(ex, ey, 260 * k, '255,30,20', .7); X.save(); X.globalCompositeOperation = 'lighter'; const fg = X.createLinearGradient(ex - 520 * k, 0, ex + 520 * k, 0); fg.addColorStop(0, 'rgba(255,40,20,0)'); fg.addColorStop(.5, 'rgba(255,220,200,.95)'); fg.addColorStop(1, 'rgba(255,40,20,0)'); X.fillStyle = fg; X.fillRect(ex - 520 * k, ey - 4 * k, 1040 * k, 8 * k); X.restore(); ell(ex, ey, 14 * k, 14 * k, 'rgba(255,255,240,.95)'); }
+      for (let i = 0; i < 80; i++) { const R2 = rng(i + 9), x = SPL - 100 + R2() * W * .6, y = R2() * H, r = 1.5 + R2() * 4; X.save(); X.globalCompositeOperation = 'lighter'; ell(x, y, r, r, `rgba(255,${90 + R2() * 110 | 0},40,${.4 + R2() * .6})`); X.restore(); }
+      X.fillStyle = rad(W * .78, H * .5, H * .5, W * .6, ['rgba(0,0,0,0)', 'rgba(0,0,0,.55)']); X.fillRect(SPL - 200, 0, W, H);
+    });
     // LEFT: nursery
     clipSide(true, () => { X.setTransform(1, 0, 0, 1, 0, 0); X.fillStyle = lin(0, 0, 0, H, ['#bfe6ff', '#ffe0f0']); X.fillRect(0, 0, W, H);
       for (let i = 0; i < 26; i++) { const R = rng(i + 2), x = R() * SPL, y = R() * H * .8; X.save(); X.translate(x, y); X.rotate(R()); X.fillStyle = 'rgba(255,255,255,.8)'; X.beginPath(); for (let k = 0; k < 10; k++) { const a = k * Math.PI / 5, r = k % 2 ? 9 : 22; X.lineTo(Math.cos(a) * r, Math.sin(a) * r); } X.fill(); X.restore(); }
@@ -71,6 +70,8 @@ const { chromium } = require('playwright');
     // split lightning
     X.setTransform(1, 0, 0, 1, 0, 0); X.beginPath(); X.moveTo(SPL + 120, -10); X.lineTo(SPL + 30, H * .35); X.lineTo(SPL + 80, H * .4); X.lineTo(SPL - 40, H * .7); X.lineTo(SPL, H * .72); X.lineTo(SPL - 120, H + 10);
     X.strokeStyle = '#fff'; X.lineWidth = 26; X.lineJoin = 'round'; X.shadowColor = '#ffd84a'; X.shadowBlur = 40; X.stroke(); X.shadowBlur = 0; X.strokeStyle = '#ffd84a'; X.lineWidth = 10; X.stroke();
+    // grain
+    { const id = X.getImageData(0, 0, W, H), d = id.data; for (let i = 0; i < d.length; i += 4) { const n = (Math.random() - .5) * 18; d[i] += n; d[i + 1] += n; d[i + 2] += n; } X.putImageData(id, 0, 0); }
     // text
     const word = (s, x, y, size, fill, rot = 0) => { X.save(); X.translate(x, y); X.rotate(rot); X.font = `700 ${size}px ${FONT}`; X.textAlign = 'center'; X.textBaseline = 'middle'; X.lineJoin = 'round'; X.strokeStyle = '#000'; X.lineWidth = size * .22; X.strokeText(s, 0, 0); X.fillStyle = fill; X.fillText(s, 0, 0); X.restore(); };
     const fit = (s, max, size) => { do { X.font = `700 ${size}px ${FONT}`; size -= 4; } while (X.measureText(s).width * 1.12 > max); return size + 4; };
