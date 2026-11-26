@@ -11,7 +11,7 @@ const { chromium } = require('playwright');
     CAM = { cx: W / 2, cy: H / 2, z: 1 };
     // RIGHT: final form over the dragon
     clipSide(false, () => { bgOverlord({ seed: 4 }, t); X.setTransform(1, 0, 0, 1, 0, 0); glowC(W * .74, H * .55, 520, '255,40,40', .35);
-      drawMetal({ metal: 1, x: .75, _y: H * 1.3, _s: 1.95, mood: 'angry', cape: '#7a1a2a', metalColor: '#4a3aa8', pose: 'point' }, t, false, true); });
+      drawMetal({ metal: 1, x: .76, _y: H * .99, _s: 1.38, mood: 'angry', cape: '#7a1a2a', metalColor: '#4a3aa8', pose: 'point' }, t, false, true); });
     // LEFT: nursery
     clipSide(true, () => { X.setTransform(1, 0, 0, 1, 0, 0); X.fillStyle = lin(0, 0, 0, H, ['#bfe6ff', '#ffe0f0']); X.fillRect(0, 0, W, H);
       for (let i = 0; i < 26; i++) { const R = rng(i + 2), x = R() * SPL, y = R() * H * .8; X.save(); X.translate(x, y); X.rotate(R()); X.fillStyle = 'rgba(255,255,255,.8)'; X.beginPath(); for (let k = 0; k < 10; k++) { const a = k * Math.PI / 5, r = k % 2 ? 9 : 22; X.lineTo(Math.cos(a) * r, Math.sin(a) * r); } X.fill(); X.restore(); }
