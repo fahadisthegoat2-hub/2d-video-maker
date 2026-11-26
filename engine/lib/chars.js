@@ -150,6 +150,8 @@ function drawHead(c, t, speaking, skin, R, id, close, pname) {
   // hair
   const hd = hex(hairC, -.2), hl = hex(hairC, .18);
   if (!hat || hat === 'scarf' || hat === 'crown') {
+    // hair cap: always covers the skull top so no forehead/scalp peeks above the hair
+    if (style !== 'bald' && style !== 'none') { X.save(); headShape(R * 1.04); X.clip(); box(-R * 1.2, -R * 1.2, R * 2.4, R * .62, style === 'curly' ? hd : hairC); X.restore(); }
     if (style === 'bald') { for (const sx of [-1, 1]) { X.beginPath(); X.ellipse(sx * R * .86, R * .02, R * .17, R * .34, sx * .2, 0, 7); X.fillStyle = hairC; X.fill(); } }
     else if (style === 'swept') { X.beginPath(); X.moveTo(-R * .98, R * .1); X.bezierCurveTo(-R * 1.15, -R * 1.2, R * .2, -R * 1.5, R * .9, -R * .8); X.quadraticCurveTo(R * 1.15, -R * .3, R * .98, R * .15); X.quadraticCurveTo(R * .7, -R * .55, R * .1, -R * .62); X.quadraticCurveTo(-R * .6, -R * .6, -R * .98, R * .1); X.fillStyle = hairC; X.fill(); X.save(); X.clip(); X.strokeStyle = hd; X.lineWidth = 4; for (let i = 0; i < 6; i++) { X.beginPath(); X.moveTo(-R * .8 + i * R * .3, -R * .55); X.quadraticCurveTo(-R * .4 + i * R * .25, -R * 1.2, R * .3 + i * R * .2, -R * 1.1); X.stroke(); } X.restore(); }
     else if (style === 'curly') { for (let i = 0; i < 11; i++) { const a = Math.PI * (1.02 + i * .1); ell(Math.cos(a) * R * .92, Math.sin(a) * R * .92 - R * .1, R * .3, R * .28, i % 2 ? hairC : hd); } }
