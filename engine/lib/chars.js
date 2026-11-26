@@ -179,14 +179,15 @@ function drawMetal(c, t, speaking, close) {
   const { legH, bodyH, bw, R } = MD, shY = -legH - bodyH, hipY = -legH;
   const beat = Math.floor(t / (speaking ? .7 : 2.2) + hash(id));
   const pname = c.pose && !speaking ? c.pose : speaking ? TALK[Math.floor(hash(beat * 1.9 + id) * TALK.length)] : IDLE[Math.floor(hash(beat * 1.3 + id) * IDLE.length)];
-  const [ru, rf, lu, lf] = POSES[pname] || POSES.rest;
-  const tilt = (hash(beat * 3.7 + id) - .5) * (speaking ? .14 : .05), hover = c.fly ? Math.sin(t * 3) * 10 - 40 : 0;
+  let [ru, rf, lu, lf] = POSES[pname] || POSES.rest; if (c.run || c.fly) [ru, rf, lu, lf] = RUN;
+  const tilt = (hash(beat * 3.7 + id) - .5) * (speaking ? .14 : .05), hover = c.fly ? Math.sin(t * 3) * 10 - 60 : 0;
   X.save(); X.translate(x, y); X.scale(s * (c.flip ? -1 : 1), s);
   ell(0, 0, bw * .9, 16, 'rgba(20,15,30,.3)');
-  X.translate(0, hover);
+  X.translate(0, hover); if (c.run || c.fly) X.rotate(.22);
+  if (c.fly || c.run) { X.save(); X.globalCompositeOperation = 'lighter'; for (let i = 0; i < 3; i++) { X.beginPath(); X.moveTo(-10, shY + bodyH * .42 - 20 + i * 4); X.lineTo(-260 - Math.sin(t * 40 + i) * 40, shY + bodyH * .42); X.lineTo(-10, shY + bodyH * .42 + 20 - i * 4); X.closePath(); X.fillStyle = ['rgba(255,120,40,.5)', 'rgba(255,200,80,.6)', 'rgba(255,255,220,.8)'][i]; X.fill(); } X.restore(); }
   if (c.cape) { X.beginPath(); X.moveTo(-bw * .5, shY + 8); X.lineTo(bw * .5, shY + 8); X.lineTo(bw * .9, -10); X.lineTo(-bw * .9, -10); X.closePath(); fs(hex(c.cape, -.15)); }
   // legs: silver thigh rods, ball knees, blue shins, big red shoes
-  for (const sx of [-1, 1]) {
+  if (c.run) peelOut(16, -50, 62, '#d82b3a', t); else for (const sx of [-1, 1]) {
     const dk = sx < 0, kx = sx * 24, ky = hipY + legH * .45;
     X.lineCap = 'round'; line(sx * 20, hipY, kx, ky, '#0d1230', 18); line(sx * 20, hipY, kx, ky, dk ? SILD : SIL, 11);
     X.beginPath(); X.moveTo(kx - 17, ky); X.lineTo(kx + 17, ky); X.lineTo(kx + 13, -30); X.lineTo(kx - 13, -30); X.closePath(); fs(dk ? BD : B);

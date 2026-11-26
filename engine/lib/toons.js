@@ -25,13 +25,17 @@ function shoe(fx, col, strap, dk, ring) {
   X.save(); X.clip(); box(fx - 10, -44, 20, 48, dk ? hex(strap, -.15) : strap); box(fx - 50, -8, 112, 12, hex(col, -.45)); ell(fx + 22, -28, 13, 5, 'rgba(255,255,255,.35)'); X.restore();
   if (ring) { box(fx - 26, -50, 40, 12, ring, 5); X.strokeStyle = OUT; X.lineWidth = 3; X.stroke(); }
 }
+function peelOut(cx, cy, r, col, t) { X.save(); X.translate(cx, cy); for (let i = 0; i < 4; i++) { X.rotate(t * 40 + i * .8); X.beginPath(); X.ellipse(0, 0, r, r * .55, 0, 0, 7); X.fillStyle = i % 2 ? hex(col, -.2) : col; X.globalAlpha = .5; X.fill(); } X.globalAlpha = 1; X.beginPath(); X.ellipse(0, 0, r, r * .55, 0, 0, 7); X.strokeStyle = 'rgba(255,255,255,.6)'; X.lineWidth = 5; X.setLineDash([24, 18]); X.lineDashOffset = -t * 400; X.stroke(); X.setLineDash([]); X.restore(); for (let k = 0; k < 3; k++) line(cx - r - 30 - k * 40, cy - 20 + k * 20, cx - r - 120 - k * 40, cy - 20 + k * 20, 'rgba(255,255,255,.5)', 4); }
+const RUN = [.9, .5, -.9, -.5];
 function drawToon(c, t, speaking, close) {
   const k = TOON[c.toon] || TOON.sonic, s = c._s || (c.size || 1), x = c.x * W, y = c._y ?? (c.y || .88) * H, id = c.x * 91 + c.toon.length;
   const fur = c.fur || k.fur, skin = k.skin, armC = k.arm === 'fur' ? fur : skin, legC = k.leg === 'skin' ? skin : fur;
   const { legH, bodyH, bw, R, arm: L } = TD, shY = -legH - bodyH, hipY = -legH;
-  const { p: [ru, rf, lu, lf], tilt } = pose(c, t, speaking, id), hover = c.fly ? Math.sin(t * 4) * 10 - 60 : 0;
+  let { p: [ru, rf, lu, lf], tilt } = pose(c, t, speaking, id); const hover = c.fly ? Math.sin(t * 4) * 10 - 60 : 0;
+  if (c.run) [ru, rf, lu, lf] = RUN;
   X.save(); X.translate(x, y); X.scale(s * (c.flip ? -1 : 1), s);
-  ell(0, 0, bw * .9, 16, 'rgba(20,15,30,.3)'); X.translate(0, hover);
+  ell(0, 0, bw * .9, 16, 'rgba(20,15,30,.3)'); X.translate(0, hover); if (c.run || c.fly && !k.tails) X.rotate(.2);
+  if (c.aura) { c.aura = '255,220,90'; glowC(0, -legH - bodyH / 2, 330, c.aura, .7); for (let i = 0; i < 10; i++) { const a = i * .63 + t * 3; line(Math.cos(a) * 140, -200 + Math.sin(a) * 200, Math.cos(a) * 220, -200 + Math.sin(a) * 300, `rgba(${c.aura},.5)`, 5); } }
   // tails (behind)
   if (k.tails) for (let i = 0; i < 2; i++) {
     X.save(); X.translate(-bw * .3, hipY - 10); X.rotate(c.fly ? t * 14 + i * Math.PI : -.5 - i * .5 + Math.sin(t * 3 + i) * .12);
@@ -39,7 +43,7 @@ function drawToon(c, t, speaking, close) {
     X.save(); X.clip(); ell(-150, -26, 50, 40, '#fff6ee'); X.restore(); X.restore();
   }
   // legs + shoes
-  for (const sx of [-1, 1]) { const lx = sx * 22; tube(lx, hipY, lx + 4, -34, sx < 0 ? hex(legC, -.15) : legC, 14); box(lx - 14, -52, 36, 18, sx < 0 ? '#dcdce4' : '#fbfbfd', 8); X.strokeStyle = OUT; X.lineWidth = 3; X.stroke(); shoe(lx + 18, k.shoe, k.strap, sx < 0, k.rings); }
+  if (c.run) { tube(0, hipY, 10, hipY + 40, legC, 14); peelOut(14, -48, 62, k.shoe, t); } else for (const sx of [-1, 1]) { const lx = sx * 22; tube(lx, hipY, lx + 4, -34, sx < 0 ? hex(legC, -.15) : legC, 14); box(lx - 14, -52, 36, 18, sx < 0 ? '#dcdce4' : '#fbfbfd', 8); X.strokeStyle = OUT; X.lineWidth = 3; X.stroke(); shoe(lx + 18, k.shoe, k.strap, sx < 0, k.rings); }
   X.save(); X.translate(0, hipY); X.rotate(tilt * .3); X.translate(0, -hipY);
   // torso
   if (k.dress) {

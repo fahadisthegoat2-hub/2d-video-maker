@@ -8,6 +8,7 @@ const SCENE_DEF = {
 };
 const WORLD = { camp: bgCamp, castle: bgCastle, throne: bgThrone, shop: bgShop, earth: bgEarth, sun: bgSun, portraits: bgPortraits };
 const CLASSIC = { room: bgRoom, outdoor: bgOutdoor, hall: bgHall, network: bgNetwork, space: bgSpace, stat: bgStat, timeline: bgTimeline };
+if (typeof SW_WORLD !== 'undefined') { Object.assign(WORLD, SW_WORLD); Object.assign(SCENE_DEF, SW_DEF); }
 const charScale = (c, sc) => (c.size || 1) * (sc.charScale || (SCENE_DEF[sc.type] || {}).s || 1);
 const charY = (c, sc) => (c.y || sc.ground || (SCENE_DEF[sc.type] || {}).y || .9) * H;
 
@@ -97,10 +98,11 @@ function renderAt(T) {
     cam(1);
     const speaking = c => sc.speaker === c.name && lt > .15 && lt < (sc.speech || sc.dur) + .15;
     [...(sc.cast || [])].sort((a, b) => charY(a, sc) - charY(b, sc)).forEach(c => { c._s = charScale(c, sc); c._y = charY(c, sc); drawChar(c, TS, speaking(c), CAM.z > 2); });
+    if (typeof SW_FG !== 'undefined' && SW_FG[sc.type]) { cam(1); SW_FG[sc.type](sc, T); }
     if (sc.type === 'camp' && sc.snow) snowfall(sc.seed + 1, T, 50, 1.4);
   }
   X.setTransform(1, 0, 0, 1, 0, 0);
-  bloom(sc.bloom ?? BLOOM[sc.type] ?? .15);
+  bloom(sc.bloom ?? BLOOM[sc.type] ?? (typeof SW_BLOOM !== 'undefined' ? SW_BLOOM[sc.type] : undefined) ?? .15);
   X.fillStyle = rad(W / 2, H / 2, H * .5, W * .75, ['rgba(0,0,0,0)', 'rgba(0,0,0,.3)']); X.fillRect(0, 0, W, H);
   // labels
   if ((CAM.name === 'close' || CAM.name === 'react') && CAM.who && CAM.who.tag) {
