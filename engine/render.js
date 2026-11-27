@@ -56,12 +56,15 @@ console.log(`${scenes.length} scenes, ${total.toFixed(1)}s @ ${FPS}fps, voice: $
   const ff = spawn('ffmpeg', ['-y', '-loglevel', 'error', '-f', 'image2pipe', '-framerate', String(FPS), '-c:v', 'mjpeg', '-i', '-',
     '-c:v', 'libx264', '-preset', flag('--preview') ? 'ultrafast' : 'medium', '-crf', '19', '-pix_fmt', 'yuv420p', silent], { stdio: ['pipe', 'inherit', 'inherit'] });
   const N = Math.ceil(total * FPS);
-  for (let n = 0; n < N; n++) {
+  const seg = opt('--seg'); let n0 = 0, n1 = N;
+  if (seg) { const [k, m] = seg.split('/').map(Number); n0 = Math.floor(k * N / m); n1 = Math.floor((k + 1) * N / m); }
+  for (let n = n0; n < n1; n++) {
     const d = await page.evaluate(([t, q]) => frame(t, q), [n / FPS, .9]);
     if (!ff.stdin.write(Buffer.from(d.split(',')[1], 'base64'))) await new Promise(r => ff.stdin.once('drain', r));
     if (n % FPS === 0) process.stdout.write(`\r  frame ${n}/${N}`);
   }
   ff.stdin.end(); await new Promise(r => ff.on('close', r)); await browser.close();
+  if (seg) { fs.copyFileSync(silent, out); console.log('\nsegment ->', out); return; }
   console.log('\n  encoding audio...');
 
   // ---------- audio mix: voice placed at scene starts + optional music ducked ----------
