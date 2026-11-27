@@ -15,7 +15,7 @@ vodur: 6.193
 music: tension
 alarm: 1
 pod: 1
-cast: maria(kid, skin=light, hair=#f2d46a, hairstyle=long, outfit=dress, shirt=#4a8ae8, mood=sad, x=0.42)
+cast: maria(kid, skin=light, hair=#f4d25a, hairstyle=long, headband=#2a4aa8, iris=#3aa0f0, outfit=dress, shirt=#a8d8f4, color2=#a8d8f4, jacket=#3a5ab8, mood=sad, x=0.42)
 speaker: maria
 shots: close, wide
 Fifty years ago, on a space station high above the Earth, a little girl pushed a hedgehog into an escape pod.
@@ -26,7 +26,7 @@ vodur: 4.446
 alarm: 1
 pod: 1
 fx: dust
-cast: maria(kid, skin=light, hair=#f2d46a, hairstyle=long, outfit=dress, shirt=#4a8ae8, mood=sad, x=0.42)
+cast: maria(kid, skin=light, hair=#f4d25a, hairstyle=long, headband=#2a4aa8, iris=#3aa0f0, outfit=dress, shirt=#a8d8f4, color2=#a8d8f4, jacket=#3a5ab8, mood=sad, x=0.42)
 speaker: maria
 shots: close
 Soldiers were coming. There was only room for one. So she pulled the lever.
@@ -148,9 +148,10 @@ dur: 6.088
 vodur: 5.588
 soft: 1
 enter: 1
-cast: gerald(old, skin=light, hair=#e8e4dc, beard=#e8e4dc, glasses, outfit=robe, shirt=#f4f4f4, color2=#d8d8d8, x=0.36), maria(kid, skin=light, hair=#f2d46a, hairstyle=long, outfit=dress, shirt=#4a8ae8, mood=happy, x=0.62, tag=maria)
+cast: gerald(old, skin=light, hair=#e8e4dc, bald, mustache=#f4f0e8, glasses, outfit=robe, shirt=#f4f4f4, color2=#d8d8d8, x=0.36), maria(kid, skin=light, hair=#f4d25a, hairstyle=long, headband=#2a4aa8, iris=#3aa0f0, outfit=dress, shirt=#a8d8f4, color2=#a8d8f4, jacket=#3a5ab8, mood=happy, x=0.62, tag=maria)
 speaker: maria
 shots: wide, react, close
+lower: Maria Robotnik|Gerald's granddaughter
 chap: 1|The Professor|8
 But the most important person on the ARK was not a scientist at all. It was his granddaughter, Maria.
 ---
@@ -158,7 +159,7 @@ scene: ark
 dur: 8.579
 vodur: 8.079
 soft: 1
-cast: maria(kid, skin=light, hair=#f2d46a, hairstyle=long, outfit=dress, shirt=#4a8ae8, mood=happy, x=0.5)
+cast: maria(kid, skin=light, hair=#f4d25a, hairstyle=long, headband=#2a4aa8, iris=#3aa0f0, outfit=dress, shirt=#a8d8f4, color2=#a8d8f4, jacket=#3a5ab8, mood=happy, x=0.5)
 speaker: maria
 shots: wide, close
 chap: 1|The Professor|8
@@ -199,7 +200,7 @@ music: tension
 screen: none
 title: GOVERNMENT CONTRACT
 data: CLIENT  THE GOVERNMENT|GOAL  ULTIMATE LIFE FORM|AGING  NONE|DISEASE  IMMUNE|DEADLINE  ?
-cast: gerald(old, skin=light, hair=#e8e4dc, beard=#e8e4dc, glasses, outfit=robe, shirt=#f4f4f4, color2=#d8d8d8, x=0.5)
+cast: gerald(old, skin=light, hair=#e8e4dc, bald, mustache=#f4f0e8, glasses, outfit=robe, shirt=#f4f4f4, color2=#d8d8d8, x=0.5)
 speaker: gerald
 shots: close, wide
 chap: 1|The Professor|8
@@ -299,6 +300,7 @@ enter: 1
 cast: shadow(toon=shadow, x=0.42, size=1.1, tag=shadow)
 speaker: shadow
 shots: wide, close, close
+lower: Shadow the Hedgehog|The Ultimate Life Form
 chap: 2|The Ultimate Life Form|8
 A black hedgehog with red stripes opened his eyes for the very first time. Gerald named him Shadow.
 ---
@@ -374,13 +376,23 @@ nocap: 1
 chap: 2|The Ultimate Life Form|8
 Form two, unlocked. Chaos Control. And he had barely even started.
 ---
-scene: burst
-dur: 9.083
-vodur: 8.583
+scene: fight
+dur: 3.688
+vodur: 3.688
 hero: shadow
-fx: chaos
+foe: drones
 chap: 2|The Ultimate Life Form|8
-He could also throw raw chaos energy like lightning bolts. He called it Chaos Spear. On day one, Shadow was already a one hedgehog army.
+He could also throw raw chaos energy like lightning bolts.
+---
+scene: fight
+dur: 5.395
+vodur: 4.895
+cam: 1.22
+push: .1
+hero: shadow
+foe: drones
+chap: 2|The Ultimate Life Form|8
+He called it Chaos Spear. On day one, Shadow was already a one hedgehog army.
 ---
 scene: chapcard
 dur: 2.474
@@ -396,7 +408,7 @@ vodur: 4.748
 soft: 1
 letterbox: 1
 enter: 1
-cast: shadow(toon=shadow, x=0.38, mood=neutral), maria(kid, skin=light, hair=#f2d46a, hairstyle=long, outfit=dress, shirt=#4a8ae8, mood=happy, x=0.64)
+cast: shadow(toon=shadow, x=0.38, mood=neutral), maria(kid, skin=light, hair=#f4d25a, hairstyle=long, headband=#2a4aa8, iris=#3aa0f0, outfit=dress, shirt=#a8d8f4, color2=#a8d8f4, jacket=#3a5ab8, mood=happy, x=0.64)
 speaker: maria
 shots: wide, react, close
 chap: 3|Maria|8
@@ -408,7 +420,7 @@ vodur: 10.691
 soft: 1
 letterbox: 1
 view: earth
-cast: shadow(toon=shadow, x=0.38, mood=neutral), maria(kid, skin=light, hair=#f2d46a, hairstyle=long, outfit=dress, shirt=#4a8ae8, mood=happy, x=0.64)
+cast: shadow(toon=shadow, x=0.38, mood=neutral), maria(kid, skin=light, hair=#f4d25a, hairstyle=long, headband=#2a4aa8, iris=#3aa0f0, outfit=dress, shirt=#a8d8f4, color2=#a8d8f4, jacket=#3a5ab8, mood=happy, x=0.64)
 speaker: maria
 shots: wide, close, react
 chap: 3|Maria|8
@@ -493,7 +505,7 @@ Soldiers stormed the station. Alarms screamed through every hallway. Scientists 
 scene: speedway
 dur: 7.353
 vodur: 6.853
-cast: shadow(toon=shadow, x=0.4, run), maria(kid, skin=light, hair=#f2d46a, hairstyle=long, outfit=dress, shirt=#4a8ae8, mood=worried, x=0.6, run)
+cast: shadow(toon=shadow, x=0.4, run), maria(kid, skin=light, hair=#f4d25a, hairstyle=long, headband=#2a4aa8, iris=#3aa0f0, outfit=dress, shirt=#a8d8f4, color2=#a8d8f4, jacket=#3a5ab8, mood=worried, x=0.6, run)
 speaker: maria
 shots: wide, close, react
 chap: 4|The Raid|8
@@ -505,7 +517,7 @@ vodur: 5.145
 alarm: 1
 pod: 1
 soft: 1
-cast: shadow(toon=shadow, x=0.62, mood=worried), maria(kid, skin=light, hair=#f2d46a, hairstyle=long, outfit=dress, shirt=#4a8ae8, mood=sad, x=0.38)
+cast: shadow(toon=shadow, x=0.62, mood=worried), maria(kid, skin=light, hair=#f4d25a, hairstyle=long, headband=#2a4aa8, iris=#3aa0f0, outfit=dress, shirt=#a8d8f4, color2=#a8d8f4, jacket=#3a5ab8, mood=sad, x=0.38)
 speaker: maria
 shots: wide, close, react
 chap: 4|The Raid|8
@@ -592,6 +604,7 @@ data: CAPSULE  SEALED|YEARS ASLEEP  50|SUBJECT  UNKNOWN|PASSWORD  REQUIRED|STATU
 cast: doctor(egg, x=0.5, size=1.05, tag=dr eggman)
 speaker: doctor
 shots: wide, close
+lower: Doctor Eggman|Gerald's grandson
 chap: 5|Awakening|8
 Until one day, someone broke in, looking for his grandfather's greatest secret. Doctor Eggman.
 ---
@@ -620,6 +633,7 @@ speed: 1600
 cast: sonic(toon=sonic, x=0.5, run, mood=angry)
 speaker: sonic
 shots: wide, close
+lower: Sonic the Hedgehog|The blue blur
 chap: 5|Awakening|8
 And the whole world blamed the only hedgehog it knew. Sonic.
 ---
@@ -714,6 +728,7 @@ soft: 1
 cast: amy(toon=amy, x=0.38, mood=sad), shadow(toon=shadow, x=0.64, flip, mood=worried)
 speaker: amy
 shots: wide, close, react
+lower: Amy Rose|Sonic's biggest fan
 chap: 6|Rivals|8
 Shadow was ready to let it happen. Until a girl named Amy Rose begged him to help the people on that planet. And her words sounded strangely familiar.
 ---
@@ -728,25 +743,23 @@ hold: 0.6
 chap: 6|Rivals|8
 Shadow remembered. Maria never asked him for revenge. She asked him to protect them.
 ---
-scene: lab
+scene: fight
 dur: 5.715
 vodur: 5.715
-screen: none
-title: PROTOTYPE 001 IS AWAKE
-data: SPECIES  LIZARD|SIZE  MASSIVE|LIFE SUPPORT  ONLINE|THREAT  EXTREME|STATUS  ESCAPED
-alarm: 1
+hero: shadow
+foe: biolizard
+trans: glitch
 chap: 6|Rivals|8
 And remember that failed lizard experiment, hidden in the ARK? It woke up. The Biolizard.
 ---
-scene: lab
+scene: fight
 dur: 5.958
 vodur: 5.458
 cam: 1.22
 push: .1
-screen: none
-title: PROTOTYPE 001 IS AWAKE
-data: SPECIES  LIZARD|SIZE  MASSIVE|LIFE SUPPORT  ONLINE|THREAT  EXTREME|STATUS  ESCAPED
-alarm: 1
+hero: shadow
+foe: biolizard
+trans: glitch
 chap: 6|Rivals|8
 It fused itself to the space colony and became something even worse. The Finalhazard.
 ---
@@ -771,15 +784,23 @@ nocap: 1
 chap: 6|Rivals|8
 Sonic turned gold. And Shadow became Super Shadow. Form three, unlocked.
 ---
-scene: speedway
-dur: 9.396
-vodur: 8.896
-fx: chaos
-cast: sonic(toon=sonic, fur=#f2c43a, x=0.36, fly, aura=1), shadow(toon=shadow, fur=#f4e9a0, x=0.64, fly, aura=1)
-speaker: shadow
-shots: wide, close, wide
+scene: fight
+dur: 2.707
+vodur: 2.707
+hero: supershadow
+foe: biolizard
 chap: 6|Rivals|8
-Together, they tore the Finalhazard apart. Then they used Chaos Control to warp the entire ARK back into a safe orbit. The Earth was saved.
+Together, they tore the Finalhazard apart.
+---
+scene: fight
+dur: 6.689
+vodur: 6.189
+cam: 1.22
+push: .1
+hero: supershadow
+foe: biolizard
+chap: 6|Rivals|8
+Then they used Chaos Control to warp the entire ARK back into a safe orbit. The Earth was saved.
 ---
 scene: ark
 dur: 9.342
@@ -827,6 +848,7 @@ scene: monitors
 dur: 10.586
 vodur: 10.086
 heroes: shadow,metal,shadow
+lower: Team Dark|Shadow, Rouge and Omega
 chap: 7|Who Am I|8
 Shadow joined Rouge and a rogue robot called Omega, and they became Team Dark. They even fought Metal Sonic. But then, Rouge found a room full of Shadows.
 ---
@@ -899,13 +921,11 @@ nocap: 1
 chap: 7|Who Am I|8
 But beat all ten, and a secret final story unlocks. The true ending. The moment Shadow became Shadow.
 ---
-scene: emeralds
+scene: fight
 dur: 6.922
 vodur: 6.422
-burst: 1
-cast: shadow(toon=shadow, x=0.5, mood=angry)
-speaker: shadow
-shots: close, wide
+hero: supershadow
+foe: devildoom
 chap: 7|Who Am I|8
 He gathered all seven emeralds, became Super Shadow again, and destroyed Black Doom's monstrous final form.
 ---
@@ -1032,6 +1052,7 @@ vodur: 7.698
 cast: mephiles(toon=mephiles, x=0.36, mood=smug), shadow(toon=shadow, x=0.64, flip, mood=angry)
 speaker: mephiles
 shots: wide, react, close
+lower: Mephiles the Dark|Born from Shadow's shadow
 chap: 8|Final Form|8
 Mephiles showed Shadow a future where the humans he protected would fear his power, and lock him away. Why save a world that will turn on you?
 ---
@@ -1051,14 +1072,11 @@ boom: RINGS OFF
 chap: 8|Final Form|8
 And then, surrounded by an army of Mephiles clones, he took the rings off.
 ---
-scene: meter
+scene: fight
 dur: 6.919
 vodur: 6.419
-mval: 112
-mlabel: Power level
-mtext: LIMITS OFF
-accent: red
-fx: chaos
+hero: shadow
+foe: clones
 chap: 8|Final Form|8
 Without the rings, Shadow's power goes beyond anything he can safely control. He tore through the entire army.
 ---
@@ -1169,15 +1187,23 @@ nocap: 1
 chap: 8|Final Form|8
 Doom. Wing.
 ---
-scene: speedway
-dur: 9.602
-vodur: 9.102
-fx: chaos
-cast: shadow(toon=shadow, fur=#f4e9a0, x=0.5, fly, aura=1, mood=angry)
-speaker: shadow
-shots: wide, close, wide
+scene: fight
+dur: 4.283
+vodur: 4.283
+hero: doomwing
+foe: devildoom
 chap: 8|Final Form|8
-Giant dark wings. Flight. Invincibility. Ultimate speed. Chaos Control. And his creator's own power, turned against him.
+Giant dark wings. Flight. Invincibility. Ultimate speed.
+---
+scene: fight
+dur: 5.319
+vodur: 4.819
+cam: 1.22
+push: .1
+hero: doomwing
+foe: devildoom
+chap: 8|Final Form|8
+Chaos Control. And his creator's own power, turned against him.
 ---
 scene: form
 dur: 3.207

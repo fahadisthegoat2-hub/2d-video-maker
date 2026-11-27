@@ -197,7 +197,7 @@ const SW_BLOOM = { lab: .35, planet: .25, speedway: .5, zone: .15, fortress: .25
 // ---------- MOTION GRAPHICS: kinetic text, hero burst, versus ----------
 const HEROES = {
   metal: { metal: 1 }, neo: { metal: 1, cape: '#7a1a2a', metalColor: '#4a3aa8' }, sonic: { toon: 'sonic', mood: 'smug' }, amy: { toon: 'amy', mood: 'happy' },
-  tails: { toon: 'tails', mood: 'happy', fly: 1 }, shadow: { toon: 'shadow' }, doctor: { egg: 1 }, mephiles: { toon: 'mephiles' }, supershadow: { toon: 'shadow', fur: '#f4e9a0', aura: 1, mood: 'angry', fly: 1 },
+  tails: { toon: 'tails', mood: 'happy', fly: 1 }, shadow: { toon: 'shadow' }, shadowfly: { toon: 'shadow', fly: 1, mood: 'angry' }, doctor: { egg: 1 }, mephiles: { toon: 'mephiles' }, supershadow: { toon: 'shadow', fur: '#f4e9a0', aura: 1, mood: 'angry', fly: 1 },
   maria: { kid: 1, skin: 'light', hair: '#f4d25a', hairstyle: 'long', headband: '#2a4aa8', iris: '#3aa0f0', outfit: 'dress', shirt: '#a8d8f4', color2: '#a8d8f4', jacket: '#3a5ab8', mood: 'happy' }, gerald: { old: 1, skin: 'light', hair: '#e8e4dc', bald: 1, mustache: '#f4f0e8', glasses: 1, outfit: 'robe', shirt: '#f4f4f4', color2: '#d8d8d8' }, super: { toon: 'sonic', fur: '#f2c43a', aura: 1, mood: 'angry', fly: 1 },
 };
 const MGPAL = [['#ff3a5a', '#ffb02e'], ['#2a6aff', '#22d3ee'], ['#8a2be2', '#ff4fd8'], ['#ff6a00', '#ffd400'], ['#00b894', '#a3ff3a'], ['#e11d48', '#7c3aed']];
@@ -296,8 +296,9 @@ function bgArk(sc, t) {
   X.restore(); X.beginPath(); X.arc(wx, wy, wr, 0, 7); X.strokeStyle = '#4a5262'; X.lineWidth = 36; X.stroke(); X.strokeStyle = '#8a93a4'; X.lineWidth = 8; X.stroke();
   for (let k = 0; k < 8; k++) { const a = k / 8 * Math.PI * 2; ell(wx + Math.cos(a) * wr, wy + Math.sin(a) * wr, 12, 12, '#bfc6d2'); }
   line(wx - wr, wy, wx + wr, wy, 'rgba(140,150,170,.35)', 6); line(wx, wy - wr, wx, wy + wr, 'rgba(140,150,170,.35)', 6);
+  if (typeof arkDetail !== 'undefined') arkDetail(sc, t, wx, wy, wr);
   // floor
-  cam(.6); box(-W, H * .86, W * 3, H * .3, '#1a1d24'); for (let i = 0; i < 30; i++) line(-W + i * 140, H * .86, -W + i * 140 - 60, H * 1.1, 'rgba(255,255,255,.05)', 3); box(-W, H * .86, W * 3, 8, '#5a6272');
+  cam(.6); box(-W, H * .86, W * 3, H * .3, '#1a1d24'); for (let i = 0; i < 30; i++) line(-W + i * 140, H * .86, -W + i * 140 - 60, H * 1.1, 'rgba(255,255,255,.05)', 3); box(-W, H * .86, W * 3, 8, '#5a6272'); X.save(); X.globalAlpha = .18; X.fillStyle = lin(0, H * .86, 0, H, [sc.view === 'moon' ? '#d8d8c8' : '#4a8aff', 'rgba(0,0,0,0)']); X.fillRect(wx - wr * 1.2, H * .86, wr * 2.4, H * .2); X.restore();
   if (sc.pod) { const px = W * .78, py = H * .62; glowC(px, py, 260, '120,255,200', .45 + .1 * Math.sin(t * 3)); box(px - 110, py - 190, 220, 400, '#3a4250', 100); box(px - 84, py - 160, 168, 320, 'rgba(120,255,200,.35)', 84); line(px - 50, py - 120, px - 50, py + 100, 'rgba(255,255,255,.4)', 6); box(px - 130, py + 190, 260, 40, '#2a2f3a', 8); }
   if (sc.alarm && Math.floor(t * 2.5) % 2) { X.setTransform(1, 0, 0, 1, 0, 0); X.fillStyle = 'rgba(255,20,20,.16)'; X.fillRect(0, 0, W, H); }
 }

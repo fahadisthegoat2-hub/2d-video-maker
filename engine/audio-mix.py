@@ -124,6 +124,7 @@ for i, sc in enumerate(S):
     if ty == 'rings' and float(sc.get('off', 99)) < d[i]: o = t0 + float(sc['off']); P('riser', o - 1.2, .2); P('clang', o, .5); P('explosion', o + .05, .5); P('electric', o + .2, .3)
     if ty == 'meter': P('riser', t0, .18); [P('tick', t0 + k * .07, .12) for k in range(16)]; (P('alarm', t0 + 1.2, .08, t0 + 2.6), P('boom', t0 + 1.2, .4)) if float(sc.get('mval', 0)) > 100 else None
     if sc.get('fx') == 'chaos': P('electric', t0 + .3, .15)
+    if ty == 'fight': [(P('zap', t0 + k, .3), P('explosion' if j % 2 else 'boom', t0 + k + .42, .35)) for j, k in enumerate(np.arange(0, d[i] - .3, .85))]; P('roar', t0 + .2, .3) if sc.get('foe') in ('devildoom', 'biolizard') else None
     if sc.get('pod'): P('bubbles', t0 + .4, .15)
     if sc.get('beam'): P('laserhum', t0 + .5, .3, t0 + 3); P('explosion', t0 + 1.4, .5)
     if ty == 'comet': P('roar', t0 + .3, .25); P('thunder', t0 + 1.2, .25)

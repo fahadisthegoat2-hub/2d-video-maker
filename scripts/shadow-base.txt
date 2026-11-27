@@ -148,6 +148,7 @@ enter: 1
 cast: gerald(old, skin=light, hair=#e8e4dc, bald, mustache=#f4f0e8, glasses, outfit=robe, shirt=#f4f4f4, color2=#d8d8d8, x=0.36), maria(kid, skin=light, hair=#f4d25a, hairstyle=long, headband=#2a4aa8, iris=#3aa0f0, outfit=dress, shirt=#a8d8f4, color2=#a8d8f4, jacket=#3a5ab8, mood=happy, x=0.62, tag=maria)
 speaker: maria
 shots: wide, react, close
+lower: Maria Robotnik|Gerald's granddaughter
 But the most important person on the ARK was not a scientist at all. It was his granddaughter, Maria.
 ---
 scene: ark
@@ -260,6 +261,7 @@ enter: 1
 cast: shadow(toon=shadow, x=0.42, size=1.1, tag=shadow)
 speaker: shadow
 shots: wide, close, close
+lower: Shadow the Hedgehog|The Ultimate Life Form
 A black hedgehog with red stripes opened his eyes for the very first time. Gerald named him Shadow.
 ---
 scene: lab
@@ -316,11 +318,11 @@ track: Day One|Chaos Control|Super Shadow|Rings Off|Doom Powers|Final Form
 nocap: 1
 Form two, unlocked. Chaos Control. And he had barely even started.
 ---
-scene: burst
+scene: fight
 dur: 9.083
 vodur: 8.583
 hero: shadow
-fx: chaos
+foe: drones
 He could also throw raw chaos energy like lightning bolts. He called it Chaos Spear. On day one, Shadow was already a one hedgehog army.
 ---
 scene: chapcard
@@ -514,6 +516,7 @@ data: CAPSULE  SEALED|YEARS ASLEEP  50|SUBJECT  UNKNOWN|PASSWORD  REQUIRED|STATU
 cast: doctor(egg, x=0.5, size=1.05, tag=dr eggman)
 speaker: doctor
 shots: wide, close
+lower: Doctor Eggman|Gerald's grandson
 Until one day, someone broke in, looking for his grandfather's greatest secret. Doctor Eggman.
 ---
 scene: ark
@@ -539,6 +542,7 @@ speed: 1600
 cast: sonic(toon=sonic, x=0.5, run, mood=angry)
 speaker: sonic
 shots: wide, close
+lower: Sonic the Hedgehog|The blue blur
 And the whole world blamed the only hedgehog it knew. Sonic.
 ---
 scene: zone
@@ -623,6 +627,7 @@ soft: 1
 cast: amy(toon=amy, x=0.38, mood=sad), shadow(toon=shadow, x=0.64, flip, mood=worried)
 speaker: amy
 shots: wide, close, react
+lower: Amy Rose|Sonic's biggest fan
 Shadow was ready to let it happen. Until a girl named Amy Rose begged him to help the people on that planet. And her words sounded strangely familiar.
 ---
 scene: quote
@@ -635,13 +640,12 @@ who: What Maria really said
 hold: 0.6
 Shadow remembered. Maria never asked him for revenge. She asked him to protect them.
 ---
-scene: lab
+scene: fight
 dur: 11.673
 vodur: 11.173
-screen: none
-title: PROTOTYPE 001 IS AWAKE
-data: SPECIES  LIZARD|SIZE  MASSIVE|LIFE SUPPORT  ONLINE|THREAT  EXTREME|STATUS  ESCAPED
-alarm: 1
+hero: shadow
+foe: biolizard
+trans: glitch
 And remember that failed lizard experiment, hidden in the ARK? It woke up. The Biolizard. It fused itself to the space colony and became something even worse. The Finalhazard.
 ---
 scene: emeralds
@@ -663,13 +667,11 @@ track: Day One|Chaos Control|Super Shadow|Rings Off|Doom Powers|Final Form
 nocap: 1
 Sonic turned gold. And Shadow became Super Shadow. Form three, unlocked.
 ---
-scene: speedway
+scene: fight
 dur: 9.396
 vodur: 8.896
-fx: chaos
-cast: sonic(toon=sonic, fur=#f2c43a, x=0.36, fly, aura=1), shadow(toon=shadow, fur=#f4e9a0, x=0.64, fly, aura=1)
-speaker: shadow
-shots: wide, close, wide
+hero: supershadow
+foe: biolizard
 Together, they tore the Finalhazard apart. Then they used Chaos Control to warp the entire ARK back into a safe orbit. The Earth was saved.
 ---
 scene: ark
@@ -715,6 +717,7 @@ scene: monitors
 dur: 10.586
 vodur: 10.086
 heroes: shadow,metal,shadow
+lower: Team Dark|Shadow, Rouge and Omega
 Shadow joined Rouge and a rogue robot called Omega, and they became Team Dark. They even fought Metal Sonic. But then, Rouge found a room full of Shadows.
 ---
 scene: kinetic
@@ -767,13 +770,11 @@ kt: The true ending
 nocap: 1
 But beat all ten, and a secret final story unlocks. The true ending. The moment Shadow became Shadow.
 ---
-scene: emeralds
+scene: fight
 dur: 6.922
 vodur: 6.422
-burst: 1
-cast: shadow(toon=shadow, x=0.5, mood=angry)
-speaker: shadow
-shots: close, wide
+hero: supershadow
+foe: devildoom
 He gathered all seven emeralds, became Super Shadow again, and destroyed Black Doom's monstrous final form.
 ---
 scene: ark
@@ -878,6 +879,7 @@ vodur: 7.698
 cast: mephiles(toon=mephiles, x=0.36, mood=smug), shadow(toon=shadow, x=0.64, flip, mood=angry)
 speaker: mephiles
 shots: wide, react, close
+lower: Mephiles the Dark|Born from Shadow's shadow
 Mephiles showed Shadow a future where the humans he protected would fear his power, and lock him away. Why save a world that will turn on you?
 ---
 scene: kinetic
@@ -894,14 +896,11 @@ off: 1.6
 boom: RINGS OFF
 And then, surrounded by an army of Mephiles clones, he took the rings off.
 ---
-scene: meter
+scene: fight
 dur: 6.919
 vodur: 6.419
-mval: 112
-mlabel: Power level
-mtext: LIMITS OFF
-accent: red
-fx: chaos
+hero: shadow
+foe: clones
 Without the rings, Shadow's power goes beyond anything he can safely control. He tore through the entire army.
 ---
 scene: form
@@ -1000,13 +999,11 @@ kt: Doom Wing
 nocap: 1
 Doom. Wing.
 ---
-scene: speedway
+scene: fight
 dur: 9.602
 vodur: 9.102
-fx: chaos
-cast: shadow(toon=shadow, fur=#f4e9a0, x=0.5, fly, aura=1, mood=angry)
-speaker: shadow
-shots: wide, close, wide
+hero: doomwing
+foe: devildoom
 Giant dark wings. Flight. Invincibility. Ultimate speed. Chaos Control. And his creator's own power, turned against him.
 ---
 scene: form
