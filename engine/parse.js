@@ -29,7 +29,7 @@ function parseScript(raw) {
 }
 // timing without recorded audio: ~3.1 words/sec narration
 function estimateTiming(scenes, wps = 3.1) {
-  scenes.forEach(sc => { const words = sc.text ? sc.text.split(/\s+/).length : 0; sc.speech = sc.speech || words / wps; sc.dur = sc.dur || Math.max(1.6, sc.speech + .15); });
+  scenes.forEach(sc => { const words = sc.text ? sc.text.split(/\s+/).length : 0; sc.dur = +sc.dur || 0; sc.speech = +sc.vodur || +sc.speech || words / wps; sc.dur = sc.dur || Math.max(1.6, sc.speech + .15); });
   return scenes;
 }
 if (typeof module !== 'undefined') module.exports = { parseScript, parseCast, estimateTiming };

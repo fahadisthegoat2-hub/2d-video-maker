@@ -1,5 +1,7 @@
 video: yes
-title: The Robot Built To Replace Sonic
+title: Metal Sonic From Day 1 to FINAL FORM
+soundtrack: soundtrack.mp3
+name: metal-sonic
 voice: en-US-AndrewNeural
 rate: +5%
 cut: 1.8

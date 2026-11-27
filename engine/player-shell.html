@@ -66,12 +66,14 @@ textarea { width: 100%; box-sizing: border-box; min-height: 260px; margin-top: 1
 
 __ENGINE__
 
+<audio id="track" preload="auto" playsinline></audio>
 <script type="application/json" id="initial-script">__SCRIPT_JSON__</script>
 <script>
 (() => {
   const $ = id => document.getElementById(id);
   let scenes = [], meta = {}, total = 1, playing = false, t0 = 0, offset = 0, lastScene = -1, rec = null, recBlob = null, ext = 'mp4';
-  let tts = null, downloads = null, slowFrames = 0;
+  let tts = null, downloads = null, slowFrames = 0, hasTrack = false, actx = null, adest = null;
+  const track = $('track');
   const fmt = s => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
   const status = m => { $('status').textContent = m; };
   window.LITE = false;
@@ -80,6 +82,7 @@ __ENGINE__
     const parsed = parseScript(text); meta = parsed.meta; scenes = estimateTiming(parsed.scenes, meta.wps || 2.9);
     setup(scenes, 30, meta); total = scenes.reduce((a, s) => a + s.dur, 0) || 1;
     $('meta').textContent = `${scenes.length} scenes · ${fmt(total)}`;
+    if (meta.soundtrack && !track.src) { track.src = meta.soundtrack; track.addEventListener('canplay', () => { hasTrack = true; $('voice').textContent = 'Soundtrack on'; }, { once: true }); }
     const strip = $('scenes'); strip.textContent = ''; let acc = 0;
     scenes.forEach((sc, i) => { const b = document.createElement('button'); b.className = 'chip'; b.textContent = `${i + 1}. ${sc.type}`; const at = acc; b.onclick = () => seekTo(at + .01); strip.appendChild(b); acc += sc.dur; });
     seekTo(0);
@@ -92,7 +95,7 @@ __ENGINE__
     const [i] = sceneAt(T); document.querySelectorAll('.chip').forEach((c, k) => c.classList.toggle('on', k === i));
   }
   function speak(text) {
-    if ($('voice').getAttribute('aria-pressed') !== 'true' || !text) return;
+    if (hasTrack || $('voice').getAttribute('aria-pressed') !== 'true' || !text) return;
     const clean = text.replace(/\*/g, '');
     if (tts) { tts.speak(clean, { rate: 1.1 }).catch(() => {}); return; }
     if ('speechSynthesis' in window) { speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance(clean); u.rate = 1.1; speechSynthesis.speak(u); }
@@ -100,19 +103,19 @@ __ENGINE__
   function stopVoice() { try { tts && tts.stop(); } catch (e) {} if ('speechSynthesis' in window) speechSynthesis.cancel(); }
   function tick() {
     if (!playing) return;
-    const T = offset + (performance.now() - t0) / 1000;
+    const T = hasTrack && !track.paused ? track.currentTime : offset + (performance.now() - t0) / 1000;
     if (T >= total) { draw(total); pause(); offset = 0; if (rec) rec.stop(); return; }
     const [i] = sceneAt(T); if (i !== lastScene) { lastScene = i; speak(scenes[i].text); }
     draw(T); requestAnimationFrame(tick);
   }
-  function play() { if (playing) return; playing = true; t0 = performance.now(); lastScene = -1; $('play').textContent = 'Pause'; $('bigPlay').hidden = true; requestAnimationFrame(tick); }
-  function pause() { if (playing) offset = Math.min(total, offset + (performance.now() - t0) / 1000); playing = false; stopVoice(); $('play').textContent = 'Play'; $('bigPlay').hidden = false; }
+  function play() { if (playing) return; playing = true; if (hasTrack) { track.currentTime = offset; track.muted = $('voice').getAttribute('aria-pressed') !== 'true'; track.play().catch(() => {}); } t0 = performance.now(); lastScene = -1; $('play').textContent = 'Pause'; $('bigPlay').hidden = true; requestAnimationFrame(tick); }
+  function pause() { if (playing) offset = Math.min(total, offset + (performance.now() - t0) / 1000); playing = false; stopVoice(); track.pause(); $('play').textContent = 'Play'; $('bigPlay').hidden = false; }
   function seekTo(T) { const was = playing; if (was) pause(); offset = clamp(T, 0, total); draw(offset); if (was) play(); }
 
   $('play').onclick = () => playing ? pause() : play();
   $('bigPlay').onclick = play;
   $('seek').oninput = e => seekTo(e.target.value / 1000 * total);
-  $('voice').onclick = e => { const on = e.currentTarget.getAttribute('aria-pressed') !== 'true'; e.currentTarget.setAttribute('aria-pressed', on); e.currentTarget.textContent = on ? 'Voice on' : 'Voice off'; if (!on) stopVoice(); };
+  $('voice').onclick = e => { const on = e.currentTarget.getAttribute('aria-pressed') !== 'true'; e.currentTarget.setAttribute('aria-pressed', on); e.currentTarget.textContent = on ? 'Voice on' : 'Voice off'; if (!on) stopVoice(); track.muted = !on; };
   $('apply').onclick = () => { pause(); try { load($('script').value); status('Video updated.'); try { localStorage.setItem('v2d-draft', $('script').value); } catch (e) {} } catch (err) { status('Could not read the script: ' + err.message); } };
 
   // ---- export: record the canvas in real time on this device ----
@@ -121,10 +124,12 @@ __ENGINE__
     const type = ['video/mp4;codecs=avc1', 'video/mp4', 'video/webm;codecs=vp9', 'video/webm'].find(m => MediaRecorder.isTypeSupported(m));
     if (!type) { status('No supported video format for recording here.'); return; }
     ext = type.startsWith('video/mp4') ? 'mp4' : 'webm';
-    const chunks = []; rec = new MediaRecorder(C.captureStream(30), { mimeType: type, videoBitsPerSecond: 8e6 });
+    const stream = C.captureStream(30);
+    if (hasTrack) { try { if (!actx) { actx = new (window.AudioContext || window.webkitAudioContext)(); const src = actx.createMediaElementSource(track); adest = actx.createMediaStreamDestination(); src.connect(adest); src.connect(actx.destination); } actx.resume(); adest.stream.getAudioTracks().forEach(t => stream.addTrack(t)); } catch (e) {} }
+    const chunks = []; rec = new MediaRecorder(stream, { mimeType: type, videoBitsPerSecond: 8e6 });
     rec.ondataavailable = e => e.data.size && chunks.push(e.data);
     rec.onstop = () => { recBlob = new Blob(chunks, { type }); rec = null; $('export').disabled = false; $('save').hidden = !downloads; status(downloads ? `Recorded ${fmt(total)} (${(recBlob.size / 1048576).toFixed(1)} MB). Tap Save video.` : 'Recorded, but saving files is not available in this view.'); };
-    $('export').disabled = true; $('save').hidden = true; status('Recording… keep this tab open until the video ends. The voice is not included in the file.');
+    $('export').disabled = true; $('save').hidden = true; status(hasTrack ? 'Recording with the soundtrack… keep this tab open and the screen on until the video ends.' : 'Recording… keep this tab open until the video ends. The voice is not included in the file.');
     pause(); offset = 0; rec.start(250); play();
   };
   $('save').onclick = async () => {
