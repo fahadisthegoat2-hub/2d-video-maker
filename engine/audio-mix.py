@@ -89,10 +89,10 @@ used = set()
 def P(name, at, g=.5, loop_to=None): used.add(name); put(name, at, g, loop_to)
 for i, sc in enumerate(S):
     t0, t1 = starts[i], starts[i] + d[i]; ty = sc.get('scene', ''); cast = sc.get('cast', '')
-    if i: P('whoosh', t0 - .25, .35)
-    if 'label' in sc and 'Chapter' in sc['label']: P('riser', t0 - 1.8, .25); P('boom', t0, .5)
+    if i: P('whoosh', t0 - .25, .2)
+    if 'label' in sc and 'Chapter' in sc['label']: P('riser', t0 - 1.8, .15); P('boom', t0, .3)
     elif 'label' in sc: P('flash', t0 + .2, .3)
-    if sc.get('alarm'): P('alarm', t0, .12, t1)
+    if sc.get('alarm') and i: P('alarm', t0, .06, t1)
     if sc.get('cage'): P('cage', t0 + .3, .5)
     if sc.get('laser'): P('laserhum', t0, .2, t1); [P('zap', t0 + k, .25) for k in np.arange(.8, d[i] - .5, 2.3)]
     if 'fly' in cast and 'metal' in cast: P('jet', t0 + .1, .22)
@@ -114,11 +114,11 @@ shots = open('/home/user/2d-video-maker/scripts/metal-sonic.txt').read().split('
 for b in shots:
     kv = dict(re.findall(r'^(\w+): (.*)$', b, re.M)); du = float(kv['dur']); ty = kv.get('scene')
     if st > .5 and not any(abs(st - x) < .05 for x in starts): P('whoosh', st - .2, .3)
-    if ty == 'burst': P('boom', st + .02, .3); P('flash', st, .2)
-    if ty == 'kinetic': [P('tick', st + k * .3, .3) for k in range(len(kv.get('kt', '').split()))]
-    if ty == 'versus': P('clang', st + .1, .3); P('boom', st + .3, .35)
+    if ty == 'burst': P('whoosh', st - .15, .18)
+    if ty == 'kinetic': [P('tick', st + k * .3, .1) for k in range(len(kv.get('kt', '').split()))]
+    if ty == 'versus': P('clang', st + .1, .15)
     st += du
-P('subdrop', .2, .5); P('heartbeat', starts[85] + 1, .5); P('heartbeat', starts[85] + 2.2, .5)
+P('scan', 4.3, .08); P('ring', 4.9, .06); P('heartbeat', 6.2, .25); P('heartbeat', starts[85] + 1, .5); P('heartbeat', starts[85] + 2.2, .5)
 P('electric', starts[54] + .5, .3); P('powerdown', starts[67] + .5, .35); P('chains', starts[44] + .6, .4); P('chains', starts[73] + .5, .3)
 print('effects used:', len(used), sorted(used))
 # ---------------- music ----------------
@@ -167,7 +167,8 @@ for k, (sc0, srcm) in enumerate(SECT):
 # ---------------- mix ----------------
 v = np.fromfile('/tmp/claude-0/vo/voice.f32', np.float32).astype(np.float64); voice = np.zeros(N); voice[:len(v)] = v
 venv = np.sqrt(lpf(voice ** 2, .0005)); duck = 1 - .55 * np.clip(venv / (venv.max() * .25 + 1e-9), 0, 1)
-mix = voice * 1.0 + mus * .55 * duck + fx * .55
+fade = np.clip(np.arange(N) / SR / 4.0, 0, 1) ** 2
+mix = voice * 1.0 + mus * .5 * duck * fade + fx * .4
 mix = np.tanh(mix * 1.1) * .92
 mix[:int((TOTAL + .5) * SR)].astype(np.float32).tofile('/tmp/claude-0/vo/mix.f32')
 print('mix seconds', round(TOTAL, 1))

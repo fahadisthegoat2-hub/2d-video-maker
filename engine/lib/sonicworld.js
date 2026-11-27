@@ -242,3 +242,18 @@ function bgVersus(sc, t) {
   X.save(); X.translate(W / 2, H * .45); X.scale(vs, vs); X.rotate(-.08); X.font = `700 260px ${FONT}`; X.textAlign = 'center'; X.textBaseline = 'middle'; X.lineJoin = 'round'; X.globalAlpha = vk; X.strokeStyle = '#000'; X.lineWidth = 40; X.strokeText('VS', 0, 0); X.fillStyle = '#ffe23a'; X.fillText('VS', 0, 0); X.restore(); X.textAlign = 'left';
 }
 Object.assign(SW_WORLD, { burst: bgBurst, kinetic: bgKinetic, versus: bgVersus }); Object.assign(SW_BLOOM, { burst: .2, kinetic: .2, versus: .25 });
+// ---------- COLD OPEN: eyes power on in the dark ----------
+function bgEyes(sc, t) {
+  const lt = LT - .7; X.setTransform(1, 0, 0, 1, 0, 0); X.fillStyle = '#000'; X.fillRect(0, 0, W, H);
+  const z = 1 + lt * .05, R = 330 * z, cx = W * .5 - R * .45, cy = H * .55;
+  X.save(); X.translate(cx, cy); metalHead({}, 0, false, R, '#1d3a8a', '#0b1840', '#3a5ab0', '#8a93a4', '#4a5262', 1); X.restore();
+  X.fillStyle = 'rgba(0,0,0,.86)'; X.fillRect(0, 0, W, H);
+  X.save(); X.globalCompositeOperation = 'lighter'; X.fillStyle = rad(cx + R * .3, cy - R * 1.1, 0, R * 1.4, ['rgba(80,120,255,.25)', 'rgba(80,120,255,0)']); X.fillRect(0, 0, W, H); X.restore();
+  const on = lt < .5 ? 0 : lt < .62 ? 1 : lt < .75 ? .15 : lt < .9 ? 1 : lt < 1 ? .4 : Math.min(1, .7 + (lt - 1) * .6);
+  if (on > 0) for (const [ex, ey, k] of [[cx + R * .2, cy + R * .06, 1], [cx + R * .7, cy + R * .12, .75]]) {
+    glowC(ex, ey, 260 * k * on, '255,25,15', .8 * on); ell(ex, ey, R * .14 * k, R * .2 * k, `rgba(255,40,25,${on})`); ell(ex, ey, R * .06 * k, R * .09 * k, `rgba(255,200,170,${on})`);
+    if (lt > 1.1) { X.save(); X.globalCompositeOperation = 'lighter'; const fw = 700 * k * Math.min(1, (lt - 1.1) * 2); const g = X.createLinearGradient(ex - fw, 0, ex + fw, 0); g.addColorStop(0, 'rgba(255,40,20,0)'); g.addColorStop(.5, 'rgba(255,210,190,.9)'); g.addColorStop(1, 'rgba(255,40,20,0)'); X.fillStyle = g; X.fillRect(ex - fw, ey - 3, fw * 2, 6); X.restore(); }
+  }
+  for (let i = 0; i < 30; i++) { const R2 = rng(i + 5), x = (R2() * W + t * 15) % W, y = (R2() * H - t * (10 + R2() * 20) % H + H) % H; ell(x, y, 1.5, 1.5, `rgba(200,210,255,${.1 + R2() * .2})`); }
+}
+Object.assign(SW_WORLD, { eyes: bgEyes }); SW_BLOOM.eyes = .6;

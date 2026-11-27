@@ -105,6 +105,7 @@ function renderAt(T) {
     if (sc.type === 'camp' && sc.snow) snowfall(sc.seed + 1, T, 50, 1.4);
   }
   X.setTransform(1, 0, 0, 1, 0, 0);
+  if (sc.dim) { X.fillStyle = `rgba(0,0,0,${sc.dim})`; X.fillRect(0, 0, W, H); }
   { const g = ['rgba(0,0,0,0)', 'rgba(255,140,60,.07)', 'rgba(60,120,255,.07)', 'rgba(200,60,255,.05)'][(sc.idx || 0) % 4]; X.fillStyle = g; X.fillRect(0, 0, W, H); }
   bloom(sc.bloom ?? BLOOM[sc.type] ?? (typeof SW_BLOOM !== 'undefined' ? SW_BLOOM[sc.type] : undefined) ?? .15);
   X.fillStyle = rad(W / 2, H / 2, H * .5, W * .75, ['rgba(0,0,0,0)', 'rgba(0,0,0,.3)']); X.fillRect(0, 0, W, H);
@@ -116,6 +117,8 @@ function renderAt(T) {
   if (sc.type === 'stat') bigNumber(sc, lt);
   if (sc.type === 'timeline') timeline(sc, lt, T);
   ribbon(sc.label, lt - .2);
+  if (sc.chap) { const [n, nm] = String(sc.chap).split('|'), s = `CH ${n}/10 · ${nm.toUpperCase()}`; X.font = `700 34px ${FONT}`; const w = X.measureText(s).width + 44; box(36, 34, w, 58, 'rgba(10,12,24,.72)', 29); box(36, 34, 12 + (w - 12) * (+n / 10), 6, '#ffd23a', 3); X.fillStyle = '#fff'; X.textBaseline = 'middle'; X.fillText(s, 58, 66); X.textBaseline = 'alphabetic'; }
+  if (sc.teaser) { const k = Math.min(1, lt / .2); X.save(); X.translate(W - 60, 70); X.rotate(.05); X.scale(k, k); X.font = `700 54px ${FONT}`; const tw = X.measureText('COMING UP').width; box(-tw - 50, -36, tw + 50, 76, '#ffd23a', 12); X.fillStyle = '#111'; X.textAlign = 'right'; X.textBaseline = 'middle'; X.fillText('COMING UP', -25, 4); X.restore(); X.textAlign = 'left'; X.textBaseline = 'alphabetic'; }
   captions(sc, lt);
   if (i > 0 && lt < .12) { X.setTransform(1, 0, 0, 1, 0, 0); X.fillStyle = `rgba(255,255,255,${.55 * (1 - lt / .12)})`; X.fillRect(0, 0, W, H); }
   if (i === 0 && lt < .4) { X.fillStyle = `rgba(0,0,0,${1 - lt / .4})`; X.fillRect(0, 0, W, H); }

@@ -32,25 +32,38 @@ def punch(t):
     s = min(ss, key=lambda x: abs(len(x.split()) - 5)) if ss else t
     w = re.sub(r'[.!?]+$', '', s).split(); return ' '.join(w[:8]) + ('...' if len(w) > 8 else '')
 out, last = [], None
+chap = ''
+TEASE = {1: [['scene: overlord', 'teaser: 1'], ['scene: burst', 'hero: neo', 'teaser: 1']], 2: [['scene: versus', 'vs: super/neo', 'teaser: 1'], ['scene: emeralds', 'burst: 1', 'teaser: 1'], ['scene: burst', 'hero: metal']]}
 for idx, b in enumerate(body):
-    kv, text = parse(b); d = dict(kv); dur = float(d['dur']); k = max(1, round(dur / 3.0))
+    kv, text = parse(b); d = dict(kv)
+    m = re.match(r'Chapter (\d+): (.*)', d.get('label', ''))
+    if m: chap = '%s|%s' % (m.group(1), m.group(2))
+    dur = float(d['dur']); k = max(1, round(dur / 3.0))
     ch = pieces(text, k); k = len(ch); tot = sum(len(c) for c in ch)
     durs = [dur * len(c) / tot for c in ch]
     vs_ok = ('sonic' in d.get('cast', '') and 'metal' in d.get('cast', '')) or ('Sonic' in text and 'Metal' in text) or ('Shadow' in text and 'Metal' in text)
+    if idx == 0:
+        ch = pieces(text, 3); first = ch[0]; cut = first.index(',') + 1; ch = [first[:cut].strip(), first[cut:].strip()] + ch[1:]
+        k = len(ch); tot = sum(len(c) for c in ch); durs = [dur * len(c) / tot for c in ch]
     plan = ['orig']; cyc = ['burst', 'kinetic', 'orig2', 'burst', 'kinetic'] if d['scene'] not in ('stat', 'timeline', 'news', 'monitors') else ['kinetic', 'burst', 'orig2']
     if vs_ok and idx % 2 == 0: cyc = ['versus'] + cyc
     for j in range(1, k): plan.append(cyc[(j - 1) % len(cyc)])
+    if idx == 0: plan = ['dark', 'eyes', 'orig', 'kinetic'][:k]
     for j, (c, du) in enumerate(zip(ch, durs)):
         p = plan[j]; last_chunk = j == k - 1; vd = du - (.6 if last_chunk else 0)
         if p == 'orig': lines = ['%s: %s' % (a, v) for a, v in kv if a not in ('dur', 'vodur')]
         elif p == 'orig2':
             lines = ['%s: %s' % (a, v) for a, v in kv if a not in ('dur', 'vodur', 'label', 'shots')]
             if 'cast' in d: lines.append('shots: ' + ['close, react', 'medium, close', 'react, wide'][j % 3])
+        elif p == 'eyes': lines = ['scene: eyes']
+        elif p == 'dark': lines = ['scene: lab', 'title: SYSTEM OFFLINE', 'screen: none', 'bloom: .1', 'cam: 1.15', 'dim: .55']
         elif p == 'burst': h = hero_from(d.get('cast'), c); lines = ['scene: burst', 'hero: ' + h] + (['flip: 1'] if j % 2 else [])
         elif p == 'kinetic': lines = ['scene: kinetic', 'kt: ' + punch(c), 'nocap: 1']
         else:
             a = 'shadow' if ('Shadow' in text and 'Sonic' not in text) else ('super' if 'golden' in text or 'f2c43a' in d.get('cast', '') else 'sonic')
             lines = ['scene: versus', 'vs: %s/%s' % (a, 'neo' if 'metalColor' in d.get('cast', '') or 'Neo' in text else 'metal')]
+        if idx in TEASE and 0 <= j - (1 if idx == 1 else 0) < len(TEASE[idx]): lines = TEASE[idx][j - (1 if idx == 1 else 0)][:]
+        if chap: lines.append('chap: ' + chap)
         lines.insert(1, 'dur: %.3f\nvodur: %.3f' % (du, max(.8, vd)))
         out.append('\n'.join(lines) + '\n' + c)
 open(dst, 'w').write(head + '\n---\n' + '\n---\n'.join(out) + '\n')
