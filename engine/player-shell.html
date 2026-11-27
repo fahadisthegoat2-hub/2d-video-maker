@@ -103,7 +103,8 @@ __ENGINE__
   function stopVoice() { try { tts && tts.stop(); } catch (e) {} if ('speechSynthesis' in window) speechSynthesis.cancel(); }
   function tick() {
     if (!playing) return;
-    const T = hasTrack && !track.paused ? track.currentTime : offset + (performance.now() - t0) / 1000;
+    const T = offset + (performance.now() - t0) / 1000;
+    if (hasTrack && !track.paused && Math.abs(track.currentTime - T) > .35) { try { track.currentTime = T; } catch (e) {} }
     if (T >= total) { draw(total); pause(); offset = 0; if (rec) rec.stop(); return; }
     const [i] = sceneAt(T); if (i !== lastScene) { lastScene = i; speak(scenes[i].text); }
     draw(T); if (rec) { const pc = Math.floor(T / total * 100); if (pc !== tick.pc) { tick.pc = pc; status(`Recording… ${pc}% (${fmt(T)} of ${fmt(total)}). Keep this page open and the screen on.`); } }
