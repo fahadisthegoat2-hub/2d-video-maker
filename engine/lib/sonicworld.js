@@ -16,15 +16,15 @@ function bgLab(sc, t) {
   box(mx - 24, my - 24, mw + 48, mh + 48, '#0a0e16', 16); box(mx, my, mw, mh, '#06263a', 6);
   X.save(); X.beginPath(); X.rect(mx, my, mw, mh); X.clip();
   X.strokeStyle = 'rgba(80,200,255,.18)'; X.lineWidth = 2; for (let i = 0; i < 20; i++) { line(mx + i * 44, my, mx + i * 44, my + mh, 'rgba(80,200,255,.15)', 2); line(mx, my + i * 34, mx + mw, my + i * 34, 'rgba(80,200,255,.15)', 2); }
-  if (sc.screen === 'sonic' || sc.screen === 'metal' || !sc.screen) {
+  if (sc.screen === 'sonic' || sc.screen === 'shadow' || sc.screen === 'metal' || !sc.screen) {
     X.save(); X.translate(mx + mw * .5, my + mh * .55); X.scale(.9, .9); X.globalAlpha = .9;
-    const c = sc.screen === 'sonic' ? { toon: 'sonic', mood: 'smug' } : null;
-    if (c) toonHead(c, TOON.sonic, '#2a8ad8', '#9fdcff', t, false, 120, 1); else metalHead({}, t, false, 120, '#2a7ad8', '#123a70', '#6ac8ff', '#bfefff', '#5aa0c8', 2);
+    const c = sc.screen === 'sonic' || sc.screen === 'shadow' ? { toon: sc.screen, mood: 'smug' } : null;
+    if (c) toonHead(c, TOON[sc.screen], '#2a8ad8', '#9fdcff', t, false, 120, 1); else metalHead({}, t, false, 120, '#2a7ad8', '#123a70', '#6ac8ff', '#bfefff', '#5aa0c8', 2);
     X.restore();
     X.save(); X.beginPath(); X.arc(mx + mw * .5, my + mh * .55, 210, t * 2, t * 2 + 4.5); X.strokeStyle = 'rgba(120,230,255,.7)'; X.lineWidth = 4; X.stroke(); X.restore();
   }
   X.font = `700 40px ${FONT}`; X.fillStyle = '#7fe6ff'; X.fillText(sc.title || 'PROJECT: METAL', mx + 30, my + 56);
-  X.font = `500 26px Roboto, sans-serif`; X.fillStyle = 'rgba(127,230,255,.8)'; for (let i = 0; i < 5; i++) X.fillText(['SPEED  MACH 1.2', 'ARMOR  99.8%', 'ENGINE  ONLINE', 'TARGET  SONIC', 'OBEY  TRUE'][i], mx + 30, my + 110 + i * 36);
+  X.font = `500 26px Roboto, sans-serif`; X.fillStyle = 'rgba(127,230,255,.8)'; for (let i = 0; i < 5; i++) X.fillText((sc.data ? String(sc.data).split('|') : ['SPEED  MACH 1.2', 'ARMOR  99.8%', 'ENGINE  ONLINE', 'TARGET  SONIC', 'OBEY  TRUE'])[i] || '', mx + 30, my + 110 + i * 36);
   const sy = my + ((t * 140) % mh); box(mx, sy, mw, 6, 'rgba(160,240,255,.35)');
   for (let y = my; y < my + mh; y += 6) box(mx, y, mw, 2, 'rgba(0,0,0,.18)');
   X.restore(); glowC(mx + mw / 2, my + mh / 2, mw * .7, '60,180,255', .18);
@@ -195,7 +195,8 @@ const SW_BLOOM = { lab: .35, planet: .25, speedway: .5, zone: .15, fortress: .25
 // ---------- MOTION GRAPHICS: kinetic text, hero burst, versus ----------
 const HEROES = {
   metal: { metal: 1 }, neo: { metal: 1, cape: '#7a1a2a', metalColor: '#4a3aa8' }, sonic: { toon: 'sonic', mood: 'smug' }, amy: { toon: 'amy', mood: 'happy' },
-  tails: { toon: 'tails', mood: 'happy', fly: 1 }, shadow: { toon: 'shadow' }, doctor: { egg: 1 }, super: { toon: 'sonic', fur: '#f2c43a', aura: 1, mood: 'angry', fly: 1 },
+  tails: { toon: 'tails', mood: 'happy', fly: 1 }, shadow: { toon: 'shadow' }, doctor: { egg: 1 }, supershadow: { toon: 'shadow', fur: '#f4e9a0', aura: 1, mood: 'angry', fly: 1 },
+  maria: { kid: 1, skin: 'light', hair: '#f2d46a', hairstyle: 'long', outfit: 'dress', shirt: '#4a8ae8', mood: 'happy' }, gerald: { old: 1, skin: 'light', hair: '#e8e4dc', beard: '#e8e4dc', glasses: 1, outfit: 'robe', shirt: '#f4f4f4', color2: '#d8d8d8' }, super: { toon: 'sonic', fur: '#f2c43a', aura: 1, mood: 'angry', fly: 1 },
 };
 const MGPAL = [['#ff3a5a', '#ffb02e'], ['#2a6aff', '#22d3ee'], ['#8a2be2', '#ff4fd8'], ['#ff6a00', '#ffd400'], ['#00b894', '#a3ff3a'], ['#e11d48', '#7c3aed']];
 function heroAt(name, x, y, s, t, mood, flip) {
@@ -213,7 +214,7 @@ function bgBurst(sc, t) {
   const R2 = rng(Math.floor(t * 12)); for (let i = 0; i < 24; i++) { const a = R2() * 7, r0 = 300 + R2() * 300; line(W / 2 + Math.cos(a) * r0, H * .55 + Math.sin(a) * r0, W / 2 + Math.cos(a) * (r0 + 500), H * .55 + Math.sin(a) * (r0 + 500), 'rgba(255,255,255,.5)', 4); }
   X.save(); X.translate(W / 2, H * .55); X.scale(k * pop * zoom, k * pop * zoom); X.rotate((sc.idx % 2 ? -1 : 1) * .04 + Math.sin(lt * 2) * .02); X.translate(-W / 2, -H * .55);
   X.filter = 'drop-shadow(12px 0 0 #fff) drop-shadow(-12px 0 0 #fff) drop-shadow(0 12px 0 #fff) drop-shadow(0 -12px 0 #fff)';
-  heroAt(sc.hero, W / 2, H * 1.05, sc.hero === 'doctor' ? 1.3 : 1.75, t, sc.mood, sc.flip); X.filter = 'none'; heroAt(sc.hero, W / 2, H * 1.05, sc.hero === 'doctor' ? 1.3 : 1.75, t, sc.mood, sc.flip);
+  heroAt(sc.hero, W / 2, H * 1.05, sc.hero === 'doctor' || sc.hero === 'maria' || sc.hero === 'gerald' ? 1.3 : 1.75, t, sc.mood, sc.flip); X.filter = 'none'; heroAt(sc.hero, W / 2, H * 1.05, sc.hero === 'doctor' || sc.hero === 'maria' || sc.hero === 'gerald' ? 1.3 : 1.75, t, sc.mood, sc.flip);
   X.restore();
 }
 function bgKinetic(sc, t) {
@@ -257,3 +258,60 @@ function bgEyes(sc, t) {
   for (let i = 0; i < 30; i++) { const R2 = rng(i + 5), x = (R2() * W + t * 15) % W, y = (R2() * H - t * (10 + R2() * 20) % H + H) % H; ell(x, y, 1.5, 1.5, `rgba(200,210,255,${.1 + R2() * .2})`); }
 }
 Object.assign(SW_WORLD, { eyes: bgEyes }); SW_BLOOM.eyes = .6;
+
+// ---------- SHADOW: Space Colony ARK, Black Comet, shadow cold open ----------
+function earthBall(x, y, r, t) {
+  glowC(x, y, r * 1.5, '90,160,255', .35); X.save(); X.beginPath(); X.arc(x, y, r, 0, 7); X.clip();
+  X.fillStyle = rad(x - r * .3, y - r * .3, 0, r * 1.2, ['#5ab0ff', '#1f5ec8', '#0a1e4a']); X.fillRect(x - r, y - r, r * 2, r * 2);
+  for (let i = 0; i < 9; i++) { const R = rng(i + 31), cx = x + ((R() * 2.4 - 1.2 + t * .02) % 2.4 + 2.4) % 2.4 * r - 1.2 * r, cy = y + (R() - .5) * r * 1.4; ell(cx, cy, r * (.15 + R() * .25), r * (.1 + R() * .18), i % 3 ? '#3aa14a' : '#c8a35a'); }
+  for (let i = 0; i < 8; i++) { const R = rng(i + 77), cx = x + ((R() * 2.4 - 1.2 + t * .035) % 2.4 + 2.4) % 2.4 * r - 1.2 * r, cy = y + (R() - .5) * r * 1.6; ell(cx, cy, r * (.2 + R() * .2), r * .04, 'rgba(255,255,255,.55)'); }
+  X.fillStyle = rad(x + r * .45, y + r * .4, r * .2, r * 1.1, ['rgba(0,0,20,0)', 'rgba(0,0,20,.75)']); X.fillRect(x - r, y - r, r * 2, r * 2); X.restore();
+}
+function moonBall(x, y, r, bite) {
+  glowC(x, y, r * 1.4, '230,230,210', .25); X.save(); X.beginPath(); X.arc(x, y, r, 0, 7); X.clip(); X.fillStyle = rad(x - r * .3, y - r * .3, 0, r * 1.2, ['#f4f2e6', '#b8b4a4', '#6a685e']); X.fillRect(x - r, y - r, r * 2, r * 2);
+  for (let i = 0; i < 10; i++) { const R = rng(i + 3); ell(x + (R() - .5) * r * 1.4, y + (R() - .5) * r * 1.4, r * (.06 + R() * .1), r * (.06 + R() * .1), 'rgba(80,78,70,.35)'); }
+  if (bite) { X.globalCompositeOperation = 'destination-out'; X.beginPath(); X.arc(x + r * .95, y - r * .2, r * .62, 0, 7); X.fill(); X.globalCompositeOperation = 'source-over'; } X.restore();
+  if (bite) { X.beginPath(); X.arc(x + r * .95, y - r * .2, r * .62, 2.2, 4.1); X.strokeStyle = 'rgba(255,140,60,.8)'; X.lineWidth = 6; X.stroke(); }
+}
+function bgArk(sc, t) {
+  cam(0); sky2('#02030a', '#070a1c'); stars(sc.seed, 260, t, H);
+  const view = sc.view || 'earth', wx = W * .5, wy = H * .42, wr = H * .5;
+  cam(.08); if (view === 'moon') moonBall(wx + 120, wy, 220, !!sc.beam && LT > 1.2); else earthBall(wx, wy + H * .55, H * .75, t);
+  if (sc.beam) { const k = Math.max(0, Math.min(1, (LT - .6) / .4)); if (k > 0) { X.save(); X.globalCompositeOperation = 'lighter'; const g = X.createLinearGradient(0, H * .55, wx, wy); g.addColorStop(0, 'rgba(120,255,120,.0)'); g.addColorStop(1, 'rgba(160,255,160,.9)'); X.strokeStyle = g; X.lineWidth = 40 * k + 10 * Math.sin(t * 40); X.beginPath(); X.moveTo(-100, H * .8); X.lineTo(wx + 120, wy); X.stroke(); X.restore(); glowC(wx + 120, wy, 300 * k, '180,255,160', .7); } }
+  // hull frame with round window
+  cam(.3); X.save(); X.beginPath(); X.rect(-W, -H, W * 3, H * 3); X.moveTo(wx + wr, wy); X.arc(wx, wy, wr, 0, Math.PI * 2, true); X.closePath(); X.clip();
+  for (let i = 0; i < 10; i++) for (let j = 0; j < 5; j++) rivetPanel(-300 + i * 260, -80 + j * 230, 250, 220, (i + j) % 2 ? '#2a2f3a' : '#262a34');
+  X.restore(); X.beginPath(); X.arc(wx, wy, wr, 0, 7); X.strokeStyle = '#4a5262'; X.lineWidth = 36; X.stroke(); X.strokeStyle = '#8a93a4'; X.lineWidth = 8; X.stroke();
+  for (let k = 0; k < 8; k++) { const a = k / 8 * Math.PI * 2; ell(wx + Math.cos(a) * wr, wy + Math.sin(a) * wr, 12, 12, '#bfc6d2'); }
+  line(wx - wr, wy, wx + wr, wy, 'rgba(140,150,170,.35)', 6); line(wx, wy - wr, wx, wy + wr, 'rgba(140,150,170,.35)', 6);
+  // floor
+  cam(.6); box(-W, H * .86, W * 3, H * .3, '#1a1d24'); for (let i = 0; i < 30; i++) line(-W + i * 140, H * .86, -W + i * 140 - 60, H * 1.1, 'rgba(255,255,255,.05)', 3); box(-W, H * .86, W * 3, 8, '#5a6272');
+  if (sc.pod) { const px = W * .78, py = H * .62; glowC(px, py, 260, '120,255,200', .45 + .1 * Math.sin(t * 3)); box(px - 110, py - 190, 220, 400, '#3a4250', 100); box(px - 84, py - 160, 168, 320, 'rgba(120,255,200,.35)', 84); line(px - 50, py - 120, px - 50, py + 100, 'rgba(255,255,255,.4)', 6); box(px - 130, py + 190, 260, 40, '#2a2f3a', 8); }
+  if (sc.alarm && Math.floor(t * 2.5) % 2) { X.setTransform(1, 0, 0, 1, 0, 0); X.fillStyle = 'rgba(255,20,20,.16)'; X.fillRect(0, 0, W, H); }
+}
+function bgComet(sc, t) {
+  cam(0); sky2('#0a0006', '#2a0418', '#5a0a1a'); stars(sc.seed, 160, t, H);
+  cam(.15); X.save(); X.translate(W * .52, H * .42 + Math.sin(t * .8) * 14); X.rotate(-.15);
+  glowC(0, 0, 640, '255,40,60', .35); X.beginPath(); for (let i = 0; i < 18; i++) { const a = i / 18 * Math.PI * 2, r = 380 + (hash(i + 9) - .5) * 120; X.lineTo(Math.cos(a) * r * 1.3, Math.sin(a) * r * .8); } X.closePath(); X.fillStyle = rad(-80, -80, 40, 520, ['#5a2a4a', '#2a0e22', '#12040c']); X.fill();
+  for (let i = 0; i < 14; i++) { const R = rng(i + 50); ell((R() - .5) * 800, (R() - .5) * 420, 20 + R() * 40, 12 + R() * 20, 'rgba(255,60,80,' + (.3 + .3 * Math.sin(t * 3 + i)) + ')'); }
+  const open = Math.min(1, LT / .8); ell(0, 0, 150, 90 * open, '#ffdf3a'); ell(0, 0, 42, 70 * open, '#c80a1a'); glowC(0, 0, 260, '255,200,40', .5 * open); X.restore();
+  cam(.7); for (let i = 0; i < 9; i++) { const R = rng(i + 90), x = ((R() * W * 1.4 + t * 260 * (R() + .5)) % (W * 1.6)) - W * .3, y = H * (.55 + R() * .4); X.save(); X.translate(x, y); X.rotate(-.5); ell(0, 0, 50, 16, '#1a0a14'); ell(16, 0, 8, 6, '#ff2a3a'); X.restore(); }
+}
+// Cold open variant: `scene: eyes` + `who: shadow`
+const _eyesMetal = bgEyes;
+function bgEyesWho(sc, t) {
+  if (sc.who !== 'shadow') return _eyesMetal(sc, t);
+  const lt = LT - .7; X.setTransform(1, 0, 0, 1, 0, 0); X.fillStyle = '#000'; X.fillRect(0, 0, W, H);
+  const z = 1 + Math.max(0, lt) * .04; X.save(); X.translate(W / 2, H * .5); X.scale(z, z); X.translate(-W / 2, -H * .5);
+  heroAt('shadow', W * .5, H * 2.55, 4.2, 0, 'angry', false); X.restore();
+  X.fillStyle = 'rgba(0,0,0,.84)'; X.fillRect(0, 0, W, H);
+  X.save(); X.globalCompositeOperation = 'lighter'; X.fillStyle = rad(W * .5, -H * .2, 0, W * .7, ['rgba(255,40,60,.22)', 'rgba(255,40,60,0)']); X.fillRect(0, 0, W, H); X.restore();
+  const on = lt < .5 ? 0 : lt < .62 ? 1 : lt < .75 ? .15 : lt < .9 ? 1 : lt < 1 ? .4 : Math.min(1, .7 + (lt - 1) * .6);
+  const ex = sc.ex ? String(sc.ex).split(',').map(Number) : [.555, .43, .69, .44];
+  if (on > 0) for (const [px, py, k] of [[ex[0], ex[1], 1], [ex[2], ex[3], .8]]) {
+    const x = (W / 2 + (px * W - W / 2) * z), y = H * .5 + (py * H - H * .5) * z; glowC(x, y, 240 * k * on, '255,20,40', .8 * on);
+    X.save(); X.translate(x, y); X.rotate(-.12); ell(0, 0, 46 * k, 30 * k, `rgba(255,30,50,${on})`); ell(6, 0, 16 * k, 22 * k, `rgba(255,210,200,${on})`); X.restore();
+    if (lt > 1.1) { X.save(); X.globalCompositeOperation = 'lighter'; const fw = 700 * k * Math.min(1, (lt - 1.1) * 2), g = X.createLinearGradient(x - fw, 0, x + fw, 0); g.addColorStop(0, 'rgba(255,30,40,0)'); g.addColorStop(.5, 'rgba(255,210,200,.9)'); g.addColorStop(1, 'rgba(255,30,40,0)'); X.fillStyle = g; X.fillRect(x - fw, y - 3, fw * 2, 6); X.restore(); }
+  }
+}
+Object.assign(SW_WORLD, { ark: bgArk, comet: bgComet, eyes: bgEyesWho }); Object.assign(SW_BLOOM, { ark: .35, comet: .4 });

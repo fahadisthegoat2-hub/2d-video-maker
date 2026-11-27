@@ -1,9 +1,11 @@
-import json, re, subprocess, numpy as np
+import json, re, subprocess, sys, numpy as np
+NAME = sys.argv[1] if len(sys.argv) > 1 else 'metal-sonic'; MS = NAME == 'metal-sonic'
+ROOT = '/home/user/2d-video-maker'; VO = '/tmp/claude-0/vo' if MS else f'{ROOT}/out/{NAME}-vo'
 SR = 44100
 rng = np.random.default_rng(7)
-d = json.load(open('/tmp/claude-0/vo/durs.json'))
+d = json.load(open(f'{VO}/durs.json'))
 starts = np.concatenate([[0], np.cumsum(d)])[:-1]; TOTAL = sum(d)
-blocks = open('/home/user/2d-video-maker/scripts/metal-sonic-base.txt').read().split('\n---\n')[1:]
+blocks = open(f'{ROOT}/scripts/{NAME}-base.txt').read().split('\n---\n')[1:]
 S = []
 for b in blocks:
     kv = dict(re.findall(r'^(\w+): (.*)$', b, re.M)); S.append(kv)
@@ -109,8 +111,13 @@ for i, sc in enumerate(S):
     if ty == 'planet' and sc.get('metal'): P('clang', t0 + .8, .25)
     if ty == 'stat': [P('tick', t0 + k * .09, .25) for k in range(18)]; P('boom', t0 + 1.8, .4)
     if ty == 'timeline': [P('tick', t0 + .4 + k * .6, .3) for k in range(4)]
+    if ty == 'ark': P('beep', t0 + .8, .1)
+    if sc.get('pod'): P('bubbles', t0 + .4, .15)
+    if sc.get('beam'): P('laserhum', t0 + .5, .3, t0 + 3); P('explosion', t0 + 1.4, .5)
+    if ty == 'comet': P('roar', t0 + .3, .25); P('thunder', t0 + 1.2, .25)
+    if 'fly' in cast and 'aura' in cast: P('powerup', t0 + .2, .3)
     if ty == 'speedway' and 'fly' not in cast and 'run' not in cast: P('wind', t0, .1, t1)
-shots = open('/home/user/2d-video-maker/scripts/metal-sonic.txt').read().split('\n---\n')[1:]; st = 0.0
+shots = open(f'{ROOT}/scripts/{NAME}.txt').read().split('\n---\n')[1:]; st = 0.0
 for b in shots:
     kv = dict(re.findall(r'^(\w+): (.*)$', b, re.M)); du = float(kv['dur']); ty = kv.get('scene')
     if st > .5 and not any(abs(st - x) < .05 for x in starts): P('whoosh', st - .2, .3)
@@ -118,15 +125,16 @@ for b in shots:
     if ty == 'kinetic': [P('tick', st + k * .3, .1) for k in range(len(kv.get('kt', '').split()))]
     if ty == 'versus': P('clang', st + .1, .15)
     st += du
-P('scan', 4.3, .08); P('ring', 4.9, .06); P('heartbeat', 6.2, .25); P('heartbeat', starts[85] + 1, .5); P('heartbeat', starts[85] + 2.2, .5)
-P('electric', starts[54] + .5, .3); P('powerdown', starts[67] + .5, .35); P('chains', starts[44] + .6, .4); P('chains', starts[73] + .5, .3)
+if MS: P('scan', 4.3, .08); P('ring', 4.9, .06); P('heartbeat', 6.2, .25); P('heartbeat', starts[85] + 1, .5); P('heartbeat', starts[85] + 2.2, .5)
+if MS: P('electric', starts[54] + .5, .3); P('powerdown', starts[67] + .5, .35); P('chains', starts[44] + .6, .4); P('chains', starts[73] + .5, .3)
+if not MS: P('heartbeat', 1.0, .45); P('heartbeat', 2.3, .45); P('flash', 3.1, .2)
 print('effects used:', len(used), sorted(used))
 # ---------------- music ----------------
 def load(f):
     raw = subprocess.run(['ffmpeg', '-v', 'error', '-i', f, '-ac', '1', '-ar', str(SR), '-f', 'f32le', '-'], capture_output=True).stdout
     x = np.frombuffer(raw, np.float32).astype(np.float64); return x / (np.sqrt(np.mean(x ** 2)) + 1e-9) * .13
 U = '/root/.claude/uploads/3b627f92-e3d2-57e3-a6e3-7407732bd355/'
-GH, EB, IJ = load(U + 'c2d2408a-Sonic_the_Hedgehog_OST_-_Green_Hill_Zone_mp3.pm.mp3'), load(U + '92b69d28-05._Boss_-_Egg_Breaker.mp3'), load(U + 'fd34db81-16._Iron_Jungle__Vocal_mix_1.mp3')
+if MS: GH, EB, IJ = load(U + 'c2d2408a-Sonic_the_Hedgehog_OST_-_Green_Hill_Zone_mp3.pm.mp3'), load(U + '92b69d28-05._Boss_-_Egg_Breaker.mp3'), load(U + 'fd34db81-16._Iron_Jungle__Vocal_mix_1.mp3')
 BPM = 100; beat = 60 / BPM
 def note(f, sec, kind='pad'):
     t = T(sec)
@@ -157,7 +165,7 @@ def gen(style, sec):
         t += bar; i += 1
     return out[:int(sec * SR)] / (np.sqrt(np.mean(out ** 2)) + 1e-9) * .2
 # sections: (first scene, source)
-SECT = [(0, 'tension'), (6, GH), (14, 'ambient'), (26, EB), (33, 'sad'), (36, 'tension'), (43, IJ), (58, 'action'), (60, EB), (68, 'sad'), (79, 'ambient'), (84, 'tension')]
+SECT = [(i, sc['music']) for i, sc in enumerate(S) if 'music' in sc] if not MS else [(0, 'tension'), (6, GH), (14, 'ambient'), (26, EB), (33, 'sad'), (36, 'tension'), (43, IJ), (58, 'action'), (60, EB), (68, 'sad'), (79, 'ambient'), (84, 'tension')]
 mus = np.zeros(N)
 for k, (sc0, srcm) in enumerate(SECT):
     a = starts[sc0]; b = starts[SECT[k + 1][0]] if k + 1 < len(SECT) else TOTAL + 1
@@ -165,11 +173,11 @@ for k, (sc0, srcm) in enumerate(SECT):
     seg = gen(srcm, b - a + 1.5) if isinstance(srcm, str) else np.tile(srcm, int(np.ceil(L / len(srcm))) + 1)[:L]
     seg = seg * env(len(seg), 1.2, 1.5); i = int(a * SR); mus[i:i + len(seg)] += seg[:N - i]
 # ---------------- mix ----------------
-v = np.fromfile('/tmp/claude-0/vo/voice.f32', np.float32).astype(np.float64); voice = np.zeros(N); voice[:len(v)] = v
+v = np.fromfile(f'{VO}/voice.f32', np.float32).astype(np.float64); voice = np.zeros(N); voice[:len(v)] = v
 venv = np.sqrt(lpf(voice ** 2, .0005)); duck = 1 - .8 * np.clip(venv / (venv.max() * .15 + 1e-9), 0, 1)
 fade = np.clip(np.arange(N) / SR / 4.0, 0, 1) ** 2
 mix = voice * 1.0 + mus * .28 * duck * fade + fx * .35
 vr = np.sqrt(np.mean(voice[voice != 0] ** 2)); mr = np.sqrt(np.mean((mus * .28 * duck)[np.abs(voice) > .05] ** 2)); print('voice vs music under speech: %.1f dB' % (20 * np.log10(vr / mr)))
 mix = np.tanh(mix * 1.1) * .92
-mix[:int((TOTAL + .5) * SR)].astype(np.float32).tofile('/tmp/claude-0/vo/mix.f32')
+mix[:int((TOTAL + .5) * SR)].astype(np.float32).tofile(f'{VO}/mix.f32')
 print('mix seconds', round(TOTAL, 1))
