@@ -124,7 +124,7 @@ print('effects used:', len(used), sorted(used))
 # ---------------- music ----------------
 def load(f):
     raw = subprocess.run(['ffmpeg', '-v', 'error', '-i', f, '-ac', '1', '-ar', str(SR), '-f', 'f32le', '-'], capture_output=True).stdout
-    x = np.frombuffer(raw, np.float32).astype(np.float64); return x / (np.sqrt(np.mean(x ** 2)) + 1e-9) * .2
+    x = np.frombuffer(raw, np.float32).astype(np.float64); return x / (np.sqrt(np.mean(x ** 2)) + 1e-9) * .13
 U = '/root/.claude/uploads/3b627f92-e3d2-57e3-a6e3-7407732bd355/'
 GH, EB, IJ = load(U + 'c2d2408a-Sonic_the_Hedgehog_OST_-_Green_Hill_Zone_mp3.pm.mp3'), load(U + '92b69d28-05._Boss_-_Egg_Breaker.mp3'), load(U + 'fd34db81-16._Iron_Jungle__Vocal_mix_1.mp3')
 BPM = 100; beat = 60 / BPM
@@ -166,9 +166,10 @@ for k, (sc0, srcm) in enumerate(SECT):
     seg = seg * env(len(seg), 1.2, 1.5); i = int(a * SR); mus[i:i + len(seg)] += seg[:N - i]
 # ---------------- mix ----------------
 v = np.fromfile('/tmp/claude-0/vo/voice.f32', np.float32).astype(np.float64); voice = np.zeros(N); voice[:len(v)] = v
-venv = np.sqrt(lpf(voice ** 2, .0005)); duck = 1 - .55 * np.clip(venv / (venv.max() * .25 + 1e-9), 0, 1)
+venv = np.sqrt(lpf(voice ** 2, .0005)); duck = 1 - .8 * np.clip(venv / (venv.max() * .15 + 1e-9), 0, 1)
 fade = np.clip(np.arange(N) / SR / 4.0, 0, 1) ** 2
-mix = voice * 1.0 + mus * .5 * duck * fade + fx * .4
+mix = voice * 1.0 + mus * .28 * duck * fade + fx * .35
+vr = np.sqrt(np.mean(voice[voice != 0] ** 2)); mr = np.sqrt(np.mean((mus * .28 * duck)[np.abs(voice) > .05] ** 2)); print('voice vs music under speech: %.1f dB' % (20 * np.log10(vr / mr)))
 mix = np.tanh(mix * 1.1) * .92
 mix[:int((TOTAL + .5) * SR)].astype(np.float32).tofile('/tmp/claude-0/vo/mix.f32')
 print('mix seconds', round(TOTAL, 1))
