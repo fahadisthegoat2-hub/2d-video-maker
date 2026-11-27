@@ -10,14 +10,18 @@ const { chromium } = require('playwright');
     const side = (left, fn) => { X.save(); X.setTransform(1, 0, 0, 1, 0, 0); X.beginPath(); if (left) { X.moveTo(0, 0); X.lineTo(SPL + 110, 0); X.lineTo(SPL - 110, H); X.lineTo(0, H); } else { X.moveTo(SPL + 110, 0); X.lineTo(W, 0); X.lineTo(W, H); X.lineTo(SPL - 110, H); } X.closePath(); X.clip(); fn(); X.restore(); };
     // LEFT: day one, small and dark inside the ARK capsule
     side(true, () => {
-      X.setTransform(1, 0, 0, 1, 0, 0); X.fillStyle = rad(W * .2, H * .55, 0, W * .5, ['#14324a', '#060a12']); X.fillRect(0, 0, W, H);
-      glowC(W * .21, H * .58, 380, '120,255,200', .5); box(W * .21 - 190, H * .14, 380, H * .8, '#2a3240', 190); box(W * .21 - 160, H * .18, 320, H * .72, 'rgba(120,255,200,.22)', 160);
-      outlined(() => heroAt('shadow', W * .21, H * .92, .95, t, 'worried', false), 8);
-      line(W * .21 - 110, H * .25, W * .21 - 110, H * .8, 'rgba(255,255,255,.35)', 8);
+      X.setTransform(1, 0, 0, 1, 0, 0); X.fillStyle = rad(W * .22, H * .35, 0, W * .6, ['#7ae8ff', '#1fa8ff', '#1a4cff']); X.fillRect(0, 0, W, H);
+      for (let i = 0; i < 14; i++) { X.save(); X.translate(W * .22, H * .45); X.rotate(i * Math.PI / 7 + .1); X.beginPath(); X.moveTo(0, 0); X.lineTo(-70, -1400); X.lineTo(70, -1400); X.closePath(); X.fillStyle = 'rgba(255,255,255,.12)'; X.fill(); X.restore(); }
+      X.fillStyle = lin(0, H * .82, 0, H, ['#ff7ad8', '#c23aff']); X.beginPath(); X.ellipse(W * .22, H * 1.08, W * .42, H * .3, 0, 0, 7); X.fill(); X.strokeStyle = '#fff'; X.lineWidth = 8; X.stroke();
+      const R = rng(4); for (let i = 0; i < 40; i++) { const x = R() * W * .5, y = R() * H * .8, c = ['#ff4fd8', '#ffe23a', '#3dff8a', '#ffffff', '#ff7a2a'][i % 5]; X.save(); X.translate(x, y); X.rotate(R() * 6); box(-8, -4, 16, 8, c, 3); X.restore(); }
+      for (const [x, y, k] of [[W * .1, H * .32, 1], [W * .37, H * .28, .8], [W * .3, H * .55, .6]]) { X.save(); X.translate(x, y); X.scale(k, k); X.beginPath(); X.moveTo(0, 18); X.bezierCurveTo(-46, -14, -22, -46, 0, -22); X.bezierCurveTo(22, -46, 46, -14, 0, 18); X.fillStyle = '#ff3a8a'; X.fill(); X.strokeStyle = '#fff'; X.lineWidth = 6; X.stroke(); X.restore(); }
+      outlined(() => heroAt('maria', W * .3, H * .99, 1.5, 3.2, 'happy', true), 10);
+      outlined(() => heroAt('shadow', W * .13, H * .99, .78, 1.1, 'happy', false), 10);
+      X.save(); X.translate(W * .215, H * .8); ell(0, 0, 58, 58, '#ffe23a'); X.beginPath(); X.arc(0, 0, 58, -.6, 1.2); X.lineTo(0, 0); X.fillStyle = '#ff3a5a'; X.fill(); X.beginPath(); X.arc(0, 0, 58, 2.4, 3.9); X.lineTo(0, 0); X.fillStyle = '#2a8cff'; X.fill(); X.beginPath(); X.arc(0, 0, 58, 0, 7); X.strokeStyle = '#14121c'; X.lineWidth = 7; X.stroke(); ell(-18, -22, 14, 9, 'rgba(255,255,255,.7)'); X.restore();
     });
     // RIGHT: final form, gold, rings flying off
     side(false, () => {
-      burstBg({}, t, '#c0102a', '#ffb02e'); X.setTransform(1, 0, 0, 1, 0, 0);
+      burstBg({}, t, '#ff0a3c', '#ffd21a'); X.setTransform(1, 0, 0, 1, 0, 0);
       glowC(W * .7, H * .55, 640, '255,220,120', .85);
       X.save(); X.translate(W * .7, H * .6); X.scale(1.12, 1.12); X.translate(-W * .7, -H * .6);
       outlined(() => heroAt('supershadow', W * .7, H * 1.18, 1.95, t, 'angry', true), 14); X.restore();
@@ -28,7 +32,7 @@ const { chromium } = require('playwright');
     const label = (s, x, y, size, col, rot) => { X.save(); X.translate(x, y); X.rotate(rot); X.font = `700 ${size}px ${FONT}`; X.textAlign = 'center'; X.textBaseline = 'middle'; X.lineJoin = 'round'; X.strokeStyle = '#000'; X.lineWidth = size * .28; X.strokeText(s, 0, 0); X.fillStyle = col; X.fillText(s, 0, 0); X.restore(); };
     label('DAY 1', W * .2, H * .13, 190, '#fff', -.05);
     label('FINAL FORM', W * .68, H * .87, 200, '#ffe23a', -.04);
-    const v = X.getImageData(0, 0, W, H), d = v.data; for (let i = 0; i < d.length; i += 4) { for (let k = 0; k < 3; k++) { const c = d[i + k] / 255; d[i + k] = Math.min(255, 255 * (c + (c - .5) * .12) * 1.03); } } X.putImageData(v, 0, 0);
+    const v = X.getImageData(0, 0, W, H), d = v.data; for (let i = 0; i < d.length; i += 4) { const r = d[i], g = d[i + 1], bb = d[i + 2], l = .3 * r + .59 * g + .11 * bb; for (let k = 0; k < 3; k++) { const v = l + (d[i + k] - l) * 1.35; d[i + k] = Math.max(0, Math.min(255, (v - 128) * 1.08 + 132)); } } X.putImageData(v, 0, 0);
     return C.toDataURL('image/png');
   });
   fs.mkdirSync(path.join(__dirname, '..', 'out'), { recursive: true });
