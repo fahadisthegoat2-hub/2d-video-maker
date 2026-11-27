@@ -63,7 +63,7 @@ function planetBall(x, y, r, t, metal) {
 function chain(x0, y0, x1, y1, sag, n) { for (let i = 0; i <= n; i++) { const k = i / n, x = x0 + (x1 - x0) * k, y = y0 + (y1 - y0) * k + Math.sin(k * Math.PI) * sag; X.save(); X.translate(x, y); X.rotate(Math.atan2(y1 - y0, x1 - x0) + (i % 2) * 1.57); X.beginPath(); X.ellipse(0, 0, 18, 9, 0, 0, 7); X.strokeStyle = '#3a3a44'; X.lineWidth = 7; X.stroke(); X.strokeStyle = '#9aa3b2'; X.lineWidth = 3; X.stroke(); X.restore(); } }
 function bgPlanet(sc, t) {
   const m = !!sc.metal;
-  cam(0); sky2(m ? '#2a1a3a' : '#5ab4ff', m ? '#7a3a4a' : '#bfe6ff', m ? '#e0703a' : '#ffe9b8'); if (m) stars(sc.seed, 80, t, H * .4);
+  const pv = (sc.idx || 0) % 3; cam(0); sky2(m ? '#2a1a3a' : ['#5ab4ff', '#ff9a6a', '#3a5ab0'][pv], m ? '#7a3a4a' : ['#bfe6ff', '#ffc89a', '#9ab0f0'][pv], m ? '#e0703a' : ['#ffe9b8', '#ffe0b0', '#ffd0e0'][pv]); if (m) stars(sc.seed, 80, t, H * .4);
   cam(.06); const cd = t * 10; for (let i = 0; i < 4; i++) cloudP((W * (.15 + i * .3) + cd * (1 + i * .3)) % (W + 600) - 200, H * (.12 + (i % 2) * .14), .8, m ? '#6a4a5a' : '#ffffff');
   cam(.12); range(sc.seed, H * .66, H * .3, 100, m ? '#4a3a5a' : '#7a9ad0', m ? null : '#eef4ff', 340);
   cam(.2); const px = W * .42, py = H * .3; chain(px + 140, py + 200, W * .9, H * .5, 80, 26); planetBall(px, py + Math.sin(t) * 8, 230, t, m);
@@ -79,7 +79,7 @@ function bgPlanet(sc, t) {
 // ---------- STARDUST SPEEDWAY ----------
 function bgSpeedway(sc, t) {
   const sp = sc.speed ?? 1400;
-  cam(0); sky2('#120a2e', '#3a1a6a', '#d0508a'); stars(sc.seed, 260, t, H * .7);
+  const sv = (sc.idx || 0) % 3; cam(0); sky2(['#120a2e', '#0a1a2e', '#2a0a1e'][sv], ['#3a1a6a', '#1a3a6a', '#6a1a3a'][sv], ['#d0508a', '#50a0d0', '#e0703a'][sv]); stars(sc.seed, 260, t, H * .7);
   ell(W * .8, H * .2, 90, 90, '#ffe8f4'); glowC(W * .8, H * .2, 300, '255,180,230', .35);
   cam(.08); for (let i = 0; i < 26; i++) { const bx = scroll(i * 110, sp * .05, t, W + 300) - 150, bh = 120 + (i * 53) % 220; box(bx, H * .62 - bh, 90, bh + 40, '#2a1450'); for (let k = 0; k < 6; k++) if ((i + k) % 3) box(bx + 14 + (k % 2) * 40, H * .62 - bh + 20 + Math.floor(k / 2) * 40, 18, 18, ['#ffd94a', '#ff7ad8', '#7af0ff'][k % 3]); }
   cam(.18); for (let i = 0; i < 7; i++) { const gx = scroll(i * 330, sp * .12, t, W + 400) - 200, gy = H * (.2 + (i % 3) * .1); X.save(); X.translate(gx, gy); X.rotate(t * (i % 2 ? 1 : -1)); for (let k = 0; k < 8; k++) { X.rotate(Math.PI / 4); box(-10, -46, 20, 22, '#c08ae0', 3); } ell(0, 0, 34, 34, '#c08ae0'); ell(0, 0, 14, 14, '#3a1a6a'); X.restore(); }
@@ -153,7 +153,7 @@ function bgEmeralds(sc, t) {
 function bgMonitors(sc, t) {
   cam(0); sky2('#03100a', '#062018');
   const list = String(sc.heroes || 'sonic,tails,amy,shadow,metal,sonic').split(',').map(s => s.trim());
-  const cols = 3, rows = Math.ceil(list.length / cols), mw = W * .27, mh = H * .32, gx = (W - cols * mw - (cols - 1) * 40) / 2, gy = H * .12;
+  const cols = 3, rows = Math.ceil(list.length / cols), one = rows === 1, mw = one ? W * .29 : W * .27, mh = one ? H * .46 : H * .32, gx = (W - cols * mw - (cols - 1) * 40) / 2, gy = one ? H * .26 : H * .12;
   cam(.4); list.forEach((who, i) => {
     const x = gx + (i % cols) * (mw + 40), y = gy + Math.floor(i / cols) * (mh + 40); box(x - 14, y - 14, mw + 28, mh + 28, '#111a16', 12); box(x, y, mw, mh, '#04281a', 4);
     X.save(); X.beginPath(); X.rect(x, y, mw, mh); X.clip();

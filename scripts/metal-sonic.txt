@@ -24,10 +24,8 @@ speaker: sonic
 shots: wide, react, close, wide
 This is the true story of Metal Sonic. Where he came from, every battle he fought, and the one question nobody can answer. Is he just a machine?
 ---
-scene: lab
+scene: fortress
 label: Chapter 1: The Doctor
-screen: sonic
-title: TARGET: SONIC
 cast: doctor(egg, x=0.5)
 speaker: doctor
 shots: wide, close
@@ -64,9 +62,7 @@ speaker: tails
 shots: wide, close, react
 And every time, Sonic had help. A young two tailed fox named Miles Prower. Everyone calls him Tails, and he can fly by spinning his tails like a helicopter.
 ---
-scene: lab
-screen: sonic
-title: LOSSES: 47
+scene: wreck
 cast: doctor(egg, x=0.5, mood=angry)
 speaker: doctor
 shots: close, wide, close
@@ -101,7 +97,7 @@ scene: planet
 label: Chapter 2: Little Planet
 But a robot this powerful needed the perfect place to fight. And Eggman had found one.
 ---
-scene: planet
+scene: zone
 label: Never Lake
 Above a quiet place called Never Lake, something strange happens once every year.
 ---
@@ -139,7 +135,7 @@ speaker: amy
 shots: wide, close, close
 And he was not alone. Someone had followed him there. A young pink hedgehog named Amy Rose.
 ---
-scene: planet
+scene: zone
 cast: amy(toon=amy, x=0.5, mood=happy)
 speaker: amy
 shots: close, close
@@ -159,8 +155,7 @@ speaker: metal
 shots: wide, close, react, close
 A blue blur dropped down and grabbed her. For a second, Amy thought it was Sonic. Then she saw the red eyes.
 ---
-scene: planet
-metal: 1
+scene: lab
 cast: metal(metal, x=0.5, size=1.1)
 speaker: metal
 shots: close, close
@@ -242,8 +237,7 @@ speaker: doctor
 shots: wide, close, react
 Eggman did not throw his creation away. He picked up the pieces and rebuilt him.
 ---
-scene: lab
-title: WEAPON #1
+scene: fortress
 cast: doctor(egg, x=0.32), metal(metal, x=0.66)
 speaker: doctor
 shots: wide, close, react
@@ -297,9 +291,8 @@ speaker: metal
 shots: close, react, wide
 One night, Metal Sonic walked into Eggman's lab, grabbed his own creator, and locked him inside a cage.
 ---
-scene: lab
-alarm: 1
-cage: 0.5
+scene: news
+headline: WHERE IS DR EGGMAN?
 cast: doctor(egg, x=0.5, mood=worried)
 speaker: doctor
 shots: close, close
@@ -381,7 +374,7 @@ speaker: metal
 shots: wide, close, react, close
 Then, on top of Eggman's flying fortress, he finally revealed himself to the heroes. And he said the words he had waited years to say.
 ---
-scene: fortress
+scene: overlord
 cast: metal(metal, x=0.5, size=1.25, cape=#7a1a2a, metalColor=#4a3aa8)
 speaker: metal
 shots: close, close
@@ -401,7 +394,7 @@ scene: overlord
 label: Metal Overlord
 He became a giant metal dragon, as big as a mountain. With wings of steel, a body of armor, and the powers of every hero he had copied. He called himself Metal Overlord.
 ---
-scene: overlord
+scene: wreck
 cast: amy(toon=amy, x=0.5, mood=worried)
 speaker: amy
 shots: close, wide
@@ -447,7 +440,7 @@ speaker: metal
 shots: wide, react, close
 Metal looked up at Sonic and spoke. Not the words of a weapon. The words of someone who had finally lost a fight he truly cared about.
 ---
-scene: wreck
+scene: zone
 cast: sonic(toon=sonic, x=0.5, mood=smug, pose=wave)
 speaker: sonic
 shots: close, wide

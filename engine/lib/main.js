@@ -37,7 +37,7 @@ function shotAt(sc, lt) {
     const z = Math.min(clamp(.8 * H / hgt, 1.15, 2.6), W * .92 / span) * sub;
     return Object.assign(clampCam({ cx: (Math.max(...xs) + Math.min(...xs)) / 2, cy: gy - hgt * .5, z }), { name });
   }
-  return { cx: W / 2, cy: H / 2, z: (sc.cam || 1) * push, name: 'wide' };
+  const v = (sc.idx || 0) % 4; return Object.assign(clampCam({ cx: W / 2 + [0, -1, 1, 0][v] * W * .05, cy: H / 2 + [0, .02, .02, -.02][v] * H, z: (sc.cam || 1) * push * [1, 1.1, 1.12, 1.05][v] }), { name: 'wide' });
 }
 // world -> screen
 const toScreen = (x, y) => ({ x: (x - CAM.cx) * CAM.z + W / 2, y: (y - CAM.cy) * CAM.z + H / 2 });
@@ -92,6 +92,9 @@ function renderAt(T) {
   const sc = SCENES[i], lt = T - start, prog = clamp(lt / sc.dur), toEnd = sc.dur - lt;
   TS = Math.floor(T * 12) / 12; LT = lt;                      // characters + fire etc. animate on 12fps
   CAM = shotAt(sc, lt);
+  if (i > 0 && lt < .3) CAM.z *= 1 + .1 * (1 - lt / .3) ** 2;
+  const act = sc.shake || sc.laser || sc.alarm || sc.burst || sc.type === 'overlord' || (sc.type === 'speedway' && (sc.speed ?? 1400) > 600);
+  if (act) { const a = (sc.type === 'overlord' || sc.laser ? 9 : 5) / CAM.z; CAM.cx += Math.sin(T * 47) * a + Math.sin(T * 31) * a; CAM.cy += Math.cos(T * 43) * a; }
   X.setTransform(1, 0, 0, 1, 0, 0); X.globalAlpha = 1; X.globalCompositeOperation = 'source-over'; X.fillStyle = '#000'; X.fillRect(0, 0, W, H);
   if (WORLD[sc.type]) WORLD[sc.type](sc, T, prog); else { cam(1); (CLASSIC[sc.type] || bgCamp)(sc, T, prog); }
   if (sc.type !== 'portraits') {
@@ -102,6 +105,7 @@ function renderAt(T) {
     if (sc.type === 'camp' && sc.snow) snowfall(sc.seed + 1, T, 50, 1.4);
   }
   X.setTransform(1, 0, 0, 1, 0, 0);
+  { const g = ['rgba(0,0,0,0)', 'rgba(255,140,60,.07)', 'rgba(60,120,255,.07)', 'rgba(200,60,255,.05)'][(sc.idx || 0) % 4]; X.fillStyle = g; X.fillRect(0, 0, W, H); }
   bloom(sc.bloom ?? BLOOM[sc.type] ?? (typeof SW_BLOOM !== 'undefined' ? SW_BLOOM[sc.type] : undefined) ?? .15);
   X.fillStyle = rad(W / 2, H / 2, H * .5, W * .75, ['rgba(0,0,0,0)', 'rgba(0,0,0,.3)']); X.fillRect(0, 0, W, H);
   // labels
@@ -113,6 +117,7 @@ function renderAt(T) {
   if (sc.type === 'timeline') timeline(sc, lt, T);
   ribbon(sc.label, lt - .2);
   captions(sc, lt);
+  if (i > 0 && lt < .12) { X.setTransform(1, 0, 0, 1, 0, 0); X.fillStyle = `rgba(255,255,255,${.55 * (1 - lt / .12)})`; X.fillRect(0, 0, W, H); }
   if (i === 0 && lt < .4) { X.fillStyle = `rgba(0,0,0,${1 - lt / .4})`; X.fillRect(0, 0, W, H); }
   if (i === SCENES.length - 1 && toEnd < .8) { X.fillStyle = `rgba(0,0,0,${1 - toEnd / .8})`; X.fillRect(0, 0, W, H); }
 }
@@ -121,5 +126,5 @@ function prep(sc) {
   const total = toks.reduce((a, w) => a + w.length + 2, 0) || 1, sp = sc.speech || sc.dur; let acc = 0;
   sc.words = toks.map(w => { const o = { w, t: .15 + acc / total * sp }; acc += w.length + 2; return o; });
 }
-window.setup = (scenes, fps, meta) => { SCENES = scenes; META = meta || {}; SCENES.forEach(prep); };
+window.setup = (scenes, fps, meta) => { SCENES = scenes; META = meta || {}; SCENES.forEach((s, k) => { s.idx = k; prep(s); }); };
 window.frame = (T, q) => { renderAt(T); return C.toDataURL('image/jpeg', q || .92); };
