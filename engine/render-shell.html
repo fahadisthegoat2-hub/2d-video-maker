@@ -1,0 +1,221 @@
+<title>__TITLE__ Renderer</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@500&display=swap">
+<style>
+/* Layout: render bay. Big preview monitor left with the progress strip under it; device + settings column right. Single dark look (edit suite). */
+:root {
+  --bg: #0b0d12; --panel: #141821; --line: #252b38; --fg: #eef0f4; --dim: #98a1b3; --accent: #ff3b4e; --gold: #ffcc33; --ok: #3ddc84; --warn: #ffb020;
+  --ui: Roboto, system-ui, sans-serif; --display: Fredoka, Roboto, system-ui, sans-serif; --mono: "Roboto Mono", ui-monospace, monospace;
+  color-scheme: dark;
+}
+body { background: var(--bg); color: var(--fg); font: 15px/1.5 var(--ui); }
+.wrap { max-width: 1280px; margin: 0 auto; padding-block: 20px 40px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); display: grid; gap: 18px; }
+header { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; }
+h1 { font: 700 clamp(22px, 3.2vw, 34px)/1.1 var(--display); margin: 0; text-wrap: balance; }
+h1 span { color: var(--accent); }
+.sub { color: var(--dim); }
+.grid { display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(280px, 1fr); gap: 18px; align-items: start; }
+@media (max-width: 860px) { .grid { grid-template-columns: 1fr; } }
+.monitor { background: #000; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; position: relative; }
+canvas#c { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; max-width: 100%; }
+.tag { position: absolute; top: 10px; left: 10px; font: 500 12px var(--mono); background: rgba(0,0,0,.6); padding: 3px 8px; border-radius: 6px; letter-spacing: .04em; }
+.tag.rec { color: var(--accent); }
+.bar { height: 10px; background: var(--line); border-radius: 6px; overflow: hidden; }
+.bar > i { display: block; height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent), var(--gold)); transition: width .3s; }
+.stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; font-variant-numeric: tabular-nums; }
+@media (max-width: 520px) { .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.stat { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; min-width: 0; }
+.stat b { display: block; font: 700 20px var(--mono); }
+.stat small, .label { color: var(--dim); font-size: 12px; text-transform: uppercase; letter-spacing: .08em; }
+.panel { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 16px; display: grid; gap: 12px; min-width: 0; }
+.panel h2 { font: 600 18px var(--display); margin: 0; }
+dl { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 6px 14px; margin: 0; font-size: 14px; }
+dt { color: var(--dim); } dd { margin: 0; text-align: right; overflow-wrap: anywhere; font-family: var(--mono); font-size: 13px; }
+.seg { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; background: var(--bg); border: 1px solid var(--line); border-radius: 10px; padding: 3px; gap: 3px; }
+.seg button { border: 0; background: transparent; color: var(--dim); font: 500 14px var(--ui); padding: 8px 6px; border-radius: 7px; cursor: pointer; }
+.seg button[aria-pressed="true"] { background: var(--line); color: var(--fg); }
+.rec-note { font-size: 13px; color: var(--gold); min-height: 1.5em; }
+button.go { font: 700 17px var(--display); background: var(--accent); color: #fff; border: 0; border-radius: 10px; padding: 13px 16px; cursor: pointer; }
+button.go:disabled { opacity: .45; cursor: default; }
+button.ghost { font: 500 14px var(--ui); background: transparent; color: var(--fg); border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px; cursor: pointer; }
+button.save { background: var(--ok); color: #04210f; }
+button:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+.status { font-size: 14px; color: var(--dim); min-height: 1.5em; }
+.status.err { color: var(--accent); }
+.est { display: grid; gap: 4px; font-size: 13px; font-variant-numeric: tabular-nums; }
+.est div { display: flex; justify-content: space-between; gap: 10px; }
+.est .best { color: var(--ok); }
+.tips { color: var(--dim); font-size: 13px; margin: 0; padding-left: 18px; }
+@media (prefers-reduced-motion: reduce) { .bar > i { transition: none; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <h1>__TITLE__ <span>Renderer</span></h1>
+    <span class="sub" id="meta">Loading…</span>
+  </header>
+  <div class="grid">
+    <div style="display:grid;gap:12px;min-width:0">
+      <div class="monitor">
+        <canvas id="c" width="1920" height="1080" aria-label="Render preview"></canvas>
+        <span class="tag" id="tag">PREVIEW</span>
+      </div>
+      <div class="bar" aria-hidden="true"><i id="bar"></i></div>
+      <div class="stats">
+        <div class="stat"><small>Progress</small><b id="sPct">0%</b></div>
+        <div class="stat"><small>Frames</small><b id="sFrames">0</b></div>
+        <div class="stat"><small>Speed</small><b id="sFps">–</b></div>
+        <div class="stat"><small>Time left</small><b id="sEta">–</b></div>
+      </div>
+      <div class="status" id="status" role="status"></div>
+      <div style="display:flex;flex-wrap:wrap;gap:10px">
+        <button class="go save" id="save" hidden>Save MP4</button>
+        <button class="ghost" id="cancel" hidden>Cancel render</button>
+      </div>
+    </div>
+    <aside style="display:grid;gap:18px;min-width:0">
+      <section class="panel" aria-labelledby="devH">
+        <h2 id="devH">Your device</h2>
+        <dl>
+          <dt>CPU threads</dt><dd id="dCpu">–</dd>
+          <dt>Memory</dt><dd id="dMem">–</dd>
+          <dt>Graphics</dt><dd id="dGpu">–</dd>
+          <dt>H.264 encoder</dt><dd id="dEnc">checking…</dd>
+          <dt>Draw speed</dt><dd id="dDraw">measuring…</dd>
+        </dl>
+        <div class="est" id="est"></div>
+      </section>
+      <section class="panel" aria-labelledby="setH">
+        <h2 id="setH">Render settings</h2>
+        <span class="label">Resolution</span>
+        <div class="seg" id="optRes"><button data-v="1080" aria-pressed="true">1080p</button><button data-v="720" aria-pressed="false">720p</button></div>
+        <span class="label">Frame rate</span>
+        <div class="seg" id="optFps"><button data-v="30" aria-pressed="true">30 fps</button><button data-v="24" aria-pressed="false">24 fps</button></div>
+        <span class="label">Glow effect</span>
+        <div class="seg" id="optGlow"><button data-v="1" aria-pressed="true">On</button><button data-v="0" aria-pressed="false">Off (faster)</button></div>
+        <div class="rec-note" id="rec"></div>
+        <button class="go" id="start" disabled>Render MP4</button>
+        <ul class="tips">
+          <li>Keep this tab open and in front while it renders. Plug in your charger.</li>
+          <li>The video is built frame by frame, so its length is always exact, even on a slow laptop.</li>
+          <li>Voice, music and sound effects are already mixed in.</li>
+        </ul>
+      </section>
+    </aside>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/mp4-muxer@5.1.3/build/mp4-muxer.js"></script>
+__ENGINE__
+<script type="application/json" id="initial-script">__SCRIPT_JSON__</script>
+<script>
+(() => {
+  const $ = id => document.getElementById(id);
+  const fmtT = s => { s = Math.max(0, Math.round(s)); const h = Math.floor(s / 3600), m = Math.floor(s % 3600 / 60), x = s % 60; return h ? `${h}h ${m}m` : m ? `${m}m ${String(x).padStart(2, '0')}s` : `${x}s`; };
+  const status = (m, err) => { $('status').textContent = m; $('status').className = 'status' + (err ? ' err' : ''); };
+  const raw = JSON.parse($('initial-script').textContent), parsed = parseScript(raw), meta = parsed.meta;
+  const scenes = estimateTiming(parsed.scenes, meta.wps || 2.9); setup(scenes, 30, meta);
+  const total = scenes.reduce((a, s) => a + s.dur, 0);
+  $('meta').textContent = `${scenes.length} shots · ${fmtT(total)} · drawn on this device`;
+  const opts = { res: 1080, fps: 30, glow: 1 };
+  for (const [id, key] of [['optRes', 'res'], ['optFps', 'fps'], ['optGlow', 'glow']]) $(id).onclick = e => { const b = e.target.closest('button'); if (!b || busy) return; [...$(id).children].forEach(x => x.setAttribute('aria-pressed', x === b)); opts[key] = +b.dataset.v; updateEst(); };
+  let downloads = null; (window.claude?.use ? claude.use('downloads') : Promise.resolve(null)).then(d => { downloads = d; }).catch(() => {});
+  renderAt(4.5);
+
+  // ---------- device specs ----------
+  $('dCpu').textContent = navigator.hardwareConcurrency || 'unknown';
+  $('dMem').textContent = navigator.deviceMemory ? `${navigator.deviceMemory} GB+` : 'not reported';
+  try { const g = document.createElement('canvas').getContext('webgl'); const ext = g && g.getExtension('WEBGL_debug_renderer_info'); $('dGpu').textContent = ext ? g.getParameter(ext.UNMASKED_RENDERER_WEBGL).replace(/ANGLE \(|\)$/g, '').slice(0, 60) : 'unknown'; } catch (e) { $('dGpu').textContent = 'unknown'; }
+  const CODECS = ['avc1.640028', 'avc1.4d0028', 'avc1.42e028'];
+  async function pickCodec(w, h, fps) {
+    if (!('VideoEncoder' in window)) return null;
+    for (const hw of ['prefer-hardware', 'no-preference']) for (const codec of CODECS) {
+      const cfg = { codec, width: w, height: h, framerate: fps, bitrate: w > 1300 ? 5e6 : 3e6, hardwareAcceleration: hw, avc: { format: 'avc' }, latencyMode: 'quality' };
+      try { const r = await VideoEncoder.isConfigSupported(cfg); if (r.supported) return Object.assign(cfg, { _hw: hw }); } catch (e) {}
+    }
+    return null;
+  }
+  // ---------- benchmark ----------
+  let msGlow = 0, msLite = 0, encOK = false;
+  async function bench() {
+    const c = await pickCodec(1920, 1080, 30); encOK = !!c;
+    $('dEnc').textContent = c ? (c._hw === 'prefer-hardware' ? 'Hardware' : 'Software') : 'Not available';
+    if (!c) { status('This browser cannot encode video. Open this page in Chrome or Edge on your laptop.', true); return; }
+    const sample = n => { const t0 = performance.now(); for (let i = 0; i < n; i++) renderAt((i * 37.3 + 3) % (total - 1)); return (performance.now() - t0) / n; };
+    await new Promise(r => setTimeout(r, 50)); sample(3);
+    window.LITE = false; msGlow = sample(16); window.LITE = true; msLite = sample(16); window.LITE = false; renderAt(4.5);
+    $('dDraw').textContent = `${msGlow.toFixed(0)} ms/frame (${msLite.toFixed(0)} without glow)`;
+    updateEst(); $('start').disabled = false; status('Ready. Pick your settings and press Render MP4.');
+  }
+  const estFor = (res, fps, glow) => total * fps * ((glow ? msGlow : msLite) * 1.18 + (res === 1080 ? 4 : 3)) / 1000;
+  function updateEst() {
+    if (!msGlow) return; const rows = [[1080, 30, 1], [1080, 30, 0], [720, 30, 0], [720, 24, 0]];
+    let best = rows.find(r => estFor(...r) < 45 * 60) || rows[3];
+    $('est').textContent = '';
+    rows.forEach(r => { const d = document.createElement('div'); if (r === best) d.className = 'best'; const a = document.createElement('span'); a.textContent = `${r[0]}p ${r[1]}fps, glow ${r[2] ? 'on' : 'off'}${r === best ? ' (recommended)' : ''}`; const b = document.createElement('span'); b.textContent = '≈ ' + fmtT(estFor(...r)); d.append(a, b); $('est').appendChild(d); });
+    $('rec').textContent = `Your settings: about ${fmtT(estFor(opts.res, opts.fps, opts.glow))} on this device.`;
+  }
+  // ---------- AAC soundtrack (pre-encoded ADTS, muxed without re-encoding) ----------
+  async function loadAudio() {
+    const buf = new Uint8Array(await (await fetch('shadow-audio.aac')).arrayBuffer()); const frames = []; let p = 0, cfg = null;
+    const SR = [96000, 88200, 64000, 48000, 44100, 32000, 24000, 22050, 16000, 12000, 11025, 8000, 7350];
+    while (p + 7 < buf.length) {
+      if (buf[p] !== 0xff || (buf[p + 1] & 0xf0) !== 0xf0) { p++; continue; }
+      const prot = buf[p + 1] & 1, prof = (buf[p + 2] >> 6) & 3, sfi = (buf[p + 2] >> 2) & 15, ch = ((buf[p + 2] & 1) << 2) | (buf[p + 3] >> 6), len = ((buf[p + 3] & 3) << 11) | (buf[p + 4] << 3) | (buf[p + 5] >> 5), hl = prot ? 7 : 9;
+      if (!cfg) { const asc = ((prof + 1) << 11) | (sfi << 7) | (ch << 3); cfg = { sampleRate: SR[sfi], channels: ch, description: new Uint8Array([asc >> 8, asc & 255]) }; }
+      frames.push(buf.subarray(p + hl, p + len)); p += len;
+    }
+    return { frames, cfg };
+  }
+  // ---------- render ----------
+  let busy = false, cancel = false, result = null, wake = null;
+  const tick = () => new Promise(r => { const ch = new MessageChannel(); ch.port1.onmessage = () => r(); ch.port2.postMessage(0); });
+  $('start').onclick = async () => {
+    if (busy) return; busy = true; cancel = false; result = null; $('save').hidden = true; $('start').disabled = true; $('cancel').hidden = false;
+    $('tag').textContent = '● RENDERING'; $('tag').className = 'tag rec';
+    try { wake = await navigator.wakeLock?.request('screen'); } catch (e) {}
+    try {
+      const W2 = opts.res === 1080 ? 1920 : 1280, H2 = opts.res === 1080 ? 1080 : 720, fps = opts.fps; window.LITE = !opts.glow;
+      const cfg = await pickCodec(W2, H2, fps); if (!cfg) throw new Error('No H.264 encoder for that size on this browser. Try 720p, or Chrome/Edge.');
+      status('Loading the soundtrack…'); const au = await loadAudio();
+      const muxer = new Mp4Muxer.Muxer({ target: new Mp4Muxer.ArrayBufferTarget(), video: { codec: 'avc', width: W2, height: H2, frameRate: fps }, audio: { codec: 'aac', sampleRate: au.cfg.sampleRate, numberOfChannels: au.cfg.channels }, fastStart: false, firstTimestampBehavior: 'offset' });
+      let encErr = null; const enc = new VideoEncoder({ output: (chunk, m) => muxer.addVideoChunk(chunk, m), error: e => { encErr = e; } });
+      const { _hw, ...ecfg } = cfg; enc.configure(ecfg);
+      const small = W2 !== 1920 ? Object.assign(document.createElement('canvas'), { width: W2, height: H2 }) : null, sx = small && small.getContext('2d');
+      const LIM = +new URLSearchParams(location.search).get('test') || 0, N = Math.ceil((LIM || total) * fps), adur = 1024 / au.cfg.sampleRate; let ai = 0;
+      const pushAudio = upto => { while (ai < au.frames.length && ai * adur <= upto) { muxer.addAudioChunkRaw(au.frames[ai], 'key', Math.round(ai * adur * 1e6), Math.round(adur * 1e6), ai === 0 ? { decoderConfig: { codec: 'mp4a.40.2', sampleRate: au.cfg.sampleRate, numberOfChannels: au.cfg.channels, description: au.cfg.description } } : undefined); ai++; } };
+      const t0 = performance.now(); let lastUI = 0;
+      for (let n = 0; n < N; n++) {
+        if (cancel) throw new Error('cancelled'); if (encErr) throw encErr;
+        const T = Math.min(n / fps, total - .001); renderAt(T); pushAudio(T + 1);
+        let src = C; if (small) { sx.drawImage(C, 0, 0, W2, H2); src = small; }
+        const vf = new VideoFrame(src, { timestamp: Math.round(n * 1e6 / fps), duration: Math.round(1e6 / fps) });
+        enc.encode(vf, { keyFrame: n % (fps * 2) === 0 }); vf.close();
+        while (enc.encodeQueueSize > 6) await new Promise(r => setTimeout(r, 1));
+        const now = performance.now();
+        if (now - lastUI > 400) { lastUI = now; const done = (n + 1) / N, el = (now - t0) / 1000, f = (n + 1) / el; $('bar').style.width = (done * 100).toFixed(1) + '%'; $('sPct').textContent = (done * 100).toFixed(1) + '%'; $('sFrames').textContent = `${n + 1}/${N}`; $('sFps').textContent = f.toFixed(1) + ' fps'; $('sEta').textContent = fmtT((N - n - 1) / f); status(document.hidden ? 'This tab is in the background, so rendering is slower. Switch back to it.' : `Rendering ${opts.res}p at ${fps} fps…`); await tick(); }
+      }
+      pushAudio(total + 5); status('Finishing the file…'); await enc.flush(); enc.close(); muxer.finalize();
+      result = new Blob([muxer.target.buffer], { type: 'video/mp4' });
+      if (LIM) window.__result = result;
+      $('bar').style.width = '100%'; $('sPct').textContent = '100%'; $('sEta').textContent = 'done';
+      const took = (performance.now() - t0) / 1000;
+      status(`Done: ${fmtT(total)} video, ${(result.size / 1048576).toFixed(0)} MB, rendered in ${fmtT(took)}. Press Save MP4.`);
+      $('save').hidden = false; if (!downloads) status('Done, but this view cannot save files. Open the artifact in your browser on claude.ai to save it.', true);
+    } catch (e) {
+      status(e && e.message === 'cancelled' ? 'Render cancelled.' : 'Render failed: ' + (e && e.message || e), e && e.message !== 'cancelled');
+    } finally {
+      busy = false; $('start').disabled = false; $('cancel').hidden = true; $('tag').textContent = result ? 'DONE' : 'PREVIEW'; $('tag').className = 'tag'; window.LITE = false;
+      try { await wake?.release(); } catch (e) {} wake = null;
+    }
+  };
+  $('cancel').onclick = () => { cancel = true; };
+  $('save').onclick = async () => {
+    if (!result) return; if (!downloads) { status('Saving is not available in this view. Open the artifact in your browser on claude.ai.', true); return; }
+    try { await downloads.save({ filename: '__NAME__.mp4', data: result }); status('Saved. Upload it straight to YouTube.'); }
+    catch (e) { status(e && e.code === 'declined' ? 'Save cancelled. Press Save MP4 to try again.' : 'Could not save: ' + (e && (e.message || e.code)), e && e.code !== 'declined'); }
+  };
+  bench();
+})();
+</script>
