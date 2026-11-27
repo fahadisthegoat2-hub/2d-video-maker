@@ -5,34 +5,79 @@ rate: +5%
 cut: 1.8
 ---
 scene: lab
-dur: 16.04
-vodur: 15.44
+dur: 9.671
+vodur: 9.671
 alarm: 1
 label: The Life of Metal Sonic
 cast: metal(metal, x=0.5, size=1.1, tag=metal sonic)
 speaker: metal
 shots: close, wide, close
-Deep under a frozen machine base, a robot opened its eyes for the very first time. It had one reason to exist. Destroy Sonic the Hedgehog.
+Deep under a frozen machine base, a robot opened its eyes for the very first time.
+---
+scene: versus
+dur: 3.184
+vodur: 3.184
+vs: sonic/metal
+It had one reason to exist.
+---
+scene: burst
+dur: 3.184
+vodur: 2.584
+hero: sonic
+Destroy Sonic the Hedgehog.
 ---
 scene: speedway
-dur: 11.13
-vodur: 10.53
+dur: 5.342
+vodur: 5.342
 cast: metal(metal, x=0.55, fly)
 speaker: metal
 shots: wide, close, wide
-It would chase him across planets, across years, and across time itself. And one day, it would stop chasing, because it would believe it had become him.
+It would chase him across planets, across years, and across time itself.
+---
+scene: burst
+dur: 2.597
+vodur: 2.597
+hero: metal
+flip: 1
+And one day, it would stop chasing,
+---
+scene: kinetic
+dur: 3.191
+vodur: 2.591
+kt: because it would believe it had become him
+nocap: 1
+because it would believe it had become him.
 ---
 scene: zone
-dur: 13.85
-vodur: 13.25
+dur: 3.733
+vodur: 3.733
 cast: sonic(toon=sonic, x=0.36, mood=smug), metal(metal, x=0.64, flip)
 speaker: sonic
 shots: wide, react, close, wide
-This is the true story of Metal Sonic. Where he came from, every battle he fought, and the one question nobody can answer. Is he just a machine?
+This is the true story of Metal Sonic.
+---
+scene: versus
+dur: 1.866
+vodur: 1.866
+vs: sonic/metal
+Where he came from,
+---
+scene: burst
+dur: 6.188
+vodur: 6.188
+hero: sonic
+every battle he fought, and the one question nobody can answer.
+---
+scene: kinetic
+dur: 2.063
+vodur: 1.463
+kt: Is he just a machine
+nocap: 1
+Is he just a machine?
 ---
 scene: fortress
-dur: 4.97
-vodur: 4.37
+dur: 4.970
+vodur: 4.370
 label: Chapter 1: The Doctor
 cast: doctor(egg, x=0.5)
 speaker: doctor
@@ -40,209 +85,455 @@ shots: wide, close
 To understand the robot, you first have to understand the man who built him.
 ---
 scene: lab
-dur: 13.07
-vodur: 12.47
+dur: 6.488
+vodur: 6.488
 screen: sonic
 title: TARGET: SONIC
 cast: doctor(egg, x=0.5, size=1.05, tag=dr eggman)
 speaker: doctor
 shots: close, wide, close
-His name is Doctor Ivo Robotnik. The whole world knows him as Eggman. He has an IQ of three hundred, and one dream. To rule the entire world.
+His name is Doctor Ivo Robotnik. The whole world knows him as Eggman.
+---
+scene: burst
+dur: 4.231
+vodur: 4.231
+hero: doctor
+flip: 1
+He has an IQ of three hundred, and one dream.
+---
+scene: kinetic
+dur: 2.351
+vodur: 1.751
+kt: To rule the entire world
+nocap: 1
+To rule the entire world.
 ---
 scene: stat
-dur: 11.50
-vodur: 10.90
+dur: 6.263
+vodur: 6.263
 value: 300
 label: Eggman's IQ
-Three hundred. Smarter than almost anyone who has ever lived. And yet, there was one problem he could never solve.
+Three hundred. Smarter than almost anyone who has ever lived.
+---
+scene: kinetic
+dur: 0.821
+vodur: 0.821
+kt: And yet
+nocap: 1
+And yet,
+---
+scene: burst
+dur: 4.415
+vodur: 3.815
+hero: metal
+there was one problem he could never solve.
 ---
 scene: zone
-dur: 14.14
-vodur: 13.54
+dur: 5.900
+vodur: 5.900
 speed: 1600
 rings: 1
 cast: sonic(toon=sonic, x=0.5, run, mood=smug)
 speaker: sonic
 shots: wide, close, wide
-A blue hedgehog. Every robot army he built, Sonic smashed. Every fortress, Sonic broke. Every evil plan, Sonic ruined, usually while laughing.
+A blue hedgehog. Every robot army he built, Sonic smashed.
 ---
-scene: news
-dur: 9.19
-vodur: 8.59
-headline: EGGMAN DEFEATED AGAIN
-Eggman lost on South Island. He lost on West Side Island. He lost in the sky, on his giant space station, the Death Egg.
+scene: burst
+dur: 2.848
+vodur: 2.848
+hero: sonic
+flip: 1
+Every fortress, Sonic broke.
+---
+scene: kinetic
+dur: 3.052
+vodur: 3.052
+kt: Every evil plan, Sonic ruined
+nocap: 1
+Every evil plan, Sonic ruined,
 ---
 scene: zone
-dur: 13.03
-vodur: 12.43
+dur: 2.340
+vodur: 1.740
+speed: 1600
+rings: 1
+cast: sonic(toon=sonic, x=0.5, run, mood=smug)
+speaker: sonic
+shots: close, react
+usually while laughing.
+---
+scene: news
+dur: 4.402
+vodur: 4.402
+headline: EGGMAN DEFEATED AGAIN
+Eggman lost on South Island. He lost on West Side Island.
+---
+scene: kinetic
+dur: 4.788
+vodur: 4.188
+kt: He lost in the sky, on his giant...
+nocap: 1
+He lost in the sky, on his giant space station, the Death Egg.
+---
+scene: zone
+dur: 6.261
+vodur: 6.261
 cast: sonic(toon=sonic, x=0.4, mood=happy), tails(toon=tails, x=0.6, fly, tag=tails)
 speaker: tails
 shots: wide, close, react
-And every time, Sonic had help. A young two tailed fox named Miles Prower. Everyone calls him Tails, and he can fly by spinning his tails like a helicopter.
+And every time, Sonic had help. A young two tailed fox named Miles Prower.
+---
+scene: burst
+dur: 2.115
+vodur: 2.115
+hero: tails
+flip: 1
+Everyone calls him Tails,
+---
+scene: kinetic
+dur: 4.654
+vodur: 4.054
+kt: and he can fly by spinning his tails...
+nocap: 1
+and he can fly by spinning his tails like a helicopter.
 ---
 scene: wreck
-dur: 12.39
-vodur: 11.79
+dur: 4.622
+vodur: 4.622
 cast: doctor(egg, x=0.5, mood=angry)
 speaker: doctor
 shots: close, wide, close
-Losing again and again did something to Eggman. He stopped asking how to beat Sonic. He started asking a much scarier question.
+Losing again and again did something to Eggman.
+---
+scene: burst
+dur: 7.768
+vodur: 7.168
+hero: sonic
+flip: 1
+He stopped asking how to beat Sonic. He started asking a much scarier question.
 ---
 scene: lab
-dur: 11.93
-vodur: 11.33
+dur: 4.429
+vodur: 4.429
 title: PROJECT: METAL
 cast: doctor(egg, x=0.5, mood=happy)
 speaker: doctor
 shots: close, close
-What if I build my own Sonic? One that is faster. One that is stronger. One that never gets tired, never feels fear, and always obeys.
+What if I build my own Sonic? One that is faster.
+---
+scene: burst
+dur: 1.898
+vodur: 1.898
+hero: doctor
+flip: 1
+One that is stronger.
+---
+scene: kinetic
+dur: 5.603
+vodur: 5.003
+kt: One that never gets tired, never feels fear,...
+nocap: 1
+One that never gets tired, never feels fear, and always obeys.
 ---
 scene: monitors
-dur: 12.76
-vodur: 12.16
+dur: 8.241
+vodur: 8.241
 heroes: sonic,sonic,sonic
 label: Project: Metal Sonic
-And so, in secret, he started building. He studied every recording of Sonic he had ever made. How he ran, how he jumped, how he spun into a ball.
+And so, in secret, he started building. He studied every recording of Sonic he had ever made.
+---
+scene: kinetic
+dur: 4.519
+vodur: 3.919
+kt: How he ran, how he jumped, how he...
+nocap: 1
+How he ran, how he jumped, how he spun into a ball.
 ---
 scene: lab
-dur: 11.72
-vodur: 11.12
+dur: 4.850
+vodur: 4.850
 title: PROJECT: METAL
 cast: doctor(egg, x=0.32, mood=happy), metal(metal, x=0.66)
 speaker: doctor
 shots: wide, react, close, react
-The result was a robot shaped like Sonic, but made of metal. A jet engine in his chest. Claws for hands. Red eyes that could see in total darkness.
+The result was a robot shaped like Sonic, but made of metal.
+---
+scene: burst
+dur: 2.102
+vodur: 2.102
+hero: doctor
+flip: 1
+A jet engine in his chest.
+---
+scene: kinetic
+dur: 4.769
+vodur: 4.169
+kt: Claws for hands
+nocap: 1
+Claws for hands. Red eyes that could see in total darkness.
 ---
 scene: speedway
-dur: 11.97
-vodur: 11.37
+dur: 9.368
+vodur: 9.368
 cast: metal(metal, x=0.55, fly, tag=metal sonic)
 speaker: metal
 shots: close, wide, close
-His body could reach speeds faster than sound. His armor could take hits that would destroy any other robot. Eggman called him Metal Sonic.
+His body could reach speeds faster than sound. His armor could take hits that would destroy any other robot.
+---
+scene: burst
+dur: 2.602
+vodur: 2.002
+hero: doctor
+flip: 1
+Eggman called him Metal Sonic.
 ---
 scene: planet
-dur: 6.10
-vodur: 5.50
+dur: 4.306
+vodur: 4.306
 label: Chapter 2: Little Planet
-But a robot this powerful needed the perfect place to fight. And Eggman had found one.
+But a robot this powerful needed the perfect place to fight.
+---
+scene: burst
+dur: 1.794
+vodur: 1.194
+hero: doctor
+flip: 1
+And Eggman had found one.
 ---
 scene: zone
-dur: 7.65
-vodur: 7.05
+dur: 7.650
+vodur: 7.050
 label: Never Lake
 Above a quiet place called Never Lake, something strange happens once every year.
 ---
 scene: planet
-dur: 8.77
-vodur: 8.17
+dur: 3.725
+vodur: 3.725
 label: Little Planet
-For one month, a small world appears in the sky, held by a giant chain to a mountain. People call it Little Planet.
+For one month, a small world appears in the sky,
+---
+scene: burst
+dur: 2.794
+vodur: 2.794
+hero: metal
+flip: 1
+held by a giant chain to a mountain.
+---
+scene: kinetic
+dur: 2.251
+vodur: 1.651
+kt: People call it Little Planet
+nocap: 1
+People call it Little Planet.
 ---
 scene: emeralds
-dur: 10.48
-vodur: 9.88
+dur: 4.764
+vodur: 4.764
 label: The Time Stones
-Little Planet holds seven magic gems called the Time Stones. Whoever controls them can travel through the past, and change the future.
+Little Planet holds seven magic gems called the Time Stones.
+---
+scene: burst
+dur: 3.970
+vodur: 3.970
+hero: metal
+flip: 1
+Whoever controls them can travel through the past,
+---
+scene: kinetic
+dur: 1.747
+vodur: 1.147
+kt: and change the future
+nocap: 1
+and change the future.
 ---
 scene: lab
-dur: 9.94
-vodur: 9.34
+dur: 9.210
+vodur: 9.210
 screen: metal
 title: OPERATION: TIME STONES
 cast: doctor(egg, x=0.5, mood=happy)
 speaker: doctor
 shots: close, wide
-Eggman had a plan. Chain the planet down, steal the Time Stones, and rewrite history so that he wins. Forever.
+Eggman had a plan. Chain the planet down, steal the Time Stones, and rewrite history so that he wins.
+---
+scene: burst
+dur: 0.730
+vodur: 0.800
+hero: doctor
+flip: 1
+Forever.
 ---
 scene: planet
-dur: 7.19
-vodur: 6.59
+dur: 4.985
+vodur: 4.985
 metal: 1
 label: He covered it in metal
-He wrapped the beautiful planet in steel. He built factories on its mountains, and robots in its rivers. And he left his newest creation waiting there.
+He wrapped the beautiful planet in steel. He built factories on its mountains, and robots in its rivers.
+---
+scene: burst
+dur: 2.205
+vodur: 1.605
+hero: metal
+flip: 1
+And he left his newest creation waiting there.
 ---
 scene: planet
-dur: 13.15
-vodur: 12.55
+dur: 8.477
+vodur: 8.477
 cast: sonic(toon=sonic, x=0.5, run, mood=happy)
 speaker: sonic
 shots: wide, close
-Sonic heard about the strange planet and ran straight to Never Lake to see it. He did not know he was running into a trap.
+Sonic heard about the strange planet and ran straight to Never Lake to see it.
+---
+scene: burst
+dur: 4.673
+vodur: 4.073
+hero: sonic
+flip: 1
+He did not know he was running into a trap.
 ---
 scene: planet
-dur: 9.18
-vodur: 8.58
+dur: 5.406
+vodur: 5.406
 label: Chapter 3: Amy Rose
 cast: amy(toon=amy, x=0.5, mood=happy, tag=amy rose)
 speaker: amy
 shots: wide, close, close
-And he was not alone. Someone had followed him there. A young pink hedgehog named Amy Rose.
+And he was not alone. Someone had followed him there.
+---
+scene: burst
+dur: 3.774
+vodur: 3.174
+hero: amy
+flip: 1
+A young pink hedgehog named Amy Rose.
 ---
 scene: zone
-dur: 7.93
-vodur: 7.33
+dur: 5.787
+vodur: 5.787
 cast: amy(toon=amy, x=0.5, mood=happy)
 speaker: amy
 shots: close, close
-Amy had a tarot card that told her she would meet her true love on Little Planet. And she was sure it was Sonic.
+Amy had a tarot card that told her she would meet her true love on Little Planet.
+---
+scene: burst
+dur: 2.143
+vodur: 1.543
+hero: sonic
+flip: 1
+And she was sure it was Sonic.
 ---
 scene: planet
-dur: 8.79
-vodur: 8.19
+dur: 6.348
+vodur: 6.348
 metal: 1
 cast: sonic(toon=sonic, x=0.38, mood=worried), amy(toon=amy, x=0.6, mood=happy)
 speaker: amy
 shots: wide, react, close, react
-Sonic was not so sure. But before he could run away, the sky turned dark.
+Sonic was not so sure. But before he could run away,
+---
+scene: burst
+dur: 2.442
+vodur: 1.842
+hero: sonic
+flip: 1
+the sky turned dark.
 ---
 scene: planet
-dur: 9.37
-vodur: 8.77
+dur: 3.624
+vodur: 3.624
 metal: 1
 cast: metal(metal, x=0.42, fly), amy(toon=amy, x=0.64, mood=worried)
 speaker: metal
 shots: wide, close, react, close
-A blue blur dropped down and grabbed her. For a second, Amy thought it was Sonic. Then she saw the red eyes.
+A blue blur dropped down and grabbed her.
+---
+scene: burst
+dur: 3.447
+vodur: 3.447
+hero: amy
+flip: 1
+For a second, Amy thought it was Sonic.
+---
+scene: kinetic
+dur: 2.298
+vodur: 1.698
+kt: Then she saw the red eyes
+nocap: 1
+Then she saw the red eyes.
 ---
 scene: lab
-dur: 6.74
-vodur: 6.14
+dur: 6.740
+vodur: 6.140
 cast: metal(metal, x=0.5, size=1.1)
 speaker: metal
 shots: close, close
 Metal Sonic did not want Amy. He wanted Sonic. And he knew Sonic would never leave her behind.
 ---
 scene: speedway
-dur: 11.75
-vodur: 11.15
+dur: 5.254
+vodur: 5.254
 label: Chapter 4: Stardust Speedway
 cast: sonic(toon=sonic, x=0.5, run, mood=angry)
 speaker: sonic
 shots: close, wide
-Sonic chased them to the strangest place on the planet. A shining highway floating among the stars, called Stardust Speedway.
+Sonic chased them to the strangest place on the planet.
+---
+scene: burst
+dur: 4.108
+vodur: 4.108
+hero: sonic
+flip: 1
+A shining highway floating among the stars,
+---
+scene: kinetic
+dur: 2.388
+vodur: 1.788
+kt: called Stardust Speedway
+nocap: 1
+called Stardust Speedway.
 ---
 scene: speedway
-dur: 12.28
-vodur: 11.68
+dur: 4.392
+vodur: 4.392
 speed: 40
 cast: sonic(toon=sonic, x=0.36, mood=angry), metal(metal, x=0.64, flip)
 speaker: sonic
 shots: wide, close, react, close
-There, for the first time, the hero met his copy. Same shape. Same speed. Same stare. The only difference was that one of them had a heart.
+There, for the first time, the hero met his copy.
+---
+scene: burst
+dur: 2.062
+vodur: 2.062
+hero: sonic
+flip: 1
+Same shape. Same speed.
+---
+scene: kinetic
+dur: 5.826
+vodur: 5.226
+kt: Same stare
+nocap: 1
+Same stare. The only difference was that one of them had a heart.
 ---
 scene: speedway
-dur: 5.23
-vodur: 4.63
+dur: 3.487
+vodur: 3.487
 speed: 900
 cast: metal(metal, x=0.5, fly)
 speaker: metal
 shots: close, wide
-Then Metal Sonic fired his jet engine, and the race began.
+Then Metal Sonic fired his jet engine,
+---
+scene: versus
+dur: 1.743
+vodur: 1.143
+vs: sonic/metal
+and the race began.
 ---
 scene: speedway
-dur: 7.37
-vodur: 6.77
+dur: 7.370
+vodur: 6.770
 laser: 1
 label: The race
 cast: sonic(toon=sonic, x=0.38, run, mood=angry), metal(metal, x=0.62, fly)
@@ -251,59 +542,106 @@ shots: wide, close, react, wide
 They tore down the highway faster than sound. Behind them, a giant laser chased both of them, burning everything it touched.
 ---
 scene: speedway
-dur: 9.68
-vodur: 9.08
+dur: 4.076
+vodur: 4.076
 laser: 1
 cast: metal(metal, x=0.5, fly, size=1.1)
 speaker: metal
 shots: close, close
-Metal did not care about the laser. He only cared about winning. He shoved Sonic, blocked him, and used every dirty trick Eggman had programmed into him.
+Metal did not care about the laser. He only cared about winning.
+---
+scene: versus
+dur: 5.604
+vodur: 5.004
+vs: sonic/metal
+He shoved Sonic, blocked him, and used every dirty trick Eggman had programmed into him.
 ---
 scene: speedway
-dur: 8.56
-vodur: 7.96
+dur: 4.144
+vodur: 4.144
 laser: 1
 cast: sonic(toon=sonic, x=0.5, run, mood=angry, size=1.1)
 speaker: sonic
 shots: close, close
-But Sonic did not run for his creator. He ran for his friend. And that is something no robot had ever been built to understand.
+But Sonic did not run for his creator. He ran for his friend.
+---
+scene: burst
+dur: 4.416
+vodur: 3.816
+hero: sonic
+flip: 1
+And that is something no robot had ever been built to understand.
 ---
 scene: stat
-dur: 8.62
-vodur: 8.02
+dur: 3.373
+vodur: 3.373
 value: 1
 unit: second
 label: The winning margin
-Sonic crossed the finish line first, by about one second. The laser smashed into Metal Sonic.
+Sonic crossed the finish line first,
+---
+scene: versus
+dur: 5.247
+vodur: 4.647
+vs: sonic/metal
+by about one second. The laser smashed into Metal Sonic.
 ---
 scene: planet
-dur: 10.02
-vodur: 9.42
+dur: 6.189
+vodur: 6.189
 cast: sonic(toon=sonic, x=0.4, mood=happy), amy(toon=amy, x=0.6, mood=happy)
 speaker: amy
 shots: wide, react, close
-Amy was free. She hugged Sonic so hard he could barely breathe. And Metal Sonic lay broken on the road.
+Amy was free. She hugged Sonic so hard he could barely breathe.
+---
+scene: burst
+dur: 3.831
+vodur: 3.231
+hero: metal
+flip: 1
+And Metal Sonic lay broken on the road.
 ---
 scene: planet
-dur: 7.45
-vodur: 6.85
+dur: 5.097
+vodur: 5.097
 cast: sonic(toon=sonic, x=0.5, mood=smug, pose=wave)
 speaker: sonic
 shots: close, wide
-Sonic went on to collect the Time Stones, beat Eggman, and free Little Planet. The planet floated away, safe again.
+Sonic went on to collect the Time Stones, beat Eggman, and free Little Planet.
+---
+scene: burst
+dur: 2.353
+vodur: 1.753
+hero: sonic
+flip: 1
+The planet floated away, safe again.
 ---
 scene: speedway
-dur: 11.06
-vodur: 10.46
+dur: 4.313
+vodur: 4.313
 speed: 0
 cast: metal(metal, x=0.5, mood=sad)
 speaker: metal
 shots: close, close
-But the robot lying in the stardust had learned something new. He had lost. And losing, for a machine made only to win, felt like an error he could never delete.
+But the robot lying in the stardust had learned something new.
+---
+scene: burst
+dur: 3.895
+vodur: 3.895
+hero: metal
+flip: 1
+He had lost. And losing, for a machine made only to win,
+---
+scene: kinetic
+dur: 2.852
+vodur: 2.252
+kt: felt like an error he could never delete
+nocap: 1
+felt like an error he could never delete.
 ---
 scene: lab
-dur: 4.49
-vodur: 3.89
+dur: 4.490
+vodur: 3.890
 label: Chapter 5: Rebuilt
 title: REBUILD: 12%
 cast: doctor(egg, x=0.32), metal(metal, x=0.66)
@@ -312,24 +650,38 @@ shots: wide, close, react
 Eggman did not throw his creation away. He picked up the pieces and rebuilt him.
 ---
 scene: fortress
-dur: 8.37
-vodur: 7.77
+dur: 4.731
+vodur: 4.731
 cast: doctor(egg, x=0.32), metal(metal, x=0.66)
 speaker: doctor
 shots: wide, close, react
-Over the next years, Metal Sonic became Eggman's favorite weapon. The one he sent when every other robot had failed.
+Over the next years, Metal Sonic became Eggman's favorite weapon.
+---
+scene: burst
+dur: 3.639
+vodur: 3.039
+hero: doctor
+flip: 1
+The one he sent when every other robot had failed.
 ---
 scene: timeline
-dur: 7.83
-vodur: 7.23
+dur: 4.099
+vodur: 4.099
 years: Little Planet, The Islands, The Tournament, The Base
 events: First race | Rematches | Fights | Silence
 active: 2
-He fought Sonic in hidden bases. He fought him on floating islands. He fought him in tournaments of the strongest fighters alive.
+He fought Sonic in hidden bases. He fought him on floating islands.
+---
+scene: kinetic
+dur: 3.731
+vodur: 3.131
+kt: He fought him in tournaments of the strongest...
+nocap: 1
+He fought him in tournaments of the strongest fighters alive.
 ---
 scene: zone
-dur: 6.74
-vodur: 6.14
+dur: 6.740
+vodur: 6.140
 speed: 1500
 cast: sonic(toon=sonic, x=0.38, run, mood=angry), metal(metal, x=0.62, fly)
 speaker: sonic
@@ -337,398 +689,953 @@ shots: wide, close, react, close
 And every single time, it ended the same way. Sonic won, and Metal was dragged back to the lab in pieces.
 ---
 scene: monitors
-dur: 10.37
-vodur: 9.77
+dur: 3.747
+vodur: 3.747
 heroes: sonic,sonic,sonic,sonic,sonic,sonic
-Each time he was rebuilt, Metal remembered. Every loss was saved inside his memory. Every mistake. Every move Sonic made.
+Each time he was rebuilt, Metal remembered.
+---
+scene: versus
+dur: 3.399
+vodur: 3.399
+vs: sonic/metal
+Every loss was saved inside his memory.
+---
+scene: kinetic
+dur: 3.224
+vodur: 2.624
+kt: Every move Sonic made
+nocap: 1
+Every mistake. Every move Sonic made.
 ---
 scene: lab
-dur: 9.24
-vodur: 8.64
+dur: 5.320
+vodur: 5.320
 screen: sonic
 title: MEMORY: SONIC
 label: Something changed
 cast: metal(metal, x=0.5)
 speaker: metal
 shots: close, wide, close
-And slowly, something started to grow inside that memory. Something Eggman never designed. A feeling.
+And slowly, something started to grow inside that memory.
+---
+scene: burst
+dur: 2.987
+vodur: 2.987
+hero: doctor
+flip: 1
+Something Eggman never designed.
+---
+scene: kinetic
+dur: 0.933
+vodur: 0.800
+kt: A feeling
+nocap: 1
+A feeling.
 ---
 scene: speedway
-dur: 15.33
-vodur: 14.73
+dur: 3.668
+vodur: 3.668
 speed: 0
 cast: metal(metal, x=0.5, size=1.1)
 speaker: metal
 shots: close, close
-It was not friendship. It was not love. It was pride. Metal Sonic did not want to beat Sonic because Eggman told him to anymore. He wanted to beat Sonic for himself.
+It was not friendship. It was not love.
+---
+scene: versus
+dur: 8.276
+vodur: 8.276
+vs: sonic/metal
+It was pride. Metal Sonic did not want to beat Sonic because Eggman told him to anymore.
+---
+scene: burst
+dur: 3.386
+vodur: 2.786
+hero: sonic
+He wanted to beat Sonic for himself.
 ---
 scene: lab
-dur: 8.49
-vodur: 7.89
+dur: 4.966
+vodur: 4.966
 label: Chapter 6: The Betrayal
 cast: doctor(egg, x=0.32, mood=happy), metal(metal, x=0.66)
 speaker: doctor
 shots: wide, react, close
-Eggman did not notice. He was too busy with his next big plan. And that mistake almost cost him everything.
+Eggman did not notice. He was too busy with his next big plan.
+---
+scene: burst
+dur: 3.524
+vodur: 2.924
+hero: doctor
+flip: 1
+And that mistake almost cost him everything.
 ---
 scene: lab
-dur: 8.35
-vodur: 7.75
+dur: 3.968
+vodur: 3.968
 alarm: 1
 cage: 0.3
 cast: metal(metal, x=0.62, size=1.1), doctor(egg, x=0.3, mood=worried)
 speaker: metal
 shots: close, react, wide
-One night, Metal Sonic walked into Eggman's lab, grabbed his own creator, and locked him inside a cage.
+One night, Metal Sonic walked into Eggman's lab,
+---
+scene: versus
+dur: 1.984
+vodur: 1.984
+vs: sonic/metal
+grabbed his own creator,
+---
+scene: burst
+dur: 2.398
+vodur: 1.798
+hero: metal
+and locked him inside a cage.
 ---
 scene: news
-dur: 9.14
-vodur: 8.54
+dur: 6.320
+vodur: 6.320
 headline: WHERE IS DR EGGMAN?
 cast: doctor(egg, x=0.5, mood=worried)
 speaker: doctor
 shots: close, close
-The genius who built an army of robots was now a prisoner of one. And nobody in the world knew.
+The genius who built an army of robots was now a prisoner of one.
+---
+scene: kinetic
+dur: 2.820
+vodur: 2.220
+kt: And nobody in the world knew
+nocap: 1
+And nobody in the world knew.
 ---
 scene: lab
-dur: 11.89
-vodur: 11.29
+dur: 3.567
+vodur: 3.567
 cage: 0.3
 title: BROADCAST: DR EGGMAN
 cast: doctor(egg, x=0.3, mood=worried), metal(metal, x=0.66)
 speaker: metal
 shots: wide, react, close
-Because Metal Sonic did something very smart. He pretended to be Eggman. He sent messages in the doctor's voice, giving orders to his entire robot army.
+Because Metal Sonic did something very smart.
+---
+scene: versus
+dur: 5.232
+vodur: 5.232
+vs: sonic/metal
+He pretended to be Eggman. He sent messages in the doctor's voice,
+---
+scene: burst
+dur: 3.091
+vodur: 2.491
+hero: doctor
+giving orders to his entire robot army.
 ---
 scene: fortress
-dur: 10.57
-vodur: 9.97
+dur: 2.710
+vodur: 2.710
 label: The army was his
-Thousands of robots, airships, and battle fortresses. All of them now obeyed one machine. And no one suspected a thing.
+Thousands of robots, airships,
+---
+scene: burst
+dur: 5.240
+vodur: 5.240
+hero: metal
+flip: 1
+and battle fortresses. All of them now obeyed one machine.
+---
+scene: kinetic
+dur: 2.620
+vodur: 2.020
+kt: And no one suspected a thing
+nocap: 1
+And no one suspected a thing.
 ---
 scene: monitors
-dur: 7.76
-vodur: 7.16
+dur: 5.803
+vodur: 5.803
 heroes: sonic,tails,amy,shadow,sonic,tails
 label: Chapter 7: The Copy Machine
-Then Metal began the real plan. He sent fake messages to heroes all over the world, tricking them into fighting.
+Then Metal began the real plan. He sent fake messages to heroes all over the world,
+---
+scene: kinetic
+dur: 1.957
+vodur: 1.357
+kt: tricking them into fighting
+nocap: 1
+tricking them into fighting.
 ---
 scene: zone
-dur: 10.49
-vodur: 9.89
+dur: 3.542
+vodur: 3.542
 speed: 1400
 cast: tails(toon=tails, x=0.3, fly), sonic(toon=sonic, x=0.48, run, mood=angry), amy(toon=amy, x=0.66, prop=hammer, mood=angry)
 speaker: sonic
 shots: wide, close, react, medium
-Sonic and Tails teamed up with Knuckles the echidna. Amy formed a team of her own. A detective agency took a mystery job. Everyone was racing toward Eggman.
+Sonic and Tails teamed up with Knuckles the echidna.
+---
+scene: burst
+dur: 4.632
+vodur: 4.632
+hero: amy
+flip: 1
+Amy formed a team of her own. A detective agency took a mystery job.
+---
+scene: kinetic
+dur: 2.316
+vodur: 1.716
+kt: Everyone was racing toward Eggman
+nocap: 1
+Everyone was racing toward Eggman.
 ---
 scene: fortress
-dur: 12.69
-vodur: 12.09
+dur: 4.230
+vodur: 4.230
 label: Shadow the Hedgehog
 cast: shadow(toon=shadow, x=0.5, tag=shadow)
 speaker: shadow
 shots: wide, close, close
-And from the darkness came someone nobody expected. Shadow the Hedgehog. The ultimate life form. A hedgehog created in a space station fifty years earlier.
+And from the darkness came someone nobody expected.
+---
+scene: burst
+dur: 3.649
+vodur: 3.649
+hero: shadow
+flip: 1
+Shadow the Hedgehog. The ultimate life form.
+---
+scene: kinetic
+dur: 4.811
+vodur: 4.211
+kt: A hedgehog created in a space station fifty...
+nocap: 1
+A hedgehog created in a space station fifty years earlier.
 ---
 scene: lab
-dur: 10.21
-vodur: 9.61
+dur: 6.807
+vodur: 6.807
 screen: none
 title: PROJECT: SHADOW
 cast: shadow(toon=shadow, x=0.5, mood=angry)
 speaker: shadow
 shots: close, close
-Shadow had lost his memories. He had woken up in a capsule, with no idea who he was. He only knew one thing. Eggman had answers.
+Shadow had lost his memories. He had woken up in a capsule, with no idea who he was.
+---
+scene: burst
+dur: 1.864
+vodur: 1.864
+hero: shadow
+flip: 1
+He only knew one thing.
+---
+scene: kinetic
+dur: 1.540
+vodur: 0.940
+kt: Eggman had answers
+nocap: 1
+Eggman had answers.
 ---
 scene: zone
-dur: 10.05
-vodur: 9.45
+dur: 7.886
+vodur: 7.886
 speed: 1500
 cast: sonic(toon=sonic, x=0.36, run, mood=angry), shadow(toon=shadow, x=0.62, run)
 speaker: shadow
 shots: wide, react, close
-So the heroes fought their way across the world. Through beaches, casinos, haunted castles and giant battleships. And they fought each other too.
+So the heroes fought their way across the world. Through beaches, casinos, haunted castles and giant battleships.
+---
+scene: burst
+dur: 2.164
+vodur: 1.564
+hero: sonic
+flip: 1
+And they fought each other too.
 ---
 scene: monitors
-dur: 8.03
-vodur: 7.43
+dur: 6.316
+vodur: 6.316
 heroes: sonic,tails,amy,shadow,sonic,tails
 label: He was watching every fight
-But every fight was a trap. Metal Sonic was watching from the shadows, scanning each hero.
+But every fight was a trap. Metal Sonic was watching from the shadows,
+---
+scene: kinetic
+dur: 1.714
+vodur: 1.114
+kt: scanning each hero
+nocap: 1
+scanning each hero.
 ---
 scene: monitors
-dur: 13.26
-vodur: 12.66
+dur: 3.566
+vodur: 3.566
 heroes: sonic,tails,amy,shadow,metal,sonic
-He copied Sonic's speed. Tails' flight. Knuckles' strength. Amy's hammer. Shadow's power to bend time. He stole the data of every hero, one by one.
+He copied Sonic's speed. Tails' flight.
+---
+scene: kinetic
+dur: 5.670
+vodur: 5.670
+kt: Shadow's power to bend time
+nocap: 1
+Knuckles' strength. Amy's hammer. Shadow's power to bend time.
+---
+scene: burst
+dur: 4.024
+vodur: 3.424
+hero: metal
+He stole the data of every hero, one by one.
 ---
 scene: lab
-dur: 9.92
-vodur: 9.32
+dur: 3.939
+vodur: 3.939
 alarm: 1
 title: UPGRADE: 100%
 cast: metal(metal, x=0.5, size=1.15)
 speaker: metal
 shots: close, close
-He even scanned a strange water creature called Chaos, a god that could change its own shape. And with all that data, he upgraded himself.
+He even scanned a strange water creature called Chaos,
+---
+scene: burst
+dur: 2.772
+vodur: 2.772
+hero: metal
+flip: 1
+a god that could change its own shape.
+---
+scene: kinetic
+dur: 3.209
+vodur: 2.609
+kt: And with all that data, he upgraded himself
+nocap: 1
+And with all that data, he upgraded himself.
 ---
 scene: fortress
-dur: 11.89
-vodur: 11.29
+dur: 3.737
+vodur: 3.737
 label: Neo Metal Sonic
 cast: metal(metal, x=0.5, size=1.2, tag=neo metal sonic, cape=#7a1a2a, metalColor=#4a3aa8)
 speaker: metal
 shots: wide, close, close
-His body changed. Taller. Darker. With a flowing cape. He was no longer Metal Sonic. He was Neo Metal Sonic.
+His body changed. Taller. Darker.
+---
+scene: versus
+dur: 2.265
+vodur: 2.265
+vs: sonic/neo
+With a flowing cape.
+---
+scene: burst
+dur: 3.284
+vodur: 3.284
+hero: neo
+He was no longer Metal Sonic.
+---
+scene: kinetic
+dur: 2.604
+vodur: 2.004
+kt: He was Neo Metal Sonic
+nocap: 1
+He was Neo Metal Sonic.
 ---
 scene: fortress
-dur: 9.15
-vodur: 8.55
+dur: 5.779
+vodur: 5.779
 cast: sonic(toon=sonic, x=0.34, mood=angry), metal(metal, x=0.62, size=1.2, flip, cape=#7a1a2a, metalColor=#4a3aa8)
 speaker: metal
 shots: wide, close, react, close
-Then, on top of Eggman's flying fortress, he finally revealed himself to the heroes. And he said the words he had waited years to say.
+Then, on top of Eggman's flying fortress, he finally revealed himself to the heroes.
+---
+scene: burst
+dur: 3.371
+vodur: 2.771
+hero: neo
+flip: 1
+And he said the words he had waited years to say.
 ---
 scene: overlord
-dur: 11.20
-vodur: 10.60
+dur: 2.909
+vodur: 2.909
 cast: metal(metal, x=0.5, size=1.25, cape=#7a1a2a, metalColor=#4a3aa8)
 speaker: metal
 shots: close, close
-I am the real Sonic. The one and only. The strongest. And now, I will prove it.
+I am the real Sonic.
+---
+scene: burst
+dur: 4.655
+vodur: 4.655
+hero: neo
+flip: 1
+The one and only. The strongest.
+---
+scene: kinetic
+dur: 3.636
+vodur: 3.036
+kt: And now, I will prove it
+nocap: 1
+And now, I will prove it.
 ---
 scene: fortress
-dur: 11.23
-vodur: 10.63
+dur: 8.717
+vodur: 8.717
 cast: doctor(egg, x=0.5, mood=worried)
 speaker: doctor
 shots: close, wide
-Meanwhile, Eggman had escaped his cage. He ran to the top of the fortress and saw what his creation had become. For once, the doctor was afraid.
+Meanwhile, Eggman had escaped his cage. He ran to the top of the fortress and saw what his creation had become.
+---
+scene: burst
+dur: 2.513
+vodur: 1.913
+hero: doctor
+flip: 1
+For once, the doctor was afraid.
 ---
 scene: overlord
-dur: 5.86
-vodur: 5.26
+dur: 3.606
+vodur: 3.606
 label: Chapter 8: Metal Overlord
-Neo Metal Sonic used all the data he had stolen, and transformed one last time.
+Neo Metal Sonic used all the data he had stolen,
+---
+scene: versus
+dur: 2.254
+vodur: 1.654
+vs: sonic/neo
+and transformed one last time.
 ---
 scene: overlord
-dur: 13.77
-vodur: 13.17
+dur: 4.396
+vodur: 4.396
 label: Metal Overlord
-He became a giant metal dragon, as big as a mountain. With wings of steel, a body of armor, and the powers of every hero he had copied. He called himself Metal Overlord.
+He became a giant metal dragon, as big as a mountain.
+---
+scene: burst
+dur: 3.069
+vodur: 3.069
+hero: metal
+flip: 1
+With wings of steel, a body of armor,
+---
+scene: kinetic
+dur: 3.567
+vodur: 3.567
+kt: and the powers of every hero he had...
+nocap: 1
+and the powers of every hero he had copied.
+---
+scene: overlord
+dur: 2.737
+vodur: 2.137
+He called himself Metal Overlord.
 ---
 scene: wreck
-dur: 8.59
-vodur: 7.99
+dur: 6.068
+vodur: 6.068
 cast: amy(toon=amy, x=0.5, mood=worried)
 speaker: amy
 shots: close, wide
-He smashed the fortress and grabbed the only hero he remembered from that very first day. Amy Rose. The girl from Little Planet.
+He smashed the fortress and grabbed the only hero he remembered from that very first day.
+---
+scene: burst
+dur: 0.614
+vodur: 0.800
+hero: amy
+flip: 1
+Amy Rose.
+---
+scene: kinetic
+dur: 1.909
+vodur: 1.309
+kt: The girl from Little Planet
+nocap: 1
+The girl from Little Planet.
 ---
 scene: overlord
-dur: 10.20
-vodur: 9.60
+dur: 5.283
+vodur: 5.283
 label: Everyone, together
 cast: tails(toon=tails, x=0.24, fly), sonic(toon=sonic, x=0.42, mood=angry), shadow(toon=shadow, x=0.58), amy(toon=amy, x=0.74, prop=hammer, mood=angry)
 speaker: shadow
 shots: wide, close, react, medium
-For the first time ever, every hero in the world stood on the same side. Enemies and friends. Detectives and rivals. All against one machine.
+For the first time ever, every hero in the world stood on the same side.
+---
+scene: burst
+dur: 3.155
+vodur: 3.155
+hero: tails
+flip: 1
+Enemies and friends. Detectives and rivals.
+---
+scene: kinetic
+dur: 1.761
+vodur: 1.161
+kt: All against one machine
+nocap: 1
+All against one machine.
 ---
 scene: emeralds
-dur: 6.06
-vodur: 5.46
+dur: 4.304
+vodur: 4.304
 label: The Chaos Emeralds
-They gathered the seven Chaos Emeralds, the most powerful gems in the world. And their light filled the sky.
+They gathered the seven Chaos Emeralds, the most powerful gems in the world.
+---
+scene: burst
+dur: 1.756
+vodur: 1.156
+hero: metal
+flip: 1
+And their light filled the sky.
 ---
 scene: emeralds
-dur: 10.02
-vodur: 9.42
+dur: 6.272
+vodur: 6.272
 burst: 1
 cast: sonic(toon=sonic, x=0.5, fur=#f2c43a, mood=angry, fly, size=1.1, aura, tag=super sonic)
 speaker: sonic
 shots: close, wide, close
-Sonic turned golden. Super Sonic. Tails and Knuckles glowed with power beside him. Three heroes who could fly at the speed of light.
+Sonic turned golden. Super Sonic. Tails and Knuckles glowed with power beside him.
+---
+scene: burst
+dur: 3.748
+vodur: 3.148
+hero: super
+flip: 1
+Three heroes who could fly at the speed of light.
 ---
 scene: overlord
-dur: 8.85
-vodur: 8.25
+dur: 6.202
+vodur: 6.202
 cast: sonic(toon=sonic, x=0.45, fur=#f2c43a, mood=angry, fly, aura)
 speaker: sonic
 shots: wide, close, wide
-They flew straight at the dragon. Metal Overlord threw every copied power he had at them. And the battle lit up the whole world.
+They flew straight at the dragon. Metal Overlord threw every copied power he had at them.
+---
+scene: burst
+dur: 2.648
+vodur: 2.048
+hero: super
+flip: 1
+And the battle lit up the whole world.
 ---
 scene: overlord
-dur: 9.07
-vodur: 8.47
+dur: 3.239
+vodur: 3.239
 label: A copy is just a copy
-In the end, a copy is still just a copy. The heroes broke through his armor, and Metal Overlord fell from the sky.
+In the end, a copy is still just a copy.
+---
+scene: burst
+dur: 2.834
+vodur: 2.834
+hero: metal
+flip: 1
+The heroes broke through his armor,
+---
+scene: kinetic
+dur: 2.996
+vodur: 2.396
+kt: and Metal Overlord fell from the sky
+nocap: 1
+and Metal Overlord fell from the sky.
 ---
 scene: wreck
-dur: 5.89
-vodur: 5.29
+dur: 4.890
+vodur: 4.890
 cast: metal(metal, x=0.5, mood=sad)
 speaker: metal
 shots: close, wide
-When the light faded, all that was left was the small blue robot, lying in the wreckage. He had lost again.
+When the light faded, all that was left was the small blue robot, lying in the wreckage.
+---
+scene: burst
+dur: 1.000
+vodur: 0.800
+hero: metal
+flip: 1
+He had lost again.
 ---
 scene: wreck
-dur: 9.31
-vodur: 8.71
+dur: 4.340
+vodur: 4.340
 cast: sonic(toon=sonic, x=0.36), metal(metal, x=0.64, flip)
 speaker: metal
 shots: wide, react, close
-Metal looked up at Sonic and spoke. Not the words of a weapon. The words of someone who had finally lost a fight he truly cared about.
+Metal looked up at Sonic and spoke. Not the words of a weapon.
+---
+scene: burst
+dur: 4.970
+vodur: 4.370
+hero: sonic
+flip: 1
+The words of someone who had finally lost a fight he truly cared about.
 ---
 scene: zone
-dur: 6.31
-vodur: 5.71
+dur: 5.156
+vodur: 5.156
 cast: sonic(toon=sonic, x=0.5, mood=smug, pose=wave)
 speaker: sonic
 shots: close, wide
-Sonic just smiled. Any time you want a rematch, he said, I'm ready. And he ran off.
+Sonic just smiled. Any time you want a rematch, he said, I'm ready.
+---
+scene: burst
+dur: 1.154
+vodur: 0.800
+hero: sonic
+flip: 1
+And he ran off.
 ---
 scene: wreck
-dur: 6.39
-vodur: 5.79
+dur: 3.866
+vodur: 3.866
 label: Chapter 9: Back in Chains
 cast: doctor(egg, x=0.38), metal(metal, x=0.64, flip)
 speaker: doctor
 shots: wide, close
-Eggman found his broken robot, and took him home. But this time, he made a change.
+Eggman found his broken robot, and took him home.
+---
+scene: burst
+dur: 2.524
+vodur: 1.924
+hero: doctor
+flip: 1
+But this time, he made a change.
 ---
 scene: lab
-dur: 9.08
-vodur: 8.48
+dur: 4.019
+vodur: 4.019
 title: FREE WILL: OFF
 cast: doctor(egg, x=0.32, mood=angry), metal(metal, x=0.66)
 speaker: doctor
 shots: wide, close, react
-He rewired Metal's mind and locked his free will away. Metal Sonic would never betray him again. He was a servant once more.
+He rewired Metal's mind and locked his free will away.
+---
+scene: versus
+dur: 3.051
+vodur: 3.051
+vs: sonic/metal
+Metal Sonic would never betray him again.
+---
+scene: burst
+dur: 2.010
+vodur: 1.410
+hero: doctor
+He was a servant once more.
 ---
 scene: timeline
-dur: 9.89
-vodur: 9.29
+dur: 4.396
+vodur: 4.396
 years: The Rival Races, The Time Rift, The Return, The War
 events: Racing again | Lost in time | Back home | Eggman's army
 active: 3
-And yet, Metal Sonic kept coming back. He raced Sonic again. He was pulled through rips in time. He returned to Stardust Speedway itself.
+And yet, Metal Sonic kept coming back. He raced Sonic again.
+---
+scene: kinetic
+dur: 2.564
+vodur: 2.564
+kt: He was pulled through rips in time
+nocap: 1
+He was pulled through rips in time.
+---
+scene: burst
+dur: 2.930
+vodur: 2.330
+hero: metal
+He returned to Stardust Speedway itself.
 ---
 scene: speedway
-dur: 10.62
-vodur: 10.02
+dur: 3.068
+vodur: 3.068
 cast: sonic(toon=sonic, x=0.38, run, mood=angry), metal(metal, x=0.62, fly)
 speaker: metal
 shots: wide, close, react, close
-Each time, Eggman sent him as a weapon. But in the middle of every fight, something in his eyes looked different. Like he was enjoying it.
+Each time, Eggman sent him as a weapon.
+---
+scene: versus
+dur: 2.596
+vodur: 2.596
+vs: sonic/metal
+But in the middle of every fight,
+---
+scene: burst
+dur: 3.068
+vodur: 3.068
+hero: sonic
+something in his eyes looked different.
+---
+scene: kinetic
+dur: 1.888
+vodur: 1.288
+kt: Like he was enjoying it
+nocap: 1
+Like he was enjoying it.
 ---
 scene: lab
-dur: 9.48
-vodur: 8.88
+dur: 5.312
+vodur: 5.312
 title: PRIDE: ???
 cast: metal(metal, x=0.5)
 speaker: metal
 shots: close, close
-Because deep down, under the new code, the pride was still there. He was not fighting for Eggman. He never really was.
+Because deep down, under the new code, the pride was still there.
+---
+scene: burst
+dur: 2.533
+vodur: 2.533
+hero: doctor
+flip: 1
+He was not fighting for Eggman.
+---
+scene: kinetic
+dur: 1.634
+vodur: 1.034
+kt: He never really was
+nocap: 1
+He never really was.
 ---
 scene: news
-dur: 13.45
-vodur: 12.85
+dur: 5.396
+vodur: 5.396
 headline: EGGMAN ATTACKS AGAIN
-Most people never learned how close they came to losing everything. The newspapers said Eggman attacked again. Nobody wrote about the robot who tried to replace a hero.
+Most people never learned how close they came to losing everything.
+---
+scene: kinetic
+dur: 8.054
+vodur: 7.454
+kt: The newspapers said Eggman attacked again
+nocap: 1
+The newspapers said Eggman attacked again. Nobody wrote about the robot who tried to replace a hero.
 ---
 scene: lab
-dur: 13.94
-vodur: 13.34
+dur: 5.965
+vodur: 5.965
 screen: metal
 title: STATUS: UNKNOWN
 cast: doctor(egg, x=0.5, mood=worried)
 speaker: doctor
 shots: close, wide, close
-Even Eggman never talks about that day. The day his greatest creation turned against him. Some say he keeps Metal close now, not because he trusts him, but because he is scared of what Metal might do on his own.
+Even Eggman never talks about that day. The day his greatest creation turned against him.
+---
+scene: burst
+dur: 2.279
+vodur: 2.279
+hero: metal
+flip: 1
+Some say he keeps Metal close now,
+---
+scene: kinetic
+dur: 1.742
+vodur: 1.742
+kt: not because he trusts him
+nocap: 1
+not because he trusts him,
+---
+scene: lab
+dur: 3.954
+vodur: 3.354
+screen: metal
+title: STATUS: UNKNOWN
+cast: doctor(egg, x=0.5, mood=worried)
+speaker: doctor
+shots: close, react
+but because he is scared of what Metal might do on his own.
 ---
 scene: monitors
-dur: 13.51
-vodur: 12.91
+dur: 5.196
+vodur: 5.196
 heroes: sonic,sonic,sonic
 label: One name
-And the engineers who rebuilt him noticed something strange. Every time Metal was switched back on, the very first thing he did was search for one name. Sonic.
+And the engineers who rebuilt him noticed something strange.
+---
+scene: versus
+dur: 3.291
+vodur: 3.291
+vs: sonic/metal
+Every time Metal was switched back on,
+---
+scene: kinetic
+dur: 4.503
+vodur: 4.503
+kt: the very first thing he did was search...
+nocap: 1
+the very first thing he did was search for one name.
+---
+scene: burst
+dur: 0.520
+vodur: 0.800
+hero: sonic
+flip: 1
+Sonic.
 ---
 scene: speedway
-dur: 6.75
-vodur: 6.15
+dur: 3.487
+vodur: 3.487
 speed: 0
 label: Chapter 10: Is He Alive?
 cast: metal(metal, x=0.5, size=1.1)
 speaker: metal
 shots: close, wide
-So what is Metal Sonic, really? A machine? Or something more?
+So what is Metal Sonic, really?
+---
+scene: burst
+dur: 3.263
+vodur: 2.663
+hero: metal
+flip: 1
+A machine? Or something more?
 ---
 scene: lab
-dur: 9.14
-vodur: 8.54
+dur: 4.306
+vodur: 4.306
 title: ORDERS: IGNORED
 cast: metal(metal, x=0.5, size=1.1)
 speaker: metal
 shots: close, wide
-He was built to follow orders. But he learned to disobey. He was built to copy. But he learned to want things for himself.
+He was built to follow orders. But he learned to disobey.
+---
+scene: burst
+dur: 4.834
+vodur: 4.234
+hero: metal
+flip: 1
+He was built to copy. But he learned to want things for himself.
 ---
 scene: wreck
-dur: 11.40
-vodur: 10.80
+dur: 3.135
+vodur: 3.135
 cast: shadow(toon=shadow, x=0.36), metal(metal, x=0.64, flip)
 speaker: shadow
 shots: wide, react, close
-Shadow was also created in a lab. Also made to be a weapon. But Shadow chose his own path. Maybe, one day, Metal will too.
+Shadow was also created in a lab.
+---
+scene: burst
+dur: 5.320
+vodur: 5.320
+hero: shadow
+flip: 1
+Also made to be a weapon. But Shadow chose his own path.
+---
+scene: kinetic
+dur: 2.945
+vodur: 2.345
+kt: Maybe, one day, Metal will too
+nocap: 1
+Maybe, one day, Metal will too.
 ---
 scene: planet
-dur: 8.05
-vodur: 7.45
+dur: 2.933
+vodur: 2.933
 cast: amy(toon=amy, x=0.5)
 speaker: amy
 shots: close, close
-Amy once said that even a robot can change, if someone gives it a chance. Nobody has given Metal Sonic that chance yet.
+Amy once said that even a robot can change,
+---
+scene: versus
+dur: 5.117
+vodur: 4.517
+vs: sonic/metal
+if someone gives it a chance. Nobody has given Metal Sonic that chance yet.
 ---
 scene: zone
-dur: 10.51
-vodur: 9.91
+dur: 3.352
+vodur: 3.352
 cast: sonic(toon=sonic, x=0.36, mood=smug), metal(metal, x=0.64, flip)
 speaker: sonic
 shots: wide, close, react
-And Sonic? Sonic has never hated him. To Sonic, Metal is not a monster. He is the only rival who can actually keep up.
+And Sonic? Sonic has never hated him.
+---
+scene: burst
+dur: 2.990
+vodur: 2.990
+hero: metal
+flip: 1
+To Sonic, Metal is not a monster.
+---
+scene: kinetic
+dur: 4.168
+vodur: 3.568
+kt: He is the only rival who can actually...
+nocap: 1
+He is the only rival who can actually keep up.
 ---
 scene: speedway
-dur: 7.56
-vodur: 6.96
+dur: 3.780
+vodur: 3.780
 cast: sonic(toon=sonic, x=0.4, run, mood=happy), metal(metal, x=0.62, fly)
 speaker: sonic
 shots: wide, react, close, wide
-Two blue blurs. One made of heart, one made of steel. Forever racing toward a finish line that never comes.
+Two blue blurs. One made of heart, one made of steel.
+---
+scene: versus
+dur: 3.780
+vodur: 3.180
+vs: sonic/metal
+Forever racing toward a finish line that never comes.
 ---
 scene: lab
-dur: 9.72
-vodur: 9.12
+dur: 5.703
+vodur: 5.703
 alarm: 1
 title: REBUILD: 99%
 cast: metal(metal, x=0.5, size=1.15)
 speaker: metal
 shots: close, wide, close
-Somewhere right now, in a dark lab, Metal Sonic is being rebuilt again. His engine is warming up. His eyes are turning red.
+Somewhere right now, in a dark lab, Metal Sonic is being rebuilt again.
+---
+scene: burst
+dur: 2.008
+vodur: 2.008
+hero: metal
+flip: 1
+His engine is warming up.
+---
+scene: kinetic
+dur: 2.008
+vodur: 1.408
+kt: His eyes are turning red
+nocap: 1
+His eyes are turning red.
 ---
 scene: timeline
-dur: 13.96
-vodur: 13.36
+dur: 4.723
+vodur: 4.723
 years: Day One, The Race, The Betrayal, Today
 events: Built | Defeated | Overlord | Rebuilt again
 active: 4
-From a secret lab, to a highway in the stars, to a dragon in the sky, and back to the lab again. That is the life of Metal Sonic so far.
+From a secret lab, to a highway in the stars,
+---
+scene: versus
+dur: 2.414
+vodur: 2.414
+vs: sonic/metal
+to a dragon in the sky,
+---
+scene: kinetic
+dur: 2.729
+vodur: 2.729
+kt: and back to the lab again
+nocap: 1
+and back to the lab again.
+---
+scene: burst
+dur: 4.094
+vodur: 3.494
+hero: metal
+flip: 1
+That is the life of Metal Sonic so far.
 ---
 scene: speedway
-dur: 11.60
-vodur: 11.00
+dur: 5.360
+vodur: 5.360
 speed: 40
 label: Who is the real Sonic?
 cast: metal(metal, x=0.36), sonic(toon=sonic, x=0.64, flip, mood=smug)
 speaker: sonic
 shots: wide, close, react, wide
-So, is he just a machine? Or the rival who will never stop chasing? Tell us in the comments. And subscribe, because the next story is about Shadow.
+So, is he just a machine? Or the rival who will never stop chasing?
+---
+scene: burst
+dur: 1.920
+vodur: 1.920
+hero: metal
+flip: 1
+Tell us in the comments.
+---
+scene: kinetic
+dur: 4.320
+vodur: 3.720
+kt: And subscribe, because the next story is about...
+nocap: 1
+And subscribe, because the next story is about Shadow.

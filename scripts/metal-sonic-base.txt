@@ -1,0 +1,734 @@
+video: yes
+title: The Robot Built To Replace Sonic
+voice: en-US-AndrewNeural
+rate: +5%
+cut: 1.8
+---
+scene: lab
+dur: 16.04
+vodur: 15.44
+alarm: 1
+label: The Life of Metal Sonic
+cast: metal(metal, x=0.5, size=1.1, tag=metal sonic)
+speaker: metal
+shots: close, wide, close
+Deep under a frozen machine base, a robot opened its eyes for the very first time. It had one reason to exist. Destroy Sonic the Hedgehog.
+---
+scene: speedway
+dur: 11.13
+vodur: 10.53
+cast: metal(metal, x=0.55, fly)
+speaker: metal
+shots: wide, close, wide
+It would chase him across planets, across years, and across time itself. And one day, it would stop chasing, because it would believe it had become him.
+---
+scene: zone
+dur: 13.85
+vodur: 13.25
+cast: sonic(toon=sonic, x=0.36, mood=smug), metal(metal, x=0.64, flip)
+speaker: sonic
+shots: wide, react, close, wide
+This is the true story of Metal Sonic. Where he came from, every battle he fought, and the one question nobody can answer. Is he just a machine?
+---
+scene: fortress
+dur: 4.97
+vodur: 4.37
+label: Chapter 1: The Doctor
+cast: doctor(egg, x=0.5)
+speaker: doctor
+shots: wide, close
+To understand the robot, you first have to understand the man who built him.
+---
+scene: lab
+dur: 13.07
+vodur: 12.47
+screen: sonic
+title: TARGET: SONIC
+cast: doctor(egg, x=0.5, size=1.05, tag=dr eggman)
+speaker: doctor
+shots: close, wide, close
+His name is Doctor Ivo Robotnik. The whole world knows him as Eggman. He has an IQ of three hundred, and one dream. To rule the entire world.
+---
+scene: stat
+dur: 11.50
+vodur: 10.90
+value: 300
+label: Eggman's IQ
+Three hundred. Smarter than almost anyone who has ever lived. And yet, there was one problem he could never solve.
+---
+scene: zone
+dur: 14.14
+vodur: 13.54
+speed: 1600
+rings: 1
+cast: sonic(toon=sonic, x=0.5, run, mood=smug)
+speaker: sonic
+shots: wide, close, wide
+A blue hedgehog. Every robot army he built, Sonic smashed. Every fortress, Sonic broke. Every evil plan, Sonic ruined, usually while laughing.
+---
+scene: news
+dur: 9.19
+vodur: 8.59
+headline: EGGMAN DEFEATED AGAIN
+Eggman lost on South Island. He lost on West Side Island. He lost in the sky, on his giant space station, the Death Egg.
+---
+scene: zone
+dur: 13.03
+vodur: 12.43
+cast: sonic(toon=sonic, x=0.4, mood=happy), tails(toon=tails, x=0.6, fly, tag=tails)
+speaker: tails
+shots: wide, close, react
+And every time, Sonic had help. A young two tailed fox named Miles Prower. Everyone calls him Tails, and he can fly by spinning his tails like a helicopter.
+---
+scene: wreck
+dur: 12.39
+vodur: 11.79
+cast: doctor(egg, x=0.5, mood=angry)
+speaker: doctor
+shots: close, wide, close
+Losing again and again did something to Eggman. He stopped asking how to beat Sonic. He started asking a much scarier question.
+---
+scene: lab
+dur: 11.93
+vodur: 11.33
+title: PROJECT: METAL
+cast: doctor(egg, x=0.5, mood=happy)
+speaker: doctor
+shots: close, close
+What if I build my own Sonic? One that is faster. One that is stronger. One that never gets tired, never feels fear, and always obeys.
+---
+scene: monitors
+dur: 12.76
+vodur: 12.16
+heroes: sonic,sonic,sonic
+label: Project: Metal Sonic
+And so, in secret, he started building. He studied every recording of Sonic he had ever made. How he ran, how he jumped, how he spun into a ball.
+---
+scene: lab
+dur: 11.72
+vodur: 11.12
+title: PROJECT: METAL
+cast: doctor(egg, x=0.32, mood=happy), metal(metal, x=0.66)
+speaker: doctor
+shots: wide, react, close, react
+The result was a robot shaped like Sonic, but made of metal. A jet engine in his chest. Claws for hands. Red eyes that could see in total darkness.
+---
+scene: speedway
+dur: 11.97
+vodur: 11.37
+cast: metal(metal, x=0.55, fly, tag=metal sonic)
+speaker: metal
+shots: close, wide, close
+His body could reach speeds faster than sound. His armor could take hits that would destroy any other robot. Eggman called him Metal Sonic.
+---
+scene: planet
+dur: 6.10
+vodur: 5.50
+label: Chapter 2: Little Planet
+But a robot this powerful needed the perfect place to fight. And Eggman had found one.
+---
+scene: zone
+dur: 7.65
+vodur: 7.05
+label: Never Lake
+Above a quiet place called Never Lake, something strange happens once every year.
+---
+scene: planet
+dur: 8.77
+vodur: 8.17
+label: Little Planet
+For one month, a small world appears in the sky, held by a giant chain to a mountain. People call it Little Planet.
+---
+scene: emeralds
+dur: 10.48
+vodur: 9.88
+label: The Time Stones
+Little Planet holds seven magic gems called the Time Stones. Whoever controls them can travel through the past, and change the future.
+---
+scene: lab
+dur: 9.94
+vodur: 9.34
+screen: metal
+title: OPERATION: TIME STONES
+cast: doctor(egg, x=0.5, mood=happy)
+speaker: doctor
+shots: close, wide
+Eggman had a plan. Chain the planet down, steal the Time Stones, and rewrite history so that he wins. Forever.
+---
+scene: planet
+dur: 7.19
+vodur: 6.59
+metal: 1
+label: He covered it in metal
+He wrapped the beautiful planet in steel. He built factories on its mountains, and robots in its rivers. And he left his newest creation waiting there.
+---
+scene: planet
+dur: 13.15
+vodur: 12.55
+cast: sonic(toon=sonic, x=0.5, run, mood=happy)
+speaker: sonic
+shots: wide, close
+Sonic heard about the strange planet and ran straight to Never Lake to see it. He did not know he was running into a trap.
+---
+scene: planet
+dur: 9.18
+vodur: 8.58
+label: Chapter 3: Amy Rose
+cast: amy(toon=amy, x=0.5, mood=happy, tag=amy rose)
+speaker: amy
+shots: wide, close, close
+And he was not alone. Someone had followed him there. A young pink hedgehog named Amy Rose.
+---
+scene: zone
+dur: 7.93
+vodur: 7.33
+cast: amy(toon=amy, x=0.5, mood=happy)
+speaker: amy
+shots: close, close
+Amy had a tarot card that told her she would meet her true love on Little Planet. And she was sure it was Sonic.
+---
+scene: planet
+dur: 8.79
+vodur: 8.19
+metal: 1
+cast: sonic(toon=sonic, x=0.38, mood=worried), amy(toon=amy, x=0.6, mood=happy)
+speaker: amy
+shots: wide, react, close, react
+Sonic was not so sure. But before he could run away, the sky turned dark.
+---
+scene: planet
+dur: 9.37
+vodur: 8.77
+metal: 1
+cast: metal(metal, x=0.42, fly), amy(toon=amy, x=0.64, mood=worried)
+speaker: metal
+shots: wide, close, react, close
+A blue blur dropped down and grabbed her. For a second, Amy thought it was Sonic. Then she saw the red eyes.
+---
+scene: lab
+dur: 6.74
+vodur: 6.14
+cast: metal(metal, x=0.5, size=1.1)
+speaker: metal
+shots: close, close
+Metal Sonic did not want Amy. He wanted Sonic. And he knew Sonic would never leave her behind.
+---
+scene: speedway
+dur: 11.75
+vodur: 11.15
+label: Chapter 4: Stardust Speedway
+cast: sonic(toon=sonic, x=0.5, run, mood=angry)
+speaker: sonic
+shots: close, wide
+Sonic chased them to the strangest place on the planet. A shining highway floating among the stars, called Stardust Speedway.
+---
+scene: speedway
+dur: 12.28
+vodur: 11.68
+speed: 40
+cast: sonic(toon=sonic, x=0.36, mood=angry), metal(metal, x=0.64, flip)
+speaker: sonic
+shots: wide, close, react, close
+There, for the first time, the hero met his copy. Same shape. Same speed. Same stare. The only difference was that one of them had a heart.
+---
+scene: speedway
+dur: 5.23
+vodur: 4.63
+speed: 900
+cast: metal(metal, x=0.5, fly)
+speaker: metal
+shots: close, wide
+Then Metal Sonic fired his jet engine, and the race began.
+---
+scene: speedway
+dur: 7.37
+vodur: 6.77
+laser: 1
+label: The race
+cast: sonic(toon=sonic, x=0.38, run, mood=angry), metal(metal, x=0.62, fly)
+speaker: sonic
+shots: wide, close, react, wide
+They tore down the highway faster than sound. Behind them, a giant laser chased both of them, burning everything it touched.
+---
+scene: speedway
+dur: 9.68
+vodur: 9.08
+laser: 1
+cast: metal(metal, x=0.5, fly, size=1.1)
+speaker: metal
+shots: close, close
+Metal did not care about the laser. He only cared about winning. He shoved Sonic, blocked him, and used every dirty trick Eggman had programmed into him.
+---
+scene: speedway
+dur: 8.56
+vodur: 7.96
+laser: 1
+cast: sonic(toon=sonic, x=0.5, run, mood=angry, size=1.1)
+speaker: sonic
+shots: close, close
+But Sonic did not run for his creator. He ran for his friend. And that is something no robot had ever been built to understand.
+---
+scene: stat
+dur: 8.62
+vodur: 8.02
+value: 1
+unit: second
+label: The winning margin
+Sonic crossed the finish line first, by about one second. The laser smashed into Metal Sonic.
+---
+scene: planet
+dur: 10.02
+vodur: 9.42
+cast: sonic(toon=sonic, x=0.4, mood=happy), amy(toon=amy, x=0.6, mood=happy)
+speaker: amy
+shots: wide, react, close
+Amy was free. She hugged Sonic so hard he could barely breathe. And Metal Sonic lay broken on the road.
+---
+scene: planet
+dur: 7.45
+vodur: 6.85
+cast: sonic(toon=sonic, x=0.5, mood=smug, pose=wave)
+speaker: sonic
+shots: close, wide
+Sonic went on to collect the Time Stones, beat Eggman, and free Little Planet. The planet floated away, safe again.
+---
+scene: speedway
+dur: 11.06
+vodur: 10.46
+speed: 0
+cast: metal(metal, x=0.5, mood=sad)
+speaker: metal
+shots: close, close
+But the robot lying in the stardust had learned something new. He had lost. And losing, for a machine made only to win, felt like an error he could never delete.
+---
+scene: lab
+dur: 4.49
+vodur: 3.89
+label: Chapter 5: Rebuilt
+title: REBUILD: 12%
+cast: doctor(egg, x=0.32), metal(metal, x=0.66)
+speaker: doctor
+shots: wide, close, react
+Eggman did not throw his creation away. He picked up the pieces and rebuilt him.
+---
+scene: fortress
+dur: 8.37
+vodur: 7.77
+cast: doctor(egg, x=0.32), metal(metal, x=0.66)
+speaker: doctor
+shots: wide, close, react
+Over the next years, Metal Sonic became Eggman's favorite weapon. The one he sent when every other robot had failed.
+---
+scene: timeline
+dur: 7.83
+vodur: 7.23
+years: Little Planet, The Islands, The Tournament, The Base
+events: First race | Rematches | Fights | Silence
+active: 2
+He fought Sonic in hidden bases. He fought him on floating islands. He fought him in tournaments of the strongest fighters alive.
+---
+scene: zone
+dur: 6.74
+vodur: 6.14
+speed: 1500
+cast: sonic(toon=sonic, x=0.38, run, mood=angry), metal(metal, x=0.62, fly)
+speaker: sonic
+shots: wide, close, react, close
+And every single time, it ended the same way. Sonic won, and Metal was dragged back to the lab in pieces.
+---
+scene: monitors
+dur: 10.37
+vodur: 9.77
+heroes: sonic,sonic,sonic,sonic,sonic,sonic
+Each time he was rebuilt, Metal remembered. Every loss was saved inside his memory. Every mistake. Every move Sonic made.
+---
+scene: lab
+dur: 9.24
+vodur: 8.64
+screen: sonic
+title: MEMORY: SONIC
+label: Something changed
+cast: metal(metal, x=0.5)
+speaker: metal
+shots: close, wide, close
+And slowly, something started to grow inside that memory. Something Eggman never designed. A feeling.
+---
+scene: speedway
+dur: 15.33
+vodur: 14.73
+speed: 0
+cast: metal(metal, x=0.5, size=1.1)
+speaker: metal
+shots: close, close
+It was not friendship. It was not love. It was pride. Metal Sonic did not want to beat Sonic because Eggman told him to anymore. He wanted to beat Sonic for himself.
+---
+scene: lab
+dur: 8.49
+vodur: 7.89
+label: Chapter 6: The Betrayal
+cast: doctor(egg, x=0.32, mood=happy), metal(metal, x=0.66)
+speaker: doctor
+shots: wide, react, close
+Eggman did not notice. He was too busy with his next big plan. And that mistake almost cost him everything.
+---
+scene: lab
+dur: 8.35
+vodur: 7.75
+alarm: 1
+cage: 0.3
+cast: metal(metal, x=0.62, size=1.1), doctor(egg, x=0.3, mood=worried)
+speaker: metal
+shots: close, react, wide
+One night, Metal Sonic walked into Eggman's lab, grabbed his own creator, and locked him inside a cage.
+---
+scene: news
+dur: 9.14
+vodur: 8.54
+headline: WHERE IS DR EGGMAN?
+cast: doctor(egg, x=0.5, mood=worried)
+speaker: doctor
+shots: close, close
+The genius who built an army of robots was now a prisoner of one. And nobody in the world knew.
+---
+scene: lab
+dur: 11.89
+vodur: 11.29
+cage: 0.3
+title: BROADCAST: DR EGGMAN
+cast: doctor(egg, x=0.3, mood=worried), metal(metal, x=0.66)
+speaker: metal
+shots: wide, react, close
+Because Metal Sonic did something very smart. He pretended to be Eggman. He sent messages in the doctor's voice, giving orders to his entire robot army.
+---
+scene: fortress
+dur: 10.57
+vodur: 9.97
+label: The army was his
+Thousands of robots, airships, and battle fortresses. All of them now obeyed one machine. And no one suspected a thing.
+---
+scene: monitors
+dur: 7.76
+vodur: 7.16
+heroes: sonic,tails,amy,shadow,sonic,tails
+label: Chapter 7: The Copy Machine
+Then Metal began the real plan. He sent fake messages to heroes all over the world, tricking them into fighting.
+---
+scene: zone
+dur: 10.49
+vodur: 9.89
+speed: 1400
+cast: tails(toon=tails, x=0.3, fly), sonic(toon=sonic, x=0.48, run, mood=angry), amy(toon=amy, x=0.66, prop=hammer, mood=angry)
+speaker: sonic
+shots: wide, close, react, medium
+Sonic and Tails teamed up with Knuckles the echidna. Amy formed a team of her own. A detective agency took a mystery job. Everyone was racing toward Eggman.
+---
+scene: fortress
+dur: 12.69
+vodur: 12.09
+label: Shadow the Hedgehog
+cast: shadow(toon=shadow, x=0.5, tag=shadow)
+speaker: shadow
+shots: wide, close, close
+And from the darkness came someone nobody expected. Shadow the Hedgehog. The ultimate life form. A hedgehog created in a space station fifty years earlier.
+---
+scene: lab
+dur: 10.21
+vodur: 9.61
+screen: none
+title: PROJECT: SHADOW
+cast: shadow(toon=shadow, x=0.5, mood=angry)
+speaker: shadow
+shots: close, close
+Shadow had lost his memories. He had woken up in a capsule, with no idea who he was. He only knew one thing. Eggman had answers.
+---
+scene: zone
+dur: 10.05
+vodur: 9.45
+speed: 1500
+cast: sonic(toon=sonic, x=0.36, run, mood=angry), shadow(toon=shadow, x=0.62, run)
+speaker: shadow
+shots: wide, react, close
+So the heroes fought their way across the world. Through beaches, casinos, haunted castles and giant battleships. And they fought each other too.
+---
+scene: monitors
+dur: 8.03
+vodur: 7.43
+heroes: sonic,tails,amy,shadow,sonic,tails
+label: He was watching every fight
+But every fight was a trap. Metal Sonic was watching from the shadows, scanning each hero.
+---
+scene: monitors
+dur: 13.26
+vodur: 12.66
+heroes: sonic,tails,amy,shadow,metal,sonic
+He copied Sonic's speed. Tails' flight. Knuckles' strength. Amy's hammer. Shadow's power to bend time. He stole the data of every hero, one by one.
+---
+scene: lab
+dur: 9.92
+vodur: 9.32
+alarm: 1
+title: UPGRADE: 100%
+cast: metal(metal, x=0.5, size=1.15)
+speaker: metal
+shots: close, close
+He even scanned a strange water creature called Chaos, a god that could change its own shape. And with all that data, he upgraded himself.
+---
+scene: fortress
+dur: 11.89
+vodur: 11.29
+label: Neo Metal Sonic
+cast: metal(metal, x=0.5, size=1.2, tag=neo metal sonic, cape=#7a1a2a, metalColor=#4a3aa8)
+speaker: metal
+shots: wide, close, close
+His body changed. Taller. Darker. With a flowing cape. He was no longer Metal Sonic. He was Neo Metal Sonic.
+---
+scene: fortress
+dur: 9.15
+vodur: 8.55
+cast: sonic(toon=sonic, x=0.34, mood=angry), metal(metal, x=0.62, size=1.2, flip, cape=#7a1a2a, metalColor=#4a3aa8)
+speaker: metal
+shots: wide, close, react, close
+Then, on top of Eggman's flying fortress, he finally revealed himself to the heroes. And he said the words he had waited years to say.
+---
+scene: overlord
+dur: 11.20
+vodur: 10.60
+cast: metal(metal, x=0.5, size=1.25, cape=#7a1a2a, metalColor=#4a3aa8)
+speaker: metal
+shots: close, close
+I am the real Sonic. The one and only. The strongest. And now, I will prove it.
+---
+scene: fortress
+dur: 11.23
+vodur: 10.63
+cast: doctor(egg, x=0.5, mood=worried)
+speaker: doctor
+shots: close, wide
+Meanwhile, Eggman had escaped his cage. He ran to the top of the fortress and saw what his creation had become. For once, the doctor was afraid.
+---
+scene: overlord
+dur: 5.86
+vodur: 5.26
+label: Chapter 8: Metal Overlord
+Neo Metal Sonic used all the data he had stolen, and transformed one last time.
+---
+scene: overlord
+dur: 13.77
+vodur: 13.17
+label: Metal Overlord
+He became a giant metal dragon, as big as a mountain. With wings of steel, a body of armor, and the powers of every hero he had copied. He called himself Metal Overlord.
+---
+scene: wreck
+dur: 8.59
+vodur: 7.99
+cast: amy(toon=amy, x=0.5, mood=worried)
+speaker: amy
+shots: close, wide
+He smashed the fortress and grabbed the only hero he remembered from that very first day. Amy Rose. The girl from Little Planet.
+---
+scene: overlord
+dur: 10.20
+vodur: 9.60
+label: Everyone, together
+cast: tails(toon=tails, x=0.24, fly), sonic(toon=sonic, x=0.42, mood=angry), shadow(toon=shadow, x=0.58), amy(toon=amy, x=0.74, prop=hammer, mood=angry)
+speaker: shadow
+shots: wide, close, react, medium
+For the first time ever, every hero in the world stood on the same side. Enemies and friends. Detectives and rivals. All against one machine.
+---
+scene: emeralds
+dur: 6.06
+vodur: 5.46
+label: The Chaos Emeralds
+They gathered the seven Chaos Emeralds, the most powerful gems in the world. And their light filled the sky.
+---
+scene: emeralds
+dur: 10.02
+vodur: 9.42
+burst: 1
+cast: sonic(toon=sonic, x=0.5, fur=#f2c43a, mood=angry, fly, size=1.1, aura, tag=super sonic)
+speaker: sonic
+shots: close, wide, close
+Sonic turned golden. Super Sonic. Tails and Knuckles glowed with power beside him. Three heroes who could fly at the speed of light.
+---
+scene: overlord
+dur: 8.85
+vodur: 8.25
+cast: sonic(toon=sonic, x=0.45, fur=#f2c43a, mood=angry, fly, aura)
+speaker: sonic
+shots: wide, close, wide
+They flew straight at the dragon. Metal Overlord threw every copied power he had at them. And the battle lit up the whole world.
+---
+scene: overlord
+dur: 9.07
+vodur: 8.47
+label: A copy is just a copy
+In the end, a copy is still just a copy. The heroes broke through his armor, and Metal Overlord fell from the sky.
+---
+scene: wreck
+dur: 5.89
+vodur: 5.29
+cast: metal(metal, x=0.5, mood=sad)
+speaker: metal
+shots: close, wide
+When the light faded, all that was left was the small blue robot, lying in the wreckage. He had lost again.
+---
+scene: wreck
+dur: 9.31
+vodur: 8.71
+cast: sonic(toon=sonic, x=0.36), metal(metal, x=0.64, flip)
+speaker: metal
+shots: wide, react, close
+Metal looked up at Sonic and spoke. Not the words of a weapon. The words of someone who had finally lost a fight he truly cared about.
+---
+scene: zone
+dur: 6.31
+vodur: 5.71
+cast: sonic(toon=sonic, x=0.5, mood=smug, pose=wave)
+speaker: sonic
+shots: close, wide
+Sonic just smiled. Any time you want a rematch, he said, I'm ready. And he ran off.
+---
+scene: wreck
+dur: 6.39
+vodur: 5.79
+label: Chapter 9: Back in Chains
+cast: doctor(egg, x=0.38), metal(metal, x=0.64, flip)
+speaker: doctor
+shots: wide, close
+Eggman found his broken robot, and took him home. But this time, he made a change.
+---
+scene: lab
+dur: 9.08
+vodur: 8.48
+title: FREE WILL: OFF
+cast: doctor(egg, x=0.32, mood=angry), metal(metal, x=0.66)
+speaker: doctor
+shots: wide, close, react
+He rewired Metal's mind and locked his free will away. Metal Sonic would never betray him again. He was a servant once more.
+---
+scene: timeline
+dur: 9.89
+vodur: 9.29
+years: The Rival Races, The Time Rift, The Return, The War
+events: Racing again | Lost in time | Back home | Eggman's army
+active: 3
+And yet, Metal Sonic kept coming back. He raced Sonic again. He was pulled through rips in time. He returned to Stardust Speedway itself.
+---
+scene: speedway
+dur: 10.62
+vodur: 10.02
+cast: sonic(toon=sonic, x=0.38, run, mood=angry), metal(metal, x=0.62, fly)
+speaker: metal
+shots: wide, close, react, close
+Each time, Eggman sent him as a weapon. But in the middle of every fight, something in his eyes looked different. Like he was enjoying it.
+---
+scene: lab
+dur: 9.48
+vodur: 8.88
+title: PRIDE: ???
+cast: metal(metal, x=0.5)
+speaker: metal
+shots: close, close
+Because deep down, under the new code, the pride was still there. He was not fighting for Eggman. He never really was.
+---
+scene: news
+dur: 13.45
+vodur: 12.85
+headline: EGGMAN ATTACKS AGAIN
+Most people never learned how close they came to losing everything. The newspapers said Eggman attacked again. Nobody wrote about the robot who tried to replace a hero.
+---
+scene: lab
+dur: 13.94
+vodur: 13.34
+screen: metal
+title: STATUS: UNKNOWN
+cast: doctor(egg, x=0.5, mood=worried)
+speaker: doctor
+shots: close, wide, close
+Even Eggman never talks about that day. The day his greatest creation turned against him. Some say he keeps Metal close now, not because he trusts him, but because he is scared of what Metal might do on his own.
+---
+scene: monitors
+dur: 13.51
+vodur: 12.91
+heroes: sonic,sonic,sonic
+label: One name
+And the engineers who rebuilt him noticed something strange. Every time Metal was switched back on, the very first thing he did was search for one name. Sonic.
+---
+scene: speedway
+dur: 6.75
+vodur: 6.15
+speed: 0
+label: Chapter 10: Is He Alive?
+cast: metal(metal, x=0.5, size=1.1)
+speaker: metal
+shots: close, wide
+So what is Metal Sonic, really? A machine? Or something more?
+---
+scene: lab
+dur: 9.14
+vodur: 8.54
+title: ORDERS: IGNORED
+cast: metal(metal, x=0.5, size=1.1)
+speaker: metal
+shots: close, wide
+He was built to follow orders. But he learned to disobey. He was built to copy. But he learned to want things for himself.
+---
+scene: wreck
+dur: 11.40
+vodur: 10.80
+cast: shadow(toon=shadow, x=0.36), metal(metal, x=0.64, flip)
+speaker: shadow
+shots: wide, react, close
+Shadow was also created in a lab. Also made to be a weapon. But Shadow chose his own path. Maybe, one day, Metal will too.
+---
+scene: planet
+dur: 8.05
+vodur: 7.45
+cast: amy(toon=amy, x=0.5)
+speaker: amy
+shots: close, close
+Amy once said that even a robot can change, if someone gives it a chance. Nobody has given Metal Sonic that chance yet.
+---
+scene: zone
+dur: 10.51
+vodur: 9.91
+cast: sonic(toon=sonic, x=0.36, mood=smug), metal(metal, x=0.64, flip)
+speaker: sonic
+shots: wide, close, react
+And Sonic? Sonic has never hated him. To Sonic, Metal is not a monster. He is the only rival who can actually keep up.
+---
+scene: speedway
+dur: 7.56
+vodur: 6.96
+cast: sonic(toon=sonic, x=0.4, run, mood=happy), metal(metal, x=0.62, fly)
+speaker: sonic
+shots: wide, react, close, wide
+Two blue blurs. One made of heart, one made of steel. Forever racing toward a finish line that never comes.
+---
+scene: lab
+dur: 9.72
+vodur: 9.12
+alarm: 1
+title: REBUILD: 99%
+cast: metal(metal, x=0.5, size=1.15)
+speaker: metal
+shots: close, wide, close
+Somewhere right now, in a dark lab, Metal Sonic is being rebuilt again. His engine is warming up. His eyes are turning red.
+---
+scene: timeline
+dur: 13.96
+vodur: 13.36
+years: Day One, The Race, The Betrayal, Today
+events: Built | Defeated | Overlord | Rebuilt again
+active: 4
+From a secret lab, to a highway in the stars, to a dragon in the sky, and back to the lab again. That is the life of Metal Sonic so far.
+---
+scene: speedway
+dur: 11.60
+vodur: 11.00
+speed: 40
+label: Who is the real Sonic?
+cast: metal(metal, x=0.36), sonic(toon=sonic, x=0.64, flip, mood=smug)
+speaker: sonic
+shots: wide, close, react, wide
+So, is he just a machine? Or the rival who will never stop chasing? Tell us in the comments. And subscribe, because the next story is about Shadow.

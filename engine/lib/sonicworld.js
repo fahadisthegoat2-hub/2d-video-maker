@@ -191,3 +191,54 @@ const SW_WORLD = { lab: bgLab, planet: bgPlanet, speedway: bgSpeedway, zone: bgZ
 const SW_FG = { lab: FG_lab, speedway: FG_speedway, zone: FG_zone, fortress: FG_fortress };
 const SW_DEF = { lab: { y: .9, s: .9 }, planet: { y: .92, s: .8 }, speedway: { y: .86, s: .85 }, zone: { y: .88, s: .85 }, fortress: { y: .86, s: .85 }, overlord: { y: .95, s: .8 }, emeralds: { y: .95, s: .9 }, wreck: { y: .9, s: .85 } };
 const SW_BLOOM = { lab: .35, planet: .25, speedway: .5, zone: .15, fortress: .25, overlord: .5, emeralds: .6, monitors: .45, news: .05, wreck: .35 };
+
+// ---------- MOTION GRAPHICS: kinetic text, hero burst, versus ----------
+const HEROES = {
+  metal: { metal: 1 }, neo: { metal: 1, cape: '#7a1a2a', metalColor: '#4a3aa8' }, sonic: { toon: 'sonic', mood: 'smug' }, amy: { toon: 'amy', mood: 'happy' },
+  tails: { toon: 'tails', mood: 'happy', fly: 1 }, shadow: { toon: 'shadow' }, doctor: { egg: 1 }, super: { toon: 'sonic', fur: '#f2c43a', aura: 1, mood: 'angry', fly: 1 },
+};
+const MGPAL = [['#ff3a5a', '#ffb02e'], ['#2a6aff', '#22d3ee'], ['#8a2be2', '#ff4fd8'], ['#ff6a00', '#ffd400'], ['#00b894', '#a3ff3a'], ['#e11d48', '#7c3aed']];
+function heroAt(name, x, y, s, t, mood, flip) {
+  const c = Object.assign({ name, x: x / W, _y: y, _s: s, flip: !!flip }, HEROES[name] || HEROES.metal); if (mood) c.mood = mood;
+  if (c.aura) c.aura = '255,220,90'; X.save(); drawChar(c, t, false, true); X.restore();
+}
+function burstBg(sc, t, c1, c2) {
+  X.setTransform(1, 0, 0, 1, 0, 0); X.fillStyle = rad(W / 2, H / 2, 0, W * .7, [c2, c1, hex(c1, -.5)]); X.fillRect(0, 0, W, H);
+  X.save(); X.translate(W / 2, H * .5); X.rotate(t * .35); for (let i = 0; i < 28; i++) { X.rotate(Math.PI / 14); X.beginPath(); X.moveTo(0, 0); X.lineTo(-70, -1500); X.lineTo(70, -1500); X.closePath(); X.fillStyle = i % 2 ? 'rgba(255,255,255,.14)' : 'rgba(0,0,0,.08)'; X.fill(); } X.restore();
+  X.fillStyle = 'rgba(0,0,0,.14)'; for (let y = 0; y < H; y += 36) for (let x = (y / 36) % 2 * 18; x < W; x += 36) { const r = 3 + 6 * Math.hypot(x - W / 2, y - H / 2) / W; X.beginPath(); X.arc(x, y, r, 0, 7); X.fill(); }
+}
+function bgBurst(sc, t) {
+  const lt = LT, pal = MGPAL[(sc.idx || 0) % MGPAL.length]; burstBg(sc, t, pal[0], pal[1]);
+  const k = Math.min(1, lt / .35), pop = 1 + .25 * Math.max(0, 1 - lt / .35) * Math.sin(lt * 30), zoom = 1 + lt * .03;
+  const R2 = rng(Math.floor(t * 12)); for (let i = 0; i < 24; i++) { const a = R2() * 7, r0 = 300 + R2() * 300; line(W / 2 + Math.cos(a) * r0, H * .55 + Math.sin(a) * r0, W / 2 + Math.cos(a) * (r0 + 500), H * .55 + Math.sin(a) * (r0 + 500), 'rgba(255,255,255,.5)', 4); }
+  X.save(); X.translate(W / 2, H * .55); X.scale(k * pop * zoom, k * pop * zoom); X.rotate((sc.idx % 2 ? -1 : 1) * .04 + Math.sin(lt * 2) * .02); X.translate(-W / 2, -H * .55);
+  X.filter = 'drop-shadow(12px 0 0 #fff) drop-shadow(-12px 0 0 #fff) drop-shadow(0 12px 0 #fff) drop-shadow(0 -12px 0 #fff)';
+  heroAt(sc.hero, W / 2, H * 1.05, sc.hero === 'doctor' ? 1.3 : 1.75, t, sc.mood, sc.flip); X.filter = 'none'; heroAt(sc.hero, W / 2, H * 1.05, sc.hero === 'doctor' ? 1.3 : 1.75, t, sc.mood, sc.flip);
+  X.restore();
+}
+function bgKinetic(sc, t) {
+  const lt = LT, pal = MGPAL[((sc.idx || 0) + 3) % MGPAL.length];
+  X.setTransform(1, 0, 0, 1, 0, 0); X.fillStyle = lin(0, 0, W, H, [hex(pal[0], -.55), hex(pal[1], -.6)]); X.fillRect(0, 0, W, H);
+  for (let i = 0; i < 7; i++) { const R2 = rng(i + (sc.idx || 0)), x = (R2() * W + t * (40 + R2() * 80)) % (W + 400) - 200, y = R2() * H, s = 80 + R2() * 220; X.save(); X.translate(x, y); X.rotate(t * (R2() - .5)); X.strokeStyle = `rgba(255,255,255,${.08 + R2() * .1})`; X.lineWidth = 10; i % 2 ? X.strokeRect(-s / 2, -s / 2, s, s) : (X.beginPath(), X.arc(0, 0, s / 2, 0, 7), X.stroke()); X.restore(); }
+  const words = String(sc.kt || '').toUpperCase().split(/\s+/).filter(Boolean), per = Math.min(.32, (sc.dur * .6) / Math.max(1, words.length));
+  X.font = `700 150px ${FONT}`; const lines = []; let cur = [];
+  words.forEach(w => { cur.push(w); if (X.measureText(cur.join(' ')).width > W * .78) { cur.pop(); lines.push(cur); cur = [w]; } }); if (cur.length) lines.push(cur);
+  let wi = 0; const lh = 170, y0 = H * .48 - (lines.length - 1) * lh / 2;
+  lines.forEach((ln, li) => { const full = X.measureText(ln.join(' ')).width; let x = W / 2 - full / 2;
+    ln.forEach(w => { const age = lt - wi * per, ww = X.measureText(w + ' ').width;
+      if (age > 0) { const k = Math.min(1, age / .18), s = k < 1 ? .4 + .9 * k : 1 + .08 * Math.exp(-(age - .18) * 8) * Math.cos((age - .18) * 25), hot = /[A-Z]{5,}/.test(w) && wi % 2 === 0;
+        X.save(); X.translate(x + ww / 2, y0 + li * lh); X.scale(s, s); X.rotate((wi % 3 - 1) * .03); X.textAlign = 'center'; X.textBaseline = 'middle'; X.lineJoin = 'round';
+        X.strokeStyle = '#000'; X.lineWidth = 26; X.strokeText(w, 0, 0); X.fillStyle = hot ? pal[1] : '#fff'; X.fillText(w, 0, 0); X.restore(); }
+      x += ww; wi++; }); });
+  X.textAlign = 'left'; X.textBaseline = 'alphabetic';
+}
+function bgVersus(sc, t) {
+  const lt = LT, [a, b] = String(sc.vs || 'sonic,metal').split('/'), k = Math.min(1, lt / .4), e = 1 - Math.pow(1 - k, 3);
+  X.setTransform(1, 0, 0, 1, 0, 0);
+  X.save(); X.beginPath(); X.moveTo(0, 0); X.lineTo(W * .56, 0); X.lineTo(W * .44, H); X.lineTo(0, H); X.closePath(); X.clip(); burstBg(sc, t, '#1e5aff', '#7ad0ff'); X.setTransform(1, 0, 0, 1, 0, 0); heroAt(a, W * .24 - (1 - e) * 700, H * .97, 1.3, t, 'angry', false); X.restore();
+  X.save(); X.beginPath(); X.moveTo(W * .56, 0); X.lineTo(W, 0); X.lineTo(W, H); X.lineTo(W * .44, H); X.closePath(); X.clip(); burstBg(sc, t, '#e0122e', '#ff9a3a'); X.setTransform(1, 0, 0, 1, 0, 0); heroAt(b, W * .76 + (1 - e) * 700, H * .97, 1.3, t, 'angry', true); X.restore();
+  X.beginPath(); X.moveTo(W * .56, -10); X.lineTo(W * .49, H * .45); X.lineTo(W * .53, H * .5); X.lineTo(W * .44, H + 10); X.strokeStyle = '#fff'; X.lineWidth = 22; X.shadowColor = '#ffe23a'; X.shadowBlur = 40; X.stroke(); X.shadowBlur = 0;
+  const vk = Math.max(0, Math.min(1, (lt - .3) / .2)), vs = vk < 1 ? 3 - 2 * vk : 1 + .05 * Math.sin(lt * 10);
+  X.save(); X.translate(W / 2, H * .45); X.scale(vs, vs); X.rotate(-.08); X.font = `700 260px ${FONT}`; X.textAlign = 'center'; X.textBaseline = 'middle'; X.lineJoin = 'round'; X.globalAlpha = vk; X.strokeStyle = '#000'; X.lineWidth = 40; X.strokeText('VS', 0, 0); X.fillStyle = '#ffe23a'; X.fillText('VS', 0, 0); X.restore(); X.textAlign = 'left';
+}
+Object.assign(SW_WORLD, { burst: bgBurst, kinetic: bgKinetic, versus: bgVersus }); Object.assign(SW_BLOOM, { burst: .2, kinetic: .2, versus: .25 });

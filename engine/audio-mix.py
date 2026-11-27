@@ -3,7 +3,7 @@ SR = 44100
 rng = np.random.default_rng(7)
 d = json.load(open('/tmp/claude-0/vo/durs.json'))
 starts = np.concatenate([[0], np.cumsum(d)])[:-1]; TOTAL = sum(d)
-blocks = open('/home/user/2d-video-maker/scripts/metal-sonic.txt').read().split('\n---\n')[1:]
+blocks = open('/home/user/2d-video-maker/scripts/metal-sonic-base.txt').read().split('\n---\n')[1:]
 S = []
 for b in blocks:
     kv = dict(re.findall(r'^(\w+): (.*)$', b, re.M)); S.append(kv)
@@ -110,6 +110,14 @@ for i, sc in enumerate(S):
     if ty == 'stat': [P('tick', t0 + k * .09, .25) for k in range(18)]; P('boom', t0 + 1.8, .4)
     if ty == 'timeline': [P('tick', t0 + .4 + k * .6, .3) for k in range(4)]
     if ty == 'speedway' and 'fly' not in cast and 'run' not in cast: P('wind', t0, .1, t1)
+shots = open('/home/user/2d-video-maker/scripts/metal-sonic.txt').read().split('\n---\n')[1:]; st = 0.0
+for b in shots:
+    kv = dict(re.findall(r'^(\w+): (.*)$', b, re.M)); du = float(kv['dur']); ty = kv.get('scene')
+    if st > .5 and not any(abs(st - x) < .05 for x in starts): P('whoosh', st - .2, .3)
+    if ty == 'burst': P('boom', st + .02, .3); P('flash', st, .2)
+    if ty == 'kinetic': [P('tick', st + k * .3, .3) for k in range(len(kv.get('kt', '').split()))]
+    if ty == 'versus': P('clang', st + .1, .3); P('boom', st + .3, .35)
+    st += du
 P('subdrop', .2, .5); P('heartbeat', starts[85] + 1, .5); P('heartbeat', starts[85] + 2.2, .5)
 P('electric', starts[54] + .5, .3); P('powerdown', starts[67] + .5, .35); P('chains', starts[44] + .6, .4); P('chains', starts[73] + .5, .3)
 print('effects used:', len(used), sorted(used))
