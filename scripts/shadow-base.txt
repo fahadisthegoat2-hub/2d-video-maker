@@ -15,7 +15,7 @@ vodur: 6.193
 music: tension
 alarm: 1
 pod: 1
-cast: maria(kid, skin=light, hair=#f2d46a, hairstyle=long, outfit=dress, shirt=#4a8ae8, mood=sad, x=0.42)
+cast: maria(kid, skin=light, hair=#f4d25a, hairstyle=long, headband=#2a4aa8, iris=#3aa0f0, outfit=dress, shirt=#a8d8f4, color2=#a8d8f4, jacket=#3a5ab8, mood=sad, x=0.42)
 speaker: maria
 shots: close, wide
 Fifty years ago, on a space station high above the Earth, a little girl pushed a hedgehog into an escape pod.
@@ -26,7 +26,7 @@ vodur: 4.446
 alarm: 1
 pod: 1
 fx: dust
-cast: maria(kid, skin=light, hair=#f2d46a, hairstyle=long, outfit=dress, shirt=#4a8ae8, mood=sad, x=0.42)
+cast: maria(kid, skin=light, hair=#f4d25a, hairstyle=long, headband=#2a4aa8, iris=#3aa0f0, outfit=dress, shirt=#a8d8f4, color2=#a8d8f4, jacket=#3a5ab8, mood=sad, x=0.42)
 speaker: maria
 shots: close
 Soldiers were coming. There was only room for one. So she pulled the lever.
@@ -145,7 +145,7 @@ dur: 6.088
 vodur: 5.588
 soft: 1
 enter: 1
-cast: gerald(old, skin=light, hair=#e8e4dc, beard=#e8e4dc, glasses, outfit=robe, shirt=#f4f4f4, color2=#d8d8d8, x=0.36), maria(kid, skin=light, hair=#f2d46a, hairstyle=long, outfit=dress, shirt=#4a8ae8, mood=happy, x=0.62, tag=maria)
+cast: gerald(old, skin=light, hair=#e8e4dc, bald, mustache=#f4f0e8, glasses, outfit=robe, shirt=#f4f4f4, color2=#d8d8d8, x=0.36), maria(kid, skin=light, hair=#f4d25a, hairstyle=long, headband=#2a4aa8, iris=#3aa0f0, outfit=dress, shirt=#a8d8f4, color2=#a8d8f4, jacket=#3a5ab8, mood=happy, x=0.62, tag=maria)
 speaker: maria
 shots: wide, react, close
 But the most important person on the ARK was not a scientist at all. It was his granddaughter, Maria.
@@ -154,7 +154,7 @@ scene: ark
 dur: 8.579
 vodur: 8.079
 soft: 1
-cast: maria(kid, skin=light, hair=#f2d46a, hairstyle=long, outfit=dress, shirt=#4a8ae8, mood=happy, x=0.5)
+cast: maria(kid, skin=light, hair=#f4d25a, hairstyle=long, headband=#2a4aa8, iris=#3aa0f0, outfit=dress, shirt=#a8d8f4, color2=#a8d8f4, jacket=#3a5ab8, mood=happy, x=0.5)
 speaker: maria
 shots: wide, close
 Maria was kind. She was curious. And every day, she pressed her face against the window and stared down at the blue planet below.
@@ -181,7 +181,7 @@ music: tension
 screen: none
 title: GOVERNMENT CONTRACT
 data: CLIENT  THE GOVERNMENT|GOAL  ULTIMATE LIFE FORM|AGING  NONE|DISEASE  IMMUNE|DEADLINE  ?
-cast: gerald(old, skin=light, hair=#e8e4dc, beard=#e8e4dc, glasses, outfit=robe, shirt=#f4f4f4, color2=#d8d8d8, x=0.5)
+cast: gerald(old, skin=light, hair=#e8e4dc, bald, mustache=#f4f0e8, glasses, outfit=robe, shirt=#f4f4f4, color2=#d8d8d8, x=0.5)
 speaker: gerald
 shots: close, wide
 Then the government gave him a mission. Create the Ultimate Life Form. A being that never ages, never gets sick, and never dies.
@@ -337,7 +337,7 @@ vodur: 4.748
 soft: 1
 letterbox: 1
 enter: 1
-cast: shadow(toon=shadow, x=0.38, mood=neutral), maria(kid, skin=light, hair=#f2d46a, hairstyle=long, outfit=dress, shirt=#4a8ae8, mood=happy, x=0.64)
+cast: shadow(toon=shadow, x=0.38, mood=neutral), maria(kid, skin=light, hair=#f4d25a, hairstyle=long, headband=#2a4aa8, iris=#3aa0f0, outfit=dress, shirt=#a8d8f4, color2=#a8d8f4, jacket=#3a5ab8, mood=happy, x=0.64)
 speaker: maria
 shots: wide, react, close
 He was her best friend. The only one on the whole station who was not sick of her questions.
@@ -348,7 +348,7 @@ vodur: 10.691
 soft: 1
 letterbox: 1
 view: earth
-cast: shadow(toon=shadow, x=0.38, mood=neutral), maria(kid, skin=light, hair=#f2d46a, hairstyle=long, outfit=dress, shirt=#4a8ae8, mood=happy, x=0.64)
+cast: shadow(toon=shadow, x=0.38, mood=neutral), maria(kid, skin=light, hair=#f4d25a, hairstyle=long, headband=#2a4aa8, iris=#3aa0f0, outfit=dress, shirt=#a8d8f4, color2=#a8d8f4, jacket=#3a5ab8, mood=happy, x=0.64)
 speaker: maria
 shots: wide, close, react
 Every day, they sat at the giant window and looked down at Earth together. Maria told him about the people down there. Their cities. Their families. How badly she wanted to meet them.
@@ -424,7 +424,7 @@ Soldiers stormed the station. Alarms screamed through every hallway. Scientists 
 scene: speedway
 dur: 7.353
 vodur: 6.853
-cast: shadow(toon=shadow, x=0.4, run), maria(kid, skin=light, hair=#f2d46a, hairstyle=long, outfit=dress, shirt=#4a8ae8, mood=worried, x=0.6, run)
+cast: shadow(toon=shadow, x=0.4, run), maria(kid, skin=light, hair=#f4d25a, hairstyle=long, headband=#2a4aa8, iris=#3aa0f0, outfit=dress, shirt=#a8d8f4, color2=#a8d8f4, jacket=#3a5ab8, mood=worried, x=0.6, run)
 speaker: maria
 shots: wide, close, react
 Shadow grabbed Maria's hand, and they ran. Down the corridors, past the labs, all the way to the escape pods.
@@ -435,7 +435,7 @@ vodur: 5.145
 alarm: 1
 pod: 1
 soft: 1
-cast: shadow(toon=shadow, x=0.62, mood=worried), maria(kid, skin=light, hair=#f2d46a, hairstyle=long, outfit=dress, shirt=#4a8ae8, mood=sad, x=0.38)
+cast: shadow(toon=shadow, x=0.62, mood=worried), maria(kid, skin=light, hair=#f4d25a, hairstyle=long, headband=#2a4aa8, iris=#3aa0f0, outfit=dress, shirt=#a8d8f4, color2=#a8d8f4, jacket=#3a5ab8, mood=sad, x=0.38)
 speaker: maria
 shots: wide, close, react
 And now you know the rest. One capsule. Two of them. Maria pushed him inside.

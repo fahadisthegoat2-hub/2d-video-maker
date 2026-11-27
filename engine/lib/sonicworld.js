@@ -198,7 +198,7 @@ const SW_BLOOM = { lab: .35, planet: .25, speedway: .5, zone: .15, fortress: .25
 const HEROES = {
   metal: { metal: 1 }, neo: { metal: 1, cape: '#7a1a2a', metalColor: '#4a3aa8' }, sonic: { toon: 'sonic', mood: 'smug' }, amy: { toon: 'amy', mood: 'happy' },
   tails: { toon: 'tails', mood: 'happy', fly: 1 }, shadow: { toon: 'shadow' }, doctor: { egg: 1 }, mephiles: { toon: 'mephiles' }, supershadow: { toon: 'shadow', fur: '#f4e9a0', aura: 1, mood: 'angry', fly: 1 },
-  maria: { kid: 1, skin: 'light', hair: '#f2d46a', hairstyle: 'long', outfit: 'dress', shirt: '#4a8ae8', mood: 'happy' }, gerald: { old: 1, skin: 'light', hair: '#e8e4dc', beard: '#e8e4dc', glasses: 1, outfit: 'robe', shirt: '#f4f4f4', color2: '#d8d8d8' }, super: { toon: 'sonic', fur: '#f2c43a', aura: 1, mood: 'angry', fly: 1 },
+  maria: { kid: 1, skin: 'light', hair: '#f4d25a', hairstyle: 'long', headband: '#2a4aa8', iris: '#3aa0f0', outfit: 'dress', shirt: '#a8d8f4', color2: '#a8d8f4', jacket: '#3a5ab8', mood: 'happy' }, gerald: { old: 1, skin: 'light', hair: '#e8e4dc', bald: 1, mustache: '#f4f0e8', glasses: 1, outfit: 'robe', shirt: '#f4f4f4', color2: '#d8d8d8' }, super: { toon: 'sonic', fur: '#f2c43a', aura: 1, mood: 'angry', fly: 1 },
 };
 const MGPAL = [['#ff3a5a', '#ffb02e'], ['#2a6aff', '#22d3ee'], ['#8a2be2', '#ff4fd8'], ['#ff6a00', '#ffd400'], ['#00b894', '#a3ff3a'], ['#e11d48', '#7c3aed']];
 function heroAt(name, x, y, s, t, mood, flip) {

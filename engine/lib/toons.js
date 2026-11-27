@@ -5,7 +5,7 @@ const TOON = {
   tails: { fur: '#f39b2c', skin: '#fff6ee', eye: '#3a86d8', arm: 'fur', fluff: 1, belly: 'skin', shoe: '#d8283a', strap: '#f4f2ee', quills: 'tails', tails: 1, mood: 'happy' },
   shadow: { fur: '#1f1c25', stripe: '#d8283a', skin: '#f2c391', eye: '#d8283a', arm: 'fur', fluff: 1, shoe: '#f4f2ee', strap: '#d8283a', quills: 'shadow', rings: '#f2b928', mood: 'angry' },
 };
-TOON.mephiles = Object.assign({}, TOON.shadow, { fur: '#2e3a5a', stripe: '#8ad8ff', eye: '#6ae8ff', strap: '#8ad8ff', rings: '#8ad8ff', mood: 'smug' });
+TOON.mephiles = Object.assign({}, TOON.shadow, { fur: '#3a3446', stripe: '#cfdcef', eye: '#3ae86a', sclera: '#d8283a', muzzle: '#4a4458', nomouth: 1, crystal: '#dce6f6', glowC: '160,90,255', shoe: '#cfdcef', strap: '#9aa8c8', rings: null, mood: 'smug' });
 const TD = { legH: 104, bodyH: 92, bw: 88, R: 116, arm: 56 }, ED = { legH: 78, bodyH: 200, bw: 230, R: 100, arm: 72 };
 function toonDims(c) { return c.egg ? ED : c.metal ? MD : TD; }
 const OUT = '#14121c';
@@ -36,6 +36,7 @@ function drawToon(c, t, speaking, close) {
   if (c.run) [ru, rf, lu, lf] = RUN;
   X.save(); X.translate(x, y); X.scale(s * (c.flip ? -1 : 1), s);
   ell(0, 0, bw * .9, 16, 'rgba(20,15,30,.3)'); X.translate(0, hover); if (c.run || c.fly && !k.tails) X.rotate(.2);
+  if (k.glowC) { glowC(0, -legH - bodyH / 2, 300, k.glowC, .45); for (let i = 0; i < 12; i++) { const a = i * .52 + t * 2, r = 150 + 40 * Math.sin(t * 3 + i); X.save(); X.globalCompositeOperation = 'lighter'; ell(Math.cos(a) * r, -230 + Math.sin(a) * r * 1.4, 14, 22, `rgba(${k.glowC},.1)`); X.restore(); } }
   if (c.aura) { c.aura = '255,220,90'; glowC(0, -legH - bodyH / 2, 330, c.aura, .7); for (let i = 0; i < 10; i++) { const a = i * .63 + t * 3; line(Math.cos(a) * 140, -200 + Math.sin(a) * 200, Math.cos(a) * 220, -200 + Math.sin(a) * 300, `rgba(${c.aura},.5)`, 5); } }
   // tails (behind)
   if (k.tails) for (let i = 0; i < 2; i++) {
@@ -76,18 +77,21 @@ function toonHead(c, k, fur, skin, t, speaking, R, id) {
     for (const [bx, by, tx, ty] of [[-.4, -.1, -1.35, .85], [-.35, .3, -1.15, 1.15], [-.3, -.5, -1.4, .3]]) quill(bx * R, by * R, tx * R, ty * R, R * .32, D, -.3);
   }
   const ear = (bx, tx, ty, col) => { X.beginPath(); X.moveTo(bx - R * .3, -R * .6); X.lineTo(tx, ty); X.lineTo(bx + R * .3, -R * .7); X.closePath(); fs(col); X.beginPath(); X.moveTo(bx - R * .15, -R * .68); X.lineTo(tx + R * .02, ty + R * .24); X.lineTo(bx + R * .15, -R * .74); X.closePath(); X.fillStyle = k.stripe ? '#f2b0a0' : '#f5c9b0'; X.fill(); };
+  if (k.crystal) { const sh = (x, y, a, l, w) => { X.save(); X.translate(x * R, y * R); X.rotate(a); X.beginPath(); X.moveTo(0, -w * R); X.lineTo(l * R, 0); X.lineTo(0, w * R); X.lineTo(-l * R * .2, 0); X.closePath(); X.fillStyle = lin(0, -w * R, l * R, w * R, ['#ffffff', k.crystal, '#8a98c0']); X.fill(); X.strokeStyle = OUT; X.lineWidth = 4; X.stroke(); X.restore(); };
+    for (const [x, y, a, l, w] of [[-1.5, 1.0, 2.5, .55, .12], [-1.9, .2, 2.9, .6, .13], [-1.8, -.75, -2.7, .6, .13], [-.95, -1.55, -2.2, .55, .12], [-.2, -1.05, -1.9, .5, .1], [-1.2, .55, 2.7, .45, .1]]) sh(x, y, a, l, w); }
   ear(-R * .1, -R * .12, -R * 1.45, D); ear(R * .48, R * .6, -R * 1.38, fur);
   if (k.lashes) { X.beginPath(); X.arc(0, -R * .05, R * 1.02, Math.PI * 1.12, Math.PI * 1.75); X.strokeStyle = OUT; X.lineWidth = R * .16; X.stroke(); X.strokeStyle = '#d8283a'; X.lineWidth = R * .11; X.stroke(); }
   ell(0, 0, R, R * .98); fs(lin(-R, -R, R, R, [Lt, fur, D]), 6);
   ell(-R * .35, -R * .55, R * .3, R * .15, 'rgba(255,255,255,.22)', -.5);
+  if (k.crystal) { X.beginPath(); X.moveTo(R * .25, -R * .95); X.lineTo(R * .42, -R * .55); X.lineTo(R * .3, -R * .58); X.lineTo(R * .38, -R * .3); X.lineTo(R * .14, -R * .62); X.lineTo(R * .24, -R * .6); X.closePath(); X.fillStyle = k.crystal; X.fill(); }
   if (k.quills === 'tails') { for (const [bx, tx, ty] of [[-.2, -.15, -1.45], [.1, .25, -1.5], [.35, .7, -1.3]]) quill(bx * R, -R * .7, tx * R, ty * R, R * .16, fur, .4); ell(-R * .85, R * .4, R * .2, R * .14, '#fff6ee'); }
   // muzzle
-  const mz = k.quills === 'tails' ? '#fff6ee' : skin;
+  const mz = k.muzzle || (k.quills === 'tails' ? '#fff6ee' : skin);
   X.beginPath(); X.moveTo(-R * .08, R * .32); X.quadraticCurveTo(R * .4, R * .18, R * .9, R * .26); X.quadraticCurveTo(R * 1.28, R * .34, R * 1.18, R * .6); X.quadraticCurveTo(R * 1.05, R * .86, R * .6, R * .9); X.quadraticCurveTo(R * .08, R * .92, -R * .1, R * .66); X.quadraticCurveTo(-R * .2, R * .45, -R * .08, R * .32); X.closePath(); fs(mz, 5);
   // eyes: one joined white shape
   const bp = (t + hash(id) * 5) % 3.8, blink = bp < .15;
   const eyes = () => { X.beginPath(); X.moveTo(R * .2, -R * .5); X.bezierCurveTo(R * -.22, -R * .52, R * -.22, R * .32, R * .18, R * .32); X.quadraticCurveTo(R * .44, R * .3, R * .5, R * .12); X.quadraticCurveTo(R * .58, R * .32, R * .76, R * .3); X.bezierCurveTo(R * 1.06, R * .28, R * 1.02, -R * .44, R * .74, -R * .44); X.quadraticCurveTo(R * .55, -R * .44, R * .48, -R * .3); X.quadraticCurveTo(R * .4, -R * .52, R * .2, -R * .5); X.closePath(); };
-  eyes(); X.fillStyle = blink ? fur : '#fff'; X.fill();
+  eyes(); X.fillStyle = blink ? fur : (k.sclera || '#fff'); X.fill();
   if (!blink) {
     X.save(); eyes(); X.clip();
     for (const [ex, ey, r] of [[R * .3, -R * .02, R * .17], [R * .8, 0, R * .14]]) { ell(ex, ey, r * .8, r * 1.15, k.eye); ell(ex + r * .1, ey + r * .1, r * .4, r * .65, '#0d0b12'); ell(ex - r * .2, ey - r * .4, r * .22, r * .22, '#fff'); }
@@ -103,7 +107,8 @@ function toonHead(c, k, fur, skin, t, speaking, R, id) {
   // nose + mouth
   ell(R * 1.2, R * .36, R * .11, R * .09); fs('#0d0b12', 3); ell(R * 1.17, R * .32, R * .04, R * .025, 'rgba(255,255,255,.7)');
   const mx = R * .68, my = R * .62;
-  if (speaking) {
+  if (k.nomouth) {}
+  else if (speaking) {
     const v = Math.floor(hash(Math.floor(t * 10) * 7.3 + id) * 4), h = [.04, .13, .2, .1][v];
     X.beginPath(); X.ellipse(mx, my, R * .2, R * h, -.15, 0, 7); fs('#4a1015', 3); if (h > .1) { X.save(); X.clip(); ell(mx, my + R * h, R * .12, R * h * .6, '#d8566a'); X.restore(); }
   } else if (mood === 'angry') { box(mx - R * .2, my - R * .06, R * .4, R * .13, '#fff', 4); X.strokeStyle = OUT; X.lineWidth = 3; X.stroke(); line(mx - R * .2, my, mx + R * .2, my, OUT, 2); }
