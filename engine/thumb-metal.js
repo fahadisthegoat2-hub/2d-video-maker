@@ -75,15 +75,15 @@ const { chromium } = require('playwright');
     const chainLink = (Z, x0, y0, x1, y1, n, sz) => { for (let i = 0; i <= n; i++) { const k = i / n, x = x0 + (x1 - x0) * k, y = y0 + (y1 - y0) * k + Math.sin(k * Math.PI) * 40; Z.save(); Z.translate(x, y); Z.rotate(Math.atan2(y1 - y0, x1 - x0) + (i % 2) * 1.57); Z.beginPath(); Z.ellipse(0, 0, sz, sz * .5, 0, 0, 7); Z.strokeStyle = '#05060c'; Z.lineWidth = sz * .42; Z.stroke(); const gg = Z.createLinearGradient(-sz, -sz, sz, sz); gg.addColorStop(0, '#f4f6fa'); gg.addColorStop(.5, '#8a93a4'); gg.addColorStop(1, '#3a404c'); Z.strokeStyle = gg; Z.lineWidth = sz * .22; Z.stroke(); Z.restore(); } };
     X.clearRect(0, 0, W, H);
     clipSide(false, () => { X.setTransform(1, 0, 0, 1, 0, 0);
-      X.fillStyle = rad(W * .8, H * .45, 40, W * .6, ['#4a0a0c', '#16030a', '#020104']); X.fillRect(0, 0, W, H);
+      X.fillStyle = rad(W * .8, H * .45, 40, W * .6, ['#ff5a1a', '#a0140c', '#2a0306']); X.fillRect(0, 0, W, H);
       for (let i = 0; i < 9; i++) { const R2 = rng(i + 40); X.fillStyle = `rgba(80,20,20,${.12 + R2() * .1})`; X.beginPath(); X.ellipse(SPL + R2() * W * .5, H * (.6 + R2() * .5), 300 + R2() * 300, 140 + R2() * 120, 0, 0, 7); X.fill(); }
       
       X.filter = 'blur(28px)'; X.globalAlpha = .9; X.drawImage(Rc, 0, 0); X.drawImage(Rc, 0, 0); X.filter = 'none'; X.globalAlpha = 1;
-      X.save(); X.filter = 'drop-shadow(0 0 40px rgba(255,60,20,.8))'; X.drawImage(Lc, 0, 0); X.restore();
+      X.save(); X.filter = 'drop-shadow(10px 0 0 #fff) drop-shadow(-10px 0 0 #fff) drop-shadow(0 10px 0 #fff) drop-shadow(0 -10px 0 #fff) drop-shadow(0 0 40px rgba(255,90,20,1))'; X.drawImage(Lc, 0, 0); X.restore(); X.drawImage(Lc, 0, 0);
       chainLink(X, wr[0][0], wr[0][1], SPL - 40, H * .05, 16, 36); chainLink(X, wr[1][0], wr[1][1], W + 40, H * .05, 16, 36);
       for (const [ex, ey, k] of eyes) { glowC(ex, ey, 260 * k, '255,30,20', .7); X.save(); X.globalCompositeOperation = 'lighter'; const fg = X.createLinearGradient(ex - 520 * k, 0, ex + 520 * k, 0); fg.addColorStop(0, 'rgba(255,40,20,0)'); fg.addColorStop(.5, 'rgba(255,220,200,.95)'); fg.addColorStop(1, 'rgba(255,40,20,0)'); X.fillStyle = fg; X.fillRect(ex - 520 * k, ey - 4 * k, 1040 * k, 8 * k); X.restore(); ell(ex, ey, 14 * k, 14 * k, 'rgba(255,255,240,.95)'); }
       for (let i = 0; i < 80; i++) { const R2 = rng(i + 9), x = SPL - 100 + R2() * W * .6, y = R2() * H, r = 1.5 + R2() * 4; X.save(); X.globalCompositeOperation = 'lighter'; ell(x, y, r, r, `rgba(255,${90 + R2() * 110 | 0},40,${.4 + R2() * .6})`); X.restore(); }
-      X.fillStyle = rad(W * .78, H * .5, H * .5, W * .6, ['rgba(0,0,0,0)', 'rgba(0,0,0,.55)']); X.fillRect(SPL - 200, 0, W, H);
+      X.fillStyle = rad(W * .78, H * .5, H * .5, W * .6, ['rgba(0,0,0,0)', 'rgba(0,0,0,.3)']); X.fillRect(SPL - 200, 0, W, H);
     });
     // LEFT: nursery
     clipSide(true, () => { X.setTransform(1, 0, 0, 1, 0, 0); X.fillStyle = lin(0, 0, 0, H, ['#bfe6ff', '#ffe0f0']); X.fillRect(0, 0, W, H);
@@ -91,6 +91,7 @@ const { chromium } = require('playwright');
       cloudP(W * .1, H * .18, .7, '#ffffff'); cloudP(W * .36, H * .1, .5, '#ffffff');
       for (let i = 0; i < 14; i++) box(i * 80 - 10, H * .55, 22, H * .4, '#f4d8a8', 10); box(-10, H * .53, SPL + 40, 36, '#e8c088', 16); box(-10, H * .92, SPL + 40, 40, '#e8c088', 16);
       ell(W * .25, H * .97, 420, 60, 'rgba(120,80,140,.25)');
+      const babyDraw = () => {
       // baby: tiny body, giant head
       X.save(); X.translate(W * .25, H * .97); X.scale(1.35, 1.35);
       const B = '#3a6ae0', SIL = '#d6dce6';
@@ -109,17 +110,20 @@ const { chromium } = require('playwright');
       X.beginPath(); X.ellipse(R * .5, R * .58, R * .45, R * .26, 0, 0, 7); fs(lin(0, R * .3, 0, R * .9, ['#fff', SIL, '#9aa3b2']), 6);
       X.save(); X.translate(R * .85, R * .6); ell(0, 0, R * .2, R * .2); fs('#ff6aa8', 5); ell(R * .02, 0, R * .1, R * .1); fs('#f2d43a', 4); X.restore();
       ell(-R * .1, R * .45, R * .15, R * .08, 'rgba(255,120,160,.5)');
-      X.restore(); });
+      X.restore();
+      };
+      X.save(); X.filter = 'drop-shadow(9px 0 0 #fff) drop-shadow(-9px 0 0 #fff) drop-shadow(0 9px 0 #fff) drop-shadow(0 -9px 0 #fff) drop-shadow(0 0 3px #000)'; babyDraw(); X.restore(); babyDraw(); });
     // split lightning
     X.setTransform(1, 0, 0, 1, 0, 0); X.beginPath(); X.moveTo(SPL + 120, -10); X.lineTo(SPL + 30, H * .35); X.lineTo(SPL + 80, H * .4); X.lineTo(SPL - 40, H * .7); X.lineTo(SPL, H * .72); X.lineTo(SPL - 120, H + 10);
     X.strokeStyle = '#fff'; X.lineWidth = 26; X.lineJoin = 'round'; X.shadowColor = '#ffd84a'; X.shadowBlur = 40; X.stroke(); X.shadowBlur = 0; X.strokeStyle = '#ffd84a'; X.lineWidth = 10; X.stroke();
+    { const [Tc, Tx] = (() => { const c = document.createElement('canvas'); c.width = W; c.height = H; return [c, c.getContext('2d')]; })(); Tx.filter = 'saturate(1.35) contrast(1.12)'; Tx.drawImage(C, 0, 0); X.setTransform(1, 0, 0, 1, 0, 0); X.drawImage(Tc, 0, 0); }
     // grain
     { const id = X.getImageData(0, 0, W, H), d = id.data; for (let i = 0; i < d.length; i += 4) { const n = (Math.random() - .5) * 18; d[i] += n; d[i + 1] += n; d[i + 2] += n; } X.putImageData(id, 0, 0); }
     // text
     const word = (s, x, y, size, fill, rot = 0) => { X.save(); X.translate(x, y); X.rotate(rot); X.font = `700 ${size}px ${FONT}`; X.textAlign = 'center'; X.textBaseline = 'middle'; X.lineJoin = 'round'; X.strokeStyle = '#000'; X.lineWidth = size * .22; X.strokeText(s, 0, 0); X.fillStyle = fill; X.fillText(s, 0, 0); X.restore(); };
     const fit = (s, max, size) => { do { X.font = `700 ${size}px ${FONT}`; size -= 4; } while (X.measureText(s).width * 1.12 > max); return size + 4; };
     word('DAY 1', W * .22, H * .13, fit('DAY 1', W * .36, 180), '#ffffff', -.05);
-    word('FINAL FORM', W * .75, H * .13, fit('FINAL FORM', W * .4, 160), '#ff3a3a', .03);
+    word('FINAL FORM', W * .75, H * .13, fit('FINAL FORM', W * .4, 160), '#ffe23a', .03);
     // arrow
     X.save(); X.translate(W * .5, H * .86); X.rotate(-.08); X.beginPath(); X.moveTo(-150, -34); X.lineTo(70, -34); X.lineTo(70, -80); X.lineTo(170, 0); X.lineTo(70, 80); X.lineTo(70, 34); X.lineTo(-150, 34); X.closePath(); X.lineWidth = 22; X.lineJoin = 'round'; X.strokeStyle = '#000'; X.stroke(); X.fillStyle = '#ffd84a'; X.fill(); X.restore();
     return C.toDataURL('image/png');
