@@ -158,7 +158,7 @@ __ENGINE__
   }
   // ---------- AAC soundtrack (pre-encoded ADTS, muxed without re-encoding) ----------
   async function loadAudio() {
-    const buf = new Uint8Array(await (await fetch('shadow-audio.aac')).arrayBuffer()); const frames = []; let p = 0, cfg = null;
+    const js = await (await fetch('shadow-audio.json')).json(), bin = atob(js.adts), buf = new Uint8Array(bin.length); for (let i = 0; i < bin.length; i++) buf[i] = bin.charCodeAt(i); const frames = []; let p = 0, cfg = null;
     const SR = [96000, 88200, 64000, 48000, 44100, 32000, 24000, 22050, 16000, 12000, 11025, 8000, 7350];
     while (p + 7 < buf.length) {
       if (buf[p] !== 0xff || (buf[p + 1] & 0xf0) !== 0xf0) { p++; continue; }
