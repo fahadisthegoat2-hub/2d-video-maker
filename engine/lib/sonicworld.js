@@ -208,13 +208,23 @@ function burstBg(sc, t, c1, c2) {
   X.save(); X.translate(W / 2, H * .5); X.rotate(t * .35); for (let i = 0; i < 28; i++) { X.rotate(Math.PI / 14); X.beginPath(); X.moveTo(0, 0); X.lineTo(-70, -1500); X.lineTo(70, -1500); X.closePath(); X.fillStyle = i % 2 ? 'rgba(255,255,255,.14)' : 'rgba(0,0,0,.08)'; X.fill(); } X.restore();
   X.fillStyle = 'rgba(0,0,0,.14)'; for (let y = 0; y < H; y += 36) for (let x = (y / 36) % 2 * 18; x < W; x += 36) { const r = 3 + 6 * Math.hypot(x - W / 2, y - H / 2) / W; X.beginPath(); X.arc(x, y, r, 0, 7); X.fill(); }
 }
+// Fast sticker outline: draw on a transparent layer, stamp a white silhouette around it (canvas filters are ~10s/frame in software)
+const OL = [0, 1].map(() => { const c = document.createElement('canvas'); c.width = W; c.height = H; return c; });
+function outlined(draw, r) {
+  const [bg, hero] = OL, bx = bg.getContext('2d'), hx = hero.getContext('2d'), m = X.getTransform();
+  bx.clearRect(0, 0, W, H); bx.drawImage(C, 0, 0); X.save(); X.setTransform(1, 0, 0, 1, 0, 0); X.clearRect(0, 0, W, H); X.restore();
+  draw(); hx.clearRect(0, 0, W, H); hx.drawImage(C, 0, 0);
+  X.save(); X.setTransform(1, 0, 0, 1, 0, 0); X.clearRect(0, 0, W, H); X.drawImage(bg, 0, 0);
+  bx.clearRect(0, 0, W, H); bx.drawImage(hero, 0, 0); bx.globalCompositeOperation = 'source-in'; bx.fillStyle = '#fff'; bx.fillRect(0, 0, W, H); bx.globalCompositeOperation = 'source-over';
+  for (let k = 0; k < 8; k++) { const a = k * Math.PI / 4; X.drawImage(bg, Math.round(Math.cos(a) * r), Math.round(Math.sin(a) * r)); }
+  X.drawImage(hero, 0, 0); X.restore(); X.setTransform(m);
+}
 function bgBurst(sc, t) {
   const lt = LT, pal = MGPAL[(sc.idx || 0) % MGPAL.length]; burstBg(sc, t, pal[0], pal[1]);
   const k = Math.min(1, lt / .35), pop = 1 + .25 * Math.max(0, 1 - lt / .35) * Math.sin(lt * 30), zoom = 1 + lt * .03;
   const R2 = rng(Math.floor(t * 12)); for (let i = 0; i < 24; i++) { const a = R2() * 7, r0 = 300 + R2() * 300; line(W / 2 + Math.cos(a) * r0, H * .55 + Math.sin(a) * r0, W / 2 + Math.cos(a) * (r0 + 500), H * .55 + Math.sin(a) * (r0 + 500), 'rgba(255,255,255,.5)', 4); }
   X.save(); X.translate(W / 2, H * .55); X.scale(k * pop * zoom, k * pop * zoom); X.rotate((sc.idx % 2 ? -1 : 1) * .04 + Math.sin(lt * 2) * .02); X.translate(-W / 2, -H * .55);
-  X.filter = 'drop-shadow(12px 0 0 #fff) drop-shadow(-12px 0 0 #fff) drop-shadow(0 12px 0 #fff) drop-shadow(0 -12px 0 #fff)';
-  heroAt(sc.hero, W / 2, H * 1.05, sc.hero === 'doctor' || sc.hero === 'maria' || sc.hero === 'gerald' ? 1.3 : 1.75, t, sc.mood, sc.flip); X.filter = 'none'; heroAt(sc.hero, W / 2, H * 1.05, sc.hero === 'doctor' || sc.hero === 'maria' || sc.hero === 'gerald' ? 1.3 : 1.75, t, sc.mood, sc.flip);
+  outlined(() => heroAt(sc.hero, W / 2, H * 1.05, sc.hero === 'doctor' || sc.hero === 'maria' || sc.hero === 'gerald' ? 1.3 : 1.75, t, sc.mood, sc.flip), 12);
   X.restore();
 }
 function bgKinetic(sc, t) {
