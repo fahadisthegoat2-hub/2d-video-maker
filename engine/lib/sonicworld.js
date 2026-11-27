@@ -207,14 +207,20 @@ function burstBg(sc, t, c1, c2) {
   X.save(); X.translate(W / 2, H * .5); X.rotate(t * .35); for (let i = 0; i < 28; i++) { X.rotate(Math.PI / 14); X.beginPath(); X.moveTo(0, 0); X.lineTo(-70, -1500); X.lineTo(70, -1500); X.closePath(); X.fillStyle = i % 2 ? 'rgba(255,255,255,.14)' : 'rgba(0,0,0,.08)'; X.fill(); } X.restore();
   X.fillStyle = 'rgba(0,0,0,.14)'; for (let y = 0; y < H; y += 36) for (let x = (y / 36) % 2 * 18; x < W; x += 36) { const r = 3 + 6 * Math.hypot(x - W / 2, y - H / 2) / W; X.beginPath(); X.arc(x, y, r, 0, 7); X.fill(); }
 }
+const mkLayer = () => { const c = document.createElement('canvas'); c.width = W; c.height = H; return { c, ctx: c.getContext('2d') }; }, BG_L = mkLayer(), HERO_L = mkLayer();
 function bgBurst(sc, t) {
   const lt = LT, pal = MGPAL[(sc.idx || 0) % MGPAL.length]; burstBg(sc, t, pal[0], pal[1]);
   const k = Math.min(1, lt / .35), pop = 1 + .25 * Math.max(0, 1 - lt / .35) * Math.sin(lt * 30), zoom = 1 + lt * .03;
   const R2 = rng(Math.floor(t * 12)); for (let i = 0; i < 24; i++) { const a = R2() * 7, r0 = 300 + R2() * 300; line(W / 2 + Math.cos(a) * r0, H * .55 + Math.sin(a) * r0, W / 2 + Math.cos(a) * (r0 + 500), H * .55 + Math.sin(a) * (r0 + 500), 'rgba(255,255,255,.5)', 4); }
   X.save(); X.translate(W / 2, H * .55); X.scale(k * pop * zoom, k * pop * zoom); X.rotate((sc.idx % 2 ? -1 : 1) * .04 + Math.sin(lt * 2) * .02); X.translate(-W / 2, -H * .55);
-  X.filter = 'drop-shadow(12px 0 0 #fff) drop-shadow(-12px 0 0 #fff) drop-shadow(0 12px 0 #fff) drop-shadow(0 -12px 0 #fff)';
-  heroAt(sc.hero, W / 2, H * 1.05, sc.hero === 'doctor' ? 1.3 : 1.75, t, sc.mood, sc.flip); X.filter = 'none'; heroAt(sc.hero, W / 2, H * 1.05, sc.hero === 'doctor' ? 1.3 : 1.75, t, sc.mood, sc.flip);
-  X.restore();
+  const M = X.getTransform(); X.restore();
+  // draw the hero once on a clean layer, then outline the whole silhouette in one pass
+  BG_L.ctx.setTransform(1, 0, 0, 1, 0, 0); BG_L.ctx.clearRect(0, 0, W, H); BG_L.ctx.drawImage(C, 0, 0);
+  X.setTransform(1, 0, 0, 1, 0, 0); X.clearRect(0, 0, W, H); X.setTransform(M);
+  heroAt(sc.hero, W / 2, H * 1.05, sc.hero === 'doctor' ? 1.3 : 1.75, t, sc.mood, sc.flip);
+  HERO_L.ctx.setTransform(1, 0, 0, 1, 0, 0); HERO_L.ctx.clearRect(0, 0, W, H); HERO_L.ctx.drawImage(C, 0, 0);
+  X.setTransform(1, 0, 0, 1, 0, 0); X.drawImage(BG_L.c, 0, 0);
+  X.filter = 'drop-shadow(12px 0 0 #fff) drop-shadow(-12px 0 0 #fff) drop-shadow(0 12px 0 #fff) drop-shadow(0 -12px 0 #fff)'; X.drawImage(HERO_L.c, 0, 0); X.filter = 'none'; X.drawImage(HERO_L.c, 0, 0);
 }
 function bgKinetic(sc, t) {
   const lt = LT, pal = MGPAL[((sc.idx || 0) + 3) % MGPAL.length];
