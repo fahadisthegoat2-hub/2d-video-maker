@@ -5,6 +5,7 @@ const TOON = {
   tails: { fur: '#f39b2c', skin: '#fff6ee', eye: '#3a86d8', arm: 'fur', fluff: 1, belly: 'skin', shoe: '#d8283a', strap: '#f4f2ee', quills: 'tails', tails: 1, mood: 'happy' },
   shadow: { fur: '#1f1c25', stripe: '#d8283a', skin: '#f2c391', eye: '#d8283a', arm: 'fur', fluff: 1, shoe: '#f4f2ee', strap: '#d8283a', quills: 'shadow', rings: '#f2b928', mood: 'angry' },
 };
+TOON.mephiles = Object.assign({}, TOON.shadow, { fur: '#2e3a5a', stripe: '#8ad8ff', eye: '#6ae8ff', strap: '#8ad8ff', rings: '#8ad8ff', mood: 'smug' });
 const TD = { legH: 104, bodyH: 92, bw: 88, R: 116, arm: 56 }, ED = { legH: 78, bodyH: 200, bw: 230, R: 100, arm: 72 };
 function toonDims(c) { return c.egg ? ED : c.metal ? MD : TD; }
 const OUT = '#14121c';

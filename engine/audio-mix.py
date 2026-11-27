@@ -76,6 +76,7 @@ x = np.zeros(int(2 * SR))
 for k in range(10): i = int(rng.uniform(0, 1.8) * SR); f = rng.uniform(300, 700); c = sweep(f, f * 2, .08) * env(int(.08 * SR), .005, .04); x[i:i + len(c)] += c
 FX['bubbles'] = norm(x)
 x = lpf(noise(3), .2) * (rng.uniform(0, 1, int(3 * SR)) > .995) * 3 + lpf(noise(3), .01) * .3; FX['fire'] = norm(x)
+t = T(1.0); FX['gunshot'] = norm(np.concatenate([noise(.02) * 1.0, lpf(noise(.98), .05) * np.exp(-T(.98) * 7)]) + .6 * sweep(160, 40, 1.0) * np.exp(-t * 8))
 FX['tick'] = norm(np.sin(2 * np.pi * 2000 * T(.03)) * env(int(.03 * SR), .001, .02))
 print('sound effects:', len(FX))
 import os; os.makedirs('/home/user/2d-video-maker/out/sfx', exist_ok=True)
@@ -91,7 +92,8 @@ used = set()
 def P(name, at, g=.5, loop_to=None): used.add(name); put(name, at, g, loop_to)
 for i, sc in enumerate(S):
     t0, t1 = starts[i], starts[i] + d[i]; ty = sc.get('scene', ''); cast = sc.get('cast', '')
-    if i: P('whoosh', t0 - .25, .2)
+    soft = sc.get('soft')
+    if i and not soft: P('whoosh', t0 - .25, .2)
     if 'label' in sc and 'Chapter' in sc['label']: P('riser', t0 - 1.8, .15); P('boom', t0, .3)
     elif 'label' in sc: P('flash', t0 + .2, .3)
     if sc.get('alarm') and i: P('alarm', t0, .06, t1)
@@ -111,7 +113,17 @@ for i, sc in enumerate(S):
     if ty == 'planet' and sc.get('metal'): P('clang', t0 + .8, .25)
     if ty == 'stat': [P('tick', t0 + k * .09, .25) for k in range(18)]; P('boom', t0 + 1.8, .4)
     if ty == 'timeline': [P('tick', t0 + .4 + k * .6, .3) for k in range(4)]
-    if ty == 'ark': P('beep', t0 + .8, .1)
+    if ty == 'ark' and not soft: P('beep', t0 + .8, .1)
+    if ty == 'wreck': P('gunshot', t0 + .1, .7)
+    if ty == 'eyes': P('heartbeat', t0 + .6, .45); P('heartbeat', t0 + 1.9, .45); P('flash', t0 + 1.3, .2)
+    if ty == 'chapcard': P('riser', t0 - 1.6, .14); P('boom', t0 + .05, .4); P('whoosh', t0 + .2, .25)
+    if ty == 'form': P('powerup', t0 + .05, .4); P('boom', t0 + .35, .45); P('sparkle', t0 + .5, .25); [P('tick', t0 + .8 + k * .12, .12) for k in range(8)]
+    if ty == 'dossier': P('paper', t0 + .05, .4); P('data', t0 + .6, .15); P('data', t0 + 1.6, .12); P('clang', t0 + 1.6, .3) if sc.get('stamp') else None
+    if ty == 'orbit': P('scan', t0 + .3, .15); P('alarm', t0, .05, t1) if sc.get('mode') == 'fall' else None
+    if ty == 'chaos': P('subdrop', t0 + .45, .55); P('flash', t0 + .45, .3); P('heartbeat', t0 + 1.1, .25)
+    if ty == 'rings' and float(sc.get('off', 99)) < d[i]: o = t0 + float(sc['off']); P('riser', o - 1.2, .2); P('clang', o, .5); P('explosion', o + .05, .5); P('electric', o + .2, .3)
+    if ty == 'meter': P('riser', t0, .18); [P('tick', t0 + k * .07, .12) for k in range(16)]; (P('alarm', t0 + 1.2, .08, t0 + 2.6), P('boom', t0 + 1.2, .4)) if float(sc.get('mval', 0)) > 100 else None
+    if sc.get('fx') == 'chaos': P('electric', t0 + .3, .15)
     if sc.get('pod'): P('bubbles', t0 + .4, .15)
     if sc.get('beam'): P('laserhum', t0 + .5, .3, t0 + 3); P('explosion', t0 + 1.4, .5)
     if ty == 'comet': P('roar', t0 + .3, .25); P('thunder', t0 + 1.2, .25)
@@ -120,14 +132,14 @@ for i, sc in enumerate(S):
 shots = open(f'{ROOT}/scripts/{NAME}.txt').read().split('\n---\n')[1:]; st = 0.0
 for b in shots:
     kv = dict(re.findall(r'^(\w+): (.*)$', b, re.M)); du = float(kv['dur']); ty = kv.get('scene')
-    if st > .5 and not any(abs(st - x) < .05 for x in starts): P('whoosh', st - .2, .3)
+    if st > .5 and not kv.get('soft') and not any(abs(st - x) < .05 for x in starts): P('whoosh', st - .2, .3)
     if ty == 'burst': P('whoosh', st - .15, .18)
     if ty == 'kinetic': [P('tick', st + k * .3, .1) for k in range(len(kv.get('kt', '').split()))]
     if ty == 'versus': P('clang', st + .1, .15)
     st += du
 if MS: P('scan', 4.3, .08); P('ring', 4.9, .06); P('heartbeat', 6.2, .25); P('heartbeat', starts[85] + 1, .5); P('heartbeat', starts[85] + 2.2, .5)
 if MS: P('electric', starts[54] + .5, .3); P('powerdown', starts[67] + .5, .35); P('chains', starts[44] + .6, .4); P('chains', starts[73] + .5, .3)
-if not MS: P('heartbeat', 1.0, .45); P('heartbeat', 2.3, .45); P('flash', 3.1, .2)
+pass
 print('effects used:', len(used), sorted(used))
 # ---------------- music ----------------
 def load(f):

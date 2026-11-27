@@ -112,13 +112,15 @@ function bgZone(sc, t) {
 }
 function FG_zone(sc, t) { if ((sc.speed ?? 0) > 600) speedLines(sc, t); }
 // ---------- FLYING FORTRESS ----------
-function airship(x, y, s, t) { X.save(); X.translate(x, y); X.scale(s, s); ell(0, 0, 240, 70, '#5a606c'); box(-240, -10, 480, 20, '#d8283a'); ell(0, -30, 200, 30, 'rgba(255,255,255,.12)'); box(-60, -120, 120, 70, '#4a505c', 10); for (let i = 0; i < 3; i++) box(-40 + i * 30, -100, 16, 16, '#ffd94a'); for (const px of [-200, 200]) { X.save(); X.translate(px, -70); X.scale(Math.cos(t * 20), 1); box(-60, -6, 120, 12, '#2a2a30', 6); X.restore(); line(px, -70, px, -30, '#2a2a30', 8); } eggEmblem(0, 20, .35); for (let i = 0; i < 5; i++) ell(-160 + i * 80, 46, 10, 6, '#ff6a2a'); X.restore(); }
+let GUNMODE = false;
+function gunEmblem(x, y, s) { X.save(); X.translate(x, y); X.scale(s, s); ell(0, 0, 60, 60, '#2a3a2a'); ell(0, 0, 50, 50, '#c8c8b0'); X.beginPath(); for (let i = 0; i < 10; i++) { const a = -Math.PI / 2 + i * Math.PI / 5, r = i % 2 ? 18 : 42; X.lineTo(Math.cos(a) * r, Math.sin(a) * r); } X.closePath(); X.fillStyle = '#2a3a2a'; X.fill(); X.restore(); }
+function airship(x, y, s, t) { X.save(); X.translate(x, y); X.scale(s, s); ell(0, 0, 240, 70, '#5a606c'); box(-240, -10, 480, 20, '#d8283a'); ell(0, -30, 200, 30, 'rgba(255,255,255,.12)'); box(-60, -120, 120, 70, '#4a505c', 10); for (let i = 0; i < 3; i++) box(-40 + i * 30, -100, 16, 16, '#ffd94a'); for (const px of [-200, 200]) { X.save(); X.translate(px, -70); X.scale(Math.cos(t * 20), 1); box(-60, -6, 120, 12, '#2a2a30', 6); X.restore(); line(px, -70, px, -30, '#2a2a30', 8); } (GUNMODE ? gunEmblem(0, 20, .35) : eggEmblem(0, 20, .35)); for (let i = 0; i < 5; i++) ell(-160 + i * 80, 46, 10, 6, '#ff6a2a'); X.restore(); }
 function bgFortress(sc, t) {
-  cam(0); sky2('#2a1a4a', '#c0506a', '#ffb04a');
-  cam(.05); for (let i = 0; i < 6; i++) cloudP(scroll(i * 380, 260, t, W + 700) - 300, H * (.25 + (i % 3) * .15), .9 + (i % 2) * .4, i % 2 ? '#e8a0a0' : '#f4c0a0');
+  GUNMODE = !!sc.gun; cam(0); if (sc.gun) sky2('#0a1018', '#1a2a3a', '#3a4a5a'); else sky2('#2a1a4a', '#c0506a', '#ffb04a');
+  cam(.05); for (let i = 0; i < 6; i++) cloudP(scroll(i * 380, 260, t, W + 700) - 300, H * (.25 + (i % 3) * .15), .9 + (i % 2) * .4, sc.gun ? (i % 2 ? '#2a3a4a' : '#34465a') : i % 2 ? '#e8a0a0' : '#f4c0a0');
   cam(.15); airship(scroll(W * .2, 40, t, W + 800) - 300, H * .25 + Math.sin(t) * 10, .55, t); airship(scroll(W * .75, 60, t, W + 800) - 300, H * .4 + Math.sin(t + 2) * 10, .4, t);
-  cam(.3); for (let i = 0; i < 5; i++) cloudP(scroll(i * 500, 520, t, W + 900) - 400, H * .7, 1.4, '#f0d0c0');
-  cam(1); box(-W, H * .8, W * 3, H, '#3a404c'); for (let i = -10; i < 30; i++) box(i * 160, H * .8, 150, H, i % 2 ? '#454c5a' : '#3a404c'); hazard(-W, H * .8, W * 3, 16);
+  cam(.3); for (let i = 0; i < 5; i++) cloudP(scroll(i * 500, 520, t, W + 900) - 400, H * .7, 1.4, sc.gun ? '#2a3644' : '#f0d0c0');
+  cam(1); box(-W, H * .8, W * 3, H, '#3a404c'); for (let i = -10; i < 30; i++) box(i * 160, H * .8, 150, H, i % 2 ? '#454c5a' : '#3a404c'); hazard(-W, H * .8, W * 3, 16); GUNMODE = false;
   for (let i = -4; i < 20; i++) { box(i * 120, H * .62, 12, H * .18, '#2a2e38'); } box(-W, H * .61, W * 3, 14, '#2a2e38', 6);
   box(W * .82, H * .5, 220, 80, '#2a2e38', 14); box(W * .9, H * .46, 260, 40, '#1a1e28', 10); ell(W * .86, H * .58, 50, 50, '#4a505c');
 }
@@ -195,7 +197,7 @@ const SW_BLOOM = { lab: .35, planet: .25, speedway: .5, zone: .15, fortress: .25
 // ---------- MOTION GRAPHICS: kinetic text, hero burst, versus ----------
 const HEROES = {
   metal: { metal: 1 }, neo: { metal: 1, cape: '#7a1a2a', metalColor: '#4a3aa8' }, sonic: { toon: 'sonic', mood: 'smug' }, amy: { toon: 'amy', mood: 'happy' },
-  tails: { toon: 'tails', mood: 'happy', fly: 1 }, shadow: { toon: 'shadow' }, doctor: { egg: 1 }, supershadow: { toon: 'shadow', fur: '#f4e9a0', aura: 1, mood: 'angry', fly: 1 },
+  tails: { toon: 'tails', mood: 'happy', fly: 1 }, shadow: { toon: 'shadow' }, doctor: { egg: 1 }, mephiles: { toon: 'mephiles' }, supershadow: { toon: 'shadow', fur: '#f4e9a0', aura: 1, mood: 'angry', fly: 1 },
   maria: { kid: 1, skin: 'light', hair: '#f2d46a', hairstyle: 'long', outfit: 'dress', shirt: '#4a8ae8', mood: 'happy' }, gerald: { old: 1, skin: 'light', hair: '#e8e4dc', beard: '#e8e4dc', glasses: 1, outfit: 'robe', shirt: '#f4f4f4', color2: '#d8d8d8' }, super: { toon: 'sonic', fur: '#f2c43a', aura: 1, mood: 'angry', fly: 1 },
 };
 const MGPAL = [['#ff3a5a', '#ffb02e'], ['#2a6aff', '#22d3ee'], ['#8a2be2', '#ff4fd8'], ['#ff6a00', '#ffd400'], ['#00b894', '#a3ff3a'], ['#e11d48', '#7c3aed']];

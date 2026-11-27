@@ -92,7 +92,7 @@ function renderAt(T) {
   const sc = SCENES[i], lt = T - start, prog = clamp(lt / sc.dur), toEnd = sc.dur - lt;
   TS = Math.floor(T * 12) / 12; LT = lt;                      // characters + fire etc. animate on 12fps
   CAM = shotAt(sc, lt);
-  if (i > 0 && lt < .3) CAM.z *= 1 + .1 * (1 - lt / .3) ** 2;
+  if (i > 0 && lt < .3 && !sc.soft) CAM.z *= 1 + .1 * (1 - lt / .3) ** 2;
   const act = sc.shake || sc.laser || sc.alarm || sc.burst || sc.type === 'overlord' || (sc.type === 'speedway' && (sc.speed ?? 1400) > 600);
   if (act) { const a = (sc.type === 'overlord' || sc.laser ? 9 : 5) / CAM.z; CAM.cx += Math.sin(T * 47) * a + Math.sin(T * 31) * a; CAM.cy += Math.cos(T * 43) * a; }
   X.setTransform(1, 0, 0, 1, 0, 0); X.globalAlpha = 1; X.globalCompositeOperation = 'source-over'; X.fillStyle = '#000'; X.fillRect(0, 0, W, H);
@@ -100,10 +100,11 @@ function renderAt(T) {
   if (sc.type !== 'portraits') {
     cam(1);
     const speaking = c => sc.speaker === c.name && lt > .15 && lt < (sc.speech || sc.dur) + .15;
-    [...(sc.cast || [])].sort((a, b) => charY(a, sc) - charY(b, sc)).forEach(c => { c._s = charScale(c, sc); c._y = charY(c, sc); drawChar(c, TS, speaking(c), CAM.z > 2); });
+    [...(sc.cast || [])].sort((a, b) => charY(a, sc) - charY(b, sc)).forEach(c => { c._s = charScale(c, sc); c._y = charY(c, sc); const x0 = c.x; if (sc.enter && lt < .5) c.x += (c.x < .5 ? -1 : 1) * .7 * (1 - back(Math.floor(lt * 24) / 24 / .5)); drawChar(c, TS, speaking(c), CAM.z > 2); c.x = x0; });
     if (typeof SW_FG !== 'undefined' && SW_FG[sc.type]) { cam(1); SW_FG[sc.type](sc, T); }
     if (sc.type === 'camp' && sc.snow) snowfall(sc.seed + 1, T, 50, 1.4);
   }
+  if (typeof drawFX !== 'undefined') drawFX(sc, T);
   X.setTransform(1, 0, 0, 1, 0, 0);
   if (sc.dim) { X.fillStyle = `rgba(0,0,0,${sc.dim})`; X.fillRect(0, 0, W, H); }
   { const g = ['rgba(0,0,0,0)', 'rgba(255,140,60,.07)', 'rgba(60,120,255,.07)', 'rgba(200,60,255,.05)'][(sc.idx || 0) % 4]; X.fillStyle = g; X.fillRect(0, 0, W, H); }
@@ -116,11 +117,12 @@ function renderAt(T) {
   }
   if (sc.type === 'stat') bigNumber(sc, lt);
   if (sc.type === 'timeline') timeline(sc, lt, T);
+  if (sc.letterbox) { X.setTransform(1, 0, 0, 1, 0, 0); const lb = 110 * Math.min(1, (i > 0 && SCENES[i - 1].letterbox) ? 1 : lt / .4); box(0, 0, W, lb, '#000'); box(0, H - lb, W, lb, '#000'); }
   ribbon(sc.label, lt - .2);
-  if (sc.chap) { const [n, nm, tot0] = String(sc.chap).split('|'), tot = +tot0 || 10, s = `CH ${n}/${tot} · ${nm.toUpperCase()}`; X.font = `700 34px ${FONT}`; const w = X.measureText(s).width + 44; box(36, 34, w, 58, 'rgba(10,12,24,.72)', 29); box(36, 34, 12 + (w - 12) * (+n / tot), 6, '#ffd23a', 3); X.fillStyle = '#fff'; X.textBaseline = 'middle'; X.fillText(s, 58, 66); X.textBaseline = 'alphabetic'; }
+  if (sc.chap && sc.type !== 'chapcard') { const [n, nm, tot0] = String(sc.chap).split('|'), tot = +tot0 || 10, s = `CH ${n}/${tot} · ${nm.toUpperCase()}`; X.font = `700 34px ${FONT}`; const w = X.measureText(s).width + 44; box(36, 34, w, 58, 'rgba(10,12,24,.72)', 29); box(36, 34, 12 + (w - 12) * (+n / tot), 6, '#ffd23a', 3); X.fillStyle = '#fff'; X.textBaseline = 'middle'; X.fillText(s, 58, 66); X.textBaseline = 'alphabetic'; }
   if (sc.teaser) { const k = Math.min(1, lt / .2); X.save(); X.translate(W - 60, 70); X.rotate(.05); X.scale(k, k); X.font = `700 54px ${FONT}`; const tw = X.measureText('COMING UP').width; box(-tw - 50, -36, tw + 50, 76, '#ffd23a', 12); X.fillStyle = '#111'; X.textAlign = 'right'; X.textBaseline = 'middle'; X.fillText('COMING UP', -25, 4); X.restore(); X.textAlign = 'left'; X.textBaseline = 'alphabetic'; }
   captions(sc, lt);
-  if (i > 0 && lt < .12) { X.setTransform(1, 0, 0, 1, 0, 0); X.fillStyle = `rgba(255,255,255,${.55 * (1 - lt / .12)})`; X.fillRect(0, 0, W, H); }
+  if (i > 0 && lt < .12 && !sc.soft) { X.setTransform(1, 0, 0, 1, 0, 0); X.fillStyle = `rgba(255,255,255,${.55 * (1 - lt / .12)})`; X.fillRect(0, 0, W, H); }
   if (i === 0 && lt < .4) { X.fillStyle = `rgba(0,0,0,${1 - lt / .4})`; X.fillRect(0, 0, W, H); }
   if (i === SCENES.length - 1 && toEnd < .8) { X.fillStyle = `rgba(0,0,0,${1 - toEnd / .8})`; X.fillRect(0, 0, W, H); }
 }

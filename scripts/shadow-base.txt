@@ -3,418 +3,1095 @@ title: Shadow the Hedgehog From Day 1 to FINAL FORM
 soundtrack: soundtrack.mp3
 name: shadow
 voice: en-US-AndrewNeural
-rate: +5%
-cut: 1.8
+rate: -6%
+gap: .5
+cut: 2.2
 chapters: 8
+mode: v2
 ---
 scene: ark
-dur: 10.650
-vodur: 10.050
+dur: 6.693
+vodur: 6.193
 music: tension
-label: The Life of Shadow
+alarm: 1
 pod: 1
-cast: shadow(toon=shadow, x=0.42, size=1.1, tag=shadow)
-speaker: shadow
-shots: close, wide, close
-Fifty years ago, in a space station high above the Earth, a scientist created something that should never have existed. A hedgehog who could not get sick, could not grow old, and could not die.
----
-scene: speedway
-dur: 7.806
-vodur: 7.206
-cast: shadow(toon=shadow, x=0.5, run)
-speaker: shadow
-shots: wide, close, wide
-He was called the Ultimate Life Form. He would be hunted by an army, locked away for half a century, and one day, he would stand against a god.
----
-scene: zone
-dur: 8.415
-vodur: 7.815
-cast: sonic(toon=sonic, x=0.36, mood=smug), shadow(toon=shadow, x=0.64, flip)
-speaker: shadow
-shots: wide, react, close, wide
-This is the true story of Shadow the Hedgehog. Where he came from, the promise he made, and the question he has asked himself ever since. Who am I?
----
-scene: ark
-dur: 3.422
-vodur: 2.822
-music: ambient
-label: Chapter 1: The Professor
-cast: gerald(old, skin=light, hair=#e8e4dc, beard=#e8e4dc, glasses, outfit=robe, shirt=#f4f4f4, color2=#d8d8d8, x=0.5)
-speaker: gerald
-shots: wide, close
-It all starts with a man named Professor Gerald Robotnik.
----
-scene: lab
-dur: 6.767
-vodur: 6.167
-screen: none
-title: SPACE COLONY ARK
-data: LOCATION  EARTH ORBIT|CREW  RESEARCH TEAM|LEAD  PROF. G. ROBOTNIK|STATUS  ACTIVE|YEAR  50 YEARS AGO
-cast: gerald(old, skin=light, hair=#e8e4dc, beard=#e8e4dc, glasses, outfit=robe, shirt=#f4f4f4, color2=#d8d8d8, x=0.5, size=1.05, tag=professor gerald)
-speaker: gerald
-shots: close, wide, close
-Gerald was the smartest scientist on the planet. He was also the grandfather of a boy who would one day call himself Eggman.
----
-scene: ark
-dur: 9.454
-vodur: 8.854
-view: earth
-Gerald worked on the Space Colony ARK, a giant research station floating in orbit around the Earth. Thousands of people lived and worked up there, far above the clouds.
----
-scene: ark
-dur: 7.705
-vodur: 7.105
-cast: maria(kid, skin=light, hair=#f2d46a, hairstyle=long, outfit=dress, shirt=#4a8ae8, mood=happy, x=0.5, tag=maria)
+cast: maria(kid, skin=light, hair=#f2d46a, hairstyle=long, outfit=dress, shirt=#4a8ae8, mood=sad, x=0.42)
 speaker: maria
-shots: wide, close, wide
-And one of them was very special to him. His granddaughter, Maria. A kind, gentle girl who loved looking down at the blue planet below.
+shots: close, wide
+Fifty years ago, on a space station high above the Earth, a little girl pushed a hedgehog into an escape pod.
+---
+scene: ark
+dur: 4.946
+vodur: 4.446
+alarm: 1
+pod: 1
+fx: dust
+cast: maria(kid, skin=light, hair=#f2d46a, hairstyle=long, outfit=dress, shirt=#4a8ae8, mood=sad, x=0.42)
+speaker: maria
+shots: close
+Soldiers were coming. There was only room for one. So she pulled the lever.
+---
+scene: quote
+dur: 6.703
+vodur: 5.403
+soft: 1
+letterbox: 1
+q: Shadow. Please. Give the people of that planet a chance to be happy.
+who: Maria Robotnik
+hold: 0.8
+Shadow, she whispered. Please. Give the people of that planet a chance to be happy.
+---
+scene: quote
+dur: 2.426
+vodur: 1.326
+q: 
+soft: 1
+letterbox: 1
+hold: 0.6
+Then, a gunshot.
+---
+scene: eyes
+dur: 5.486
+vodur: 4.986
+who: shadow
+The hedgehog inside that capsule was built to be the most powerful living thing in the universe.
+---
+scene: chaos
+dur: 4.507
+vodur: 4.007
+He can stop time. He cannot grow old. He cannot get sick.
+---
+scene: comet
+dur: 4.075
+vodur: 3.575
+teaser: 1
+And one day, he would turn against the alien god who helped create him.
+---
+scene: news
+dur: 7.082
+vodur: 6.582
+headline: KEANU REEVES IS SHADOW
+In 2024, millions of people met him for the first time in the Sonic 3 movie, voiced by Keanu Reeves.
+---
+scene: kinetic
+dur: 4.751
+vodur: 4.251
+kt: The movie only told half the story
+nocap: 1
+But the movie only told you half of his story. Today, you are getting all of it.
+---
+scene: rings
+dur: 8.526
+vodur: 8.026
+off: 99
+teaser: 1
+Like these gold rings on his wrists. They are not decoration. And by the end of this video, you will know exactly what happens when he takes them off.
+---
+scene: form
+dur: 7.279
+vodur: 6.779
+form: 1
+fname: Day One
+sub: Six forms. One is terrifying.
+hero: shadow
+accent: red
+bars: SPEED:40,POWER:35,CHAOS:20
+track: Day One|Chaos Control|Super Shadow|Rings Off|Doom Powers|Final Form
+nocap: 1
+We are going to follow Shadow through every form he has ever unlocked. There are six. The last one should not exist.
 ---
 scene: lab
-dur: 8.284
-vodur: 7.684
+dur: 5.962
+vodur: 5.462
 screen: none
-title: PATIENT: MARIA
-data: ILLNESS  N.I.D.S.|CURE  NONE|STATUS  CRITICAL|EARTH VISIT  NOT ALLOWED|HOPE  ?
-But Maria was sick. She had a rare disease with no cure. She could not even travel down to Earth. And Gerald was terrified of losing her.
+title: CLASSIFIED: PROJECT SHADOW
+data: STARTED  50 YEARS AGO|LOCATION  EARTH ORBIT|SUBJECTS  2|SURVIVORS  ?|STATUS  SEALED
+fx: dust
+But to understand any of it, we have to go back fifty years, to a man who was trying to cheat death.
+---
+scene: chapcard
+dur: 2.755
+vodur: 2.255
+music: ambient
+chap: 1|The Professor|8
+accent: blue
+His name was Professor Gerald Robotnik.
+---
+scene: dossier
+dur: 8.690
+vodur: 8.190
+hero: gerald
+name: Gerald Robotnik
+fields: ROLE: Chief scientist|BASE: Space Colony ARK|IQ: Genius|FAMILY: Granddaughter Maria
+stamp: TOP SECRET
+accent: blue
+He was the greatest scientist of his time. And if that last name sounds familiar, it should. His grandson would grow up to become Doctor Eggman.
+---
+scene: orbit
+dur: 6.990
+vodur: 6.490
+mode: ark
+Gerald lived and worked on the Space Colony ARK. A giant research station, orbiting high above the Earth.
+---
+scene: ark
+dur: 6.916
+vodur: 6.416
+view: earth
+fx: dust
+Scientists lived up there, far above the clouds, working on experiments that were too dangerous to do on the ground.
+---
+scene: ark
+dur: 6.088
+vodur: 5.588
+soft: 1
+enter: 1
+cast: gerald(old, skin=light, hair=#e8e4dc, beard=#e8e4dc, glasses, outfit=robe, shirt=#f4f4f4, color2=#d8d8d8, x=0.36), maria(kid, skin=light, hair=#f2d46a, hairstyle=long, outfit=dress, shirt=#4a8ae8, mood=happy, x=0.62, tag=maria)
+speaker: maria
+shots: wide, react, close
+But the most important person on the ARK was not a scientist at all. It was his granddaughter, Maria.
+---
+scene: ark
+dur: 8.579
+vodur: 8.079
+soft: 1
+cast: maria(kid, skin=light, hair=#f2d46a, hairstyle=long, outfit=dress, shirt=#4a8ae8, mood=happy, x=0.5)
+speaker: maria
+shots: wide, close
+Maria was kind. She was curious. And every day, she pressed her face against the window and stared down at the blue planet below.
+---
+scene: lab
+dur: 9.169
+vodur: 8.669
+screen: none
+title: PATIENT: MARIA ROBOTNIK
+data: CONDITION  N.I.D.S.|CURE  NONE KNOWN|VISIT EARTH  FORBIDDEN|PROGNOSIS  CRITICAL|
+She had never been there. Maria was born with a rare disease called NIDS. There was no cure, and her body was too weak to ever travel to Earth.
 ---
 scene: stat
-dur: 5.899
-vodur: 5.299
+dur: 7.868
+vodur: 7.368
 value: 0
-label: Known cures for Maria's illness
-Zero. No medicine on Earth could save her. So Gerald decided he would create something that could.
+caption2: known cures
+Zero cures. Zero treatments. Gerald could build anything. But he could not save the one person he loved most.
 ---
 scene: lab
-dur: 7.594
-vodur: 6.994
+dur: 8.017
+vodur: 7.517
 music: tension
-label: Chapter 2: Project Shadow
-screen: shadow
-title: PROJECT: SHADOW
-data: GOAL  ULTIMATE LIFE FORM|AGING  NONE|DISEASE  IMMUNE|POWER  CHAOS|STATUS  SECRET
+screen: none
+title: GOVERNMENT CONTRACT
+data: CLIENT  THE GOVERNMENT|GOAL  ULTIMATE LIFE FORM|AGING  NONE|DISEASE  IMMUNE|DEADLINE  ?
 cast: gerald(old, skin=light, hair=#e8e4dc, beard=#e8e4dc, glasses, outfit=robe, shirt=#f4f4f4, color2=#d8d8d8, x=0.5)
 speaker: gerald
 shots: close, wide
-The government gave him a secret mission. Build the Ultimate Life Form. A being that never ages, never gets sick, and lives forever.
+Then the government gave him a mission. Create the Ultimate Life Form. A being that never ages, never gets sick, and never dies.
+---
+scene: kinetic
+dur: 5.732
+vodur: 5.232
+kt: Eternal life could save Maria
+nocap: 1
+Gerald saw what nobody else did. If he could unlock eternal life, he could save Maria.
+---
+scene: lab
+dur: 13.060
+vodur: 12.560
+screen: none
+title: PROTOTYPE 001
+data: SPECIES  LIZARD|STABILITY  FAILING|NEEDS  LIFE SUPPORT|CONTROL  NONE|STATUS  LOCKED AWAY
+fx: dust
+His first attempt was a giant reptile. It grew huge, but it was unstable, and it could only survive hooked up to a machine. Gerald locked it deep inside the ARK. Remember this monster. It comes back.
 ---
 scene: comet
-dur: 8.286
-vodur: 7.686
-If Gerald could unlock the secret of eternal life, he could save Maria. But his first attempts all failed. Until something answered him from deep space.
+dur: 5.152
+vodur: 4.652
+fx: embers
+So Gerald went looking for help in the last place anyone would look. Outer space.
 ---
 scene: comet
-dur: 8.041
-vodur: 7.441
-It was an alien called Black Doom, leader of a race of monsters called the Black Arms. He offered Gerald his own blood to finish the project.
+dur: 6.968
+vodur: 6.468
+Something answered. An alien warlord named Black Doom, ruler of a race of monsters called the Black Arms.
 ---
-scene: comet
-dur: 9.451
-vodur: 8.851
-In return, Gerald made a promise. In fifty years, when Black Doom's comet passed by the Earth again, the Ultimate Life Form would bring him the seven Chaos Emeralds.
+scene: dossier
+dur: 7.587
+vodur: 7.087
+hero: none
+name: Black Doom
+fields: SPECIES: Black Arms|HOME: The Black Comet|POWER: Chaos energy|WANTS: The Chaos Emeralds
+stamp: HOSTILE
+accent: red
+Black Doom offered Gerald something no scientist on Earth could. His own blood. The missing piece for the Ultimate Life Form.
+---
+scene: orbit
+dur: 7.616
+vodur: 7.116
+mode: comet
+And the Black Comet only swings past the Earth once every fifty years. That is where the deadline came from. Fifty years to pay.
+---
+scene: orbit
+dur: 10.503
+vodur: 10.003
+mode: comet
+But there was a price. In fifty years, when his Black Comet came back past the Earth, the Ultimate Life Form would hand him all seven Chaos Emeralds. Gerald agreed.
+---
+scene: kinetic
+dur: 4.349
+vodur: 3.449
+kt: That deal would come back
+nocap: 1
+hold: 0.4
+He had no idea that deal would come back to haunt the whole planet.
+---
+scene: chapcard
+dur: 4.115
+vodur: 3.615
+music: action
+chap: 2|The Ultimate Life Form|8
+accent: red
+Then, one night, inside a glowing capsule, it worked.
 ---
 scene: ark
-dur: 7.501
-vodur: 6.901
+dur: 6.235
+vodur: 5.735
 pod: 1
+fx: chaos
+enter: 1
 cast: shadow(toon=shadow, x=0.42, size=1.1, tag=shadow)
 speaker: shadow
 shots: wide, close, close
-And so, inside a glowing capsule, a black hedgehog with red stripes opened his eyes for the first time. Gerald named him Shadow.
+A black hedgehog with red stripes opened his eyes for the very first time. Gerald named him Shadow.
+---
+scene: lab
+dur: 10.075
+vodur: 9.575
+screen: shadow
+title: SUBJECT: SHADOW
+data: AGE  0 DAYS|AGING  NONE|SPEED  SUPERSONIC|SHOES  AIR JETS|DNA  ???
+Shadow was everything Gerald had promised. He could not get sick. He would never grow old. His shoes had jets in them, so he could skate on air at the speed of sound.
+---
+scene: meter
+dur: 6.774
+vodur: 6.274
+mval: 72
+mlabel: Top speed
+mtext: SUPERSONIC
+accent: blue
+On day one, he was already as fast as anything that had ever lived. But speed was not his real power.
 ---
 scene: emeralds
-dur: 11.874
-vodur: 11.274
+dur: 6.652
+vodur: 6.152
 burst: 1
-Shadow was faster than sound. He could skate on air using his jet shoes. And with a Chaos Emerald, he could do something incredible. Chaos Control. He could freeze time itself, and teleport anywhere.
+His real power came from the Chaos Emeralds. Seven ancient gems, each holding almost unlimited energy.
+---
+scene: chaos
+dur: 5.663
+vodur: 5.163
+nocap: 1
+With just one emerald, Shadow could do something no one else could. He could say two words.
+---
+scene: kinetic
+dur: 2.148
+vodur: 1.648
+kt: Chaos Control
+nocap: 1
+Chaos. Control.
+---
+scene: chaos
+dur: 9.208
+vodur: 8.708
+And time would stop. Bullets froze in the air. The whole world paused, and Shadow could walk anywhere, or teleport across the planet in a blink.
+---
+scene: form
+dur: 5.268
+vodur: 4.768
+form: 2
+fname: Chaos Control
+sub: One emerald. Time stops.
+hero: shadow
+accent: purple
+bars: SPEED:60,POWER:55,CHAOS:75
+track: Day One|Chaos Control|Super Shadow|Rings Off|Doom Powers|Final Form
+nocap: 1
+Form two, unlocked. Chaos Control. And he had barely even started.
+---
+scene: burst
+dur: 9.083
+vodur: 8.583
+hero: shadow
+fx: chaos
+He could also throw raw chaos energy like lightning bolts. He called it Chaos Spear. On day one, Shadow was already a one hedgehog army.
+---
+scene: chapcard
+dur: 2.474
+vodur: 1.974
+music: sad
+chap: 3|Maria|8
+accent: blue
+But to Maria, he was not a weapon.
 ---
 scene: ark
-dur: 3.764
-vodur: 3.164
-music: ambient
-label: Chapter 3: Maria
+dur: 5.248
+vodur: 4.748
+soft: 1
+letterbox: 1
+enter: 1
 cast: shadow(toon=shadow, x=0.38, mood=neutral), maria(kid, skin=light, hair=#f2d46a, hairstyle=long, outfit=dress, shirt=#4a8ae8, mood=happy, x=0.64)
 speaker: maria
 shots: wide, react, close
-But Shadow was not a weapon to Maria. He was her best friend.
+He was her best friend. The only one on the whole station who was not sick of her questions.
 ---
 scene: ark
-dur: 9.212
-vodur: 8.612
+dur: 11.191
+vodur: 10.691
+soft: 1
+letterbox: 1
+view: earth
 cast: shadow(toon=shadow, x=0.38, mood=neutral), maria(kid, skin=light, hair=#f2d46a, hairstyle=long, outfit=dress, shirt=#4a8ae8, mood=happy, x=0.64)
-speaker: maria
-shots: close, react, wide
-Every day, they sat by the giant window and looked down at the Earth together. Maria told him about the people living there. Their cities, their families, their dreams.
----
-scene: ark
-dur: 9.201
-vodur: 8.601
-cast: shadow(toon=shadow, x=0.38, mood=neutral), maria(kid, skin=light, hair=#f2d46a, hairstyle=long, outfit=dress, shirt=#4a8ae8, mood=happy, x=0.64)
-speaker: shadow
-shots: react, close, wide
-Shadow had been made in a lab. He did not know what it meant to be alive. But Maria showed him. And for the first time, the Ultimate Life Form had something to protect.
----
-scene: ark
-dur: 7.742
-vodur: 7.142
-music: action
-label: Chapter 4: The Raid
-alarm: 1
-But on Earth, the government grew afraid. They heard rumors that Gerald was building something dangerous. Something that could destroy the world.
----
-scene: fortress
-dur: 7.570
-vodur: 6.970
-So they sent in their army, an organisation called GUN. Their orders were simple. Shut down the ARK, and capture everything inside it.
----
-scene: ark
-dur: 6.412
-vodur: 5.812
-alarm: 1
-cast: shadow(toon=shadow, x=0.38, run), maria(kid, skin=light, hair=#f2d46a, hairstyle=long, outfit=dress, shirt=#4a8ae8, mood=worried, x=0.62, run)
 speaker: maria
 shots: wide, close, react
-Soldiers stormed the station. Alarms screamed through the halls. Shadow grabbed Maria's hand, and they ran.
+Every day, they sat at the giant window and looked down at Earth together. Maria told him about the people down there. Their cities. Their families. How badly she wanted to meet them.
 ---
 scene: ark
-dur: 6.679
-vodur: 6.079
-pod: 1
-alarm: 1
-cast: maria(kid, skin=light, hair=#f2d46a, hairstyle=long, outfit=dress, shirt=#4a8ae8, mood=sad, x=0.45)
-speaker: maria
-shots: close, wide, close
-They reached an escape capsule. But there was only room for one. Maria pushed Shadow inside, and pulled the lever.
+dur: 6.115
+vodur: 5.615
+soft: 1
+letterbox: 1
+cast: shadow(toon=shadow, x=0.5, mood=neutral)
+speaker: shadow
+shots: close, wide
+Shadow had been made in a lab. He did not know what being alive was for. Maria showed him.
+---
+scene: ark
+dur: 7.696
+vodur: 7.196
+soft: 1
+letterbox: 1
+view: earth
+Everyone else on the station saw a project. A test subject. Maria was the only one who ever treated him like a person.
 ---
 scene: kinetic
-dur: 5.448
-vodur: 4.848
-kt: Give them a chance to be happy
+dur: 4.434
+vodur: 3.434
+kt: Something to protect
 nocap: 1
-Shadow, she whispered. Please. Give the people of that planet a chance to be happy.
+hold: 0.5
+For the first time, the Ultimate Life Form had something to protect.
 ---
-scene: wreck
-dur: 7.131
-vodur: 6.531
-music: sad
-Then a gunshot rang out. The capsule shot away from the ARK, and the last thing Shadow saw through the glass was Maria, falling.
+scene: orbit
+dur: 4.407
+vodur: 3.907
+mode: ark
+music: tension
+But down on Earth, people were looking up at the ARK. And they were scared.
 ---
-scene: lab
-dur: 9.504
-vodur: 8.904
-screen: none
-title: GERALD ROBOTNIK
-data: STATUS  ARRESTED|PROJECT  SHUT DOWN|ARK  SEALED|SENTENCE  EXECUTION|LAST WISH  REVENGE
-Gerald was arrested. His work was locked away. And the grief drove him to madness. Before he died, he secretly programmed the ARK for revenge against the whole world.
+scene: news
+dur: 5.615
+vodur: 5.115
+headline: SECRET WEAPON IN ORBIT?
+Rumors spread that Gerald was building a monster up there. Something that could destroy the world.
+---
+scene: kinetic
+dur: 2.911
+vodur: 2.011
+kt: They were half right
+nocap: 1
+hold: 0.4
+And honestly? They were half right.
+---
+scene: chapcard
+dur: 4.017
+vodur: 3.517
+music: action
+chap: 4|The Raid|8
+accent: red
+The government sent in its army. An organisation called GUN.
 ---
 scene: fortress
-dur: 6.999
-vodur: 6.399
-music: tension
-label: Chapter 5: Awakening
-Shadow's capsule was taken to a top secret GUN base called Prison Island. And there he slept, frozen, for fifty years.
+dur: 6.100
+vodur: 5.600
+gun: 1
+GUN had one order. Shut down the ARK, seal it forever, and capture everything inside.
+---
+scene: ark
+dur: 7.112
+vodur: 6.612
+alarm: 1
+fx: dust
+Soldiers stormed the station. Alarms screamed through every hallway. Scientists were rounded up, one by one.
+---
+scene: speedway
+dur: 7.353
+vodur: 6.853
+cast: shadow(toon=shadow, x=0.4, run), maria(kid, skin=light, hair=#f2d46a, hairstyle=long, outfit=dress, shirt=#4a8ae8, mood=worried, x=0.6, run)
+speaker: maria
+shots: wide, close, react
+Shadow grabbed Maria's hand, and they ran. Down the corridors, past the labs, all the way to the escape pods.
+---
+scene: ark
+dur: 5.645
+vodur: 5.145
+alarm: 1
+pod: 1
+soft: 1
+cast: shadow(toon=shadow, x=0.62, mood=worried), maria(kid, skin=light, hair=#f2d46a, hairstyle=long, outfit=dress, shirt=#4a8ae8, mood=sad, x=0.38)
+speaker: maria
+shots: wide, close, react
+And now you know the rest. One capsule. Two of them. Maria pushed him inside.
+---
+scene: quote
+dur: 6.558
+vodur: 5.458
+soft: 1
+letterbox: 1
+q: Give the people of that planet a chance to be happy.
+who: Maria's last words
+hold: 0.6
+Her last wish was not for herself. It was for the people on a planet she would never get to visit.
+---
+scene: orbit
+dur: 6.393
+vodur: 5.893
+mode: capsule
+The capsule shot away from the ARK. Through the glass, the last thing Shadow saw was Maria, falling.
+---
+scene: dossier
+dur: 5.187
+vodur: 4.687
+music: sad
+hero: gerald
+name: Gerald Robotnik
+fields: STATUS: Arrested|PROJECT: Shut down|THE ARK: Sealed|SENTENCE: Execution
+stamp: TERMINATED
+accent: red
+Gerald was arrested. His life's work was locked away. And the grief broke him.
 ---
 scene: lab
-dur: 5.383
-vodur: 4.783
-pod: 1
+dur: 8.331
+vodur: 7.831
+screen: none
+title: ARK FINAL PROGRAM
+data: TRIGGER  7 EMERALDS|TARGET  PLANET EARTH|AUTHOR  G. ROBOTNIK|STATUS  HIDDEN|COUNTDOWN  --:--
+alarm: 1
+Before he died, he did something terrible. He hid a secret program deep inside the ARK. Revenge, against the entire world.
+---
+scene: kinetic
+dur: 8.443
+vodur: 7.943
+kt: He rewrote Shadow's memory
+nocap: 1
+And he did one more thing. He changed Shadow's memory. So when Shadow woke up, he would remember Maria's last words as a cry for revenge.
+---
+scene: chapcard
+dur: 4.166
+vodur: 3.666
+music: tension
+chap: 5|Awakening|8
+accent: green
+Shadow's capsule was taken to a top secret GUN prison on an island.
+---
+scene: kinetic
+dur: 8.020
+vodur: 7.520
+kt: Who is stronger?
+nocap: 1
+And if you have ever wondered who is actually stronger, Sonic or Shadow, keep watching. The next two chapters answer that, the hard way.
+---
+scene: fortress
+dur: 6.372
+vodur: 5.872
+gun: 1
+fx: rain
+And there, behind locked doors, he slept. One year. Ten years. Fifty years.
+---
+scene: lab
+dur: 6.159
+vodur: 5.659
 screen: shadow
 title: PRISON ISLAND
-data: CAPSULE  SEALED|YEARS ASLEEP  50|SUBJECT  UNKNOWN|ACCESS  DENIED|PASSWORD  ?
+data: CAPSULE  SEALED|YEARS ASLEEP  50|SUBJECT  UNKNOWN|PASSWORD  REQUIRED|STATUS  ...
 cast: doctor(egg, x=0.5, size=1.05, tag=dr eggman)
 speaker: doctor
 shots: wide, close
-Until one day, a man broke in looking for his grandfather's greatest secret. Doctor Eggman.
+Until one day, someone broke in, looking for his grandfather's greatest secret. Doctor Eggman.
 ---
 scene: ark
-dur: 7.318
-vodur: 6.718
+dur: 8.904
+vodur: 8.404
 pod: 1
-cast: shadow(toon=shadow, x=0.4, size=1.1, mood=smug), doctor(egg, x=0.7, flip)
+fx: chaos
+cast: shadow(toon=shadow, x=0.4, size=1.1, mood=smug), doctor(egg, x=0.72, flip)
 speaker: shadow
 shots: close, react, wide
-The capsule opened. Shadow stepped out. And he told Eggman to meet him at the Space Colony ARK, if he wanted to rule the world.
+The capsule hissed open. Shadow stepped out. And he made Eggman an offer. Meet me at the Space Colony ARK, and I will help you rule the world.
 ---
 scene: news
-dur: 8.300
-vodur: 7.700
-headline: BLUE HEDGEHOG STEALS EMERALD
-That same night, Shadow stole a Chaos Emerald from a bank. But the security cameras only saw a hedgehog shape, and the news blamed somebody else.
+dur: 7.662
+vodur: 7.162
+headline: HEDGEHOG STEALS CHAOS EMERALD
+That same night, Shadow broke into a bank and stole a Chaos Emerald. But the cameras only saw a blur shaped like a hedgehog.
 ---
 scene: zone
-dur: 6.661
-vodur: 6.061
+dur: 4.068
+vodur: 3.568
 speed: 1600
-rings: 1
 cast: sonic(toon=sonic, x=0.5, run, mood=angry)
 speaker: sonic
-shots: wide, close, wide
-Sonic. Arrested for a crime he did not commit. Now Sonic had to find out who this fake hedgehog really was.
+shots: wide, close
+And the whole world blamed the only hedgehog it knew. Sonic.
+---
+scene: zone
+dur: 9.009
+vodur: 8.509
+soft: 1
+cast: amy(toon=amy, x=0.4, mood=happy), shadow(toon=shadow, x=0.62, flip, mood=worried)
+speaker: amy
+shots: wide, react, close
+It got so confusing that when Amy Rose ran into Shadow, she hugged him, thinking he was Sonic. The Ultimate Life Form had no idea what to do.
+---
+scene: versus
+dur: 7.974
+vodur: 7.474
+vs: sonic/shadow
+When they finally came face to face, Sonic called him a fake. Shadow fired back that Sonic was not even good enough to be his fake.
 ---
 scene: ark
-dur: 7.999
-vodur: 7.399
+dur: 6.825
+vodur: 6.325
 view: moon
 beam: 1
-Shadow and Eggman gathered the emeralds and powered up the ARK's secret weapon, the Eclipse Cannon. With one shot, they blew away half of the moon.
+fx: embers
+Then Shadow and Eggman powered up the ARK's hidden superweapon, the Eclipse Cannon. And they fired it at the moon.
 ---
-scene: stat
-dur: 4.010
-vodur: 3.410
-value: 50
-label: Percent of the moon destroyed
-Half of the moon. Gone. And everyone on Earth watched it happen.
+scene: orbit
+dur: 6.012
+vodur: 5.512
+mode: ark
+bite: 1
+One shot. A massive piece of the moon, gone. And everyone on Earth looked up and saw it.
+---
+scene: kinetic
+dur: 4.133
+vodur: 3.233
+kt: Shadow was the villain
+nocap: 1
+hold: 0.4
+At this point, Shadow was the villain. And he was winning.
+---
+scene: chapcard
+dur: 1.867
+vodur: 1.367
+music: action
+chap: 6|Rivals|8
+accent: blue
+But Sonic was not done.
 ---
 scene: speedway
-dur: 7.330
-vodur: 6.730
-music: action
-label: Chapter 6: Rivals
+dur: 9.849
+vodur: 9.349
+fx: speed
 cast: sonic(toon=sonic, x=0.36, run), shadow(toon=shadow, x=0.64, run)
 speaker: shadow
 shots: wide, close, react
-When Sonic and Shadow finally met, it was like looking into a mirror. Same speed. Same power. Same attitude.
+Sonic and Shadow fought across highways, through jungles, and inside the ARK itself. Same speed. Same power. Every fight ended in a draw.
 ---
-scene: emeralds
-dur: 6.030
-vodur: 5.430
-They fought on highways, in jungles, and inside the ARK itself. Each time, neither one could win.
+scene: versus
+dur: 3.054
+vodur: 2.554
+vs: sonic/shadow
+It was like watching someone fight their own reflection.
 ---
-scene: ark
-dur: 8.943
-vodur: 8.343
+scene: orbit
+dur: 9.256
+vodur: 8.756
+mode: fall
 alarm: 1
-But then, the truth came out. Gerald's revenge program woke up. The whole space colony was now falling towards the Earth, ready to destroy the planet below.
+Then the truth came out. The seven emeralds had triggered Gerald's hidden program. The entire space colony was now falling, straight towards the Earth.
+---
+scene: kinetic
+dur: 6.643
+vodur: 6.143
+kt: Gerald wanted it all destroyed
+nocap: 1
+Gerald's real plan was never to rule the world. He wanted it destroyed. And he had built Shadow to help.
 ---
 scene: ark
-dur: 8.230
-vodur: 7.630
-cast: shadow(toon=shadow, x=0.5, mood=sad)
-speaker: shadow
-shots: close, wide, close
-Shadow thought his mission was revenge. But then he remembered Maria's last words. She never asked him for revenge. She asked him to protect them.
+dur: 9.422
+vodur: 8.922
+soft: 1
+cast: amy(toon=amy, x=0.38, mood=sad), shadow(toon=shadow, x=0.64, flip, mood=worried)
+speaker: amy
+shots: wide, close, react
+Shadow was ready to let it happen. Until a girl named Amy Rose begged him to help the people on that planet. And her words sounded strangely familiar.
 ---
-scene: overlord
-dur: 8.784
-vodur: 8.184
-Inside the ARK, a giant monster rose up. Gerald's first failed experiment, the Biolizard. It fused with the colony and became the Finalhazard.
+scene: quote
+dur: 6.224
+vodur: 5.124
+soft: 1
+letterbox: 1
+q: Give the people of that planet a chance to be happy.
+who: What Maria really said
+hold: 0.6
+Shadow remembered. Maria never asked him for revenge. She asked him to protect them.
+---
+scene: lab
+dur: 11.673
+vodur: 11.173
+screen: none
+title: PROTOTYPE 001 IS AWAKE
+data: SPECIES  LIZARD|SIZE  MASSIVE|LIFE SUPPORT  ONLINE|THREAT  EXTREME|STATUS  ESCAPED
+alarm: 1
+And remember that failed lizard experiment, hidden in the ARK? It woke up. The Biolizard. It fused itself to the space colony and became something even worse. The Finalhazard.
 ---
 scene: emeralds
-dur: 7.086
-vodur: 6.486
+dur: 7.982
+vodur: 7.482
 burst: 1
-Sonic and Shadow used all seven Chaos Emeralds together. Sonic turned gold. And Shadow became Super Shadow.
+To stop it, Sonic and Shadow had to do the one thing they never had. Team up. They used all seven Chaos Emeralds at once.
+---
+scene: form
+dur: 5.877
+vodur: 5.377
+form: 3
+fname: Super Shadow
+sub: All seven Chaos Emeralds
+hero: supershadow
+accent: gold
+bars: SPEED:90,POWER:92,CHAOS:96
+track: Day One|Chaos Control|Super Shadow|Rings Off|Doom Powers|Final Form
+nocap: 1
+Sonic turned gold. And Shadow became Super Shadow. Form three, unlocked.
 ---
 scene: speedway
-dur: 6.700
-vodur: 6.100
+dur: 9.396
+vodur: 8.896
+fx: chaos
 cast: sonic(toon=sonic, fur=#f2c43a, x=0.36, fly, aura=1), shadow(toon=shadow, fur=#f4e9a0, x=0.64, fly, aura=1)
 speaker: shadow
 shots: wide, close, wide
-Together, they destroyed the monster, and used Chaos Control to send the ARK back into orbit. The Earth was saved.
+Together, they tore the Finalhazard apart. Then they used Chaos Control to warp the entire ARK back into a safe orbit. The Earth was saved.
 ---
 scene: ark
-dur: 6.629
-vodur: 6.029
-view: earth
+dur: 9.342
+vodur: 8.842
 music: sad
-But Shadow had used up all of his power. He fell, towards the planet he had promised to protect, and he was gone.
+soft: 1
+letterbox: 1
+view: earth
+cast: shadow(toon=shadow, x=0.5, mood=sad)
+speaker: shadow
+shots: close, wide
+But Shadow had used up every last drop of his power. He thought of Maria, and her promise. And then he fell, towards the planet he had just saved.
+---
+scene: kinetic
+dur: 3.346
+vodur: 1.846
+kt: Shadow was gone
+nocap: 1
+hold: 1.0
+Everyone believed Shadow was gone.
+---
+scene: chapcard
+dur: 1.470
+vodur: 0.970
+music: tension
+chap: 7|Who Am I|8
+accent: purple
+Everyone was wrong.
 ---
 scene: lab
-dur: 5.315
-vodur: 4.715
-music: tension
-label: Chapter 7: The Truth
+dur: 10.275
+vodur: 9.775
 screen: shadow
 title: SUBJECT FOUND
-data: NAME  SHADOW|MEMORY  ERASED|ORIGIN  UNKNOWN|ALLIES  ROUGE, OMEGA|STATUS  ALIVE
+data: LOCATION  EGGMAN BASE|MEMORY  WIPED|NAME  SHADOW?|ALIVE  YES|ORIGIN  UNKNOWN
 cast: shadow(toon=shadow, x=0.5, mood=worried)
 speaker: shadow
 shots: close, wide
-Shadow survived. He woke up in one of Eggman's bases, with no memory of who he was.
+Months later, a treasure hunter named Rouge broke into one of Eggman's bases. And inside a capsule, she found Shadow. Alive. With no memory of who he was.
 ---
 scene: monitors
-dur: 10.359
-vodur: 9.759
+dur: 10.586
+vodur: 10.086
 heroes: shadow,metal,shadow
-He teamed up with a treasure hunter named Rouge and a rebel robot named Omega. They even fought Metal Sonic himself. But Shadow kept asking. Am I real? Or am I a copy?
+Shadow joined Rouge and a rogue robot called Omega, and they became Team Dark. They even fought Metal Sonic. But then, Rouge found a room full of Shadows.
+---
+scene: kinetic
+dur: 7.385
+vodur: 6.885
+kt: Am I even the real one?
+nocap: 1
+Rows of copies, all with his face. So Shadow had to ask the scariest question of all. Am I even the real one?
+---
+scene: kinetic
+dur: 3.372
+vodur: 2.872
+kt: Hold that thought
+nocap: 1
+Hold that thought. We are getting the answer very soon.
+---
+scene: orbit
+dur: 8.120
+vodur: 7.620
+mode: comet
+music: action
+Then the sky turned red. Fifty years had passed. The Black Comet was back, and its alien army fell on the cities of Earth.
 ---
 scene: comet
-dur: 7.842
-vodur: 7.242
-Then, the sky turned red. Fifty years had passed. Black Doom's comet had returned, and his alien army attacked the Earth.
+dur: 5.995
+vodur: 5.495
+fx: embers
+And Black Doom called Shadow by name. Remember that deal from chapter one? He was here to collect.
 ---
-scene: comet
-dur: 8.287
-vodur: 7.687
-Black Doom told Shadow the truth. Shadow had been made with his blood. He was created for one reason, to help the Black Arms conquer the planet.
+scene: lab
+dur: 11.097
+vodur: 10.597
+screen: shadow
+title: DNA RESULTS
+data: SUBJECT  SHADOW|SOURCE A  HEDGEHOG|SOURCE B  BLACK DOOM|MATCH  CONFIRMED|PURPOSE  ???
+alarm: 1
+Black Doom told him the truth. Shadow was made with his blood. He was never meant to be a hero. He was supposed to deliver the Chaos Emeralds and help the Black Arms take over the planet.
+---
+scene: stat
+dur: 9.158
+vodur: 8.658
+value: 10
+caption2: different endings
+In the 2005 game, players decided what Shadow would do, hero, villain, or neither, and the game had ten different endings.
+---
+scene: kinetic
+dur: 7.274
+vodur: 6.774
+kt: The true ending
+nocap: 1
+But beat all ten, and a secret final story unlocks. The true ending. The moment Shadow became Shadow.
 ---
 scene: emeralds
-dur: 7.948
-vodur: 7.348
+dur: 6.922
+vodur: 6.422
 burst: 1
 cast: shadow(toon=shadow, x=0.5, mood=angry)
 speaker: shadow
 shots: close, wide
-But Shadow made his own choice. He gathered all seven emeralds, became Super Shadow again, and blasted the Black Comet out of the sky.
+He gathered all seven emeralds, became Super Shadow again, and destroyed Black Doom's monstrous final form.
+---
+scene: ark
+dur: 9.178
+vodur: 8.678
+view: moon
+beam: 1
+Then he warped the entire Black Comet into space, and fired the Eclipse Cannon, the same weapon he once used against the moon. The comet was gone.
+---
+scene: ark
+dur: 7.999
+vodur: 7.499
+soft: 1
+letterbox: 1
+music: sad
+cast: shadow(toon=shadow, x=0.5, mood=neutral)
+speaker: shadow
+shots: close, wide
+Afterwards, Shadow stood at the ARK window, holding an old photo of Maria and the Professor. And he made peace with the past.
 ---
 scene: kinetic
-dur: 6.708
-vodur: 6.108
+dur: 6.857
+vodur: 5.757
 kt: I am Shadow the Hedgehog
 nocap: 1
-He let go of the past. He was not Gerald's weapon. He was not Black Doom's soldier. He was Shadow the Hedgehog.
+hold: 0.6
+Not Gerald's weapon. Not Black Doom's soldier. Not a copy. He was Shadow the Hedgehog.
 ---
-scene: lab
-dur: 7.270
-vodur: 6.670
-music: action
-label: Chapter 8: Final Form
-screen: shadow
-title: INHIBITOR RINGS
-data: LOCATION  WRISTS|PURPOSE  LIMIT POWER|REMOVED  DANGER|POWER  UNLIMITED|WEARER  SHADOW
-Today, Shadow works as an agent for GUN, the same army that once hunted him. And those gold rings on his wrists are not decoration.
+scene: monitors
+dur: 9.208
+vodur: 8.708
+heroes: shadow,shadow,shadow
+And the copies? They were androids Eggman had built after the ARK. The Shadow that Rouge found in that capsule was the real one. He always had been.
 ---
-scene: emeralds
-dur: 6.772
-vodur: 6.172
-burst: 1
-They are inhibitor rings. They hold back his power. When Shadow takes them off, his strength becomes almost unlimited.
+scene: chapcard
+dur: 2.197
+vodur: 1.697
+music: tension
+chap: 8|Final Form|8
+accent: gold
+Which brings us back to those rings.
 ---
-scene: timeline
-dur: 5.688
-vodur: 5.088
-years: 2001, 2003, 2005, 2024
-events: Ultimate Life Form|Lost memories|Defeats Black Doom|Doom powers
-Over the years, he got stronger and stronger. And then, Black Doom came back one more time.
+scene: dossier
+dur: 6.917
+vodur: 6.417
+hero: shadow
+name: Agent Shadow
+fields: EMPLOYER: G.U.N.|RANK: Agent|PARTNERS: Rouge, Omega|THREAT: Off the charts
+stamp: ACTIVE
+accent: green
+Today, Shadow works as an agent for GUN. Yes, the same army that raided the ARK and took Maria from him.
 ---
-scene: comet
-dur: 9.344
-vodur: 8.744
-This time, Shadow did something nobody expected. He took Black Doom's dark power, and made it his own. Wings. Spears. Morphing shadows.
+scene: dossier
+dur: 11.834
+vodur: 11.334
+hero: none
+name: The Commander
+fields: RANK: Commander of GUN|PAST: Survivor of the ARK|FRIEND: Maria Robotnik|BLAMED: Shadow
+stamp: CLASSIFIED
+accent: blue
+And here is the part most people miss. The commander of GUN was once a little boy on the ARK. One of Maria's friends. He survived the raid, and for fifty years he blamed Shadow for her death.
+---
+scene: kinetic
+dur: 6.462
+vodur: 5.962
+kt: Now Shadow works for him
+nocap: 1
+And now Shadow takes orders from him. Two survivors of the same tragedy, working side by side.
 ---
 scene: speedway
-dur: 8.733
-vodur: 8.133
+dur: 11.110
+vodur: 10.610
+fx: speed
+cast: sonic(toon=sonic, x=0.36, run), shadow(toon=shadow, x=0.64, run)
+speaker: shadow
+shots: wide, react, close
+As for Sonic? More than twenty years later, they still race, still fight, and still argue about who is faster. But whenever the world is in real danger, Shadow shows up.
+---
+scene: rings
+dur: 7.077
+vodur: 6.577
+off: 99
+And on his wrists, he wears gold rings. They are inhibitor rings. Their only job is to hold back his power.
+---
+scene: lab
+dur: 7.332
+vodur: 6.832
+screen: shadow
+title: ORIGIN OF THE RINGS
+data: FIRST SEEN  SONIC X ANIME|CANON  SONIC 2006|PURPOSE  LIMITER|REMOVED  RARELY|DANGER  EXTREME
+Fun fact. The idea that these rings are limiters started in the Sonic X anime. Then the games made it official.
+---
+scene: comet
+dur: 8.809
+vodur: 8.309
+fx: dust
+In Sonic 2006, Shadow faced Mephiles the Dark, a demon who escaped from inside Shadow's own shadow, and copied his shape.
+---
+scene: zone
+dur: 8.198
+vodur: 7.698
+cast: mephiles(toon=mephiles, x=0.36, mood=smug), shadow(toon=shadow, x=0.64, flip, mood=angry)
+speaker: mephiles
+shots: wide, react, close
+Mephiles showed Shadow a future where the humans he protected would fear his power, and lock him away. Why save a world that will turn on you?
+---
+scene: kinetic
+dur: 5.106
+vodur: 4.606
+kt: He would protect it anyway
+nocap: 1
+Shadow's answer was simple. If the world turned against him, he would still defend it.
+---
+scene: rings
+dur: 4.731
+vodur: 4.231
+off: 1.6
+boom: RINGS OFF
+And then, surrounded by an army of Mephiles clones, he took the rings off.
+---
+scene: meter
+dur: 6.919
+vodur: 6.419
+mval: 112
+mlabel: Power level
+mtext: LIMITS OFF
+accent: red
+fx: chaos
+Without the rings, Shadow's power goes beyond anything he can safely control. He tore through the entire army.
+---
+scene: form
+dur: 6.350
+vodur: 5.850
+form: 4
+fname: Rings Off
+sub: No limiter. No mercy.
+hero: shadow
+accent: red
+bars: SPEED:96,POWER:110,CHAOS:110
+track: Day One|Chaos Control|Super Shadow|Rings Off|Doom Powers|Final Form
+nocap: 1
+Form four, unlocked. And this is the version of Shadow even his friends are a little scared of.
+---
+scene: zone
+dur: 8.549
+vodur: 8.049
+cast: sonic(toon=sonic, x=0.36, mood=smug), shadow(toon=shadow, x=0.64, flip, mood=smug)
+speaker: sonic
+shots: wide, close, react
+Quick pause. Two forms left. Before you see them, comment which form you think is the strongest. Let's see if you are right at the end.
+---
+scene: speedway
+dur: 7.721
+vodur: 7.221
+music: action
+fx: speed
+cast: shadow(toon=shadow, x=0.5, run, mood=smug)
+speaker: shadow
+shots: wide, close
+In 2017's Sonic Forces, Shadow wiped out a team of mercenaries without even trying. Their leader never forgot it.
+---
+scene: kinetic
+dur: 8.720
+vodur: 8.220
+kt: One defeat created Infinite
+nocap: 1
+That humiliation helped turn him into Infinite, one of the most dangerous villains Sonic has ever faced. One fight with Shadow created a monster.
+---
+scene: timeline
+dur: 3.886
+vodur: 3.386
+years: 2001, 2003, 2005, 2006, 2017, 2024
+events: Born on the ARK|Lost memories|Defeats Black Doom|Rings off|Infinite|Doom powers
+And then, in 2024, the story came full circle.
+---
+scene: comet
+dur: 8.484
+vodur: 7.984
+fx: embers
+In Sonic X Shadow Generations, Black Doom came back one last time. This time, he tried to take control of Shadow through the blood they share.
+---
+scene: kinetic
+dur: 5.039
+vodur: 4.539
+kt: He took the power for himself
+nocap: 1
+It backfired. Shadow took Black Doom's dark power, and made it his own.
+---
+scene: dossier
+dur: 7.287
+vodur: 6.787
+hero: shadow
+name: Doom Powers
+fields: DOOM SPEAR: Rapid fire spears|DOOM BLAST: Shockwave|DOOM SURF: Ride on water|DOOM MORPH: Liquid shadow
+stamp: UNLOCKED
+accent: purple
+Doom Spears. Doom Blast. Doom Surf. And Doom Morph, which turns him into living liquid shadow.
+---
+scene: form
+dur: 4.646
+vodur: 4.146
+form: 5
+fname: Doom Powers
+sub: Black Doom's own power, stolen
+hero: shadow
+accent: purple
+bars: SPEED:100,POWER:105,CHAOS:112
+track: Day One|Chaos Control|Super Shadow|Rings Off|Doom Powers|Final Form
+nocap: 1
+Form five, unlocked. The powers of the alien who created him.
+---
+scene: emeralds
+dur: 5.823
+vodur: 5.323
+burst: 1
+fx: chaos
+teaser: 1
+But there was one more. The power that lets Shadow fly, the one fans call his final form.
+---
+scene: kinetic
+dur: 1.623
+vodur: 1.123
+kt: Doom Wing
+nocap: 1
+Doom. Wing.
+---
+scene: speedway
+dur: 9.602
+vodur: 9.102
+fx: chaos
 cast: shadow(toon=shadow, fur=#f4e9a0, x=0.5, fly, aura=1, mood=angry)
 speaker: shadow
 shots: wide, close, wide
-Ultimate speed. Chaos Control. Unlimited power. And the dark gifts of his own creator, turned against him. This is Shadow's final form.
+Giant dark wings. Flight. Invincibility. Ultimate speed. Chaos Control. And his creator's own power, turned against him.
+---
+scene: form
+dur: 3.207
+vodur: 2.207
+form: 6
+fname: Final Form
+sub: Doom Wing
+hero: supershadow
+accent: gold
+bars: SPEED:115,POWER:115,CHAOS:115
+track: Day One|Chaos Control|Super Shadow|Rings Off|Doom Powers|Final Form
+nocap: 1
+hold: 0.5
+Form six. The final form.
 ---
 scene: ark
-dur: 7.024
-vodur: 6.424
+dur: 10.459
+vodur: 9.959
 music: ambient
+soft: 1
+letterbox: 1
+cast: shadow(toon=shadow, x=0.5, mood=neutral)
+speaker: shadow
+shots: close, wide
+In that same game, Shadow went back through his own memories. The ARK. The raid. The day he lost Maria. And this time, he did not run from any of it.
+---
+scene: stat
+dur: 10.964
+vodur: 10.464
+value: 490
+prefix: $
+suffix: M
+caption2: Sonic 3 worldwide box office
+And two months later, Sonic 3 hit theaters and made around four hundred and ninety million dollars. Fifty years after a little girl's last wish, the whole world finally met him.
+---
+scene: fortress
+dur: 13.622
+vodur: 13.122
+gun: 1
+fx: rain
+The movie changed some details. GUN kept Shadow frozen in a prison on an island for fifty years, and Gerald himself came back for revenge. But the heart of the story stayed exactly the same. Maria, and a promise.
+---
+scene: versus
+dur: 8.655
+vodur: 8.155
+vs: gerald/supershadow
+Think about it. Gerald built him to be a weapon. Black Doom wanted a soldier. Eggman wanted a partner. Mephiles wanted his body.
+---
+scene: kinetic
+dur: 5.411
+vodur: 4.911
+kt: Every single one of them lost
+nocap: 1
+Every single one of them tried to decide who Shadow was. And every single one of them lost.
+---
+scene: ark
+dur: 9.329
+vodur: 8.829
+soft: 1
+letterbox: 1
 view: earth
 cast: shadow(toon=shadow, x=0.5, mood=neutral)
 speaker: shadow
 shots: wide, close
-But his greatest power was never his speed, or his strength. It was a promise he made to a little girl, fifty years ago.
+Because his real final form was never Super Shadow, or the Doom Wing. It was a choice. To keep a promise he made to a little girl, fifty years ago.
+---
+scene: quote
+dur: 2.483
+vodur: 1.183
+soft: 1
+letterbox: 1
+q: Give the people of that planet a chance to be happy.
+who: Maria Robotnik
+hold: 0.8
+And he is still keeping it.
 ---
 scene: zone
-dur: 9.201
-vodur: 8.601
+dur: 14.726
+vodur: 13.026
+music: action
 cast: sonic(toon=sonic, x=0.36, mood=smug), shadow(toon=shadow, x=0.64, flip, mood=smug)
+hold: 1.2
 speaker: shadow
 shots: wide, react, close
-So, is Shadow a hero? A villain? Or just the Ultimate Life Form? Tell us in the comments. And subscribe, because the next story is coming soon.
+So, were you right? Which form do you think is his strongest? Tell us in the comments. And if you want to see the robot who copied Shadow's powers, and tried to become Sonic himself, Metal Sonic's full story is right here.
+
 
