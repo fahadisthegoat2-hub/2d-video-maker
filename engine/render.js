@@ -29,6 +29,7 @@ scenes.forEach((sc, i) => {
     if (r.status === 0 && fs.existsSync(f) && probe(f) > 0) { sc.audio = f; speech = probe(f); }
     else if (i === 0) console.log('  (voice unavailable — rendering silent with captions)');
   }
+  if (sc.vodur) speech = +sc.vodur;
   sc.speech = speech;
   sc.dur = sc.dur || Math.max(1.6, speech + .15);
 });
