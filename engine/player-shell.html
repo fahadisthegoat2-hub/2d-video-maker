@@ -52,6 +52,8 @@ textarea { width: 100%; box-sizing: border-box; min-height: 260px; margin-top: 1
     <input type="range" id="seek" min="0" max="1000" value="0" step="1" aria-label="Seek">
     <span class="time" id="time">0:00 / 0:00</span>
     <button id="voice" aria-pressed="true">Voice on</button>
+    <button id="render" class="primary">Render MP4</button>
+    <select id="quality" aria-label="Render quality"><option value="1080">1080p</option><option value="720">720p (faster)</option></select>
     <button id="export">Export video</button>
     <button id="save" class="primary" hidden>Save video</button>
   </div>
@@ -64,6 +66,7 @@ textarea { width: 100%; box-sizing: border-box; min-height: 260px; margin-top: 1
   </details>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/mp4-muxer@5.1.3/build/mp4-muxer.js"></script>
 __ENGINE__
 
 <audio id="track" preload="auto" playsinline></audio>
@@ -119,6 +122,52 @@ __ENGINE__
   $('seek').oninput = e => seekTo(e.target.value / 1000 * total);
   $('voice').onclick = e => { const on = e.currentTarget.getAttribute('aria-pressed') !== 'true'; e.currentTarget.setAttribute('aria-pressed', on); e.currentTarget.textContent = on ? 'Voice on' : 'Voice off'; if (!on) stopVoice(); track.muted = !on; };
   $('apply').onclick = () => { pause(); try { load($('script').value); status('Video updated.'); try { localStorage.setItem('v2d-draft', $('script').value); } catch (e) {} } catch (err) { status('Could not read the script: ' + err.message); } };
+
+  // ---- render: frame-by-frame MP4 with the soundtrack (WebCodecs) ----
+  let rendering = false;
+  async function renderMp4() {
+    if (rendering) { rendering = false; return; }
+    if (!window.VideoEncoder || !window.Mp4Muxer) { status('This browser cannot render MP4 files. Use Chrome or Edge on a computer.'); return; }
+    pause(); rendering = true; $('render').textContent = 'Cancel render'; $('save').hidden = true; recBlob = null;
+    const fps = 30, N = Math.ceil(total * fps), q = $('quality').value, ow = q === '720' ? 1280 : 1920, oh = q === '720' ? 720 : 1080;
+    const out = document.createElement('canvas'); out.width = ow; out.height = oh; const ox = out.getContext('2d');
+    try {
+      let vcfg = null;
+      for (const codec of ['avc1.640028', 'avc1.4d0028', 'avc1.42e028']) { const c = { codec, width: ow, height: oh, bitrate: q === '720' ? 3e6 : 6e6, framerate: fps }; if ((await VideoEncoder.isConfigSupported(c)).supported) { vcfg = c; break; } }
+      if (!vcfg) throw new Error('this device has no H.264 encoder');
+      let pcm = null, acfg = null, sr = 48000;
+      if (meta.soundtrack) {
+        status('Preparing the soundtrack…');
+        const ab = await (await fetch(meta.soundtrack)).arrayBuffer();
+        for (const c of [{ codec: 'mp4a.40.2', sampleRate: 48000, numberOfChannels: 2, bitrate: 160000 }, { codec: 'mp4a.40.2', sampleRate: 44100, numberOfChannels: 2, bitrate: 160000 }, { codec: 'opus', sampleRate: 48000, numberOfChannels: 2, bitrate: 160000 }]) { if (window.AudioEncoder && (await AudioEncoder.isConfigSupported(c)).supported) { acfg = c; break; } }
+        if (acfg) { sr = acfg.sampleRate; const dec = await new (window.AudioContext || window.webkitAudioContext)().decodeAudioData(ab); const oc = new OfflineAudioContext(2, Math.ceil(dec.duration * sr), sr); const s = oc.createBufferSource(); s.buffer = dec; s.connect(oc.destination); s.start(); pcm = await oc.startRendering(); }
+      }
+      const muxer = new Mp4Muxer.Muxer({ target: new Mp4Muxer.ArrayBufferTarget(), fastStart: 'in-memory', video: { codec: 'avc', width: ow, height: oh, frameRate: fps }, audio: pcm ? { codec: acfg.codec === 'opus' ? 'opus' : 'aac', sampleRate: sr, numberOfChannels: 2 } : undefined });
+      let err = null;
+      const ve = new VideoEncoder({ output: (c, m) => muxer.addVideoChunk(c, m), error: e => { err = e; } }); ve.configure(vcfg);
+      const t0r = performance.now(); window.LITE = false;
+      for (let n = 0; n < N && rendering; n++) {
+        if (err) throw err;
+        renderAt(n / fps); ox.drawImage(C, 0, 0, ow, oh);
+        const vf = new VideoFrame(out, { timestamp: Math.round(n * 1e6 / fps), duration: Math.round(1e6 / fps) }); ve.encode(vf, { keyFrame: n % 60 === 0 }); vf.close();
+        if (n % 10 === 0) { const el = (performance.now() - t0r) / 1000, left = el / (n + 1) * (N - n - 1); status(`Rendering… ${Math.floor(n / N * 100)}%  (frame ${n} of ${N}, about ${fmt(left)} left). You can use other tabs, but keep this one open.`); $('seek').value = Math.round(n / N * 1000); $('time').textContent = `${fmt(n / fps)} / ${fmt(total)}`; await new Promise(r => setTimeout(r, 0)); }
+        while (ve.encodeQueueSize > 6) await new Promise(r => setTimeout(r, 1));
+      }
+      if (!rendering) { ve.close(); status('Render cancelled.'); return; }
+      await ve.flush();
+      if (pcm) {
+        status('Adding the soundtrack…');
+        const ae = new AudioEncoder({ output: (c, m) => muxer.addAudioChunk(c, m), error: e => { err = e; } }); ae.configure(acfg);
+        const L = pcm.getChannelData(0), R = pcm.getChannelData(1), F = 1024, end = Math.min(pcm.length, Math.ceil(total * sr));
+        for (let i = 0; i < end; i += F) { const n = Math.min(F, end - i), d = new Float32Array(n * 2); d.set(L.subarray(i, i + n), 0); d.set(R.subarray(i, i + n), n); const a = new AudioData({ format: 'f32-planar', sampleRate: sr, numberOfFrames: n, numberOfChannels: 2, timestamp: Math.round(i * 1e6 / sr), data: d }); ae.encode(a); a.close(); if (ae.encodeQueueSize > 20) await new Promise(r => setTimeout(r, 0)); }
+        await ae.flush(); if (err) throw err;
+      }
+      muxer.finalize(); recBlob = new Blob([muxer.target.buffer], { type: 'video/mp4' }); ext = 'mp4';
+      status(`Done: ${fmt(total)} MP4, ${(recBlob.size / 1048576).toFixed(0)} MB${pcm ? ' with sound' : ''}. Click Save video.`); $('save').hidden = !downloads;
+    } catch (e) { status('Render failed: ' + (e && e.message || e) + '. Try 720p, or Chrome/Edge.'); }
+    finally { rendering = false; $('render').textContent = 'Render MP4'; }
+  }
+  $('render').onclick = renderMp4;
 
   // ---- export: record the canvas in real time on this device ----
   $('export').onclick = () => {
